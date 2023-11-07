@@ -1,0 +1,22 @@
+// utils
+@import './variables';
+@import './mixins';
+@import './breakpoints';
+
+// base styles
+@import './reset';
+@import './common';
+@import './section';
+@import './container';
+@import './animations';
+@import './js-selectors';
+
+// components
+@import './visually-hidden';
+@import './pop-up';
+@import './backdrop';
+@import './schedule';
+@import './button';
+@import './social-links';
+@import './socials';
+@import './pagination';
