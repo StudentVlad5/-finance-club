@@ -1,14 +1,13 @@
 :root {
     // background
-    --color-background-main: #ffffff;
-    --color-background-second: #F7F7F7;
-    --color-background-accent: #191C26;
-    --color-background-input: #fdf7f2;
+    --color-background-main: #060606;
+    --color-background-second: #1E1E1E;
+    --color-background-accent: #FFF;
+    --color-background-input: #B8B8B8;
 
     // text
-    --color-text-main: #303030;
-    --color-text-second: #555555;
-    --color-text-white: #ffffff;
+    --color-text-main: #FFF;
+    --color-text-second: #000;
     --color-text-light: #9DA4BD;
 
     // accent
@@ -20,8 +19,8 @@
     --color-shadow: rgba(85, 85, 85, 0.302);
 
     // fonts
-    --font-family-main: 'Open Sans', sans-serif;
-    --font-family-title: 'Raleway', sans-serif;
+    --font-family-main: 'DM Sans';
+    --font-family-title: 'Sans';
 
     // transition
     --animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);

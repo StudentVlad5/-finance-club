@@ -3,60 +3,132 @@
 .about {
     &__container {
         display: flex;
+        flex-direction: column;
+    }
+    &__container-navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__containerNavigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__BtnPrev, &__BtnNext {
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
     }
 
-    &__list {
-        display: none;
-
-        @include mq(tablet) {
-            display: flex;
-            flex-wrap: wrap;
-            margin-right: 30px;
-        }
-
-        @include mq(desktop) {
-            display: flex;
-            flex-wrap: nowrap;
-            margin-right: 64px;
-        }
+    &__BtnNext:hover,
+    &__BtnPrev:hover
+    {
+        background-color: var(--color-background-input);
+        border-radius: 50%;
+        cursor: pointer;
     }
-
-    &__item {
-        overflow: hidden;
-
-        &:not(:last-child) {
-            margin-bottom: 30px;
-        }
-
-        @include mq(desktop) {
-
-            &:first-child {
-                margin-right: 30px;
-            }
-
-            &:not(:last-child) {
-                margin-bottom: 0;
-            }
-        }
-
-        &:hover .about__image,
-        &:focus .about__image {
-            transform: scale(1.15);
-        }
+    &__BtnNext:hover .buttonSlide,
+    &__BtnPrev:hover .buttonSlide
+    {
+       color: var(--color-background-main);
+       fill: var(--color-background-main);
     }
+    &__listItemsContainer{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        align-items: stretch;
+        gap: 28px;
+        width: 100%;
+        margin-bottom: 48px;
+    }
+    &__list{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    &__listItemsImgContainer{
+        display: flex;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        width: 136px;
+        height: 68px;
+        border-radius: 20px;
+        background: var(--color-background-main);
+    }
+    &__listItemsImg{
+        width: 52px;
+        height: 52px;
+    }
+    &__listItems{
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: row;
+        max-width: 585px;
+        min-height: 246px;
+        padding: 58px 32px;
+        border-radius: 40px;
+        gap: 24px;
+        background-color: var(--color-background-accent);
 
-    &__image {
-        transition: transform var(--slow-anim);
-
-        @include mq(tablet) {
-            min-width: 330px;
-            height: 235px;
-        }
-
-        @include mq(desktop) {
-            min-width: 270px;
-            height: 445px;
-        }
-
+    }
+    &__listItemsTitle{
+        color: var(--color-text-second);
+        margin-bottom: 7px;
+        font-family: var(--font-family-main);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height:  144.4%;
+        letter-spacing: 0.9px;
+        text-transform: uppercase;
+    }
+    &__listItemsSubTitle{
+        color: var(--color-text-second);
+        font-family: var(--font-family-main);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 177.8%;
+    }
+}
+.buttonSlide {
+    width: 100%;
+    height: 100%;
+    fill: ar(--color-text-white);
+    color: var(--color-text-white);
+}
+.uppertitle {
+    max-width: 496px;
+    color: var(--color-text-main);
+    text-align: center;
+    font-family: var(--font-family-main);
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 114.625%;
+    text-transform: capitalize;
+    }
+.subTitle{
+    max-width: 496px;
+    color: var(--color-text-main);
+    text-align: center;
+    font-family: var(--font-family-main);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height:177.8%;
+    margin-bottom: 40px;
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5)
+     {
+        text-align: justify;
+        max-width: 607px;
     }
 }
