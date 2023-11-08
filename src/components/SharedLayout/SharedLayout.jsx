@@ -1,17 +1,17 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from 'components/Header/Header';
-import { Footer } from 'components/Footer/Footer';
+// import { Header } from 'components/Header/Header';
+// import { Footer } from 'components/Footer/Footer';
 
 export const SharedLayout = () => {
   return (
     <>
       <Suspense fallback={'Loading...'}>
-        <Header />
+        {/* <Header /> */}
         <main>
           <Outlet />
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </Suspense>
     </>
   );
