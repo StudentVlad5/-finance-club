@@ -1,18 +1,22 @@
 import { HelmetProvider } from 'react-helmet-async';
-import { useEffect, Suspense } from 'react';
+import { lazy, useEffect, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-// import { RestrictedRoute } from 'routes/RestrictedRoute';
+import { RestrictedRoute } from 'routes/RestrictedRoute';
 import { PrivateRoute } from 'routes/PrivateRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { selectIsRefreshing, getPermission } from 'redux/auth/selectors';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
-import LandingPage from 'pages/LandingPage';
-import AdminPage from 'pages/Admin/Admin';
-import AdminUsersPage from 'pages/Admin/AdminUsers';
-import AdminServicesPage from 'pages/Admin/AdminServices';
-import { User } from 'components/Sections/User/User';
-import AdminOwnerPage from 'pages/Admin/AdminOwners';
+
+const HomePage = lazy(() => import('pages/HomePage'));
+const AboutPage = lazy(() => import('pages/AboutPage'));
+const EventsPage = lazy(() => import('pages/EventsPage'));
+const HowToJoinPage = lazy(() => import('pages/HowToJoinPage'));
+const ReviewsPage = lazy(() => import('pages/ReviewsPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const UserPage = lazy(() => import('pages/UserPage'));
+const AdminPage = lazy(() => import('pages/AdminPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -30,7 +34,7 @@ export const App = () => {
       <Suspense fallback={<div>{'Loading...'}</div>}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
-            <Route index element={<LandingPage />} />
+            <Route index element={<HomePage />} />
             {permission === 'admin' ? (
               <Route
                 path="admin"
@@ -41,10 +45,12 @@ export const App = () => {
             ) : (
               <Route
                 path="user"
-                element={<PrivateRoute redirectTo="/" component={<User />} />}
+                element={
+                  <PrivateRoute redirectTo="/login" component={<UserPage />} />
+                }
               />
             )}
-            <Route
+            {/* <Route
               path="admin/users"
               element={
                 <PrivateRoute
@@ -54,25 +60,39 @@ export const App = () => {
               }
             />
             <Route
-              path="admin/services"
+              path="admin/events"
               element={
                 <PrivateRoute
                   redirectTo="/admin"
-                  component={<AdminServicesPage />}
+                  component={<AdminEventsPage />}
                 />
               }
-            />
+            /> */}
+
             <Route
-              path="admin/owners"
+              path="login"
               element={
-                <PrivateRoute
-                  redirectTo="/admin"
-                  component={<AdminOwnerPage />}
-                />
+                <RestrictedRoute redirectTo={'/'} component={<LoginPage />} />
               }
             />
 
-            <Route path="*" element={<LandingPage />} />
+            {/* <Route
+              path="forgot_password"
+              element={
+                <RestrictedRoute
+                  redirectTo="/user/profile"
+                  component={<ForgotPasswordPage />}
+                />
+              }
+            /> */}
+
+            <Route path="about" element={<AboutPage />} />
+            <Route path="events" element={<EventsPage />} />
+            <Route path="join" element={<HowToJoinPage />} />
+            <Route path="reviews" element={<ReviewsPage />} />
+            <Route path="contacts" element={<ContactsPage />} />
+
+            <Route path="*" element={<HomePage />} />
           </Route>
         </Routes>
       </Suspense>

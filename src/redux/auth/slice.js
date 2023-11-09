@@ -1,16 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { register, logIn, logOut, refreshUser, update } from "./operations";
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  register,
+  logIn,
+  logOut,
+  refreshUser,
+  addEvents,
+  removeEvents,
+  update,
+} from './operations';
 
 const initialState = {
   user: {
     _id: null,
-    userName: null,
+    name: null,
+    surname: null,
     avatarUrl: null,
     email: null,
     phone: null,
-    location: null,
+    company: null,
+    position: null,
     birthday: null,
-    role: "user",
+    events: null,
+    package: {},
+    status: 'inactive',
+    role: 'candidate',
   },
   token: null,
   permission: null,
@@ -21,9 +34,9 @@ const initialState = {
 };
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
         if (action.payload.data.authToken) {
@@ -33,7 +46,7 @@ export const authSlice = createSlice({
           state.isLoggedIn = true;
         }
       })
-      .addCase(register.rejected, (state) => {
+      .addCase(register.rejected, state => {
         state.user = initialState.user;
         state.token = null;
         state.permission = null;
@@ -45,20 +58,20 @@ export const authSlice = createSlice({
         state.permission = action.payload.data.role;
         state.isLoggedIn = true;
       })
-      .addCase(logIn.rejected, (state) => {
+      .addCase(logIn.rejected, state => {
         state.user = initialState.user;
         state.token = null;
         state.permission = null;
         state.isLoggedIn = false;
       })
-      .addCase(logOut.fulfilled, (state) => {
+      .addCase(logOut.fulfilled, state => {
         state.user = initialState.user;
         state.token = null;
         state.permission = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
       })
-      .addCase(update.pending, (state) => {
+      .addCase(update.pending, state => {
         state.isLoading = true;
         state.isError = null;
       })
@@ -71,7 +84,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = payload;
       })
-      .addCase(refreshUser.pending, (state) => {
+      .addCase(refreshUser.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
@@ -79,12 +92,38 @@ export const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(refreshUser.rejected, state => {
         state.user = initialState.user;
         state.isLoggedIn = false;
         state.isRefreshing = false;
         state.token = null;
         state.permission = null;
+      })
+      .addCase(addEvents.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(addEvents.fulfilled, (state, { payload }) => {
+        state.user.events = [...state.user.events, payload];
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(addEvents.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = payload;
+      })
+      .addCase(removeEvents.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(removeEvents.fulfilled, (state, { payload }) => {
+        state.user.events = state.user.events.filter(_id => +_id !== payload);
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(removeEvents.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = payload;
       });
   },
 });
