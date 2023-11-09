@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from 'components/baseStyles/Variables.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 const Section = styled.section`
   position: relative;
@@ -58,7 +58,7 @@ const Headline = styled.h2`
   font-weight: 700;
   line-height: 55.02px; /* 114.625% */
 
-  color: ${theme.colors.white};
+  color: ${props => props.theme.white};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 24px;

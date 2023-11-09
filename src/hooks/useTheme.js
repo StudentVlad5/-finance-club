@@ -6,8 +6,8 @@ export const useTheme = () => {
     const theme = `${window?.localStorage?.getItem('theme')}`;
     if (Object.values(themes).includes(theme)) return theme;
 
-    const userMedia = window.matchMedia('(prefers-color-scheme: light)');
-    if (userMedia.matches) return themes.light;
+    const userMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    if (userMedia.matches) return themes.dark;
 
     return themes.dark;
   };
@@ -21,7 +21,7 @@ export const useTheme = () => {
 
   useEffect(() => {
     const localTheme = window?.localStorage?.getItem('theme');
-    localTheme ? setTheme(localTheme) : setTheme('light');
+    localTheme ? setTheme(localTheme) : setTheme('dark');
     setThemeLoaded(true);
   }, []);
 

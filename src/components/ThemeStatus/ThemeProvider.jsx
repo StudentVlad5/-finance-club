@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useTheme } from '../../hooks/useTheme';
-import { theme as Theme } from 'components/baseStyles/Variables';
+import { theme as Theme } from 'components/baseStyles/Variables.styled';
 import PropTypes from 'prop-types';
 
 export const themes = {

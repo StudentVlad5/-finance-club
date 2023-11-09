@@ -1,4 +1,4 @@
-const theme = {
+export const theme = {
   breakpoints: {
     mobile: '375px',
     tablet: '768px',
@@ -15,7 +15,7 @@ const theme = {
     greyOpacity: 'rgba(113, 113, 113, 0.1)',
   },
   dark: {
-    fon: '1E1E1E',
+    fon: '#1E1E1E',
     black: '000000',
     white: '#ffffff',
     grey: '#8D8D8D',
@@ -36,4 +36,4 @@ const theme = {
   scale: 'scale(1.15)',
 };
 
-export default theme;
+// export default theme;
