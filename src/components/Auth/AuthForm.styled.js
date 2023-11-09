@@ -8,7 +8,7 @@ import {
   Section,
   Title,
 } from 'components/baseStyles/CommonStyle.styled';
-import theme from 'components/baseStyles/Variables.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 const FormSection = styled(Section)`
   padding-top: 123px;

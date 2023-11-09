@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as Logout } from 'images/svg/logout.svg';
-import theme from 'components/baseStyles/Variables.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 export const AdminContainer = styled.div`
   position: relative;

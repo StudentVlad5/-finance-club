@@ -6,6 +6,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 import { persistor, store } from './redux/store';
 import { App } from './components/App/App';
+import { GlobalStyle } from 'components/baseStyles/GlobalStyle';
+import { ThemeStatus } from 'components/ThemeStatus/ThemeProvider';
 
 import AOS from 'aos';
 
@@ -16,8 +18,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <PersistGate loading={'Loading'} persistor={persistor}>
         <BrowserRouter basename="finance-club">
-          {/* <BrowserRouter basename="/"> */}
-          <App />
+          <ThemeStatus>
+            <GlobalStyle />
+            <App />
+          </ThemeStatus>
         </BrowserRouter>
       </PersistGate>
     </Provider>

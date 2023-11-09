@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
-import theme from 'components/baseStyles/Variables.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 export const Backdrop = styled.div`
   position: fixed;
