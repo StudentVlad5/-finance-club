@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme } from 'components/baseStyles/Variables.styled';
+// import { theme } from 'components/baseStyles/Variables.styled';
 
 export const EventsList = styled.ul``;
 
