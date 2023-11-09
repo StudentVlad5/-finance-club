@@ -271,7 +271,7 @@ input::-webkit-calendar-picker-indicator:hover {
 }
 .select__indicators{
   background: ${props => props.theme.black};
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.white_text};
   border: none;
   transition: all 0.25s ease-in;
   &:focus,
@@ -295,7 +295,7 @@ input::-webkit-calendar-picker-indicator:hover {
   background-size: contain;
 }
 .select__value-container{
-  background-color: ${props => props.theme.white};
+  background-color: ${props => props.theme.white_fon};
   color: ${props => props.theme.grey};
 }
 .select__control{
@@ -343,7 +343,7 @@ input::-webkit-calendar-picker-indicator:hover {
   }
 }
 .css-16xfy0z-control{
-  background-color: ${props => props.theme.white} !important;
+  background-color: ${props => props.theme.white_fon} !important;
 }
 .css-15lsz6c-indicatorContainer{
   padding:0 !important;
@@ -365,7 +365,7 @@ input::-webkit-calendar-picker-indicator:hover {
 
 .linkFolder.active{
   background-color: ${props => props.theme.grey};
-  color: ${props => props.theme.white}
+  color: ${props => props.theme.white_text}
 }
 
 .linkFolder.sideBar_menu{
@@ -401,7 +401,7 @@ input::-webkit-calendar-picker-indicator:hover {
     left: 0;
     width: 110%;
     height: 0.5px;
-    background: ${props => props.theme.white};
+    background: ${props => props.theme.white_fon};
 
     @media (min-width: ${theme.breakpoints.tablet}) {
       width: 150px;
