@@ -177,7 +177,7 @@ color:${props => props.theme.grey} !important;
 }
 
 .buttonSlide{
-  color:${props => props.theme.white};
+  color:${props => props.theme.white_text};
   width: 31px;
   height: 50px;
   flex-shrink: 0;
