@@ -55,9 +55,11 @@ export const ArchiveEventsList = ({ events }) => {
           );
         })}
       </ArchiveList>
-      <BtnMore type="button" aria-label="More events" onClick={() => end(2)}>
-        more events
-      </BtnMore>
+      {archiveEvents.length > limit && (
+        <BtnMore type="button" aria-label="More events" onClick={() => end(2)}>
+          more events
+        </BtnMore>
+      )}
     </>
   );
 };
@@ -79,7 +81,8 @@ ArchiveEventsList.propTypes = {
           position: PropTypes.string,
         }),
       ).isRequired,
-      package: PropTypes.array.isRequired,
+      moderator: PropTypes.string,
+      packages: PropTypes.array.isRequired,
       image: PropTypes.string,
     }),
   ),

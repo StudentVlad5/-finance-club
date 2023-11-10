@@ -11,7 +11,7 @@ import {
   EventTitle,
   List,
 } from './EventList.styled';
-// import { BASE_URL_IMG } from 'helpers/constants';
+import { BASE_URL_IMG } from 'helpers/constants';
 
 import defaultImg from 'images/events/default.jpg';
 
@@ -82,7 +82,8 @@ EventsList.propTypes = {
           position: PropTypes.string,
         }),
       ).isRequired,
-      package: PropTypes.array.isRequired,
+      moderator: PropTypes.string,
+      packages: PropTypes.array.isRequired,
       image: PropTypes.string,
     }),
   ),
