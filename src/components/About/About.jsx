@@ -12,7 +12,6 @@ import worldwide from 'images/about/worldwide.svg';
 import {AboutSection, AboutContainer, ContainerNavigation, ListOfItem, ListItemsContainer, ListItemsImgContainer, ListItemsImg, ListItems, ListItemsTitle, SubTitle, ListItemsUppertitle, SubTitleItem, ListItemsContentWraper, ListOfItemNext, Btn} from './About.styled';
 import { theme } from 'components/baseStyles/Variables.styled';
 
-
 const data = [
   {title:'Open Source',
   content :'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et nibh urna in proin dui purus bibendum cras. Morbi cursus nunc.',
