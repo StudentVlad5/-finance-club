@@ -6,7 +6,7 @@ import { FieldArray, Formik } from 'formik';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
-import { selectUser } from 'redux/auth/selectors';
+import { selectUserName } from 'redux/auth/selectors';
 import { addReload } from 'redux/reload/slice';
 import { fetchData, updateServiceData } from 'services/APIservice'; //fetchServiceData,
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
@@ -43,7 +43,7 @@ export const EditModal = () => {
   const [error, setError] = useState(null);
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
-  const userName = useSelector(selectUser);
+  const userName = useSelector(selectUserName);
 
   const itemForFetch = `/admin/${modal.id}`;
 
@@ -84,7 +84,7 @@ export const EditModal = () => {
       const { code } = await updateServiceData(
         `/admin/${modal.id}`,
         values,
-        file
+        file,
       );
       if (code && code !== 201) {
         return onFetchError('Whoops, something went wrong');
@@ -476,6 +476,6 @@ export const EditModal = () => {
         </Modal>
       </Backdrop>
     ),
-    document.querySelector('#popup-root')
+    document.querySelector('#popup-root'),
   );
 };

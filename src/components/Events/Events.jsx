@@ -21,7 +21,7 @@ const eventsData = [
     _id: '1sdghs',
     date: '2023/11/22',
     time: '17:30 - 20:30',
-    location: 'New york, USA',
+    location: 'New York, USA',
     title: 'Digital money and financial risks',
     description:
       'There is a challenge to ensuring a high level of security of the digital money function, namely the problem of digital currency fraud and CBDCs. CBDC is a new third form of fiat money. The difference between CBDCs and cryptocurrencies, is that the latter are forms of decentralized or private money. Today, the use of cryptocurrency requires full regulation comparable to the risks they already pose or may pose in the future.',
