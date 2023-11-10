@@ -1,16 +1,15 @@
 import styled from 'styled-components';
-// import { theme } from 'components/baseStyles/Variables.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
+import { Headline } from 'components/baseStyles/CommonStyle.styled';
 
-export const EventsList = styled.ul``;
+export const Heading = styled(Headline)`
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
 
-export const EventItem = styled.li``;
-
-export const EventImages = styled.img``;
-
-export const EventDate = styled.span``;
-
-export const EventTitle = styled.span``;
-
-export const EventDesc = styled.p``;
-
-export const BtnLink = styled.a``;
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    margin-top: 50px;
+    margin-bottom: 40px;
+    font-size: 42px;
+  }
+`;

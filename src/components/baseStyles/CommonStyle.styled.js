@@ -40,7 +40,7 @@ const Title = styled.h1`
   line-height: 79.992px; /* 121.2% */
   letter-spacing: -1px;
 
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 42px;
@@ -58,7 +58,7 @@ const Headline = styled.h2`
   font-weight: 700;
   line-height: 55.02px; /* 114.625% */
 
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 24px;
@@ -76,7 +76,7 @@ const Subtitle = styled.p`
   font-weight: 400;
   line-height: 32.004px; /* 177.8% */
 
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 16px;
