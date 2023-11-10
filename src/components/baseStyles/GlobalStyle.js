@@ -176,6 +176,14 @@ color:${props => props.theme.grey} !important;
 color:${props => props.theme.grey} !important;
 }
 
+.buttonSlide{
+  color:${props => props.theme.white};
+  width: 31px;
+  height: 50px;
+  flex-shrink: 0;
+};
+
+/* PAGINATION */
 .swiper-pagination-bullet-active.swiper-pagination-bullet{
 
 }
