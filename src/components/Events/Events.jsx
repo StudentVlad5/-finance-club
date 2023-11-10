@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { EventsList } from './EventsList/EventList';
+import { ArchiveEventsList } from './ArchiveEventsList/ArchiveEventList';
+import { fetchData } from 'services/APIservice';
+import { onLoading, onLoaded } from 'helpers/Loader/Loader';
+import { onFetchError } from 'helpers/Messages/NotifyMessages';
+import { Heading } from './Events.styled';
 import {
   Container,
   Section,
   Title,
 } from 'components/baseStyles/CommonStyle.styled';
-import { Heading } from './Events.styled';
 
 import digitalMoney from 'images/events/DIGITAL MONEY.jpg';
 import cybersecurity from 'images/events/cybersecurity.webp';
 import cybersecurity2 from 'images/events/cybersecurity-2.webp';
 import defi from 'images/events/defi.webp';
-import { ArchiveEventsList } from './ArchiveEventsList/ArchiveEventList';
 
-const events = [
+const eventsData = [
   {
     _id: '1sdghs',
     date: '2023/11/22',
     time: '17:30 - 20:30',
-    location: 'New york, USA',
+    location: 'New York, USA',
     title: 'Digital money and financial risks',
     description:
       'There is a challenge to ensuring a high level of security of the digital money function, namely the problem of digital currency fraud and CBDCs. CBDC is a new third form of fiat money. The difference between CBDCs and cryptocurrencies, is that the latter are forms of decentralized or private money. Today, the use of cryptocurrency requires full regulation comparable to the risks they already pose or may pose in the future.',
@@ -27,8 +30,16 @@ const events = [
       '18:00 – 20:00 Lecture from the speaker',
       '20:00 – 20:30 Questions for the speaker',
     ],
-    speakers: [{ name: 'Den Braun', company: 'Bronx', position: 'CFO' }],
-    package: ['basic', 'pro', 'expert', 'visit'],
+    speakers: [
+      { name: 'Den Braun', company: 'Bronx', position: 'CFO' },
+      {
+        name: 'Joanne Walker',
+        company: 'BDO',
+        position: 'Global Partnership Director',
+      },
+    ],
+    moderator: 'Stew May',
+    packages: ['pro', 'expert'],
     image: digitalMoney,
   },
   {
@@ -47,7 +58,8 @@ const events = [
         position: 'Global Partnership Director',
       },
     ],
-    package: ['expert', 'visit'],
+    moderator: '',
+    packages: ['expert'],
     image: cybersecurity,
   },
   {
@@ -66,7 +78,8 @@ const events = [
         position: 'Professor of Finance and Economics',
       },
     ],
-    package: ['pro', 'expert', 'visit'],
+    moderator: 'Stew May',
+    packages: ['pro', 'expert'],
     image: defi,
   },
   {
@@ -85,7 +98,8 @@ const events = [
         position: 'Cybersecurity specialist',
       },
     ],
-    package: ['basic', 'pro', 'expert', 'visit'],
+    moderator: '',
+    packages: ['basic', 'pro', 'expert'],
     image: cybersecurity2,
   },
   {
@@ -98,7 +112,8 @@ const events = [
       'There is a challenge to ensuring a high level of security of the digital money function, namely the problem of digital currency fraud and CBDCs.CBDC is a new third form of fiat money. The difference between CBDCs and cryptocurrencies, is that the latter are forms of decentralized or private money. Today, the use of cryptocurrency requires full regulation comparable to the risks they already pose or may pose in the future.',
     plan: '',
     speakers: [{ name: 'Den Braun', company: 'Bronx', position: 'CFO' }],
-    package: ['pro', 'expert'],
+    moderator: '',
+    packages: ['pro', 'expert'],
     image: digitalMoney,
   },
   {
@@ -117,20 +132,48 @@ const events = [
         position: 'Professor of Finance and Economics',
       },
     ],
-    package: ['pro', 'expert', 'visit'],
+    moderator: 'Stew May',
+    packages: ['pro', 'expert'],
     image: defi,
   },
 ];
 
 export const Events = () => {
+  const [events, setEvents] = useState(eventsData);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // useEffect(() => {
+  //   (async function getData() {
+  //     setIsLoading(true);
+  //     try {
+  //       const { data } = await fetchData(`/events`);
+  //       if (!data) {
+  //         return onFetchError('Whoops, something went wrong');
+  //       }
+  //       setEvents(data);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   })();
+  // }, []);
+
   return (
     <Section>
       <Container>
         <Title>Events calendar</Title>
+
         <Heading>Upcoming club meetings</Heading>
-        <EventsList events={events} />
+        {isLoading ? onLoading() : onLoaded()}
+        {error && onFetchError('Whoops, something went wrong')}
+        {events.length > 0 && !error && <EventsList events={events} />}
+
         <Heading>Archive of past events</Heading>
-        <ArchiveEventsList events={events} />
+        {isLoading ? onLoading() : onLoaded()}
+        {error && onFetchError('Whoops, something went wrong')}
+        {events.length > 0 && !error && <ArchiveEventsList events={events} />}
       </Container>
     </Section>
   );

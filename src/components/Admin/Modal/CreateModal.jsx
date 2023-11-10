@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
-import { selectUser } from 'redux/auth/selectors';
+import { selectUserName } from 'redux/auth/selectors';
 import { addReload } from 'redux/reload/slice';
 import { createServiceData } from 'services/APIservice';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
@@ -41,7 +41,7 @@ export const CreateModal = ({ lastArticle }) => {
   const [img, setImg] = useState('');
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
-  const userName = useSelector(selectUser);
+  const userName = useSelector(selectUserName);
 
   async function createService(values) {
     const file = img;
@@ -435,7 +435,7 @@ export const CreateModal = ({ lastArticle }) => {
         </Modal>
       </Backdrop>
     ),
-    document.querySelector('#popup-root')
+    document.querySelector('#popup-root'),
   );
 };
 
