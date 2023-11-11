@@ -4,17 +4,17 @@ import {
   Section,
   Subtitle,
   Title,
-} from 'components/baseStyles/CommonStyle.styled';
-import { theme } from 'components/baseStyles/Variables.styled';
-import styled from 'styled-components';
+} from "components/baseStyles/CommonStyle.styled";
+import { theme } from "components/baseStyles/Variables.styled";
+import styled from "styled-components";
 
 const AboutSection = styled(Section)`
-  background-color: ${props => props.theme.fon};
+  background-color: ${(props) => props.theme.fon_second};
 `;
 const AboutContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.fon};
+  background-color: ${(props) => props.theme.fon_second};
 `;
 const ContainerNavigation = styled.div`
   display: flex;
@@ -32,32 +32,16 @@ const Btn = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: ${props => props.theme.grey};
+    background-color: ${(props) => props.theme.grey};
     border-radius: 50%;
   }
 
   &:hover(.buttonSlide) {
-    color: ${props => props.theme.white_text};
-    fill: ${props => props.theme.white_text};
+    color: ${(props) => props.theme.white_text};
+    fill: ${(props) => props.theme.white_text};
   }
 `;
-// const BtnNext = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 50px;
-//   height: 50px;
-//   flex-shrink: 0;
-//   cursor: pointer;
-//   &:hover {
-//     background-color: ${(props) => props.theme.grey};
-//     border-radius: 50%;
-//   }
-//   &:hover(.buttonSlide) {
-//     color: ${(props) => props.theme.white};
-//     fill: ${(props) => props.theme.white};
-//   }
-// `;
+
 const ListOfItem = styled.div`
   display: flex;
   justify-content: center;
@@ -81,6 +65,7 @@ const ListItemsContainer = styled.ul`
   gap: 28px;
   width: 100%;
   margin-bottom: 48px;
+  padding: 0 50px;
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr 1fr;
   }
@@ -93,7 +78,7 @@ const ListItemsImgContainer = styled.div`
   width: 82px;
   height: 68px;
   border-radius: 20px;
-  background: ${props => props.theme.black};
+  background: ${(props) => props.theme.black};
 `;
 const ListItemsContentWraper = styled.div`
   display: flex;
@@ -116,10 +101,10 @@ const ListItems = styled.li`
   padding: 58px 32px;
   border-radius: 40px;
   gap: 24px;
-  background-color: ${props => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_fon};
 `;
 const ListItemsUppertitle = styled(Title)`
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
   text-align: center;
   font-family: ${theme.fonts[0]};
   font-size: 36px;
@@ -133,7 +118,7 @@ const ListItemsUppertitle = styled(Title)`
   }
 `;
 const ListItemsTitle = styled(Headline)`
-  color: ${props => props.theme.black};
+  color: ${(props) => props.theme.black};
   margin-bottom: 7px;
   font-family: ${theme.fonts[0]};
   font-size: 18px;
@@ -144,7 +129,7 @@ const ListItemsTitle = styled(Headline)`
   text-transform: uppercase;
 `;
 const SubTitle = styled(Subtitle)`
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
   font-family: ${theme.fonts[0]};
   font-size: 15px;
   font-style: normal;
@@ -157,7 +142,7 @@ const SubTitle = styled(Subtitle)`
   }
 `;
 const SubTitleItem = styled(SubTitle)`
-  color: ${props => props.theme.black};
+  color: ${(props) => props.theme.black};
   margin-bottom: 0px;
   text-align: start;
 `;

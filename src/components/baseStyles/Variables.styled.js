@@ -10,6 +10,7 @@ export const theme = {
   light: {
     fon: '#ffffff',
     black: '#ffffff',
+    fon_second: '#1E1E1E',
     white_text: '#000000',
     white_fon: 'rgba(113, 113, 113, 0.2)',
     grey: '#8D8D8D',
@@ -18,6 +19,7 @@ export const theme = {
   dark: {
     fon: '#1E1E1E',
     black: '#000000',
+    fon_second: '#1E1E1E',
     white_text: '#ffffff',
     white_fon: '#ffffff',
     grey: '#8D8D8D',

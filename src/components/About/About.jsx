@@ -1,7 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Mousewheel, Keyboard, Autoplay } from 'swiper/modules';
-// import { useTranslation } from 'react-i18next';
-// import 'swiper/css/navigation';
 import 'swiper/css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
@@ -27,6 +25,7 @@ import {
   Btn,
 } from './About.styled';
 import { theme } from 'components/baseStyles/Variables.styled';
+import { useEffect, useState } from 'react';
 
 const data = [
   {
@@ -57,9 +56,11 @@ const data = [
 
 const About = () => {
   // const { t } = useTranslation();
-  //  console.log("innerWidth",window.innerWidth)
-  //  console.log("theme.breakpoints.mobile",theme.breakpoints.mobile.slice(0,-2))
-  //  console.log("window.innerWidth < theme.breakpoints.mobile", window.innerWidth < theme.breakpoints.mobile)
+  const [widthWindow, setWidthWindow]= useState(window.innerWidth);
+
+  useEffect(()=>{
+  setWidthWindow(window.innerWidth)
+},[window.innerWidth]);
 
   return (
     <AboutSection>
@@ -78,7 +79,7 @@ const About = () => {
           keyboard={true}
           loop={true}
           loopPreventsSliding={true}
-          loopedSlides={1}
+          // loopedSlides={1}
           autoplay={{ delay: 5000 }}
           effect={'creative'}
         >
@@ -101,7 +102,7 @@ const About = () => {
                 Feugiat nulla suspendisse tortor aene.
               </SubTitle>
               <ListItemsContainer>
-                {window.innerWidth >= theme.breakpoints.tablet.slice(0, -2) ? (
+                {widthWindow >= theme.breakpoints.tablet.slice(0, -2) ? (
                   data.map(it => (
                     <ListItems key={it.title}>
                       <ListItemsImgContainer>
@@ -128,7 +129,7 @@ const About = () => {
                     keyboard={true}
                     loop={true}
                     loopPreventsSliding={true}
-                    loopedSlides={1}
+                    // loopedSlides={1}
                     autoplay={{ delay: 1000 }}
                     effect={'creative'}
                   >
