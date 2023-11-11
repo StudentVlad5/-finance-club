@@ -47,6 +47,7 @@ const HeroControl = styled.div`
   flex-direction: column;
 `;
 const HeroHeadline = styled(Headline)`
+  max-width: 50%;
   color: ${(props) => props.theme.white_text};
   font-family: ${theme.fonts[2]};
   font-size: 24px;
@@ -54,6 +55,11 @@ const HeroHeadline = styled(Headline)`
   font-weight: 700;
   line-height: normal;
   text-align: center;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    max-width: 100%;
+  }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 40px;
   }
