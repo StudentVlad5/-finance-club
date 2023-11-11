@@ -23,12 +23,12 @@ export const BtnLight = styled.button`
   cursor: pointer;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    font-size: 16px;
-    padding: 23px 33px;
+    font-size: 14px;
+    padding: 18px 33px;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   &:hover,
