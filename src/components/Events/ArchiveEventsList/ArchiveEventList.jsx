@@ -61,7 +61,7 @@ export const ArchiveEventsList = ({ events }) => {
       </ArchiveList>
       {archiveEvents.length > limit && (
         <BtnMore type="button" aria-label="More events" onClick={() => end(2)}>
-          more events
+          <span>more events</span>
         </BtnMore>
       )}
     </>
