@@ -117,27 +117,102 @@ export const EventDesc = styled.p`
 `;
 
 export const BtnLink = styled(NavLink)`
+  position: relative;
   padding: 2px;
-  margin-left: 10px;
+  margin-left: 16px;
 
   color: ${props => props.theme.black};
   font-family: ${theme.fonts[0]};
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 32.004px; /* 160.02% */
   text-decoration: none;
 
-  border-bottom: 1px solid ${props => props.theme.black};
   transition: ${theme.transition};
 
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 16px;
+  }
+
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  &::before,
+  &::after,
+  & span::after,
+  & span::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    bottom: 0;
+    left: -16px;
+    width: 1px;
+    background: ${props => props.theme.black};
+    transition: ${theme.transition};
+  }
+
+  &::before {
+    right: -16px;
+    left: -16px;
+    width: auto;
+    background: 0;
+    border-right: 1px solid ${props => props.theme.black};
+    border-left: 1px solid ${props => props.theme.black};
+  }
+
+  &::after {
+    right: 0;
+    left: 0;
+    height: 1px;
+    width: auto;
+  }
+
+  & span {
+    position: relative;
+    display: inline-block;
+
+    &::before,
+    &::after {
+      top: 4px;
+      left: auto;
+      right: auto;
+      width: 0;
+      height: 1px;
+      transition: ${theme.transition};
+
+      @media screen and (min-width: ${theme.breakpoints.tablet}) {
+        top: 3px;
+      }
+
+      @media screen and (min-width: ${theme.breakpoints.desktop}) {
+        top: 2px;
+      }
+    }
+
+    &::before {
+      left: -18px;
+    }
+
+    &::after {
+      right: -18px;
+    }
   }
 
   &:hover,
   &:focus {
-    color: ${props => props.theme.grey};
-    border-bottom: 1px solid ${props => props.theme.grey};
+    &::before {
+      top: 0;
+    }
+    &::after {
+      right: -16px;
+      left: -16px;
+    }
+
+    & span::before,
+    & span::after {
+      width: 80%;
+    }
   }
 `;

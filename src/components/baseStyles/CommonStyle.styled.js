@@ -47,7 +47,7 @@ const Title = styled.h1`
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    font-size: 66px;
+    font-size: 56px;
   }
 `;
 

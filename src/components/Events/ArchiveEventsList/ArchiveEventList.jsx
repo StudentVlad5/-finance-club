@@ -31,7 +31,11 @@ export const ArchiveEventsList = ({ events }) => {
       <ArchiveList>
         {archiveEvents.slice(0, limit).map(event => {
           return (
-            <ArchiveEvent key={event._id}>
+            <ArchiveEvent
+              key={event._id}
+              data-aos="zoom-in-up"
+              data-aos-delay="200"
+            >
               <NavLink to={`/events/${event._id}`}>
                 <EventImages
                   // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
