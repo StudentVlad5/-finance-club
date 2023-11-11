@@ -9,7 +9,11 @@ export const FormTitle = styled(Headline)`
   font-size: 18px;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    font-size: 42px;
+    font-size: 24px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 32px;
   }
 `;
 
@@ -27,7 +31,7 @@ export const StyledForm = styled(Form)`
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    gap: 45px;
+    gap: 40px;
   }
 `;
 
@@ -42,7 +46,7 @@ export const FormList = styled.div`
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     grid-template-columns: 1fr 1fr;
-    gap: 35px;
+    gap: 30px;
   }
 `;
 
@@ -70,7 +74,7 @@ export const FormLabel = styled.label`
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -126,12 +130,12 @@ export const FormInput = styled(Field)`
   padding: 12px;
 
   font-family: ${theme.fonts[0]};
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 16px; /* 100% */
   letter-spacing: 1.6px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   color: ${props => props.theme.black};
 
   background: ${props => props.theme.white_fon};
@@ -146,13 +150,13 @@ export const FormInput = styled(Field)`
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     padding: 16px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     max-width: 365px;
-    padding: 22px 25px;
-    font-size: 20px;
+    padding: 16px 25px;
+    font-size: 16px;
   }
 
   &::placeholder {

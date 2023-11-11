@@ -21,7 +21,7 @@ export const SelectedEvent = styled.div`
   overflow: hidden;
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    max-height: 140px;
+    max-height: 120px;
   }
 `;
 
@@ -76,6 +76,9 @@ export const SEventTitle = styled(EventTitle)`
 `;
 
 export const SBtnLight = styled(BtnLight)`
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    padding: 18px 33px;
+  }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     width: 190px;
     margin: 0 auto 0 0;

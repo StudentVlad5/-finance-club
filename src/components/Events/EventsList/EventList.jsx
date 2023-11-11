@@ -24,7 +24,7 @@ export const EventsList = ({ events }) => {
     <List>
       {activeEvents.map(event => {
         return (
-          <Event key={event._id}>
+          <Event key={event._id} data-aos="zoom-in-up" data-aos-delay="200">
             <EventNavLink to={`/events/${event._id}`}>
               <EventImages
                 // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
@@ -56,7 +56,9 @@ export const EventsList = ({ events }) => {
                     : event.description}
                 </EventDesc>
               )}
-              <BtnLink to={`/events/${event._id}`}>More</BtnLink>
+              <BtnLink to={`/events/${event._id}`}>
+                <span>More</span>
+              </BtnLink>
             </DetailsWrapper>
           </Event>
         );

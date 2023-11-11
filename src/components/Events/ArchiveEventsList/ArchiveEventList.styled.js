@@ -33,6 +33,7 @@ export const ArchiveDetailsWrapper = styled(DetailsWrapper)`
 `;
 
 export const BtnMore = styled.button`
+  position: relative;
   display: block;
   margin: 0 auto;
   padding: 2px;
@@ -47,16 +48,86 @@ export const BtnMore = styled.button`
 
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid ${props => props.theme.white_text};
+  /* border-bottom: 1px solid ${props => props.theme.white_text}; */
   transition: ${theme.transition};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;
   }
-
+  /* 
   &:hover,
   &:focus {
     color: ${props => props.theme.grey};
     border-bottom: 1px solid ${props => props.theme.grey};
+  } */
+
+  &::before,
+  &::after,
+  & span::after,
+  & span::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    bottom: 0;
+    left: -16px;
+    width: 1px;
+    background: ${props => props.theme.white_text};
+    transition: ${theme.transition};
+  }
+
+  &::before {
+    right: -16px;
+    left: -16px;
+    width: auto;
+    background: 0;
+    border-right: 1px solid ${props => props.theme.white_text};
+    border-left: 1px solid ${props => props.theme.white_text};
+  }
+
+  &::after {
+    right: 0;
+    left: 0;
+    height: 1px;
+    width: auto;
+  }
+
+  & span {
+    position: relative;
+    display: inline-block;
+    padding: 2px;
+
+    &::before,
+    &::after {
+      top: 0;
+      left: auto;
+      right: auto;
+      width: 0;
+      height: 1px;
+      transition: ${theme.transition};
+    }
+
+    &::before {
+      left: -18px;
+    }
+
+    &::after {
+      right: -18px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      top: 2px;
+    }
+    &::after {
+      right: -16px;
+      left: -16px;
+    }
+
+    & span::before,
+    & span::after {
+      width: 50%;
+    }
   }
 `;
