@@ -23,6 +23,7 @@ const Button = styled.button`
   &:focus {
     color: ${(props) => props.theme.white_text};
     background: ${(props) => props.theme.grey};
+    border-color: ${(props) => props.theme.grey};
   }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;

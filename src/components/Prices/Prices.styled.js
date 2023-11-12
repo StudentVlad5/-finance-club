@@ -83,7 +83,7 @@ const ListItems = styled.li`
   padding: 48px 30px;
   border-radius: 40px;
   gap: 24px;
-  background-color: ${(props) => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_text};
 `;
 const ListItemsUppertitle = styled(Title)`
   color: ${(props) => props.theme.white_text};
@@ -159,6 +159,7 @@ const UlContent = styled.ul`
   list-style-position: outside;
   margin-bottom: 40px;
   margin-left: 20px;
+  min-height: 270px;
 `;
 const LiContent = styled.li`
   color: ${(props) => props.theme.black};
