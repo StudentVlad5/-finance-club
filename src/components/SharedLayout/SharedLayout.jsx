@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { HeaderComp } from 'components/Header/Header';
+import { Main } from './SharedLayout.styled';
 // import { Footer } from 'components/Footer/Footer';
 
 export const SharedLayout = () => {
@@ -8,9 +9,9 @@ export const SharedLayout = () => {
     <>
       <Suspense fallback={'Loading...'}>
         <HeaderComp />
-        <main>
+        <Main>
           <Outlet />
-        </main>
+        </Main>
         {/* <Footer /> */}
       </Suspense>
     </>
