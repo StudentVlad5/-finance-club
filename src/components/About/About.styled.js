@@ -20,6 +20,7 @@ const ContainerNavigation = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${(props) => props.theme.fon_second};
 `;
 
 const Btn = styled.div`
@@ -47,6 +48,7 @@ const ListOfItem = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: ${(props) => props.theme.fon_second};
 `;
 const ListOfItemNext = styled(ListOfItem)`
   padding: 0 60px;
@@ -66,6 +68,7 @@ const ListItemsContainer = styled.ul`
   width: 100%;
   margin-bottom: 48px;
   padding: 0 50px;
+  background-color: ${(props) => props.theme.fon_second};
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr 1fr;
   }
@@ -76,9 +79,12 @@ const ListItemsImgContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 82px;
-  height: 68px;
+  height: 82px;
   border-radius: 20px;
-  background: ${(props) => props.theme.black};
+  background: ${(props) => props.theme.black_img};
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    width: 100px;
+  }
 `;
 const ListItemsContentWraper = styled.div`
   display: flex;
@@ -101,7 +107,7 @@ const ListItems = styled.li`
   padding: 58px 32px;
   border-radius: 40px;
   gap: 24px;
-  background-color: ${(props) => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_text};
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     flex-direction: row;
   }
