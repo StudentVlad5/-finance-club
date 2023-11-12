@@ -55,7 +55,7 @@
     "eslint-plugin-react": "^7.30.0",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
-    "typescript": "^5.2.2"
+    "typescript": "^4.1.6"
   },
   "description": "for a communication platform of a fundamentally new format between the financial and banking community, the expert environment, regulators and society.",
   "main": "index.js",
