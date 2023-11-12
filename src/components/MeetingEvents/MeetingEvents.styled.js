@@ -123,7 +123,7 @@ const EventContentData = styled.div`
 `;
 const EventContentDesc = styled(EventContentData)`
   display: flex;
-  color: ${(props) => props.theme.black};
+  color: ${theme.dark.black};
   text-align: justify;
   font-size: 15px;
   width: 100%;

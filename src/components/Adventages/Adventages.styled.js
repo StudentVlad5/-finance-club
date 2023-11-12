@@ -41,7 +41,7 @@ const ListItems = styled.li`
   flex-direction: column;
   padding: 48px 24px;
   border-radius: 40px;
-  background-color: ${(props) => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_text};
 `;
 const ListItemsBig = styled(ListItems)`
   min-height: 620px;
@@ -55,7 +55,7 @@ const ListItemsImgContainer = styled.div`
   width: 68px;
   height: 68px;
   border-radius: 20px;
-  background: ${(props) => props.theme.black};
+  background: ${(props) => props.theme.black_img};
   margin-bottom: 20px;
 `;
 const ListItemsImgContainerBig = styled.div`
