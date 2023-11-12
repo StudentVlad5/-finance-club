@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Container } from "components/baseStyles/CommonStyle.styled";
-import { theme } from "components/baseStyles/Variables.styled";
+import styled from 'styled-components';
+import { Container } from 'components/baseStyles/CommonStyle.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 const HeaderSectionWrap = styled.header`
   display: flex;
@@ -15,8 +15,8 @@ const HeaderSectionWrap = styled.header`
   transform: translate(-50%, 0%);
   z-index: 20;
   transition: background-color 0.3s ease-in-out;
-  background-color: ${(props) =>
-    props.$props === "true" ? props.theme.black : "transparent"};
+  background-color: ${props =>
+    props.$props === 'true' ? props.theme.fon : props.theme.black};
 `;
 
 const HeaderContainer = styled(Container)`
