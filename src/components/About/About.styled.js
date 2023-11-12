@@ -96,12 +96,15 @@ const ListItems = styled.li`
   display: flex;
   justify-content: center;
   align-items: start;
-  flex-direction: row;
+  flex-direction: column;
   min-height: 246px;
   padding: 58px 32px;
   border-radius: 40px;
   gap: 24px;
   background-color: ${(props) => props.theme.white_fon};
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    flex-direction: row;
+  }
 `;
 const ListItemsUppertitle = styled(Title)`
   color: ${(props) => props.theme.white_text};
