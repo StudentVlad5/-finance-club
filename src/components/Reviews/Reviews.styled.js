@@ -58,6 +58,10 @@ export const ReviewsListItemDiscr = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 19.504px;
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}){
+    width: 304px;
+  }
 `;
 
 export const ReviewsBtnBox = styled.div`
@@ -174,7 +178,3 @@ export const ReviewsBtn = styled(NavLink)`
   }
 `;
 
-// export const ReviewsList = styled.ul``
-// export const ReviewsList = styled.ul``
-// export const ReviewsList = styled.ul``
-// export const ReviewsList = styled.ul``

@@ -64,6 +64,7 @@ export const Reviews = () => {
   const handleReviewsNumber = () => {
     setReviewsNumber(reviewsNumber + 4);
   };
+  
   return (
     <Section>
       <Container>
