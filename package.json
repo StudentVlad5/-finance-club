@@ -11,6 +11,7 @@
     "aos": "^2.3.4",
     "axios": "^1.6.1",
     "formik": "^2.4.5",
+    "i18next": "^23.7.3",
     "modern-normalize": "^2.0.0",
     "notiflix": "^3.2.6",
     "rc-pagination": "^3.7.0",
@@ -49,12 +50,12 @@
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.16.0",
-    "@typescript-eslint/parser": "^5.16.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.40.0",
     "eslint-plugin-react": "^7.30.0",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
-    "sass": "^1.62.1"
+    "typescript": "^5.2.2"
   },
   "description": "for a communication platform of a fundamentally new format between the financial and banking community, the expert environment, regulators and society.",
   "main": "index.js",

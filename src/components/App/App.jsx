@@ -9,7 +9,6 @@ import { selectIsRefreshing, getPermission } from 'redux/auth/selectors';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 
 const HomePage = lazy(() => import('pages/HomePage'));
-const AboutPage = lazy(() => import('pages/AboutPage'));
 const EventsPage = lazy(() => import('pages/EventsPage'));
 const EventDetailsPage = lazy(() => import('pages/EventDetailsPage'));
 const HowToJoinPage = lazy(() => import('pages/HowToJoinPage'));
@@ -87,7 +86,6 @@ export const App = () => {
               }
             /> */}
 
-            <Route path="about" element={<AboutPage />} />
             <Route path="events" element={<EventsPage />} />
             <Route path="events/:id" element={<EventDetailsPage />} />
             <Route path="join" element={<HowToJoinPage />} />
