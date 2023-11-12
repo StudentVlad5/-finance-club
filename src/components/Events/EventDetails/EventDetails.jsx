@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { addModal } from 'redux/modal/operation';
 import { openModalWindow } from 'hooks/modalWindow';
-import { Container, Section } from 'components/baseStyles/CommonStyle.styled';
+import { Container } from 'components/baseStyles/CommonStyle.styled';
 import { BackButton } from 'helpers/BackLink/BackLink';
 import { BtnLight } from 'components/baseStyles/Button.styled';
 import { RegisterModal } from '../RegisterModal/RegisterModal';
@@ -23,6 +23,7 @@ import {
 import { BASE_URL_IMG } from 'helpers/constants';
 import defaultImg from 'images/events/default.jpg';
 import { ReactComponent as Knob } from 'images/svg/knob.svg';
+import { EventsSection } from '../Events.styled';
 
 export const EventDetails = ({ event }) => {
   const {
@@ -54,7 +55,7 @@ export const EventDetails = ({ event }) => {
 
   return (
     <>
-      <Section>
+      <EventsSection>
         <Container>
           <EventTitle>
             {new Date(date).toLocaleDateString()} | {title}
@@ -130,12 +131,11 @@ export const EventDetails = ({ event }) => {
             )}
             <EventDescrBox>
               <EventDescr $small>
-                The meeting is part of the CFO CLUB club programme.
+                The meeting is part of the SoFi CLUB club programme.
                 <br />
                 If you are not a member of the club, you have a “Guest Visit”
-                option. You can use it once. The guest visit is valid only for
-                CFOs. The organizers have the right to refuse to participate, as
-                the number of guest places is limited.
+                option. The organizers have the right to refuse to participate,
+                as the number of guest places is limited.
                 <br />
                 We will be happy to answer your questions.
                 <br />
@@ -154,7 +154,7 @@ export const EventDetails = ({ event }) => {
             Register
           </BtnLight>
         </Container>
-      </Section>
+      </EventsSection>
       <RegisterModal event={event} />
     </>
   );

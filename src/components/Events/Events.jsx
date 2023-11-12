@@ -4,12 +4,8 @@ import { ArchiveEventsList } from './ArchiveEventsList/ArchiveEventList';
 import { fetchData } from 'services/APIservice';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
-import { Heading } from './Events.styled';
-import {
-  Container,
-  Section,
-  Title,
-} from 'components/baseStyles/CommonStyle.styled';
+import { EventsSection, Heading } from './Events.styled';
+import { Container, Title } from 'components/baseStyles/CommonStyle.styled';
 
 import digitalMoney from 'images/events/DIGITAL MONEY.jpg';
 import cybersecurity from 'images/events/cybersecurity.webp';
@@ -161,7 +157,7 @@ export const Events = () => {
   // }, []);
 
   return (
-    <Section>
+    <EventsSection>
       <Container>
         <Title>Events calendar</Title>
 
@@ -175,6 +171,6 @@ export const Events = () => {
         {error && onFetchError('Whoops, something went wrong')}
         {events.length > 0 && !error && <ArchiveEventsList events={events} />}
       </Container>
-    </Section>
+    </EventsSection>
   );
 };
