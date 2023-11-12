@@ -136,7 +136,7 @@ export const FormInput = styled(Field)`
   line-height: 16px; /* 100% */
   letter-spacing: 1.6px;
   /* text-transform: capitalize; */
-  color: ${props => props.theme.black};
+  color: ${props => props.theme.black_text};
 
   background: ${props => props.theme.white_fon};
   border: none;

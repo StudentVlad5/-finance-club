@@ -87,7 +87,7 @@ export const EventDate = styled.span`
 export const EventTitle = styled.p`
   margin-bottom: 20px;
 
-  color: ${props => props.theme.black};
+  color: ${props => props.theme.black_text};
   font-family: ${theme.fonts[0]};
   font-size: 15px;
   font-style: normal;
@@ -121,7 +121,7 @@ export const BtnLink = styled(NavLink)`
   padding: 2px;
   margin-left: 16px;
 
-  color: ${props => props.theme.black};
+  color: ${props => props.theme.black_text};
   font-family: ${theme.fonts[0]};
   font-size: 14px;
   font-style: normal;
@@ -149,7 +149,7 @@ export const BtnLink = styled(NavLink)`
     bottom: 0;
     left: -16px;
     width: 1px;
-    background: ${props => props.theme.black};
+    background: ${props => props.theme.black_text};
     transition: ${theme.transition};
   }
 
@@ -158,8 +158,8 @@ export const BtnLink = styled(NavLink)`
     left: -16px;
     width: auto;
     background: 0;
-    border-right: 1px solid ${props => props.theme.black};
-    border-left: 1px solid ${props => props.theme.black};
+    border-right: 1px solid ${props => props.theme.black_text};
+    border-left: 1px solid ${props => props.theme.black_text};
   }
 
   &::after {
