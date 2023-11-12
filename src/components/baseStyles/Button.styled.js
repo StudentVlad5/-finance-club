@@ -15,10 +15,11 @@ export const BtnLight = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  color: ${props => props.theme.black};
+  color: ${props => props.theme.black_text};
   text-transform: uppercase;
 
   background-color: ${props => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   border-radius: 80px;
   cursor: pointer;
 
@@ -33,8 +34,8 @@ export const BtnLight = styled.button`
 
   &:hover,
   &:focus {
-    color: ${props => props.theme.white_text};
     background-color: ${props => props.theme.grey};
+    border: 1px solid ${props => props.theme.grey};
   }
 `;
 

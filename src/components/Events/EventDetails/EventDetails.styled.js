@@ -195,6 +195,10 @@ export const EventPlan = styled.ul`
         width: 15px;
         height: 15px;
       }
+
+      & path {
+        fill: currentColor;
+      }
     }
   }
 `;
