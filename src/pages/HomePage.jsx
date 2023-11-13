@@ -3,9 +3,13 @@ import Adventages from 'components/Adventages/Adventages';
 import Hero from 'components/Hero/Hero';
 import MeetingEvents from 'components/MeetingEvents/MeetingEvents';
 import Prices from 'components/Prices/Prices';
+import { useEffect } from 'react';
 import { SEO } from 'utils/SEO';
 
 const HomePage = () => {
+  useEffect(() => {
+    window.scrollTo(({ top: 0, left: 0, behavior: 'smooth' }))
+  }, [])
   return (
     <>
       <SEO

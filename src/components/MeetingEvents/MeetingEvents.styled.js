@@ -13,6 +13,7 @@ import BackgroundImage3x from "images/events/home_img_event_3x.webp";
 
 const MeetingEventSection = styled(Section)`
   background-color: ${(props) => props.theme.fon_second};
+  padding-bottom: 70px;
 `;
 const MeetingEventContainer = styled(Container)`
   display: flex;
