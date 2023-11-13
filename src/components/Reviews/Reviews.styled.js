@@ -20,7 +20,7 @@ export const ReviewsListItem = styled.li`
   padding: 15px 25px 25px 10px;
   width: 320px;
   border-radius: 40px;
-  background-color: ${theme.light.white_fon};
+  background-color: ${(props) => props.theme.white_fon};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     width: 430px;
@@ -81,7 +81,7 @@ export const ReviewsBtn = styled(NavLink)`
   background-color: transparent;
   border-color: transparent;
 
-  color: ${props => props.theme.black_text};
+  color: ${props => props.theme.white_text};
   font-family: ${theme.fonts[0]};
   font-size: 20px;
   font-style: normal;
@@ -110,7 +110,7 @@ export const ReviewsBtn = styled(NavLink)`
     bottom: 0;
     left: -16px;
     width: 1px;
-    background: ${props => props.theme.black_text};
+    background: ${props => props.theme.white_text};
     transition: ${theme.transition};
   }
 
@@ -119,8 +119,8 @@ export const ReviewsBtn = styled(NavLink)`
     left: -16px;
     width: auto;
     background: 0;
-    border-right: 1px solid ${props => props.theme.black_text};
-    border-left: 1px solid ${props => props.theme.black_text};
+    border-right: 1px solid ${props => props.theme.white_text};
+    border-left: 1px solid ${props => props.theme.white_text};
   }
 
   &::after {
