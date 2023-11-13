@@ -8,15 +8,13 @@ import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
 import { selectUserName } from 'redux/auth/selectors';
 import { addReload } from 'redux/reload/slice';
-import { fetchData, updateServiceData } from 'services/APIservice'; //fetchServiceData,
+import { fetchData, updateEventsData } from 'services/APIservice'; //fetchServiceData,
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { setImage } from 'utils/setimage';
 import schemas from 'utils/schemas';
 import {
   AddDetailsBtn,
-  Backdrop,
-  CloseBtn,
   DoneBtn,
   Error,
   FormField,
@@ -30,45 +28,43 @@ import {
   FormList,
   FormRatio,
   IncrementBtn,
-  Modal,
   ModalForm,
-} from './Modal.styled';
+} from '../Modal.styled';
+import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
+import { BASE_URL_IMG } from 'helpers/constants';
 
-export const EditModal = () => {
-  const { BASE_URL_IMG } = window.global;
-
+export const EditEventModal = () => {
   const [dataUpdate, setDataUpdate] = useState([]);
   const [img, setImg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
-  const userName = useSelector(selectUserName);
 
-  const itemForFetch = `/admin/${modal.id}`;
+  const itemForFetch = `/events/${modal.id}`;
 
-  useEffect(() => {
-    async function getData() {
-      setIsLoading(true);
-      try {
-        const { data } = await fetchData(itemForFetch);
-        setDataUpdate(data);
-        setImg(data.images);
-        if (!data) {
-          return onFetchError('Whoops, something went wrong');
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    if (modal.id !== '' && modal.id !== undefined) {
-      getData();
-    }
-  }, [itemForFetch, modal.id]);
+  // useEffect(() => {
+  //   async function getData() {
+  //     setIsLoading(true);
+  //     try {
+  //       const { data } = await fetchData(itemForFetch);
+  //       setDataUpdate(data);
+  //       setImg(data.images);
+  //       if (!data) {
+  //         return onFetchError('Whoops, something went wrong');
+  //       }
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   if (modal.id !== '' && modal.id !== undefined) {
+  //     getData();
+  //   }
+  // }, [itemForFetch, modal.id]);
 
-  async function editPosition(values) {
+  async function editEvent(values) {
     let file = false;
     if (typeof img === 'string' && img !== '' && img !== 'none') {
       values.images = img;
@@ -76,13 +72,13 @@ export const EditModal = () => {
       file = img;
     }
 
-    // console.log('editPosition ~ file:', file);
-    // console.log('editPosition ~ values:', values);
+    // console.log('editEvent ~ file:', file);
+    // console.log('editEvent ~ values:', values);
 
     setIsLoading(true);
     try {
-      const { code } = await updateServiceData(
-        `/admin/${modal.id}`,
+      const { code } = await updateEventsData(
+        `/events/${modal.id}`,
         values,
         file,
       );
@@ -125,31 +121,28 @@ export const EditModal = () => {
           {error && onFetchError('Whoops, something went wrong')}
           <Formik
             initialValues={{
-              article: dataUpdate?.article ? dataUpdate.article : '',
-              product: dataUpdate?.product ? dataUpdate.product : '',
-              category: dataUpdate?.category ? dataUpdate.category : '',
-              name: dataUpdate?.name ? dataUpdate.name : '',
-              price: dataUpdate?.price ? dataUpdate.price : '',
-              currency: dataUpdate?.currency ? dataUpdate.currency : '₴',
-              latin_name: dataUpdate?.latin_name ? dataUpdate.latin_name : '',
-              alcohol: dataUpdate?.alcohol ? dataUpdate.alcohol : [],
-              details: dataUpdate?.details ? dataUpdate.details : [],
+              date: dataUpdate?.date ? dataUpdate.date : '',
+              time: dataUpdate?.time ? dataUpdate.time : '',
+              location: dataUpdate?.location ? dataUpdate.location : '',
+              title: dataUpdate?.title ? dataUpdate.title : '',
+              description: dataUpdate?.description
+                ? dataUpdate.description
+                : '',
+              plan: dataUpdate?.plan ? dataUpdate.plan : [],
+              speakers: dataUpdate?.speakers ? dataUpdate.speakers : [],
+              moderator: dataUpdate?.speakers ? dataUpdate.speakers : '',
+              packages: dataUpdate?.speakers ? dataUpdate.speakers : [],
               images: '',
-              size: dataUpdate?.size
-                ? dataUpdate.size
-                : { value: '', mesure: '' },
-              active: dataUpdate?.active ? dataUpdate.active : 'false',
-              admin: userName,
             }}
             onSubmit={(values, { setSubmitting }) => {
-              editPosition(values);
+              editEvent(values);
               dispatch(addReload(false));
               setSubmitting(false);
               dispatch(cleanModal());
               closeModalWindow();
             }}
             enableReinitialize={true}
-            validationSchema={schemas.schemasMenuPosition}
+            validationSchema={schemas.schemasMenuEvent}
           >
             {({
               handleChange,
@@ -167,120 +160,90 @@ export const EditModal = () => {
               >
                 <FormList>
                   <FormField>
-                    <FormLabel htmlFor="article">
-                      <span>Article</span>
-                      {errors.article && touched.article ? (
-                        <Error>{errors.article}</Error>
+                    <FormLabel htmlFor="date">
+                      <span>Date</span>
+                      {errors.date && touched.date ? (
+                        <Error>{errors.date}</Error>
                       ) : null}
                     </FormLabel>
                     <FormInput
                       type="text"
-                      id="article"
-                      name="article"
-                      placeholder="Type position article"
-                      value={values.article}
+                      id="date"
+                      name="date"
+                      placeholder="YYYY/MM/DD"
+                      value={values.date}
                     />
                   </FormField>
                   <FormField>
-                    <FormLabel htmlFor="product">
-                      <span>Product</span>
-                      {errors.product && touched.product ? (
-                        <Error>{errors.product}</Error>
+                    <FormLabel htmlFor="time">
+                      <span>Time</span>
+                      {errors.time && touched.time ? (
+                        <Error>{errors.time}</Error>
                       ) : null}
                     </FormLabel>
                     <FormInput
                       type="text"
-                      id="product"
-                      name="product"
-                      placeholder="Type position product"
-                      value={values.product}
+                      id="time"
+                      name="time"
+                      placeholder="HH:MM - HH:MM"
+                      value={values.time}
                     />
                   </FormField>
                   <FormField>
-                    <FormLabel htmlFor="category">
-                      <span>Category</span>
-                      {errors.category && touched.category ? (
-                        <Error>{errors.category}</Error>
-                      ) : null}
-                    </FormLabel>
-                    <FormInput
-                      type="text"
-                      id="category"
-                      name="category"
-                      placeholder="Type category"
-                      value={values.category}
-                    />
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="name">
-                      <span>Name</span>
-                      {errors.name && touched.name ? (
-                        <Error>{errors.name}</Error>
-                      ) : null}
-                    </FormLabel>
-                    <FormInput
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Type name"
-                      value={values.name}
-                    />
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="price">
-                      <span>Price</span>
-                      {errors.price && touched.price ? (
-                        <Error>{errors.price}</Error>
+                    <FormLabel htmlFor="location">
+                      <span>Location</span>
+                      {errors.location && touched.location ? (
+                        <Error>{errors.location}</Error>
                       ) : null}
                     </FormLabel>
                     <FormInput
                       type="number"
-                      id="price"
-                      name="price"
-                      placeholder="Type position price"
-                      value={values.price}
+                      id="location"
+                      name="location"
+                      placeholder="City / ZOOM"
+                      value={values.location}
                     />
                   </FormField>
                   <FormField>
-                    <FormLabel htmlFor="currency">
-                      <span>Currency</span>
-                      {errors.currency && touched.currency ? (
-                        <Error>{errors.currency}</Error>
+                    <FormLabel htmlFor="title">
+                      <span>Title</span>
+                      {errors.title && touched.title ? (
+                        <Error>{errors.title}</Error>
                       ) : null}
                     </FormLabel>
                     <FormInput
                       type="text"
-                      id="currency"
-                      name="currency"
-                      placeholder="Type position currency"
-                      value={values.currency}
+                      id="title"
+                      name="title"
+                      placeholder="Event title"
+                      value={values.title}
                     />
                   </FormField>
                   <FormField>
-                    <FormLabel htmlFor="latin_name">
-                      <span>Latin name</span>
-                      {errors.latin_name && touched.latin_name ? (
-                        <Error>{errors.latin_name}</Error>
+                    <FormLabel htmlFor="description">
+                      <span>Description</span>
+                      {errors.description && touched.description ? (
+                        <Error>{errors.description}</Error>
                       ) : null}
                     </FormLabel>
                     <FormInput
                       type="text"
-                      id="latin_name"
-                      name="latin_name"
-                      placeholder="Type position latin_name"
-                      value={values.latin_name}
+                      id="description"
+                      name="description"
+                      placeholder="Event description"
+                      value={values.description}
                     />
                   </FormField>
                   <FieldArray
-                    name="alcohol"
+                    name="plan"
                     render={arrayHelpers => (
                       <FormInputArray>
-                        <FormLabel>Alcohol</FormLabel>
+                        <FormLabel>Plan</FormLabel>
                         <FormInputBoxColumn>
-                          {values.alcohol && values.alcohol.length > 0 ? (
-                            values.alcohol.map((alc, index) => (
+                          {values.plan && values.plan.length > 0 ? (
+                            values.plan.map((item, index) => (
                               <div key={index}>
-                                <FormInput name={`alcohol.${index}`} />
+                                <FormInput name={`plan.${index}`} />
                                 <IncrementBtn
                                   type="button"
                                   onClick={() => arrayHelpers.remove(index)} // remove a detail from the list
@@ -289,7 +252,7 @@ export const EditModal = () => {
                                 </IncrementBtn>
                                 <IncrementBtn
                                   type="button"
-                                  onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
+                                  onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at an event
                                 >
                                   +
                                 </IncrementBtn>
@@ -300,7 +263,7 @@ export const EditModal = () => {
                               type="button"
                               onClick={() => arrayHelpers.push('')}
                             >
-                              Add an alcohol
+                              Add a plan
                             </AddDetailsBtn>
                           )}
                         </FormInputBoxColumn>
@@ -308,15 +271,15 @@ export const EditModal = () => {
                     )}
                   />
                   <FieldArray
-                    name="details"
+                    name="speakers"
                     render={arrayHelpers => (
                       <FormInputArray>
-                        <FormLabel>Details</FormLabel>
+                        <FormLabel>Speakers</FormLabel>
                         <FormInputBoxColumn>
-                          {values.details && values.details.length > 0 ? (
-                            values.details.map((detail, index) => (
+                          {values.speakers && values.speakers.length > 0 ? (
+                            values.speakers.map((speaker, index) => (
                               <div key={index}>
-                                <FormInput name={`details.${index}`} />
+                                <FormInput name={`speakers.${index}`} />
                                 <IncrementBtn
                                   type="button"
                                   onClick={() => arrayHelpers.remove(index)}
@@ -336,7 +299,7 @@ export const EditModal = () => {
                               type="button"
                               onClick={() => arrayHelpers.push('')}
                             >
-                              Add a detail
+                              Add a speaker
                             </AddDetailsBtn>
                           )}
                         </FormInputBoxColumn>
@@ -344,72 +307,56 @@ export const EditModal = () => {
                     )}
                   />
                   <FormField>
-                    <FormLabelBox>
-                      <span>Size</span>
-                      {errors.size?.value &&
-                      touched.size?.value &&
-                      errors.size?.mesure &&
-                      touched.size?.mesure ? (
-                        <Error>{errors.size}</Error>
-                      ) : null}
-
-                      <FormInputBox>
-                        <label htmlFor="size_value">
-                          <FormInput
-                            style={{ width: '70px' }}
-                            type="number"
-                            id="size_value"
-                            name="size.value"
-                            placeholder="value"
-                            value={values.size.value}
-                          />
-                        </label>
-                        <label htmlFor="size_measure">
-                          <FormInput
-                            style={{ width: '70px' }}
-                            type="text"
-                            id="size_measure"
-                            name="size.mesure"
-                            placeholder="measure"
-                            value={values.size.mesure}
-                          />
-                        </label>
-                      </FormInputBox>
-                    </FormLabelBox>
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="active">
-                      <span>Active</span>
-                      {errors.active && touched.active ? (
-                        <Error>{errors.active}</Error>
+                    <FormLabel htmlFor="moderator">
+                      <span>Moderator</span>
+                      {errors.moderator && touched.moderator ? (
+                        <Error>{errors.moderator}</Error>
                       ) : null}
                     </FormLabel>
-                    <FormRatio>
-                      <label
-                        style={{ marginRight: '5px' }}
-                        htmlFor="active_true"
-                      >
-                        <FormInput
-                          type="radio"
-                          id="active_true"
-                          name="active"
-                          value="true"
-                          checked={values.active === true}
-                        />
-                        <span>true</span>
-                      </label>
-                      <label htmlFor="active_false">
-                        <FormInput
-                          type="radio"
-                          id="active_false"
-                          name="active"
-                          value="false"
-                          checked={values.active === false}
-                        />
-                        <span>false</span>
-                      </label>
-                    </FormRatio>
+                    <FormInput
+                      type="text"
+                      id="moderator"
+                      name="moderator"
+                      placeholder="Event moderator"
+                      value={values.moderator}
+                    />
                   </FormField>
+                  <FieldArray
+                    name="packages"
+                    render={arrayHelpers => (
+                      <FormInputArray>
+                        <FormLabel>Packages</FormLabel>
+                        <FormInputBoxColumn>
+                          {values.packages && values.packages.length > 0 ? (
+                            values.packages.map((pack, index) => (
+                              <div key={index}>
+                                <FormInput name={`packages.${index}`} />
+                                <IncrementBtn
+                                  type="button"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                  -
+                                </IncrementBtn>
+                                <IncrementBtn
+                                  type="button"
+                                  onClick={() => arrayHelpers.insert(index, '')}
+                                >
+                                  +
+                                </IncrementBtn>
+                              </div>
+                            ))
+                          ) : (
+                            <AddDetailsBtn
+                              type="button"
+                              onClick={() => arrayHelpers.push('')}
+                            >
+                              Add a package
+                            </AddDetailsBtn>
+                          )}
+                        </FormInputBoxColumn>
+                      </FormInputArray>
+                    )}
+                  />
                   <FormField>
                     <FormLabel htmlFor="images">
                       <span>Image</span>
@@ -423,15 +370,14 @@ export const EditModal = () => {
                           backgroundImage: `url(${
                             BASE_URL_IMG + dataUpdate.images
                           })`,
-                          // backgroundSize: '20px ,20px',
-                          backgroundPosition: 'center',
+                          backgroundEvent: 'center',
                           backgroundRepeat: 'no-repeat',
                           backgroundSize: 'cover',
                         }}
                         type="file"
                         id="images"
                         name="images"
-                        placeholder="Type images"
+                        placeholder="images"
                         accept=".jpg,.jpeg,.webp,.png,.gif"
                         onChange={e => {
                           handleChange(e);
@@ -454,12 +400,6 @@ export const EditModal = () => {
                         }}
                       />
                     )}
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="admin">
-                      <span>Created / edited by</span>
-                    </FormLabel>
-                    <FormInput type="text" id="admin" name="admin" disabled />
                   </FormField>
                 </FormList>
 

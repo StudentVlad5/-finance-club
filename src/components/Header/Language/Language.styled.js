@@ -23,13 +23,13 @@ export const LabelLanguage = styled.span`
   margin: 2px;
 
   font-family: ${theme.fonts[1]};
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 300;
   line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
 
   transition: ${theme.transition[0]};
   cursor: pointer;
@@ -40,12 +40,12 @@ export const LabelLanguage = styled.span`
 
   &:focus,
   &:hover {
-    color:${(props) => props.theme.grey};
+    color: ${props => props.theme.grey};
     transform: ${theme.scale[0]};
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
   }
   &.active {
-    color: ${(props) => props.theme.grey};;
+    color: ${props => props.theme.grey};
     transform: ${theme.scale[0]};
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
     font-weight: 700;

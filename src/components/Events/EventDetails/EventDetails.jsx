@@ -94,15 +94,7 @@ export const EventDetails = ({ event }) => {
               <span>Speakers:</span>
               <ul>
                 {speakers.map((speaker, i) => {
-                  return (
-                    <li key={i}>
-                      {speaker.name +
-                        ', ' +
-                        speaker.company +
-                        ', ' +
-                        speaker.position}
-                    </li>
-                  );
+                  return <li key={i}>{speaker}</li>;
                 })}
               </ul>
             </EventSpeaker>
@@ -169,13 +161,7 @@ EventDetails.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     plan: PropTypes.any,
-    speakers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        company: PropTypes.string,
-        position: PropTypes.string,
-      }),
-    ).isRequired,
+    speakers: PropTypes.any.isRequired,
     moderator: PropTypes.string,
     packages: PropTypes.array.isRequired,
     image: PropTypes.string,

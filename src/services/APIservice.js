@@ -19,12 +19,14 @@ async function fetchData(pathParams) {
 async function updateUserData(pathParams, body, file) {
   const formData = new FormData();
   file && formData.set('avatar', file);
+  formData.append('name', body.name);
+  formData.append('surname', body.surname);
   formData.append('email', body.email);
-  formData.append('birthday', body.birthday);
-  formData.append('location', body.location);
   formData.append('phone', body.phone);
+  formData.append('birthday', body.birthday);
+  formData.append('company', body.company);
+  formData.append('position', body.position);
   formData.append('role', body.role);
-  formData.append('userName', body.userName);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
@@ -39,12 +41,13 @@ async function updateUserData(pathParams, body, file) {
 async function createUserData(pathParams, body, file) {
   const formData = new FormData();
   file && formData.set('avatar', file);
-  formData.append('userName', body.userName);
+  formData.append('name', body.name);
+  formData.append('surname', body.surname);
   formData.append('email', body.email);
-  formData.append('password', body.password);
   formData.append('phone', body.phone);
   formData.append('birthday', body.birthday);
-  formData.append('location', body.location);
+  formData.append('company', body.company);
+  formData.append('position', body.position);
   formData.append('role', body.role);
 
   return await axios.post(`${BASE_URL}${pathParams}`, formData, {
@@ -57,13 +60,26 @@ async function createUserData(pathParams, body, file) {
   });
 }
 
-async function updateServiceData(pathParams, body) {
+async function updateEventsData(pathParams, body) {
   const formData = new FormData();
-  formData.append('subject', body.subject);
+  formData.append('date', body.date);
   formData.append('time', body.time);
   formData.append('location', body.location);
-  formData.append('price', body.price);
-  formData.append('owner', body.owner);
+  formData.append('title', body.title);
+  formData.append('description', body.description);
+  body.plan.forEach(value => {
+    formData.append('plan[]', value);
+  });
+  body.speakers.forEach(value => {
+    formData.append('speakers[]', value);
+  });
+  formData.append('moderator', body.moderator);
+  body.packages.forEach(value => {
+    formData.append('packages[]', value);
+  });
+  file && file !== 'none'
+    ? formData.set('images', file, file.name.replaceAll(' ', '_'))
+    : formData.append('image', body.image);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
@@ -74,61 +90,28 @@ async function updateServiceData(pathParams, body) {
     },
   });
 }
-async function createServiceData(pathParams, body) {
+async function createEventsData(pathParams, body) {
   const formData = new FormData();
-  formData.append('subject', body.subject);
+  formData.append('date', body.date);
   formData.append('time', body.time);
   formData.append('location', body.location);
-  formData.append('price', body.price);
-  formData.append('owner', body.owner);
-  formData.append('Id', body.id);
+  formData.append('title', body.title);
+  formData.append('description', body.description);
+  body.plan.forEach(value => {
+    formData.append('plan[]', value);
+  });
+  body.speakers.forEach(value => {
+    formData.append('speakers[]', value);
+  });
+  formData.append('moderator', body.moderator);
+  body.packages.forEach(value => {
+    formData.append('packages[]', value);
+  });
+  file && formData.set('images', file, file.name.replaceAll(' ', '_'));
 
   return await axios.post(`${BASE_URL}${pathParams}`, formData, {
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
-    },
-  });
-}
-
-async function createOwnerData(pathParams, body, file) {
-  const formData = new FormData();
-  file && formData.set('avatar', file);
-  formData.append('startHour', body.startHour);
-  formData.append('endHour', body.endHour);
-  formData.append('designation', body.designation);
-  formData.append('workDays', body.workDays);
-  formData.append('groupId', body.groupId);
-  formData.append('ownerColor', body.ownerColor);
-  formData.append('ownerText', body.ownerText);
-  formData.append('Id', body.id);
-
-  return await axios.post(`${BASE_URL}${pathParams}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
-    },
-  });
-}
-
-async function updateOwnerData(pathParams, body, file) {
-  const formData = new FormData();
-  file && formData.set('avatar', file);
-  formData.append('ownerText', body.ownerText);
-  formData.append('ownerColor', body.ownerColor);
-  formData.append('designation', body.designation);
-  formData.append('workDays', body.workDays);
-  formData.append('startHour', body.startHour);
-  formData.append('endHour', body.endHour);
-  formData.append('groupId', body.groupId);
-
-  return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
       'Access-Control-Expose-Headers': 'Content-Range',
@@ -181,17 +164,12 @@ createUserData.propTypes = {
   file: PropTypes.string,
 };
 
-updateServiceData.propTypes = {
+updateEventsData.propTypes = {
   pathParams: PropTypes.string.isRequired,
   formData: PropTypes.string.isRequired,
 };
 
-createServiceData.propTypes = {
-  pathParams: PropTypes.string.isRequired,
-  formData: PropTypes.string.isRequired,
-};
-
-createOwnerData.propTypes = {
+createEventsData.propTypes = {
   pathParams: PropTypes.string.isRequired,
   formData: PropTypes.string.isRequired,
 };
@@ -200,10 +178,8 @@ export {
   fetchData,
   updateUserData,
   createUserData,
-  updateOwnerData,
-  createServiceData,
-  updateServiceData,
+  createEventsData,
+  updateEventsData,
   deleteData,
-  createOwnerData,
   changePassword,
 };

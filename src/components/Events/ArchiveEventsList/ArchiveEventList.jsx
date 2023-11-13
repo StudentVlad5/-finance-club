@@ -78,13 +78,7 @@ ArchiveEventsList.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       plan: PropTypes.any,
-      speakers: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string,
-          company: PropTypes.string,
-          position: PropTypes.string,
-        }),
-      ).isRequired,
+      speakers: PropTypes.any.isRequired,
       moderator: PropTypes.string,
       packages: PropTypes.array.isRequired,
       image: PropTypes.string,

@@ -70,76 +70,132 @@ img {
 }
 
  //-----pagination-----//
-.paginate__container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.pagination-data {
+        padding: 0;
+        margin: 0;
+    }
 
-  max-width: 50vw;
+    .pagination-data li {
+        list-style: none;
+    }
 
-  margin: 0 auto;
-  padding: 6px 12px;
+    .rc-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
 
-  font-family: ${theme.fonts[0]};
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.375;
-  letter-spacing: 0.04em;
-  text-align: left;
+    .rc-pagination-item,
+    .rc-pagination-prev,
+    .rc-pagination-jump-prev,
+    .rc-pagination-jump-next {
+        margin-right: 8px;
+    }
 
-  background-color: transparent;
+    .rc-pagination-total-text {
+        margin-right: 12px;
+        cursor: initial;
+    }
 
+    .rc-pagination-jump-next,
+    .rc-pagination-jump-prev,
+    .rc-pagination-next,
+    .rc-pagination-prev {
+        display: inline-block;
+        min-width: 28px;
+        height: 28px;
+        color: rgba(0, 0, 0, .85);
+        font-family: Arial;
+        line-height: 28px;
+        text-align: center;
+        vertical-align: middle;
+        list-style: none;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: all .3s;
+    }
 
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    font-size: 20px;
-    padding: 8px 16px;
-  }
+    .rc-pagination-jump-next button,
+    .rc-pagination-jump-prev button {
+        color:${props => props.theme.grey};
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
 
-  @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    max-width: 500px;
-  }
-}
+    .rc-pagination-jump-next button:after,
+    .rc-pagination-jump-prev button:after {
+        display: block;
+        content: "•••";
+    }
 
-.paginate__page, .paginate__page--prev, .paginate__page--next, .paginate__page--break {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    .rc-pagination-item,
+    .rc-pagination-prev,
+    .rc-pagination-next,
+    .rc-pagination-total-text {
+        min-width: initial;
+        height: auto;  
+        font-size: 10px;
+        line-height: initial;
+        color:${props => props.theme.white_text}!important;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
 
-  cursor: pointer;
+    .rc-pagination-item a,
+    .rc-pagination-item button,
+    .rc-pagination-prev a,
+    .rc-pagination-prev button,
+    .rc-pagination-next a,
+    .rc-pagination-next button,
+    .rc-pagination-total-text a,
+    .rc-pagination-total-text button {
+        padding: 6px 8px;
+        height: auto;
+        min-width: 24px;
+        min-height: 24px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 400;
+        color:${props => props.theme.white_text}!important;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+    }
 
-  width: 25px;
-  height: 25px;
+    .rc-pagination-item.rc-pagination-item-active a,
+    .rc-pagination-item.rc-pagination-item-active a:hover,
+    .rc-pagination-prev.rc-pagination-item-active a,
+    .rc-pagination-prev.rc-pagination-item-active a:hover,
+    .rc-pagination-next.rc-pagination-item-active a,
+    .rc-pagination-next.rc-pagination-item-active a:hover,
+    .rc-pagination-total-text.rc-pagination-item-active a,
+    .rc-pagination-total-text.rc-pagination-item-active a:hover {
+        background-color: ${props => props.theme.white_fon};
+        border-color:${props => props.theme.white_fon};
+        color: ${props => props.theme.black_text} !important;
+    }
 
-  color:${props => props.theme.black};
+    .rc-pagination-item a:hover,
+    .rc-pagination-item button:hover,
+    .rc-pagination-prev a:hover,
+    .rc-pagination-prev button:hover,
+    .rc-pagination-next a:hover,
+    .rc-pagination-next button:hover,
+    .rc-pagination-total-text a:hover,
+    .rc-pagination-total-text button:hover {
+        background-color: ${props => props.theme.grey};
+        border-color: ${props => props.theme.grey};
+        color: ${props => props.theme.white_text} !important;
+    }
 
-  transition: all .25s ease-in;
-
-  &:hover, &:focus {
-    color:${props => props.theme.grey};
-  }
-
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    width: 35px;
-    height: 35px;
-  }
-}
-
-.paginate__link {
-  display: block;
-}
-
-.paginate__page--disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.paginate__page--active {
-  pointer-events: none;
-  border: 0.5px solid ${props => props.theme.black};
-  border-radius: 5px;
-
-}
 
 //-----Swiper-----//
 
@@ -183,7 +239,7 @@ color:${props => props.theme.grey} !important;
   flex-shrink: 0;
 };
 
-/* PAGINATION */
+
 .swiper-pagination-bullet-active.swiper-pagination-bullet{
 
 }

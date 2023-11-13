@@ -21,12 +21,8 @@ const eventData = {
     '20:00 – 20:30 Questions for the speaker',
   ],
   speakers: [
-    { name: 'Den Braun', company: 'Bronx', position: 'CFO' },
-    {
-      name: 'Joanne Walker',
-      company: 'BDO',
-      position: 'Global Partnership Director',
-    },
+    'Den Braun, Bronx, CFO',
+    'Joanne Walker, BDO, Global Partnership Director',
   ],
   packages: ['pro', 'expert'],
   image: digitalMoney,

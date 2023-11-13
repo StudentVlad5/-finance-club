@@ -7,14 +7,17 @@ const MobileNavList = styled.nav`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 40px;
+
+  margin-top: 60px;
+
   font-family: ${theme.fonts[1]};
   font-size: 24px;
   text-decoration: none;
   white-space: nowrap;
-  margin-top: 60px;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    margin-top: 88px;
+    /* gap: 60px; */
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
@@ -25,6 +28,7 @@ const MobileNavList = styled.nav`
 const NavList = styled(MobileNavList)`
   display: none;
   white-space: nowrap;
+
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     display: flex;
     width: 100%;
@@ -44,33 +48,19 @@ const NavItem = styled(NavLink)`
   line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
-  color: ${(props) => props.theme.white_text};
-  transition: ${theme.transition[0]};
+  color: ${props => props.theme.white_text};
+  transition: ${theme.transition};
   &:focus,
   &:hover {
-    color:${(props) => props.theme.grey};
-    transform: ${theme.scale[0]};
+    color: ${props => props.theme.grey};
+    transform: ${theme.scale};
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
   }
   &.active {
-    color: ${(props) => props.theme.grey};;
-    transform: ${theme.scale[0]};
+    color: ${props => props.theme.grey};
+    transform: ${theme.scale};
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
     font-weight: 700;
-  }
-  &:not(:first-child) {
-    margin-top: 40px;
-  }
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    &:not(:first-child) {
-      margin-top: 60px;
-    }
-  }
-  @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    &:not(:first-child) {
-      margin-top: 0px;
-      margin-left: 0px;
-    }
   }
 `;
 export { MobileNavList, NavList, NavItem };
