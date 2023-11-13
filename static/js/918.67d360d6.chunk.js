@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkfinance_club=self.webpackChunkfinance_club||[]).push([[918],{8918:(e,n,t)=>{t.r(n),t.d(n,{default:()=>s});var i=t(4116),c=t(3329);const s=()=>(0,c.jsx)(c.Fragment,{children:(0,c.jsx)(i.H,{title:"User profile",description:""})})},4116:(e,n,t)=>{t.d(n,{H:()=>s});t(2791);var i=t(6907),c=t(3329);function s(e){let{title:n,description:t}=e;return(0,c.jsxs)(i.ql,{children:[(0,c.jsx)("title",{children:n}),(0,c.jsx)("meta",{name:"description",content:t})]})}}}]);
-//# sourceMappingURL=918.67d360d6.chunk.js.map
