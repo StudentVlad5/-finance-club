@@ -5,12 +5,12 @@ import {
   ArchiveDetailsWrapper,
   ArchiveEvent,
   ArchiveList,
+  ArchiveImage,
   BtnMore,
 } from './ArchiveEventList.styled';
 import {
   DataPlaceWrapper,
   EventDate,
-  EventImages,
   EventTitle,
 } from '../EventsList/EventList.styled';
 // import { BASE_URL_IMG } from 'helpers/constants';
@@ -37,7 +37,7 @@ export const ArchiveEventsList = ({ events }) => {
               data-aos-delay="200"
             >
               <NavLink to={`/events/${event._id}`}>
-                <EventImages
+                <ArchiveImage
                   // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
                   src={event.image ? event.image : defaultImg}
                   alt={event.title}

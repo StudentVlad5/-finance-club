@@ -43,16 +43,10 @@ export const EventsList = ({ events }) => {
                 <EventDate>{event.location}</EventDate>
               </DataPlaceWrapper>
               <EventTitle>{event.title}</EventTitle>
-              {widthWindow <= 768 ? (
+              {widthWindow && (
                 <EventDesc>
                   {event.description.length > 300
                     ? event.description.slice(0, 300) + ' ...'
-                    : event.description}
-                </EventDesc>
-              ) : (
-                <EventDesc>
-                  {event.description.length > 550
-                    ? event.description.slice(0, 550) + ' ...'
                     : event.description}
                 </EventDesc>
               )}
