@@ -17,7 +17,8 @@ export const ContactsBox = styled.div`
 `;
 
 export const ContactsTitle = styled.p`
-  color: ${props => props.theme.black_text};
+  color: ${props => props.theme.white_text};
+
   font-family: ${theme.fonts[0]};
   font-size: 22px;
   font-style: normal;
@@ -48,7 +49,7 @@ export const ContactsListItem = styled.li`
 `;
 
 export const ContactsListItemText = styled.p`
-  color: ${props => props.theme.black_text};
+  color: ${props => props.theme.white_text};
   font-family: ${theme.fonts[0]};
   font-size: 18px;
   font-style: normal;
@@ -59,7 +60,7 @@ export const ContactsListItemText = styled.p`
 
 export const ContactsListItemLink = styled.a`
   text-decoration: none;
-  color: ${props => props.theme.black_text};
+  color: ${props => props.theme.white_text};
   font-family: ${theme.fonts[0]};
   font-size: 18px;
   font-style: normal;
@@ -68,7 +69,9 @@ export const ContactsListItemLink = styled.a`
   margin-left: 15px;
 `;
 
-export const ContactsListIconPin = styled(pin)``;
+export const ContactsListIconPin = styled(pin)`
+  fill: ${props => props.theme.white_text};
+`;
 
 export const ContactsListIconEmail = styled(email)``;
 

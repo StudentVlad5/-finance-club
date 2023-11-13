@@ -196,7 +196,7 @@ const ButtonBuy = styled.button`
   }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;
-    width: 210px;
+    /* width: 210px; */
     height: 70px;
   }
 `;
