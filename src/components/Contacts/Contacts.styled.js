@@ -78,6 +78,7 @@ export const MyContainerMap = styled(MapContainer)`
   height: 403px;
   width: 100%;
   margin-top: 40px;
+  z-index: 1;
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     height: 403px;
     width: 707px;
