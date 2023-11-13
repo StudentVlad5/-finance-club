@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://studentvlad5.github.io/finance-club/",
   "dependencies": {
+    "@react-email/link": "^0.0.6",
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.1.0",
