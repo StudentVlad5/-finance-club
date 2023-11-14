@@ -60,7 +60,7 @@ const ListOfItemNext = styled(ListOfItem)`
   }
 `;
 const ListItemsContainer = styled.ul`
-  display: grid;
+  display: none;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: stretch;
@@ -71,6 +71,13 @@ const ListItemsContainer = styled.ul`
   background-color: ${(props) => props.theme.fon_second};
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr 1fr;
+    display: grid;
+  }
+`;
+const ListItemsContainerForSwiper = styled(ListItemsContainer)`
+  display: grid;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    display: none;
   }
 `;
 const ListItemsImgContainer = styled.div`
@@ -162,6 +169,7 @@ export {
   Btn,
   ListOfItem,
   ListItemsContainer,
+  ListItemsContainerForSwiper,
   ListItemsImgContainer,
   ListItemsImg,
   ListItems,

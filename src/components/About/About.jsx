@@ -23,9 +23,8 @@ import {
   ListItemsContentWraper,
   ListOfItemNext,
   Btn,
+  ListItemsContainerForSwiper,
 } from './About.styled';
-import { theme } from 'components/baseStyles/Variables.styled';
-import { useEffect, useState } from 'react';
 
 const data = [
   {
@@ -56,12 +55,6 @@ const data = [
 
 const About = () => {
   // const { t } = useTranslation();
-  const [widthWindow, setWidthWindow]= useState(window.innerWidth);
-
-  useEffect(()=>{
-  setWidthWindow(window.innerWidth)
-},[window.innerWidth]);
-
   return (
     <AboutSection>
       <AboutContainer>
@@ -102,8 +95,7 @@ const About = () => {
                 Feugiat nulla suspendisse tortor aene.
               </SubTitle>
               <ListItemsContainer>
-                {widthWindow >= theme.breakpoints.tablet.slice(0, -2) ? (
-                  data.map(it => (
+                {data.map(it => (
                     <ListItems key={it.title}>
                       <ListItemsImgContainer>
                         <ListItemsImg src={it.img} alt={it.title} />
@@ -113,47 +105,47 @@ const About = () => {
                         <SubTitleItem>{it.content}</SubTitleItem>
                       </ListItemsContentWraper>
                     </ListItems>
-                  ))
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Mousewheel, Keyboard, Autoplay]}
-                    spaceBetween={50}
-                    slidesPerView={1}
-                    grabCursor={true}
-                    navigation={{
-                      prevEl: '.swiper-button-prev',
-                      nextEl: '.swiper-button-next',
-                    }}
-                    pagination={{ clickable: false }}
-                    mousewheel={true}
-                    keyboard={true}
-                    loop={true}
-                    loopPreventsSliding={true}
-                    // loopedSlides={1}
-                    autoplay={{ delay: 1000 }}
-                    effect={'creative'}
-                  >
-                    {' '}
-                    {data.map(it => (
-                      <SwiperSlide key={it.title}>
-                        <ListItems
-                          data-aos="fade-left"
-                          data-aos-offset="300"
-                          data-aos-easing="ease-in-sine"
-                        >
-                          <ListItemsImgContainer>
-                            <ListItemsImg src={it.img} alt={it.title} />
-                          </ListItemsImgContainer>
-                          <ListItemsContentWraper>
-                            <ListItemsTitle>{it.title}</ListItemsTitle>
-                            <SubTitleItem>{it.content}</SubTitleItem>
-                          </ListItemsContentWraper>
-                        </ListItems>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                )}
+                  ))}
               </ListItemsContainer>
+              <ListItemsContainerForSwiper>
+                <Swiper
+                  modules={[Navigation, Mousewheel, Keyboard, Autoplay]}
+                  spaceBetween={50}
+                  slidesPerView={1}
+                  grabCursor={true}
+                  navigation={{
+                    prevEl: '.swiper-button-prev',
+                    nextEl: '.swiper-button-next',
+                  }}
+                  pagination={{ clickable: false }}
+                  mousewheel={true}
+                  keyboard={true}
+                  loop={true}
+                  loopPreventsSliding={true}
+                  // loopedSlides={1}
+                  autoplay={{ delay: 1000 }}
+                  effect={'creative'}
+                >
+                  {' '}
+                  {data.map(it => (
+                    <SwiperSlide key={it.title}>
+                      <ListItems
+                        data-aos="fade-left"
+                        data-aos-offset="300"
+                        data-aos-easing="ease-in-sine"
+                      >
+                        <ListItemsImgContainer>
+                          <ListItemsImg src={it.img} alt={it.title} />
+                        </ListItemsImgContainer>
+                        <ListItemsContentWraper>
+                          <ListItemsTitle>{it.title}</ListItemsTitle>
+                          <SubTitleItem>{it.content}</SubTitleItem>
+                        </ListItemsContentWraper>
+                      </ListItems>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </ListItemsContainerForSwiper>
             </ListOfItem>
           </SwiperSlide>
           <SwiperSlide>

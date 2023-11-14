@@ -2,7 +2,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Mousewheel, Keyboard, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import { useEffect, useState } from 'react';
 import {
   PriceSection,
   PriceContainer,
@@ -19,9 +18,8 @@ import {
   UlContent,
   LiContent,
   ButtonBuy,
+  ListItemsContainerForSwiper,
 } from './Prices.styled';
-import { theme } from 'components/baseStyles/Variables.styled';
-
 
 const data = [
   {
@@ -49,12 +47,6 @@ const data = [
 
 const Prices = () => {
   // const { t } = useTranslation();
-  const [widthWindow, setWidthWindow]= useState(window.innerWidth);
-
-  useEffect(()=>{
-  setWidthWindow(window.innerWidth)
-},[window.innerWidth]);
-
   return (
     <PriceSection>
       <PriceContainer>
@@ -72,8 +64,7 @@ const Prices = () => {
             >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat nulla suspendisse tortor aenean dis placerat. Scelerisque
           </SubTitle>
-          {widthWindow >= theme.breakpoints.tablet.slice(0, -2) ?
-            (<><ListItemsContainer>
+            <ListItemsContainer>
                   {data.map(it=>
                           <ListItems key={it.title}>
                             <ListItemsContentWraper>
@@ -86,10 +77,9 @@ const Prices = () => {
                               </UlContent>
                               <ButtonBuy type='button' aria-label="buy now">Buy now</ButtonBuy>
                             </ListItemsContentWraper>
-                          </ListItems>
-                      )}
-            </ListItemsContainer> </>) : 
-                    (<><ListItemsContainer>
+                          </ListItems>)}
+            </ListItemsContainer>
+            <ListItemsContainerForSwiper>
                     <Swiper
                             modules={[Navigation, Mousewheel, Keyboard, Autoplay]}
                             spaceBetween={50}
@@ -125,7 +115,7 @@ const Prices = () => {
                               </SwiperSlide>
                             )}
                     </Swiper>
-                  </ListItemsContainer>    
+            </ListItemsContainerForSwiper>
                   <ContainerNavigation>
                     <BtnSlider className="swiper-button-pr">
                       <MdKeyboardArrowLeft className="buttonSlide" />
@@ -133,8 +123,7 @@ const Prices = () => {
                     <BtnSlider className="swiper-button-nt">
                       <MdKeyboardArrowRight className="buttonSlide" />
                     </BtnSlider>
-                  </ContainerNavigation></>)
-}
+            </ContainerNavigation>
       </PriceContainer>
     </PriceSection>
   );
