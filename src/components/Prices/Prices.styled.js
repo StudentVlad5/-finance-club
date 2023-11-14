@@ -42,6 +42,18 @@ const BtnSlider = styled.div`
   }
 `;
 const ListItemsContainer = styled.ul`
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 26px;
+  width: 100%;
+  padding: 0 50px;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    display: flex;
+  }
+`;
+const ListItemsContainerForSwiper = styled(ListItemsContainer)`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -49,6 +61,9 @@ const ListItemsContainer = styled.ul`
   gap: 26px;
   width: 100%;
   padding: 0 50px;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    display: none;
+  }
 `;
 const ListItemsOfPacked = styled.div`
   display: flex;
@@ -208,6 +223,7 @@ export {
   ContainerNavigation,
   BtnSlider,
   ListItemsContainer,
+  ListItemsContainerForSwiper,
   ListItems,
   TitleItem,
   SubTitle,
