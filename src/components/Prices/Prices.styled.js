@@ -20,6 +20,9 @@ const ContainerNavigation = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 25px;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    display: none;
+  }
 `;
 
 const BtnSlider = styled.div`
@@ -200,7 +203,7 @@ const ButtonBuy = styled.button`
   font-style: normal;
   font-weight: 700;
   text-transform: uppercase;
-  line-height: 100%; 
+  line-height: 100%;
   letter-spacing: 1.6px;
   cursor: pointer;
 
