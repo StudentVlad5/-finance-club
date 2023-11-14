@@ -20,6 +20,9 @@ const ContainerNavigation = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 25px;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    display: none;
+  }
 `;
 
 const BtnSlider = styled.div`
@@ -42,6 +45,18 @@ const BtnSlider = styled.div`
   }
 `;
 const ListItemsContainer = styled.ul`
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 26px;
+  width: 100%;
+  padding: 0 50px;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    display: flex;
+  }
+`;
+const ListItemsContainerForSwiper = styled(ListItemsContainer)`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -49,6 +64,9 @@ const ListItemsContainer = styled.ul`
   gap: 26px;
   width: 100%;
   padding: 0 50px;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    display: none;
+  }
 `;
 const ListItemsOfPacked = styled.div`
   display: flex;
@@ -185,7 +203,7 @@ const ButtonBuy = styled.button`
   font-style: normal;
   font-weight: 700;
   text-transform: uppercase;
-  line-height: 100%; 
+  line-height: 100%;
   letter-spacing: 1.6px;
   cursor: pointer;
 
@@ -208,6 +226,7 @@ export {
   ContainerNavigation,
   BtnSlider,
   ListItemsContainer,
+  ListItemsContainerForSwiper,
   ListItems,
   TitleItem,
   SubTitle,
