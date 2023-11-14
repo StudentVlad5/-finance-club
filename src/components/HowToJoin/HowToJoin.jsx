@@ -12,7 +12,7 @@ import {
   JoinListItemText,
   JoinTitle,
 } from './HowToJoin.styled';
-import { JoinPrice } from './JoinPrices/JoinPrices';
+import Prices from 'components/Prices/Prices';
 
 export const HowToJoin = () => {
   return (
@@ -69,8 +69,7 @@ export const HowToJoin = () => {
               <JoinListItemText>Sign a contract with CFO Club</JoinListItemText>
             </JoinListItem>
           </JoinList>
-
-          <JoinPrice />
+          <Prices />
         </JoinBox>
       </Container>
     </Section>

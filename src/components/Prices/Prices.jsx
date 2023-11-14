@@ -123,7 +123,7 @@ const Prices = () => {
                     <BtnSlider className="swiper-button-nt">
                       <MdKeyboardArrowRight className="buttonSlide" />
                     </BtnSlider>
-            </ContainerNavigation>
+                  </ContainerNavigation>
       </PriceContainer>
     </PriceSection>
   );
