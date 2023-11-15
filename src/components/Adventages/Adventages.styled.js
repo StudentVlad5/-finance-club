@@ -10,6 +10,7 @@ import styled from "styled-components";
 
 const AdventagesSection = styled(Section)`
   background-color: ${(props) => props.theme.fon_second};
+  padding-bottom: 0;
 `;
 const AdventagesContainer = styled(Container)`
   display: flex;

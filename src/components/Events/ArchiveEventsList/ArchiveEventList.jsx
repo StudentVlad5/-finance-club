@@ -17,9 +17,9 @@ import {
 
 import defaultImg from 'images/events/default.jpg';
 
-export const ArchiveEventsList = ({ events }) => {
-  const today = new Date();
-  const archiveEvents = events.filter(({ date }) => new Date(date) < today);
+export const ArchiveEventsList = ({ archiveEvents }) => {
+  // const today = new Date();
+  // const archiveEvents = events.filter(({ date }) => new Date(date) < today);
 
   const [limit, setLimit] = useState(2);
   const end = count => {
@@ -69,7 +69,7 @@ export const ArchiveEventsList = ({ events }) => {
 };
 
 ArchiveEventsList.propTypes = {
-  events: PropTypes.arrayOf(
+  archiveEvents: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,

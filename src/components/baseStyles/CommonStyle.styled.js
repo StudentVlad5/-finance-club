@@ -4,16 +4,15 @@ import { theme } from "components/baseStyles/Variables.styled";
 const Section = styled.section`
   position: relative;
   margin: 0 auto;
-  padding: 50px 0 0;
+  padding: 50px 0;
   width: 100%;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    padding: 80px 0 0;
+    padding: 80px 0;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    padding: 100px 0 0;
-    /* max-width: ${theme.breakpoints.desktop}; */
+    padding: 100px 0;
   }
 `;
 

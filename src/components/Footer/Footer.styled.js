@@ -49,9 +49,10 @@ const FooterItemContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   @media screen and (min-width: ${theme.breakpoints.tablet}){
     flex-direction: row;
-    gap: 20px;
+    justify-content: space-around;
     align-items: start;
   }
   @media screen and (min-width: ${theme.breakpoints.desktop}){
@@ -69,8 +70,8 @@ const FooterBottomContainer = styled.div`
   padding: 20px 0;
   margin-top: 38px;
   border-top: 1px solid ${(props) => props.theme.black};
-  @media screen and (min-width: ${theme.breakpoints.desktop}){
-    width: 80%;
+  @media screen and (min-width: ${theme.breakpoints.tablet}){
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 25px;
@@ -101,6 +102,7 @@ const LinkItem = styled(Link)`
 const LinkItemLowercase = styled(Link)`
   cursor: pointer;
   text-decoration: none;
+  text-align: center;
   font-family: ${theme.fonts[1]};
   font-size: 16px;
   font-style: normal;
@@ -125,6 +127,7 @@ const Span = styled.span`
 const SpanBottom = styled.span`
   color: ${(props) => props.theme.black};
   text-transform: none;
+  text-align: center;
   font-family: ${theme.fonts[1]};
   font-size: 15px;
   font-style: normal;
