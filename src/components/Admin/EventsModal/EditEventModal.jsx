@@ -13,10 +13,11 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { BASE_URL_IMG } from 'helpers/constants';
 import { setImage } from 'utils/setimage';
 import schemas from 'utils/schemas';
-import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
+import { Backdrop, Modal } from 'components/baseStyles/Modal.styled';
 import {
   AddDetailsBtn,
   DoneBtn,
+  SCloseBtn,
   Error,
   FormField,
   FormInput,
@@ -107,13 +108,13 @@ export const EditEventModal = () => {
         }}
       >
         <Modal onClick={e => e.stopPropagation()}>
-          <CloseBtn
+          <SCloseBtn
             type="button"
             onClick={e => closeDataModal(e)}
             aria-label="Close modal"
           >
             <MdClose size={15} />
-          </CloseBtn>
+          </SCloseBtn>
           {isLoading ? onLoading() : onLoaded()}
           {error && onFetchError('Whoops, something went wrong')}
           <Formik
@@ -336,58 +337,59 @@ export const EditEventModal = () => {
                   </FormField>
                   <FormLabelBox>
                     <span>Packages</span>
-
-                    <label htmlFor="basic">
-                      <FormInput
-                        type="checkbox"
-                        id="basic"
-                        name="packages"
-                        value="basic"
-                        checked={values.packages.includes('basic')}
-                        onChange={e => {
-                          handleChange(e);
-                          setFieldValue(
-                            'packages',
-                            e.target.attributes.value.value,
-                          );
-                        }}
-                      />
-                      <span>basic</span>
-                    </label>
-                    <label htmlFor="pro">
-                      <FormInput
-                        type="checkbox"
-                        id="pro"
-                        name="packages"
-                        value="pro"
-                        checked={values.packages.includes('pro')}
-                        onChange={e => {
-                          handleChange(e);
-                          setFieldValue(
-                            'packages',
-                            e.target.attributes.value.value,
-                          );
-                        }}
-                      />
-                      <span>pro</span>
-                    </label>
-                    <label htmlFor="expert">
-                      <FormInput
-                        type="checkbox"
-                        id="expert"
-                        name="packages"
-                        value="expert"
-                        checked={values.packages.includes('expert')}
-                        onChange={e => {
-                          handleChange(e);
-                          setFieldValue(
-                            'packages',
-                            e.target.attributes.value.value,
-                          );
-                        }}
-                      />
-                      <span>expert</span>
-                    </label>
+                    <div>
+                      <label htmlFor="basic">
+                        <FormInput
+                          type="checkbox"
+                          id="basic"
+                          name="packages"
+                          value="basic"
+                          checked={values.packages.includes('basic')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'packages',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>basic</span>
+                      </label>
+                      <label htmlFor="pro">
+                        <FormInput
+                          type="checkbox"
+                          id="pro"
+                          name="packages"
+                          value="pro"
+                          checked={values.packages.includes('pro')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'packages',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>pro</span>
+                      </label>
+                      <label htmlFor="expert">
+                        <FormInput
+                          type="checkbox"
+                          id="expert"
+                          name="packages"
+                          value="expert"
+                          checked={values.packages.includes('expert')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'packages',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>expert</span>
+                      </label>
+                    </div>
                   </FormLabelBox>
                   <FormField>
                     <FormLabel htmlFor="image">

@@ -16,6 +16,59 @@ async function fetchData(pathParams) {
   return await axiosInstance.get();
 }
 
+async function createUserData(pathParams, body, file) {
+  const formData = new FormData();
+  file && formData.set('avatar', file);
+  formData.append('name', body.name);
+  formData.append('surname', body.surname);
+  formData.append('email', body.email);
+  formData.append('password', body.password);
+  formData.append('phone', body.phone);
+  formData.append('birthday', body.birthday);
+  formData.append('company', body.company);
+  formData.append('position', body.position);
+  formData.append('role', body.role);
+
+  return await axios.post(`${BASE_URL}${pathParams}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+      'Access-Control-Expose-Headers': 'Content-Range',
+    },
+  });
+}
+
+async function editUserData(pathParams, body, file) {
+  const formData = new FormData();
+  file && formData.set('avatar', file);
+  formData.append('name', body.name);
+  formData.append('surname', body.surname);
+  formData.append('email', body.email);
+  formData.append('password', body.password);
+  formData.append('phone', body.phone);
+  formData.append('birthday', body.birthday);
+  formData.append('company', body.company);
+  formData.append('position', body.position);
+  body.events.forEach(value => {
+    formData.append('events[]', value);
+  });
+  body.packages.forEach(value => {
+    formData.append('packages[]', value);
+  });
+  formData.append('status', body.status);
+  formData.append('role', body.role);
+
+  return await axios.post(`${BASE_URL}${pathParams}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+      'Access-Control-Expose-Headers': 'Content-Range',
+    },
+  });
+}
+
 async function updateUserData(pathParams, body, file) {
   const formData = new FormData();
   file && formData.set('avatar', file);
@@ -26,7 +79,6 @@ async function updateUserData(pathParams, body, file) {
   formData.append('birthday', body.birthday);
   formData.append('company', body.company);
   formData.append('position', body.position);
-  formData.append('role', body.role);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
@@ -38,19 +90,10 @@ async function updateUserData(pathParams, body, file) {
   });
 }
 
-async function createUserData(pathParams, body, file) {
+async function changePassword(pathParams, body) {
   const formData = new FormData();
-  file && formData.set('avatar', file);
-  formData.append('name', body.name);
-  formData.append('surname', body.surname);
-  formData.append('email', body.email);
-  formData.append('phone', body.phone);
-  formData.append('birthday', body.birthday);
-  formData.append('company', body.company);
-  formData.append('position', body.position);
-  formData.append('role', body.role);
-
-  return await axios.post(`${BASE_URL}${pathParams}`, formData, {
+  formData.append('password', body);
+  return axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
       'Access-Control-Allow-Origin': '*',
@@ -133,19 +176,6 @@ async function deleteData(pathParams) {
   });
 }
 
-async function changePassword(pathParams, body) {
-  const formData = new FormData();
-  formData.append('password', body);
-  return axios.patch(`${BASE_URL}${pathParams}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
-    },
-  });
-}
-
 fetchData.propTypes = {
   pathParams: PropTypes.string.isRequired,
 };
@@ -155,6 +185,12 @@ deleteData.propTypes = {
 };
 
 updateUserData.propTypes = {
+  pathParams: PropTypes.string.isRequired,
+  formData: PropTypes.string.isRequired,
+  file: PropTypes.string,
+};
+
+editUserData.propTypes = {
   pathParams: PropTypes.string.isRequired,
   formData: PropTypes.string.isRequired,
   file: PropTypes.string,
@@ -180,6 +216,7 @@ export {
   fetchData,
   updateUserData,
   createUserData,
+  editUserData,
   createEventsData,
   updateEventsData,
   deleteData,

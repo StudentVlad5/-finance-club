@@ -54,6 +54,13 @@ export const FormLabelBox = styled.div`
   letter-spacing: 0.04em;
   color: ${props => props.theme.white_text};
 
+  & div {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
   & label {
     display: flex;
     align-items: center;
@@ -191,8 +198,20 @@ export const FormInputArray = styled.div`
   gap: 3px;
 `;
 
-export const DoneBtn = styled(CloseBtn)`
-  right: 45px;
+export const SCloseBtn = styled(CloseBtn)`
+  & > svg {
+    width: 20px;
+    height: 20px;
+
+    @media screen and (min-width: ${theme.breakpoints.desktop}) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+`;
+
+export const DoneBtn = styled(SCloseBtn)`
+  right: 50px;
 `;
 
 export const IncrementBtn = styled.button`

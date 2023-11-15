@@ -6,32 +6,30 @@ import { FieldArray, Formik } from 'formik';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
-import { selectUserName } from 'redux/auth/selectors';
 import { addReload } from 'redux/reload/slice';
-import { fetchData, updateEventsData } from 'services/APIservice'; //fetchServiceData,
+import { fetchData, editUserData } from 'services/APIservice';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
+import { BASE_URL_IMG } from 'helpers/constants';
 import { setImage } from 'utils/setimage';
 import schemas from 'utils/schemas';
+import { Backdrop, Modal } from 'components/baseStyles/Modal.styled';
 import {
   AddDetailsBtn,
   DoneBtn,
+  SCloseBtn,
   Error,
   FormField,
   FormInput,
   FormInputArray,
-  FormInputBox,
   FormInputBoxColumn,
   FormInputFile,
   FormLabel,
   FormLabelBox,
   FormList,
-  FormRatio,
   IncrementBtn,
   ModalForm,
 } from '../Modal.styled';
-import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
-import { BASE_URL_IMG } from 'helpers/constants';
 
 export const EditUserModal = () => {
   const [dataUpdate, setDataUpdate] = useState([]);
@@ -40,32 +38,31 @@ export const EditUserModal = () => {
   const [error, setError] = useState(null);
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
-  const userName = useSelector(selectUserName);
 
-  const itemForFetch = `/events/${modal.id}`;
+  const itemForFetch = `/users/${modal.id}`;
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     setIsLoading(true);
-  //     try {
-  //       const { data } = await fetchData(itemForFetch);
-  //       setDataUpdate(data);
-  //       setImg(data.images);
-  //       if (!data) {
-  //         return onFetchError('Whoops, something went wrong');
-  //       }
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   }
-  //   if (modal.id !== '' && modal.id !== undefined) {
-  //     getData();
-  //   }
-  // }, [itemForFetch, modal.id]);
+  useEffect(() => {
+    async function getData() {
+      setIsLoading(true);
+      try {
+        const { data } = await fetchData(itemForFetch);
+        setDataUpdate(data);
+        setImg(data.images);
+        if (!data) {
+          return onFetchError('Whoops, something went wrong');
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (modal.id !== '' && modal.id !== undefined) {
+      getData();
+    }
+  }, [itemForFetch, modal.id]);
 
-  async function editPosition(values) {
+  async function editUser(values) {
     let file = false;
     if (typeof img === 'string' && img !== '' && img !== 'none') {
       values.images = img;
@@ -73,16 +70,12 @@ export const EditUserModal = () => {
       file = img;
     }
 
-    // console.log('editPosition ~ file:', file);
-    // console.log('editPosition ~ values:', values);
+    // console.log('editUser ~ file:', file);
+    // console.log('editUser ~ values:', values);
 
     setIsLoading(true);
     try {
-      const { code } = await updateEventsData(
-        `/events/${modal.id}`,
-        values,
-        file,
-      );
+      const { code } = await editUserData(`/users/${modal.id}`, values, file);
       if (code && code !== 201) {
         return onFetchError('Whoops, something went wrong');
       }
@@ -111,42 +104,38 @@ export const EditUserModal = () => {
         }}
       >
         <Modal onClick={e => e.stopPropagation()}>
-          <CloseBtn
+          <SCloseBtn
             type="button"
             onClick={e => closeDataModal(e)}
             aria-label="Close modal"
           >
             <MdClose size={15} />
-          </CloseBtn>
+          </SCloseBtn>
           {isLoading ? onLoading() : onLoaded()}
           {error && onFetchError('Whoops, something went wrong')}
           <Formik
             initialValues={{
-              article: dataUpdate?.article ? dataUpdate.article : '',
-              product: dataUpdate?.product ? dataUpdate.product : '',
-              category: dataUpdate?.category ? dataUpdate.category : '',
               name: dataUpdate?.name ? dataUpdate.name : '',
-              price: dataUpdate?.price ? dataUpdate.price : '',
-              currency: dataUpdate?.currency ? dataUpdate.currency : '₴',
-              latin_name: dataUpdate?.latin_name ? dataUpdate.latin_name : '',
-              alcohol: dataUpdate?.alcohol ? dataUpdate.alcohol : [],
-              details: dataUpdate?.details ? dataUpdate.details : [],
-              images: '',
-              size: dataUpdate?.size
-                ? dataUpdate.size
-                : { value: '', mesure: '' },
-              active: dataUpdate?.active ? dataUpdate.active : 'false',
-              admin: userName,
+              surname: dataUpdate?.surname ? dataUpdate.surname : '',
+              email: dataUpdate?.email ? dataUpdate.email : '',
+              phone: dataUpdate?.phone ? dataUpdate.phone : '',
+              company: dataUpdate?.company ? dataUpdate.company : '',
+              position: dataUpdate?.position ? dataUpdate.position : '',
+              events: dataUpdate?.events ? dataUpdate.events : [],
+              packages: dataUpdate?.packages ? dataUpdate.packages : [],
+              status: dataUpdate?.status ? dataUpdate.status : '',
+              avatar: '',
+              role: '',
             }}
             onSubmit={(values, { setSubmitting }) => {
-              editPosition(values);
+              editUser(values);
               dispatch(addReload(false));
               setSubmitting(false);
               dispatch(cleanModal());
               closeModalWindow();
             }}
             enableReinitialize={true}
-            validationSchema={schemas.schemasMenuPosition}
+            validationSchema={schemas.schemasUsers}
           >
             {({
               handleChange,
@@ -164,51 +153,6 @@ export const EditUserModal = () => {
               >
                 <FormList>
                   <FormField>
-                    <FormLabel htmlFor="article">
-                      <span>Article</span>
-                      {errors.article && touched.article ? (
-                        <Error>{errors.article}</Error>
-                      ) : null}
-                    </FormLabel>
-                    <FormInput
-                      type="text"
-                      id="article"
-                      name="article"
-                      placeholder="Type position article"
-                      value={values.article}
-                    />
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="product">
-                      <span>Product</span>
-                      {errors.product && touched.product ? (
-                        <Error>{errors.product}</Error>
-                      ) : null}
-                    </FormLabel>
-                    <FormInput
-                      type="text"
-                      id="product"
-                      name="product"
-                      placeholder="Type position product"
-                      value={values.product}
-                    />
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="category">
-                      <span>Category</span>
-                      {errors.category && touched.category ? (
-                        <Error>{errors.category}</Error>
-                      ) : null}
-                    </FormLabel>
-                    <FormInput
-                      type="text"
-                      id="category"
-                      name="category"
-                      placeholder="Type category"
-                      value={values.category}
-                    />
-                  </FormField>
-                  <FormField>
                     <FormLabel htmlFor="name">
                       <span>Name</span>
                       {errors.name && touched.name ? (
@@ -219,220 +163,166 @@ export const EditUserModal = () => {
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="Type name"
+                      placeholder="User name"
                       value={values.name}
                     />
                   </FormField>
                   <FormField>
-                    <FormLabel htmlFor="price">
-                      <span>Price</span>
-                      {errors.price && touched.price ? (
-                        <Error>{errors.price}</Error>
-                      ) : null}
-                    </FormLabel>
-                    <FormInput
-                      type="number"
-                      id="price"
-                      name="price"
-                      placeholder="Type position price"
-                      value={values.price}
-                    />
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="currency">
-                      <span>Currency</span>
-                      {errors.currency && touched.currency ? (
-                        <Error>{errors.currency}</Error>
+                    <FormLabel htmlFor="surname">
+                      <span>Surname</span>
+                      {errors.surname && touched.surname ? (
+                        <Error>{errors.surname}</Error>
                       ) : null}
                     </FormLabel>
                     <FormInput
                       type="text"
-                      id="currency"
-                      name="currency"
-                      placeholder="Type position currency"
-                      value={values.currency}
+                      id="surname"
+                      name="surname"
+                      placeholder="User surname"
+                      value={values.surname}
                     />
                   </FormField>
                   <FormField>
-                    <FormLabel htmlFor="latin_name">
-                      <span>Latin name</span>
-                      {errors.latin_name && touched.latin_name ? (
-                        <Error>{errors.latin_name}</Error>
+                    <FormLabel htmlFor="email">
+                      <span>Email</span>
+                      {errors.email && touched.email ? (
+                        <Error>{errors.email}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormInput
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="User email"
+                      value={values.email}
+                    />
+                  </FormField>
+                  <FormField>
+                    <FormLabel htmlFor="phone">
+                      <span>Phone</span>
+                      {errors.phone && touched.phone ? (
+                        <Error>{errors.phone}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormInput
+                      type="phone"
+                      id="phone"
+                      name="phone"
+                      placeholder="User phone"
+                      value={values.phone}
+                    />
+                  </FormField>
+                  <FormField>
+                    <FormLabel htmlFor="company">
+                      <span>Company</span>
+                      {errors.company && touched.company ? (
+                        <Error>{errors.company}</Error>
                       ) : null}
                     </FormLabel>
                     <FormInput
                       type="text"
-                      id="latin_name"
-                      name="latin_name"
-                      placeholder="Type position latin_name"
-                      value={values.latin_name}
+                      id="company"
+                      name="company"
+                      placeholder="User company"
+                      value={values.company}
                     />
                   </FormField>
-                  <FieldArray
-                    name="alcohol"
-                    render={arrayHelpers => (
-                      <FormInputArray>
-                        <FormLabel>Alcohol</FormLabel>
-                        <FormInputBoxColumn>
-                          {values.alcohol && values.alcohol.length > 0 ? (
-                            values.alcohol.map((alc, index) => (
-                              <div key={index}>
-                                <FormInput name={`alcohol.${index}`} />
-                                <IncrementBtn
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)} // remove a detail from the list
-                                >
-                                  -
-                                </IncrementBtn>
-                                <IncrementBtn
-                                  type="button"
-                                  onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
-                                >
-                                  +
-                                </IncrementBtn>
-                              </div>
-                            ))
-                          ) : (
-                            <AddDetailsBtn
-                              type="button"
-                              onClick={() => arrayHelpers.push('')}
-                            >
-                              Add an alcohol
-                            </AddDetailsBtn>
-                          )}
-                        </FormInputBoxColumn>
-                      </FormInputArray>
-                    )}
-                  />
-                  <FieldArray
-                    name="details"
-                    render={arrayHelpers => (
-                      <FormInputArray>
-                        <FormLabel>Details</FormLabel>
-                        <FormInputBoxColumn>
-                          {values.details && values.details.length > 0 ? (
-                            values.details.map((detail, index) => (
-                              <div key={index}>
-                                <FormInput name={`details.${index}`} />
-                                <IncrementBtn
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)}
-                                >
-                                  -
-                                </IncrementBtn>
-                                <IncrementBtn
-                                  type="button"
-                                  onClick={() => arrayHelpers.insert(index, '')}
-                                >
-                                  +
-                                </IncrementBtn>
-                              </div>
-                            ))
-                          ) : (
-                            <AddDetailsBtn
-                              type="button"
-                              onClick={() => arrayHelpers.push('')}
-                            >
-                              Add a detail
-                            </AddDetailsBtn>
-                          )}
-                        </FormInputBoxColumn>
-                      </FormInputArray>
-                    )}
-                  />
                   <FormField>
-                    <FormLabelBox>
-                      <span>Size</span>
-                      {errors.size?.value &&
-                      touched.size?.value &&
-                      errors.size?.mesure &&
-                      touched.size?.mesure ? (
-                        <Error>{errors.size}</Error>
-                      ) : null}
-
-                      <FormInputBox>
-                        <label htmlFor="size_value">
-                          <FormInput
-                            style={{ width: '70px' }}
-                            type="number"
-                            id="size_value"
-                            name="size.value"
-                            placeholder="value"
-                            value={values.size.value}
-                          />
-                        </label>
-                        <label htmlFor="size_measure">
-                          <FormInput
-                            style={{ width: '70px' }}
-                            type="text"
-                            id="size_measure"
-                            name="size.mesure"
-                            placeholder="measure"
-                            value={values.size.mesure}
-                          />
-                        </label>
-                      </FormInputBox>
-                    </FormLabelBox>
-                  </FormField>
-                  <FormField>
-                    <FormLabel htmlFor="active">
-                      <span>Active</span>
-                      {errors.active && touched.active ? (
-                        <Error>{errors.active}</Error>
+                    <FormLabel htmlFor="birthday">
+                      <span>Birthday</span>
+                      {errors.birthday && touched.birthday ? (
+                        <Error>{errors.birthday}</Error>
                       ) : null}
                     </FormLabel>
-                    <FormRatio>
-                      <label
-                        style={{ marginRight: '5px' }}
-                        htmlFor="active_true"
-                      >
-                        <FormInput
-                          type="radio"
-                          id="active_true"
-                          name="active"
-                          value="true"
-                          checked={values.active === true}
-                        />
-                        <span>true</span>
-                      </label>
-                      <label htmlFor="active_false">
-                        <FormInput
-                          type="radio"
-                          id="active_false"
-                          name="active"
-                          value="false"
-                          checked={values.active === false}
-                        />
-                        <span>false</span>
-                      </label>
-                    </FormRatio>
+                    <FormInput
+                      type="date"
+                      id="birthday"
+                      name="birthday"
+                      placeholder="User birthday"
+                      value={values.birthday}
+                    />
                   </FormField>
+                  <FormLabelBox>
+                    <span>Packages</span>
+                    <div>
+                      <label htmlFor="basic">
+                        <FormInput
+                          type="checkbox"
+                          id="basic"
+                          name="packages"
+                          value="basic"
+                          checked={values.packages.includes('basic')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'packages',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>basic</span>
+                      </label>
+                      <label htmlFor="pro">
+                        <FormInput
+                          type="checkbox"
+                          id="pro"
+                          name="packages"
+                          value="pro"
+                          checked={values.packages.includes('pro')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'packages',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>pro</span>
+                      </label>
+                      <label htmlFor="expert">
+                        <FormInput
+                          type="checkbox"
+                          id="expert"
+                          name="packages"
+                          value="expert"
+                          checked={values.packages.includes('expert')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'packages',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>expert</span>
+                      </label>
+                    </div>
+                  </FormLabelBox>
                   <FormField>
-                    <FormLabel htmlFor="images">
-                      <span>Image</span>
-                      {errors.images && touched.images ? (
-                        <Error>{errors.images}</Error>
+                    <FormLabel htmlFor="avatar">
+                      <span>Avatar</span>
+                      {errors.avatar && touched.avatar ? (
+                        <Error>{errors.avatar}</Error>
                       ) : null}
                     </FormLabel>
-                    {dataUpdate.images && dataUpdate.images !== 'none' ? (
+                    {dataUpdate.avatar && dataUpdate.avatar !== 'none' ? (
                       <FormInputFile
                         style={{
                           backgroundImage: `url(${
                             BASE_URL_IMG + dataUpdate.images
                           })`,
-                          // backgroundSize: '20px ,20px',
-                          backgroundPosition: 'center',
+                          backgroundUser: 'center',
                           backgroundRepeat: 'no-repeat',
                           backgroundSize: 'cover',
                         }}
                         type="file"
-                        id="images"
-                        name="images"
-                        placeholder="Type images"
+                        id="avatar"
+                        name="avatar"
+                        placeholder="avatar"
                         accept=".jpg,.jpeg,.webp,.png,.gif"
                         onChange={e => {
                           handleChange(e);
-                          setFieldValue('images', dataUpdate.images);
+                          setFieldValue('avatar', dataUpdate.avatar);
                           setImg(e.target.files[0]);
                           setImage(e);
                         }}
@@ -440,18 +330,74 @@ export const EditUserModal = () => {
                     ) : (
                       <FormInputFile
                         type="file"
-                        id="images"
-                        name="images"
+                        id="avatar"
+                        name="avatar"
                         accept=".jpg,.jpeg,.webp,.png,.gif"
                         onChange={e => {
                           handleChange(e);
-                          setFieldValue('images', e.target.files[0]);
+                          setFieldValue('avatar', e.target.files[0]);
                           setImg(e.target.files[0]);
                           setImage(e);
                         }}
                       />
                     )}
                   </FormField>
+                  <FormLabelBox>
+                    <span>Role</span>
+                    <div>
+                      <label htmlFor="candidate">
+                        <FormInput
+                          type="checkbox"
+                          id="candidate"
+                          name="role"
+                          value="candidate"
+                          checked={values.role.includes('candidate')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'role',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>candidate</span>
+                      </label>
+                      <label htmlFor="member">
+                        <FormInput
+                          type="checkbox"
+                          id="member"
+                          name="role"
+                          value="member"
+                          checked={values.role.includes('member')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'role',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>member</span>
+                      </label>
+                      <label htmlFor="guest">
+                        <FormInput
+                          type="checkbox"
+                          id="guest"
+                          name="role"
+                          value="guest"
+                          checked={values.role.includes('guest')}
+                          onChange={e => {
+                            handleChange(e);
+                            setFieldValue(
+                              'role',
+                              e.target.attributes.value.value,
+                            );
+                          }}
+                        />
+                        <span>guest</span>
+                      </label>
+                    </div>
+                  </FormLabelBox>
                 </FormList>
 
                 <DoneBtn

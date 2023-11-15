@@ -12,10 +12,11 @@ import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { setImage } from 'utils/setimage';
 import schemas from 'utils/schemas';
-import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
+import { Backdrop, Modal } from 'components/baseStyles/Modal.styled';
 import {
   AddDetailsBtn,
   DoneBtn,
+  SCloseBtn,
   Error,
   FormField,
   FormInput,
@@ -73,13 +74,13 @@ export const CreateEventModal = () => {
         }}
       >
         <Modal onClick={e => e.stopPropagation()}>
-          <CloseBtn
+          <SCloseBtn
             type="button"
             onClick={e => closeDataModal(e)}
             aria-label="Close modal"
           >
             <MdClose size={15} />
-          </CloseBtn>
+          </SCloseBtn>
           {isLoading ? onLoading() : onLoaded()}
           {error && onFetchError('Whoops, something went wrong')}
           <Formik
@@ -300,33 +301,35 @@ export const CreateEventModal = () => {
                   </FormField>
                   <FormLabelBox>
                     <span>Packages</span>
-                    <label htmlFor="basic">
-                      <FormInput
-                        type="checkbox"
-                        id="basic"
-                        name="packages"
-                        value="basic"
-                      />
-                      <span>basic</span>
-                    </label>
-                    <label htmlFor="pro">
-                      <FormInput
-                        type="checkbox"
-                        id="pro"
-                        name="packages"
-                        value="pro"
-                      />
-                      <span>pro</span>
-                    </label>
-                    <label htmlFor="expert">
-                      <FormInput
-                        type="checkbox"
-                        id="expert"
-                        name="packages"
-                        value="expert"
-                      />
-                      <span>expert</span>
-                    </label>
+                    <div>
+                      <label htmlFor="basic">
+                        <FormInput
+                          type="checkbox"
+                          id="basic"
+                          name="packages"
+                          value="basic"
+                        />
+                        <span>basic</span>
+                      </label>
+                      <label htmlFor="pro">
+                        <FormInput
+                          type="checkbox"
+                          id="pro"
+                          name="packages"
+                          value="pro"
+                        />
+                        <span>pro</span>
+                      </label>
+                      <label htmlFor="expert">
+                        <FormInput
+                          type="checkbox"
+                          id="expert"
+                          name="packages"
+                          value="expert"
+                        />
+                        <span>expert</span>
+                      </label>
+                    </div>
                   </FormLabelBox>
                   <FormField>
                     <FormLabel htmlFor="image">
