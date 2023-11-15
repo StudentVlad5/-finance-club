@@ -5,10 +5,12 @@ import {
   Title,
 } from "components/baseStyles/CommonStyle.styled";
 import { theme } from "components/baseStyles/Variables.styled";
+import { BtnLight } from "components/baseStyles/Button.styled";
 import styled from "styled-components";
 
 const PriceSection = styled(Section)`
   background-color: ${(props) => props.theme.fon_second};
+  padding-bottom: 0;
 `;
 const PriceContainer = styled(Container)`
   display: flex;
@@ -52,7 +54,7 @@ const ListItemsContainer = styled.ul`
   gap: 26px;
   width: 100%;
   padding: 0 50px;
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
     display: flex;
   }
 `;
@@ -64,7 +66,7 @@ const ListItemsContainerForSwiper = styled(ListItemsContainer)`
   gap: 26px;
   width: 100%;
   padding: 0 50px;
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
     display: none;
   }
 `;
@@ -188,24 +190,13 @@ const LiContent = styled.li`
   line-height: 111.1%;
   text-transform: none;
 `;
-const ButtonBuy = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const ButtonBuy = styled(BtnLight)`
   width: 100%;
   border: none;
   border-radius: 80px;
   padding: 27px 32px;
   background: ${(props) => props.theme.grey};
   color: ${(props) => props.theme.white_text};
-  font-family: ${theme.fonts[1]};
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 100%;
-  letter-spacing: 1.6px;
-  cursor: pointer;
 
   &:hover,
   &:focus {

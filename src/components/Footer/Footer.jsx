@@ -68,7 +68,9 @@ export const Footer = () => {
           <FooterBottomContainer>
             <SpanBottom>© 2023 CFO Club Ukraine</SpanBottom>
             <SpanBottom>Privacy Policy | Terms & Conditions</SpanBottom>
-            <LinkItemLowercase to='https://brand-maze.vercel.app/' target="_blank">Designed and Developed by Brand Maze</LinkItemLowercase>
+            <LinkItemLowercase to='https://brand-maze.vercel.app/' target="_blank">
+              <SpanBottom>Designed and Developed by Brand Maze</SpanBottom>
+            </LinkItemLowercase>
           </FooterBottomContainer>
         </FooterStyleWrap>
       </FooterContainer>
