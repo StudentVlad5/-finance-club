@@ -161,7 +161,7 @@ export const RegisterModal = ({ event }) => {
                     </FormLabel>
                     <FormInput
                       id="phone"
-                      type="tel"
+                      type="phone"
                       name="phone"
                       placeholder="+1234567890"
                       value={values.phone}
@@ -239,17 +239,12 @@ RegisterModal.propTypes = {
     _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     plan: PropTypes.any,
-    speakers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        company: PropTypes.string,
-        position: PropTypes.string,
-      }),
-    ).isRequired,
+    speakers: PropTypes.any.isRequired,
     moderator: PropTypes.string,
     packages: PropTypes.array.isRequired,
     image: PropTypes.string,

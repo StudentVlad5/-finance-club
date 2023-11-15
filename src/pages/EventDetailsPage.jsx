@@ -10,7 +10,8 @@ import digitalMoney from 'images/events/DIGITAL MONEY.jpg';
 const eventData = {
   _id: '1sdghs',
   date: '2023/11/22',
-  time: '17:30 - 20:30',
+  time: '17:30',
+  duration: 3,
   location: 'New York, USA',
   title: 'Digital money and financial risks',
   description:

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MdClose, MdEdit, MdAddCard, MdDone } from 'react-icons/md';
+import {
+  MdClose,
+  MdFilterAltOff,
+  MdEdit,
+  MdAddCard,
+  MdFilterAlt,
+} from 'react-icons/md';
 import { SEO } from 'utils/SEO';
 import { openModalWindow } from 'hooks/modalWindow';
 import { addModal } from 'redux/modal/operation';
@@ -11,6 +17,7 @@ import { getFromStorage } from 'services/localStorService';
 import { PaginationBlock } from 'helpers/Pagination/Pagination';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
+import { BASE_URL_IMG } from 'helpers/constants';
 import { EditEventModal } from 'components/Admin/EventsModal/EditEventModal';
 import { CreateEventModal } from 'components/Admin/EventsModal/CreateEventModal';
 import { BackButton } from 'helpers/BackLink/BackLink';
@@ -26,7 +33,6 @@ import {
   TableHead,
   TableRow,
 } from 'components/Admin/Admin.styled';
-import { BASE_URL_IMG } from 'helpers/constants';
 
 import digitalMoney from 'images/events/DIGITAL MONEY.jpg';
 import cybersecurity from 'images/events/cybersecurity.webp';
@@ -36,7 +42,8 @@ const eventsData = [
   {
     _id: '1sdghs',
     date: '2023/11/22',
-    time: '17:30 - 20:30',
+    time: '17:30',
+    duration: 3,
     location: 'New York, USA',
     title: 'Digital money and financial risks',
     description:
@@ -57,12 +64,13 @@ const eventsData = [
   {
     _id: '2sgfhd',
     date: '2023/12/02',
-    time: '19:00 - 21:00',
+    time: '19:00',
+    duration: 2,
     location: 'ZOOM',
     title: 'TOP 10 cybersecurity trends in 2023',
     description:
       'Tendencies and trends of the current year • What hackers know about your business • Cloud migration and cyber security risks • Practical recommendations for building cyber defense in the context of military operations',
-    plan: '',
+    plan: [],
     speakers: ['Joanne Walker, BDO, Global Partnership Director'],
     moderator: '',
     packages: ['expert'],
@@ -71,12 +79,13 @@ const eventsData = [
   {
     _id: '3xfgndf',
     date: '2023/12/15',
-    time: '13:00 - 16:00',
+    time: '13:00',
+    duration: 3,
     location: 'Miami, USA',
     title: 'DeFi: challenges of modern financial analytics',
     description:
       'The development of computing technologies and the emergence of cryptocurrencies have created the possibility of concluding direct smart contracts between economic agents, effectively redistributing risks between them and thereby creating prerequisites for further growth in economic efficiency in local markets, taking into account the local nature of their risks. To realize the new opportunities that new technologies give us, we need to create a simple and understandable decentralized platform for trading derivative financial instruments (smart derivatives) that can be initiated by each market participant, create analytical methods for the basic assessment of financial contracts, ensure their implementation by introducing certain algorithms into the corresponding smart contracts, using the mechanism of collateral by different parties to the transaction. Another important tool for the implementation of such agreements is the inclusion, by mutual agreement of the parties, in smart derivatives of reliable information flows that provide another participant in the platform – the oracle.',
-    plan: '',
+    plan: [],
     speakers: ['Jane Pence, KBS, Professor of Finance and Economics'],
     moderator: 'Stew May',
     packages: ['pro', 'expert'],
@@ -85,12 +94,13 @@ const eventsData = [
   {
     _id: '4zfgxd',
     date: '2023/10/17',
-    time: '14:00 - 16:00',
+    time: '14:00',
+    duration: 3,
     location: 'ZOOM',
     title: 'Cybersecurity for Business',
     description:
       'How to protect your company from hackers, spyware and security forces? Cybersecurity for Business',
-    plan: '',
+    plan: [],
     speakers: ['Mark Fray, HackControl, Cybersecurity specialist'],
     moderator: '',
     packages: ['basic', 'pro', 'expert'],
@@ -99,12 +109,13 @@ const eventsData = [
   {
     _id: '5sfgnd',
     date: '2023/09/27',
-    time: '14:30 - 18:30',
+    time: '14:30',
+    duration: 4,
     location: 'ZOOM',
     title: 'Digital money and financial risks',
     description:
       'There is a challenge to ensuring a high level of security of the digital money function, namely the problem of digital currency fraud and CBDCs.CBDC is a new third form of fiat money. The difference between CBDCs and cryptocurrencies, is that the latter are forms of decentralized or private money. Today, the use of cryptocurrency requires full regulation comparable to the risks they already pose or may pose in the future.',
-    plan: '',
+    plan: [],
     speakers: ['Den Braun, Bronx, CFO'],
     moderator: '',
     packages: ['pro', 'expert'],
@@ -113,16 +124,31 @@ const eventsData = [
   {
     _id: '6sfgcd',
     date: '2023/09/07',
-    time: '13:00 - 16:00',
+    time: '13:00',
+    duration: 3,
     location: 'New York, USA',
     title: 'Challenges of modern financial analytics',
     description:
       'The development of computing technologies and the emergence of cryptocurrencies have created the possibility of concluding direct smart contracts between economic agents, effectively redistributing risks between them and thereby creating prerequisites for further growth in economic efficiency in local markets, taking into account the local nature of their risks. To realize the new opportunities that new technologies give us, we need to create a simple and understandable decentralized platform for trading derivative financial instruments (smart derivatives) that can be initiated by each market participant, create analytical methods for the basic assessment of financial contracts, ensure their implementation by introducing certain algorithms into the corresponding smart contracts, using the mechanism of collateral by different parties to the transaction. Another important tool for the implementation of such agreements is the inclusion, by mutual agreement of the parties, in smart derivatives of reliable information flows that provide another participant in the platform – the oracle.',
-    plan: '',
+    plan: [],
     speakers: ['Petter Ponn, JTLD, Professor of Finance and Economics'],
     moderator: 'Stew May',
     packages: ['pro', 'expert'],
     image: defi,
+  },
+  {
+    _id: '7sfgcd',
+    date: '2023-11-15',
+    description: 'meeting',
+    duration: 2,
+    image: 'C:\\fakepath\\br-marketing.jpeg',
+    location: 'Zoom',
+    moderator: [],
+    packages: ['pro'],
+    plan: [],
+    speakers: ['Jon, CFO'],
+    time: '18:30',
+    title: 'meeting',
   },
 ];
 
@@ -135,6 +161,7 @@ const AdminEventsPage = () => {
   const [filterEvents, setFilterEvents] = useState(eventsData);
   const [filterDate, setFilterDate] = useState('');
   const [filterTime, setFilterTime] = useState('');
+  const [filterDuration, setFilterDuration] = useState('');
   const [filterLocation, setFilterLocation] = useState('');
   const [filterTitle, setFilterTitle] = useState('');
   const [filterDescription, setFilterDescription] = useState('');
@@ -184,6 +211,9 @@ const AdminEventsPage = () => {
       case 'filterTime':
         setFilterTime(e.currentTarget.value);
         break;
+      case 'filterDuration':
+        setFilterDuration(e.currentTarget.value);
+        break;
       case 'filterLocation':
         setFilterLocation(e.currentTarget.value);
         break;
@@ -220,10 +250,11 @@ const AdminEventsPage = () => {
       if (
         item.date.toString().toLowerCase().includes(filterDate) &&
         item.time.toString().toLowerCase().includes(filterTime) &&
+        item.duration.toString().toLowerCase().includes(filterDuration) &&
         item.location.toString().toLowerCase().includes(filterLocation) &&
         item.title.toString().toLowerCase().includes(filterTitle) &&
         item.description.toString().includes(filterDescription) &&
-        item.plan?.join(',').toString().toLowerCase().includes(filterPlan) &&
+        item.plan.join(',').toString().toLowerCase().includes(filterPlan) &&
         item.speakers
           .join(',')
           .toString()
@@ -244,6 +275,7 @@ const AdminEventsPage = () => {
     e.preventDefault();
     let filterPr = '';
     let filterCa = '';
+    let filterDu = '';
     let filterLn = '';
     let filterA = '';
     let filterD = '';
@@ -259,6 +291,9 @@ const AdminEventsPage = () => {
     e.currentTarget.name === 'clearFilterTime'
       ? setFilterTime(filterCa)
       : (filterCa = filterTime);
+    e.currentTarget.name === 'clearFilterDuration'
+      ? setFilterDuration(filterDu)
+      : (filterDu = filterDuration);
     e.currentTarget.name === 'clearFilterLocation'
       ? setFilterLocation(filterLn)
       : (filterLn = filterLocation);
@@ -289,6 +324,7 @@ const AdminEventsPage = () => {
       if (
         item.date?.toString().toLowerCase().includes(filterPr) &&
         item.time?.toString().toLowerCase().includes(filterCa) &&
+        item.duration?.toString().toLowerCase().includes(filterDu) &&
         item.location?.toString().toLowerCase().includes(filterLn) &&
         item.title?.toString().toLowerCase().includes(filterA) &&
         item.description?.toString().toLowerCase().includes(filterD) &&
@@ -310,6 +346,7 @@ const AdminEventsPage = () => {
     reload === true ? dispatch(addReload(false)) : dispatch(addReload(true));
     setFilterDate('');
     setFilterTime('');
+    setFilterDuration('');
     setFilterLocation('');
     setFilterTitle('');
     setFilterDescription('');
@@ -403,7 +440,7 @@ const AdminEventsPage = () => {
                     id="filterDate"
                     onClick={e => startFilterEvents(e)}
                   >
-                    <MdDone />
+                    <MdFilterAlt />
                   </button>
                   <button
                     type="button"
@@ -414,7 +451,7 @@ const AdminEventsPage = () => {
                       setFilterDate('');
                     }}
                   >
-                    <MdClose />
+                    <MdFilterAltOff />
                   </button>
                 </BtnWrapper>
               </TableHead>
@@ -433,7 +470,7 @@ const AdminEventsPage = () => {
                     id="filterTime"
                     onClick={e => startFilterEvents(e)}
                   >
-                    <MdDone />
+                    <MdFilterAlt />
                   </button>
                   <button
                     type="button"
@@ -444,7 +481,37 @@ const AdminEventsPage = () => {
                       setFilterTime('');
                     }}
                   >
-                    <MdClose />
+                    <MdFilterAltOff />
+                  </button>
+                </BtnWrapper>
+              </TableHead>
+              <TableHead>
+                <input
+                  type="number"
+                  name="filterDuration"
+                  placeholder="Duration"
+                  value={filterDuration}
+                  onKeyDown={e => handleSearchOnEnter(e)}
+                  onChange={e => handleChangeFilter(e)}
+                />
+                <BtnWrapper>
+                  <button
+                    type="button"
+                    id="filterDuration"
+                    onClick={e => startFilterEvents(e)}
+                  >
+                    <MdFilterAlt />
+                  </button>
+                  <button
+                    type="button"
+                    id="filterDuration"
+                    name="clearFilterDuration"
+                    onClick={e => {
+                      cleanFilterEvents(e);
+                      setFilterDuration('');
+                    }}
+                  >
+                    <MdFilterAltOff />
                   </button>
                 </BtnWrapper>
               </TableHead>
@@ -463,7 +530,7 @@ const AdminEventsPage = () => {
                     id="filterLocation"
                     onClick={e => startFilterEvents(e)}
                   >
-                    <MdDone />
+                    <MdFilterAlt />
                   </button>
                   <button
                     type="button"
@@ -474,7 +541,7 @@ const AdminEventsPage = () => {
                       setFilterLocation('');
                     }}
                   >
-                    <MdClose />
+                    <MdFilterAltOff />
                   </button>
                 </BtnWrapper>
               </TableHead>
@@ -493,7 +560,7 @@ const AdminEventsPage = () => {
                     id="filterTitle"
                     onClick={e => startFilterEvents(e)}
                   >
-                    <MdDone />
+                    <MdFilterAlt />
                   </button>
                   <button
                     type="button"
@@ -504,7 +571,7 @@ const AdminEventsPage = () => {
                       setFilterTitle('');
                     }}
                   >
-                    <MdClose />
+                    <MdFilterAltOff />
                   </button>
                 </BtnWrapper>
               </TableHead>
@@ -525,7 +592,7 @@ const AdminEventsPage = () => {
                         id="filterDescription"
                         onClick={e => startFilterEvents(e)}
                       >
-                        <MdDone />
+                        <MdFilterAlt />
                       </button>
                       <button
                         type="button"
@@ -536,7 +603,7 @@ const AdminEventsPage = () => {
                           setFilterDescription('');
                         }}
                       >
-                        <MdClose />
+                        <MdFilterAltOff />
                       </button>
                     </BtnWrapper>
                   </TableHead>
@@ -555,7 +622,7 @@ const AdminEventsPage = () => {
                         id="filterPlan"
                         onClick={e => startFilterEvents(e)}
                       >
-                        <MdDone />
+                        <MdFilterAlt />
                       </button>
                       <button
                         type="button"
@@ -566,7 +633,7 @@ const AdminEventsPage = () => {
                           setFilterPlan('');
                         }}
                       >
-                        <MdClose />
+                        <MdFilterAltOff />
                       </button>
                     </BtnWrapper>
                   </TableHead>
@@ -585,7 +652,7 @@ const AdminEventsPage = () => {
                         id="filterSpeakers"
                         onClick={e => startFilterEvents(e)}
                       >
-                        <MdDone />
+                        <MdFilterAlt />
                       </button>
                       <button
                         type="button"
@@ -596,7 +663,7 @@ const AdminEventsPage = () => {
                           setFilterSpeakers('');
                         }}
                       >
-                        <MdClose />
+                        <MdFilterAltOff />
                       </button>
                     </BtnWrapper>
                   </TableHead>
@@ -615,7 +682,7 @@ const AdminEventsPage = () => {
                         id="filterModerator"
                         onClick={e => startFilterEvents(e)}
                       >
-                        <MdDone />
+                        <MdFilterAlt />
                       </button>
                       <button
                         type="button"
@@ -626,7 +693,7 @@ const AdminEventsPage = () => {
                           setFilterModerator('');
                         }}
                       >
-                        <MdClose />
+                        <MdFilterAltOff />
                       </button>
                     </BtnWrapper>
                   </TableHead>
@@ -645,7 +712,7 @@ const AdminEventsPage = () => {
                         id="filterPackages"
                         onClick={e => startFilterEvents(e)}
                       >
-                        <MdDone />
+                        <MdFilterAlt />
                       </button>
                       <button
                         type="button"
@@ -656,7 +723,7 @@ const AdminEventsPage = () => {
                           setFilterPackages('');
                         }}
                       >
-                        <MdClose />
+                        <MdFilterAltOff />
                       </button>
                     </BtnWrapper>
                   </TableHead>
@@ -675,7 +742,7 @@ const AdminEventsPage = () => {
                         id="filterImage"
                         onClick={e => startFilterEvents(e)}
                       >
-                        <MdDone />
+                        <MdFilterAlt />
                       </button>
                       <button
                         type="button"
@@ -686,7 +753,7 @@ const AdminEventsPage = () => {
                           setFilterImage('');
                         }}
                       >
-                        <MdClose />
+                        <MdFilterAltOff />
                       </button>
                     </BtnWrapper>
                   </TableHead>
@@ -710,6 +777,7 @@ const AdminEventsPage = () => {
             <TableRow>
               <TableHead>Date</TableHead>
               <TableHead>Time</TableHead>
+              <TableHead>Duration</TableHead>
               <TableHead>Location</TableHead>
               <TableHead>Title</TableHead>
               {!isLearnMore && (
@@ -732,6 +800,7 @@ const AdminEventsPage = () => {
                   <TableRow key={event._id}>
                     <TableData>{event.date}</TableData>
                     <TableData>{event.time}</TableData>
+                    <TableData>{event.duration} h</TableData>
                     <TableData>{event.location}</TableData>
                     <TableData>{event.title}</TableData>
                     {!isLearnMore && (

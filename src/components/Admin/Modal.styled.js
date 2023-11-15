@@ -53,6 +53,11 @@ export const FormLabelBox = styled.div`
   line-height: 1.33;
   letter-spacing: 0.04em;
   color: ${props => props.theme.white_text};
+
+  & label {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const FormRatio = styled.div`
@@ -123,6 +128,24 @@ export const FormInput = styled(Field)`
   &:disabled {
     background-color: ${props => props.theme.greyOpacity};
     color: ${props => props.theme.grey};
+  }
+
+  &[type='checkbox'] {
+    width: 30px;
+
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+
+    & ~ span {
+      font-family: ${theme.fonts[0]};
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.33;
+      letter-spacing: 0.04em;
+      color: ${props => props.theme.black_text};
+    }
   }
 `;
 

@@ -29,6 +29,7 @@ export const EventDetails = ({ event }) => {
   const {
     date,
     time,
+    duration,
     location,
     title,
     description,
@@ -73,7 +74,7 @@ export const EventDetails = ({ event }) => {
               </HeadingItemData>
             </HeadingItem>
             <HeadingItem>
-              <HeadingItemTitle>Time</HeadingItemTitle>
+              <HeadingItemTitle>Start at</HeadingItemTitle>
               <HeadingItemData>{time}</HeadingItemData>
             </HeadingItem>
             <HeadingItem>
@@ -98,6 +99,9 @@ export const EventDetails = ({ event }) => {
                 })}
               </ul>
             </EventSpeaker>
+            <EventDescrBox>
+              <EventDescr>Duration of the event: {duration} hours</EventDescr>
+            </EventDescrBox>
             <EventDescrBox>
               <EventDescr>{description}</EventDescr>
             </EventDescrBox>
@@ -157,6 +161,7 @@ EventDetails.propTypes = {
     _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,

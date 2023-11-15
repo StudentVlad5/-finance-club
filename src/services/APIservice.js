@@ -64,6 +64,7 @@ async function updateEventsData(pathParams, body) {
   const formData = new FormData();
   formData.append('date', body.date);
   formData.append('time', body.time);
+  formData.append('duration', body.duration);
   formData.append('location', body.location);
   formData.append('title', body.title);
   formData.append('description', body.description);
@@ -94,6 +95,7 @@ async function createEventsData(pathParams, body) {
   const formData = new FormData();
   formData.append('date', body.date);
   formData.append('time', body.time);
+  formData.append('duration', body.duration);
   formData.append('location', body.location);
   formData.append('title', body.title);
   formData.append('description', body.description);

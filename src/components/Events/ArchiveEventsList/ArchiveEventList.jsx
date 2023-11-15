@@ -74,6 +74,7 @@ ArchiveEventsList.propTypes = {
       _id: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
       time: PropTypes.string.isRequired,
+      duration: PropTypes.number.isRequired,
       location: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,

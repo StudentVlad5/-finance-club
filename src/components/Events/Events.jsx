@@ -16,7 +16,8 @@ const eventsData = [
   {
     _id: '1sdghs',
     date: '2023/11/22',
-    time: '17:30 - 20:30',
+    time: '17:30',
+    duration: 3,
     location: 'New York, USA',
     title: 'Digital money and financial risks',
     description:
@@ -37,7 +38,8 @@ const eventsData = [
   {
     _id: '2sgfhd',
     date: '2023/12/02',
-    time: '19:00 - 21:00',
+    time: '19:00',
+    duration: 2,
     location: 'ZOOM',
     title: 'TOP 10 cybersecurity trends in 2023',
     description:
@@ -51,7 +53,8 @@ const eventsData = [
   {
     _id: '3xfgndf',
     date: '2023/12/15',
-    time: '13:00 - 16:00',
+    time: '13:00',
+    duration: 3,
     location: 'Miami, USA',
     title: 'DeFi: challenges of modern financial analytics',
     description:
@@ -65,7 +68,8 @@ const eventsData = [
   {
     _id: '4zfgxd',
     date: '2023/10/17',
-    time: '14:00 - 16:00',
+    time: '14:00',
+    duration: 3,
     location: 'ZOOM',
     title: 'Cybersecurity for Business',
     description:
@@ -79,7 +83,8 @@ const eventsData = [
   {
     _id: '5sfgnd',
     date: '2023/09/27',
-    time: '14:30 - 18:30',
+    time: '14:30',
+    duration: 4,
     location: 'ZOOM',
     title: 'Digital money and financial risks',
     description:
@@ -93,7 +98,8 @@ const eventsData = [
   {
     _id: '6sfgcd',
     date: '2023/09/07',
-    time: '13:00 - 16:00',
+    time: '13:00',
+    duration: 3,
     location: 'New York, USA',
     title: 'Challenges of modern financial analytics',
     description:

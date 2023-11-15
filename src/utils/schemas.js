@@ -142,12 +142,27 @@ const updatePasswordSchema = Yup.object().shape({
     .required('Require field'),
 });
 
+const schemasEvents = Yup.object().shape({
+  date: Yup.date().required('Require field'),
+  time: Yup.string().required('Require field'),
+  duration: Yup.number().required('Require field'),
+  location: Yup.string().required('Require field'),
+  title: Yup.string().required('Require field'),
+  description: Yup.string().required('Require field'),
+  plan: Yup.mixed(),
+  speakers: Yup.mixed().required('Require field'),
+  moderator: Yup.string(),
+  packages: Yup.array().required('Require field'),
+  image: Yup.string(),
+});
+
 const schemas = {
   registerSchema,
   schemasLogin,
   changePasswordSchema,
   updateSchema,
   updatePasswordSchema,
+  schemasEvents,
 };
 
 export default schemas;

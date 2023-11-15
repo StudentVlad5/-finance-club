@@ -6,13 +6,14 @@ import { FieldArray, Formik } from 'formik';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
-import { selectUserName } from 'redux/auth/selectors';
 import { addReload } from 'redux/reload/slice';
-import { fetchData, updateEventsData } from 'services/APIservice'; //fetchServiceData,
+import { fetchData, updateEventsData } from 'services/APIservice';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
+import { BASE_URL_IMG } from 'helpers/constants';
 import { setImage } from 'utils/setimage';
 import schemas from 'utils/schemas';
+import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
 import {
   AddDetailsBtn,
   DoneBtn,
@@ -20,18 +21,14 @@ import {
   FormField,
   FormInput,
   FormInputArray,
-  FormInputBox,
   FormInputBoxColumn,
   FormInputFile,
   FormLabel,
   FormLabelBox,
   FormList,
-  FormRatio,
   IncrementBtn,
   ModalForm,
 } from '../Modal.styled';
-import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
-import { BASE_URL_IMG } from 'helpers/constants';
 
 export const EditEventModal = () => {
   const [dataUpdate, setDataUpdate] = useState([]);
@@ -43,26 +40,26 @@ export const EditEventModal = () => {
 
   const itemForFetch = `/events/${modal.id}`;
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     setIsLoading(true);
-  //     try {
-  //       const { data } = await fetchData(itemForFetch);
-  //       setDataUpdate(data);
-  //       setImg(data.images);
-  //       if (!data) {
-  //         return onFetchError('Whoops, something went wrong');
-  //       }
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   }
-  //   if (modal.id !== '' && modal.id !== undefined) {
-  //     getData();
-  //   }
-  // }, [itemForFetch, modal.id]);
+  useEffect(() => {
+    async function getData() {
+      setIsLoading(true);
+      try {
+        const { data } = await fetchData(itemForFetch);
+        setDataUpdate(data);
+        setImg(data.images);
+        if (!data) {
+          return onFetchError('Whoops, something went wrong');
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (modal.id !== '' && modal.id !== undefined) {
+      getData();
+    }
+  }, [itemForFetch, modal.id]);
 
   async function editEvent(values) {
     let file = false;
@@ -123,6 +120,7 @@ export const EditEventModal = () => {
             initialValues={{
               date: dataUpdate?.date ? dataUpdate.date : '',
               time: dataUpdate?.time ? dataUpdate.time : '',
+              duration: dataUpdate?.duration ? dataUpdate.duration : '',
               location: dataUpdate?.location ? dataUpdate.location : '',
               title: dataUpdate?.title ? dataUpdate.title : '',
               description: dataUpdate?.description
@@ -130,9 +128,9 @@ export const EditEventModal = () => {
                 : '',
               plan: dataUpdate?.plan ? dataUpdate.plan : [],
               speakers: dataUpdate?.speakers ? dataUpdate.speakers : [],
-              moderator: dataUpdate?.speakers ? dataUpdate.speakers : '',
-              packages: dataUpdate?.speakers ? dataUpdate.speakers : [],
-              images: '',
+              moderator: dataUpdate?.moderator ? dataUpdate.moderator : '',
+              packages: dataUpdate?.packages ? dataUpdate.packages : [],
+              image: '',
             }}
             onSubmit={(values, { setSubmitting }) => {
               editEvent(values);
@@ -142,7 +140,7 @@ export const EditEventModal = () => {
               closeModalWindow();
             }}
             enableReinitialize={true}
-            validationSchema={schemas.schemasMenuEvent}
+            validationSchema={schemas.schemasEvents}
           >
             {({
               handleChange,
@@ -167,7 +165,7 @@ export const EditEventModal = () => {
                       ) : null}
                     </FormLabel>
                     <FormInput
-                      type="text"
+                      type="date"
                       id="date"
                       name="date"
                       placeholder="YYYY/MM/DD"
@@ -182,11 +180,26 @@ export const EditEventModal = () => {
                       ) : null}
                     </FormLabel>
                     <FormInput
-                      type="text"
+                      type="time"
                       id="time"
                       name="time"
-                      placeholder="HH:MM - HH:MM"
+                      placeholder="HH:MM"
                       value={values.time}
+                    />
+                  </FormField>
+                  <FormField>
+                    <FormLabel htmlFor="duration">
+                      <span>Duration</span>
+                      {errors.duration && touched.duration ? (
+                        <Error>{errors.duration}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormInput
+                      type="number"
+                      id="duration"
+                      name="duration"
+                      placeholder="Duration of the event"
+                      value={values.duration}
                     />
                   </FormField>
                   <FormField>
@@ -197,7 +210,7 @@ export const EditEventModal = () => {
                       ) : null}
                     </FormLabel>
                     <FormInput
-                      type="number"
+                      type="text"
                       id="location"
                       name="location"
                       placeholder="City / ZOOM"
@@ -321,50 +334,69 @@ export const EditEventModal = () => {
                       value={values.moderator}
                     />
                   </FormField>
-                  <FieldArray
-                    name="packages"
-                    render={arrayHelpers => (
-                      <FormInputArray>
-                        <FormLabel>Packages</FormLabel>
-                        <FormInputBoxColumn>
-                          {values.packages && values.packages.length > 0 ? (
-                            values.packages.map((pack, index) => (
-                              <div key={index}>
-                                <FormInput name={`packages.${index}`} />
-                                <IncrementBtn
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)}
-                                >
-                                  -
-                                </IncrementBtn>
-                                <IncrementBtn
-                                  type="button"
-                                  onClick={() => arrayHelpers.insert(index, '')}
-                                >
-                                  +
-                                </IncrementBtn>
-                              </div>
-                            ))
-                          ) : (
-                            <AddDetailsBtn
-                              type="button"
-                              onClick={() => arrayHelpers.push('')}
-                            >
-                              Add a package
-                            </AddDetailsBtn>
-                          )}
-                        </FormInputBoxColumn>
-                      </FormInputArray>
-                    )}
-                  />
+                  <FormLabelBox>
+                    <span>Packages</span>
+
+                    <label htmlFor="basic">
+                      <FormInput
+                        type="checkbox"
+                        id="basic"
+                        name="packages"
+                        value="basic"
+                        checked={values.packages.includes('basic')}
+                        onChange={e => {
+                          handleChange(e);
+                          setFieldValue(
+                            'packages',
+                            e.target.attributes.value.value,
+                          );
+                        }}
+                      />
+                      <span>basic</span>
+                    </label>
+                    <label htmlFor="pro">
+                      <FormInput
+                        type="checkbox"
+                        id="pro"
+                        name="packages"
+                        value="pro"
+                        checked={values.packages.includes('pro')}
+                        onChange={e => {
+                          handleChange(e);
+                          setFieldValue(
+                            'packages',
+                            e.target.attributes.value.value,
+                          );
+                        }}
+                      />
+                      <span>pro</span>
+                    </label>
+                    <label htmlFor="expert">
+                      <FormInput
+                        type="checkbox"
+                        id="expert"
+                        name="packages"
+                        value="expert"
+                        checked={values.packages.includes('expert')}
+                        onChange={e => {
+                          handleChange(e);
+                          setFieldValue(
+                            'packages',
+                            e.target.attributes.value.value,
+                          );
+                        }}
+                      />
+                      <span>expert</span>
+                    </label>
+                  </FormLabelBox>
                   <FormField>
-                    <FormLabel htmlFor="images">
+                    <FormLabel htmlFor="image">
                       <span>Image</span>
-                      {errors.images && touched.images ? (
-                        <Error>{errors.images}</Error>
+                      {errors.image && touched.image ? (
+                        <Error>{errors.image}</Error>
                       ) : null}
                     </FormLabel>
-                    {dataUpdate.images && dataUpdate.images !== 'none' ? (
+                    {dataUpdate.image && dataUpdate.image !== 'none' ? (
                       <FormInputFile
                         style={{
                           backgroundImage: `url(${
@@ -375,13 +407,13 @@ export const EditEventModal = () => {
                           backgroundSize: 'cover',
                         }}
                         type="file"
-                        id="images"
-                        name="images"
-                        placeholder="images"
+                        id="image"
+                        name="image"
+                        placeholder="image"
                         accept=".jpg,.jpeg,.webp,.png,.gif"
                         onChange={e => {
                           handleChange(e);
-                          setFieldValue('images', dataUpdate.images);
+                          setFieldValue('image', dataUpdate.image);
                           setImg(e.target.files[0]);
                           setImage(e);
                         }}
@@ -389,12 +421,12 @@ export const EditEventModal = () => {
                     ) : (
                       <FormInputFile
                         type="file"
-                        id="images"
-                        name="images"
+                        id="image"
+                        name="image"
                         accept=".jpg,.jpeg,.webp,.png,.gif"
                         onChange={e => {
                           handleChange(e);
-                          setFieldValue('images', e.target.files[0]);
+                          setFieldValue('image', e.target.files[0]);
                           setImg(e.target.files[0]);
                           setImage(e);
                         }}

@@ -29,7 +29,7 @@ export const TableFilter = styled.thead`
   & input {
     width: 100%;
     margin: 0;
-    padding: 5px 35px 5px 10px;
+    padding: 5px 20px 5px 10px;
 
     font-family: ${theme.fonts[0]};
     font-size: ${theme.fontSizes.extraSmall};
