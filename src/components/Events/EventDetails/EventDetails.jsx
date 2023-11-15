@@ -6,6 +6,10 @@ import { Container } from 'components/baseStyles/CommonStyle.styled';
 import { BackButton } from 'helpers/BackLink/BackLink';
 import { BtnLight } from 'components/baseStyles/Button.styled';
 import { RegisterModal } from '../RegisterModal/RegisterModal';
+import { BASE_URL_IMG } from 'helpers/constants';
+import defaultImg from 'images/events/default.jpg';
+import { ReactComponent as Knob } from 'images/svg/knob.svg';
+import { EventsSection } from '../Events.styled';
 import {
   EventDescr,
   EventDescrBox,
@@ -19,11 +23,6 @@ import {
   HeadingItemData,
   HeadingItemTitle,
 } from './EventDetails.styled';
-
-import { BASE_URL_IMG } from 'helpers/constants';
-import defaultImg from 'images/events/default.jpg';
-import { ReactComponent as Knob } from 'images/svg/knob.svg';
-import { EventsSection } from '../Events.styled';
 
 export const EventDetails = ({ event }) => {
   const {
@@ -83,8 +82,7 @@ export const EventDetails = ({ event }) => {
             </HeadingItem>
           </EventHeading>
           <EventImage
-            // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
-            src={image ? image : defaultImg}
+            src={event.image ? BASE_URL_IMG + event.image : defaultImg}
             alt={title}
             width="325"
             height="322"

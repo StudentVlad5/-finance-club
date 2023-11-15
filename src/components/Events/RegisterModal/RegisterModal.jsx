@@ -200,8 +200,7 @@ export const RegisterModal = ({ event }) => {
                 </FormList>
                 <SelectedEvent>
                   <SEventImages
-                    // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
-                    src={event.image ? event.image : defaultImg}
+                    src={event.image ? BASE_URL_IMG + event.image : defaultImg}
                     alt={event.title}
                     width="325"
                     height="322"

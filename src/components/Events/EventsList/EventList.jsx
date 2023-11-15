@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { BASE_URL_IMG } from 'helpers/constants';
 import {
   BtnLink,
   DataPlaceWrapper,
@@ -11,8 +12,6 @@ import {
   EventTitle,
   List,
 } from './EventList.styled';
-import { BASE_URL_IMG } from 'helpers/constants';
-
 import defaultImg from 'images/events/default.jpg';
 
 export const EventsList = ({ events }) => {
@@ -27,8 +26,7 @@ export const EventsList = ({ events }) => {
           <Event key={event._id} data-aos="zoom-in-up" data-aos-delay="200">
             <EventNavLink to={`/events/${event._id}`}>
               <EventImages
-                // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
-                src={event.image ? event.image : defaultImg}
+                src={event.image ? BASE_URL_IMG + event.image : defaultImg}
                 alt={event.title}
                 width="325"
                 height="322"
