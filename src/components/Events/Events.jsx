@@ -134,6 +134,9 @@ export const Events = () => {
   //   })();
   // }, []);
 
+  const today = new Date();
+  const archiveEvents = events.filter(({ date }) => new Date(date) < today);
+
   return (
     <EventsSection>
       <Container>
@@ -147,7 +150,7 @@ export const Events = () => {
         <Heading>Archive of past events</Heading>
         {isLoading ? onLoading() : onLoaded()}
         {error && onFetchError('Whoops, something went wrong')}
-        {events.length > 0 && !error && <ArchiveEventsList events={events} />}
+        {events.length > 0 && !error && <ArchiveEventsList archiveEvents={archiveEvents} />}
       </Container>
     </EventsSection>
   );

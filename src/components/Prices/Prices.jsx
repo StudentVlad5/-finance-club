@@ -48,7 +48,7 @@ const data = [
 const Prices = () => {
   // const { t } = useTranslation();
   return (
-    <PriceSection>
+    <PriceSection id="prices">
       <PriceContainer>
           <ListItemsUppertitle
             data-aos="fade-down"

@@ -10,6 +10,7 @@ import styled from "styled-components";
 import BackgroundImage1x from "images/events/home_img_event_1x.webp";
 import BackgroundImage2x from "images/events/home_img_event_2x.webp";
 import BackgroundImage3x from "images/events/home_img_event_3x.webp";
+import { AnimationBtn } from "components/baseStyles/Button.styled";
 
 const MeetingEventSection = styled(Section)`
   background-color: ${(props) => props.theme.fon_second};
@@ -133,7 +134,7 @@ const EventContentDesc = styled(EventContentData)`
     font-size: 18px;
   }
 `;
-const EventCalendarBtn = styled.button`
+const EventCalendarBtn = styled(AnimationBtn)`
 color: ${(props) => props.theme.white_text};
 background-color: transparent;
 border: none;

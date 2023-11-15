@@ -10,6 +10,7 @@ import styled from "styled-components";
 
 const AboutSection = styled(Section)`
   background-color: ${(props) => props.theme.fon_second};
+  padding-bottom: 0;
 `;
 const AboutContainer = styled(Container)`
   display: flex;

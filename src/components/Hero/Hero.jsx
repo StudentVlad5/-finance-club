@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BtnContainer, BtnHeroJoin, DesctopImgContainer, HeroContainer, HeroControl, HeroHeadline, HeroImages, HeroSection, DesctopDarkScreen, DesctopDarkBottom } from "./Hero.styled";
 
 
@@ -13,8 +14,12 @@ const Hero = () => {
                 data-aos-easing="linear"
                 data-aos-duration="1500">COMPANY NAME - dolor, consectetur adipisicing elit</HeroHeadline>
           <BtnContainer>
-            <BtnHeroJoin aria-label="join now" type="button">JOIN NOW</BtnHeroJoin>
-            <BtnHeroJoin aria-label="VIEW PRICING" type="button">VIEW PRICING</BtnHeroJoin>
+            <Link to="/join" style={{textDecoration:"none"}}>
+              <BtnHeroJoin aria-label="join now" type="button">JOIN NOW
+              </BtnHeroJoin>
+            </Link>
+            <a href="#prices" style={{textDecoration:"none"}}><BtnHeroJoin aria-label="VIEW PRICING" type="button">VIEW PRICING</BtnHeroJoin>
+            </a>
           </BtnContainer>
         </HeroControl>
         <DesctopImgContainer>

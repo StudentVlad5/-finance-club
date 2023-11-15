@@ -13,7 +13,6 @@ const Section = styled.section`
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     padding: 100px 0;
-    /* max-width: ${theme.breakpoints.desktop}; */
   }
 `;
 

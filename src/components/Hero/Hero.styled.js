@@ -4,7 +4,6 @@ import {
   Section,
 } from "components/baseStyles/CommonStyle.styled";
 import { theme } from "components/baseStyles/Variables.styled";
-import { Btn } from "helpers/Button/Button";
 import styled from "styled-components";
 import BackgroundImageD1x from "images/hero/screen_desctop_desctop_1x.webp";
 import BackgroundImageD2x from "images/hero/screen_desctop_desctop_2x.webp";
@@ -15,6 +14,7 @@ import BackgroundImageM3x from "images/hero/screen_desctop_modal_3x.webp";
 
 import { ReactComponent as DesctopScreen } from "images/hero/dark_screen.svg";
 import { ReactComponent as DesctopBottom } from "images/hero/bottom_desctop.svg";
+import { BtnLight } from "components/baseStyles/Button.styled";
 
 const HeroSection = styled(Section)`
   display: flex;
@@ -79,7 +79,7 @@ const BtnContainer = styled.div`
     flex-direction: column;
   }
 `;
-const BtnHeroJoin = styled(Btn)``;
+const BtnHeroJoin = styled(BtnLight)``;
 
 const DesctopImgContainer = styled.div`
   position: relative;
