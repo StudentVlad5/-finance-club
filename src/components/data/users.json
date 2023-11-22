@@ -1,6 +1,5 @@
 [
   {
-    "_id": "1",
     "email": "candidate@gmail.com",
     "password": "123456",
     "name": "Candidate",
@@ -16,7 +15,6 @@
     "role": "candidate"
   },
   {
-    "_id": "2",
     "email": "member@gmail.com",
     "password": "987654",
     "name": "Member",
@@ -37,7 +35,6 @@
     "role": "member"
   },
   {
-    "_id": "3",
     "email": "memberOld@gmail.com",
     "password": "654321",
     "name": "Member",
@@ -58,7 +55,6 @@
     "role": "member"
   },
   {
-    "_id": "4",
     "email": "guest@gmail.com",
     "password": "456123",
     "name": "Guest",
