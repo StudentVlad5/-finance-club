@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useFormik, Formik } from 'formik';
 import { ImEye, ImEyeBlocked } from 'react-icons/im';
 import schemas from 'utils/schemas';
-import theme from 'components/baseStyles/Variables.styled';
+import {theme} from 'components/baseStyles/Variables.styled';
 
 import { FormLogin, TitleLogin } from './LoginForm.styled';
 import { logIn } from 'redux/auth/operations';
@@ -136,14 +136,14 @@ export const LoginForm = () => {
                 <Btn
                   type="submit"
                   disabled={isValid}
-                  aria-label="submit sign in"
+                  aria-label="submit log in"
                 >
-                  {isLoading ? 'Loading' : 'Sign In'}
+                  {isLoading ? 'Loading' : 'Log In'}
                 </Btn>
               )}
 
               {!isShown && (
-                <Btn type="submit">{isLoading ? 'Loading' : 'Sign In'}</Btn>
+                <Btn type="submit">{isLoading ? 'Loading' : 'Log In'}</Btn>
               )}
               <BoxText>
                 <StyledLink to="/register">{'Create acount'}</StyledLink>

@@ -44,4 +44,8 @@ export const theme = {
   },
   transition: 'all 0.25s ease-in',
   scale: 'scale(1.15)',
+  colors: {
+    red: '#E0181D',
+    darkGreen: '#374920',
+  },
 };

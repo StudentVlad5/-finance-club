@@ -97,9 +97,9 @@ const ListItemsContentWraper = styled.div`
 const ListItems = styled.li`
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: stretch;
   flex-direction: row;
-  min-height: 645px;
+  /* height: 645px; */
   padding: 48px 30px;
   border-radius: 40px;
   gap: 24px;
@@ -152,23 +152,29 @@ const SubTitleItem = styled(SubTitle)`
 `;
 const TitleItem = styled(SubTitle)`
   color: ${(props) => props.theme.black};
-  font-size: 42px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 700;
   line-height: 131%;
   margin: 16px 0;
   text-transform: uppercase;
   padding: 0;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size:38px;
+    }
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 42px;
+    }
 `;
 const UlContent = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  gap: 16px;
+  gap: 8px;
   color: ${(props) => props.theme.black};
   font-family: ${theme.fonts[0]};
-  font-size: 18px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 144.4%;
@@ -179,12 +185,15 @@ const UlContent = styled.ul`
   list-style-position: outside;
   margin-bottom: 40px;
   margin-left: 20px;
-  min-height: 270px;
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    gap: 16px;
+    font-size: 18px;
+    min-height: 270px;
+  }
 `;
 const LiContent = styled.li`
   color: ${(props) => props.theme.black};
   font-family: ${theme.fonts[0]};
-  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 111.1%;
@@ -194,7 +203,7 @@ const ButtonBuy = styled(BtnLight)`
   width: 100%;
   border: none;
   border-radius: 80px;
-  padding: 27px 32px;
+  padding: 22px 26px;
   background: ${(props) => props.theme.grey};
   color: ${(props) => props.theme.white_text};
 
@@ -205,6 +214,7 @@ const ButtonBuy = styled(BtnLight)`
   }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;
+    padding: 27px 32px;
     /* width: 210px; */
     height: 70px;
   }

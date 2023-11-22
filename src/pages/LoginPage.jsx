@@ -1,3 +1,4 @@
+import LoginForm from 'components/Auth/LoginForm/LoginForm';
 import { useEffect } from 'react';
 import { SEO } from 'utils/SEO';
 
@@ -8,6 +9,7 @@ const LoginPage = () => {
   return (
     <>
       <SEO title="Login" description="" />
+      <LoginForm/>
     </>
   );
 };
