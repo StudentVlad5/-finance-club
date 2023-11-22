@@ -8,13 +8,19 @@ import {
   MobileContainer,
   MobileNavBlock,
 } from './Navigation.styled';
+import { AuthNav } from '../AuthNav/AuthNav';
+import { UserNav } from '../UserNav/UserNav';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { useSelector } from 'react-redux';
 
 export const Navigation = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <Container>
       <Nav />
       <NavBlock/>
+      {isLoggedIn ? <UserNav /> : <AuthNav />}
     </Container>
   );
 };
