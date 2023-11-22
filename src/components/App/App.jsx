@@ -17,7 +17,9 @@ const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
-const AdminPage = lazy(() => import('pages/AdminPage'));
+const AdminPage = lazy(() => import('pages/Admin/AdminPage'));
+const AdminUsersPage = lazy(() => import('pages/Admin/AdminUsersPage'));
+const AdminEventsPage = lazy(() => import('pages/Admin/AdminEventsPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -36,39 +38,42 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<HomePage />} />
-            {permission === 'admin' ? (
-              <Route
-                path="admin"
-                element={
-                  <PrivateRoute redirectTo="/" component={<AdminPage />} />
-                }
-              />
-            ) : (
-              <Route
-                path="user"
-                element={
-                  <PrivateRoute redirectTo="/login" component={<UserPage />} />
-                }
-              />
-            )}
-            {/* <Route
-              path="admin/users"
+            {/* {permission === 'admin' ? ( */}
+            <Route
+              path="admin"
+              element={<AdminPage />}
+              // element={
+              //   <PrivateRoute redirectTo="/" component={<AdminPage />} />
+              // }
+            />
+            {/* ) : ( */}
+            <Route
+              path="user"
               element={
-                <PrivateRoute
-                  redirectTo="/admin"
-                  component={<AdminUsersPage />}
-                />
+                <PrivateRoute redirectTo="/login" component={<UserPage />} />
               }
+            />
+            {/* )} */}
+            <Route
+              path="admin/users"
+              element={<AdminUsersPage />}
+              // element={
+              //   <PrivateRoute
+              //     redirectTo="/admin"
+              //     component={<AdminUsersPage />}
+              //   />
+              // }
             />
             <Route
               path="admin/events"
-              element={
-                <PrivateRoute
-                  redirectTo="/admin"
-                  component={<AdminEventsPage />}
-                />
-              }
-            /> */}
+              element={<AdminEventsPage />}
+              // element={
+              //   <PrivateRoute
+              //     redirectTo="/admin"
+              //     component={<AdminEventsPage />}
+              //   />
+              // }
+            />
 
             <Route
               path="login"

@@ -1,57 +1,7 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
 import { theme } from 'components/baseStyles/Variables.styled';
-
-export const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 15;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-  padding-top: 30px;
-
-  background: rgba(0, 0, 0, 0.2);
-
-  transition: ${theme.transition};
-  overflow-y: scroll;
-
-  &.is-hidden {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-  }
-`;
-
-export const Modal = styled.div`
-  position: relative;
-  display: block;
-
-  width: 90%;
-  max-width: calc(100vw - 40px);
-  padding: 20px;
-
-  background-color: ${theme.colors.white};
-  border: 1px solid ${theme.colors.opacity};
-  border-radius: 5px;
-  box-shadow: ${theme.colors.opacity} 7px 4px 14px;
-
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    max-width: 600px;
-    margin-top: 0;
-    padding: 25px;
-  }
-
-  @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    max-width: 800px;
-    padding: 40px;
-  }
-`;
+import { CloseBtn } from 'components/baseStyles/Modal.styled';
 
 export const ModalForm = styled(Form)`
   display: flex;
@@ -81,11 +31,12 @@ export const FormField = styled.div`
 `;
 
 export const FormLabel = styled.label`
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
+  color: ${props => props.theme.white_text};
 `;
 
 export const FormLabelBox = styled.div`
@@ -96,11 +47,24 @@ export const FormLabelBox = styled.div`
 
   width: 100%;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
+  color: ${props => props.theme.white_text};
+
+  & div {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  & label {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const FormRatio = styled.div`
@@ -111,11 +75,12 @@ export const FormRatio = styled.div`
 
   width: 70%;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: 10px;
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
+  color: ${props => props.theme.white_text};
 `;
 
 export const FormInputBox = styled.div`
@@ -140,15 +105,15 @@ export const FormInput = styled(Field)`
   padding: 5px;
   box-sizing: border-box;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: 12px;
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
+  color: ${props => props.theme.black_text};
 
-  background-color: ${theme.colors.white};
-  color: ${theme.colors.black};
-  border: 1px solid ${theme.colors.braun};
+  background-color: ${props => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
   transition: ${theme.transition};
@@ -159,7 +124,7 @@ export const FormInput = styled(Field)`
 
   &:hover,
   &:focus {
-    outline: 2px solid ${theme.colors.braun};
+    outline: 2px solid ${props => props.theme.black_text};
   }
 
   &::-webkit-outer-spin-button,
@@ -168,8 +133,26 @@ export const FormInput = styled(Field)`
   }
 
   &:disabled {
-    background-color: ${theme.colors.opacity};
-    color: ${theme.colors.gray};
+    background-color: ${props => props.theme.greyOpacity};
+    color: ${props => props.theme.grey};
+  }
+
+  &[type='checkbox'] {
+    width: 30px;
+
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+
+    & ~ span {
+      font-family: ${theme.fonts[0]};
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.33;
+      letter-spacing: 0.04em;
+      color: ${props => props.theme.black_text};
+    }
   }
 `;
 
@@ -178,9 +161,9 @@ export const FormInputFile = styled(Field)`
   height: 50px;
   width: 50px;
 
-  background-color: ${theme.colors.white};
+  background-color: ${props => props.theme.white_fon};
   border-radius: 4px;
-  border: 1px solid ${theme.colors.braun};
+  border: 1px solid ${props => props.theme.white_fon};
   outline: none;
 
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzEiIGhlaWdodD0iNzEiIHZpZXdCb3g9IjAgMCA3MSA3MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM1LjQ5OTkgNTkuMTY2M1YzNS40OTk3TTM1LjQ5OTkgMzUuNDk5N1YxMS44MzNNMzUuNDk5OSAzNS40OTk3SDU5LjE2NjZNMzUuNDk5OSAzNS40OTk3SDExLjgzMzMiIHN0cm9rZT0iIzExMTExMSIgc3Ryb2tlLW9wYWNpdHk9IjAuNiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+);
@@ -192,7 +175,7 @@ export const FormInputFile = styled(Field)`
 
   color: transparent;
   &:hover {
-    outline: 3px solid ${theme.colors.braun};
+    outline: 3px solid ${props => props.theme.black_text};
   }
   &:focus {
     outline: none;
@@ -215,54 +198,20 @@ export const FormInputArray = styled.div`
   gap: 3px;
 `;
 
-export const CloseBtn = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
+export const SCloseBtn = styled(CloseBtn)`
+  & > svg {
+    width: 20px;
+    height: 20px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 30px;
-  height: 30px;
-
-  color: ${theme.colors.black};
-  background-color: ${theme.colors.white};
-  border-color: ${theme.colors.black};
-  border-radius: 50%;
-  backdrop-filter: blur(2px);
-  z-index: 50;
-
-  cursor: pointer;
+    @media screen and (min-width: ${theme.breakpoints.desktop}) {
+      width: 30px;
+      height: 30px;
+    }
+  }
 `;
 
-export const DoneBtn = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 45px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 30px;
-  height: 30px;
-
-  color: ${theme.colors.braun};
-  background-color: transparent;
-  border-color: ${theme.colors.braun};
-  border-radius: 50%;
-  backdrop-filter: blur(2px);
-  z-index: 50;
-
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.braun};
-  }
+export const DoneBtn = styled(SCloseBtn)`
+  right: 50px;
 `;
 
 export const IncrementBtn = styled.button`
@@ -276,9 +225,10 @@ export const IncrementBtn = styled.button`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  background-color: ${theme.colors.white};
-  color: ${theme.colors.black};
-  border: 1px solid ${theme.colors.braun};
+  color: ${props => props.theme.white_text};
+
+  background-color: ${props => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
   transition: ${theme.transition};
@@ -287,8 +237,8 @@ export const IncrementBtn = styled.button`
 
   &:hover,
   &:focus {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.braun};
+    color: ${props => props.theme.white_fon};
+    background-color: ${props => props.theme.white_fon};
   }
 `;
 
@@ -296,15 +246,15 @@ export const AddDetailsBtn = styled.button`
   padding: 5px;
   text-align: start;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: 12px;
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
+  color: ${props => props.theme.black_text};
 
-  background-color: ${theme.colors.white};
-  color: ${theme.colors.gray};
-  border: 1px solid ${theme.colors.braun};
+  background-color: ${props => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
 
@@ -314,8 +264,8 @@ export const AddDetailsBtn = styled.button`
 
   &:hover,
   &:focus {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.braun};
+    color: ${props => props.theme.white_fon};
+    background-color: ${props => props.theme.white_fon};
   }
 `;
 
@@ -325,10 +275,10 @@ export const Error = styled.span`
   right: 0px;
   z-index: 99;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-style: normal;
   font-weight: 400;
   font-size: 8px;
   text-align: right;
-  color: ${theme.colors.braun};
+  color: ${props => props.theme.black_text};
 `;

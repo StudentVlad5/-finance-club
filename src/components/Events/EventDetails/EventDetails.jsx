@@ -6,6 +6,10 @@ import { Container } from 'components/baseStyles/CommonStyle.styled';
 import { BackButton } from 'helpers/BackLink/BackLink';
 import { BtnLight } from 'components/baseStyles/Button.styled';
 import { RegisterModal } from '../RegisterModal/RegisterModal';
+import { BASE_URL_IMG } from 'helpers/constants';
+import defaultImg from 'images/events/default.jpg';
+import { ReactComponent as Knob } from 'images/svg/knob.svg';
+import { EventsSection } from '../Events.styled';
 import {
   EventDescr,
   EventDescrBox,
@@ -20,15 +24,11 @@ import {
   HeadingItemTitle,
 } from './EventDetails.styled';
 
-import { BASE_URL_IMG } from 'helpers/constants';
-import defaultImg from 'images/events/default.jpg';
-import { ReactComponent as Knob } from 'images/svg/knob.svg';
-import { EventsSection } from '../Events.styled';
-
 export const EventDetails = ({ event }) => {
   const {
     date,
     time,
+    duration,
     location,
     title,
     description,
@@ -73,7 +73,7 @@ export const EventDetails = ({ event }) => {
               </HeadingItemData>
             </HeadingItem>
             <HeadingItem>
-              <HeadingItemTitle>Time</HeadingItemTitle>
+              <HeadingItemTitle>Start at</HeadingItemTitle>
               <HeadingItemData>{time}</HeadingItemData>
             </HeadingItem>
             <HeadingItem>
@@ -82,8 +82,7 @@ export const EventDetails = ({ event }) => {
             </HeadingItem>
           </EventHeading>
           <EventImage
-            // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
-            src={image ? image : defaultImg}
+            src={event.image ? BASE_URL_IMG + event.image : defaultImg}
             alt={title}
             width="325"
             height="322"
@@ -94,18 +93,13 @@ export const EventDetails = ({ event }) => {
               <span>Speakers:</span>
               <ul>
                 {speakers.map((speaker, i) => {
-                  return (
-                    <li key={i}>
-                      {speaker.name +
-                        ', ' +
-                        speaker.company +
-                        ', ' +
-                        speaker.position}
-                    </li>
-                  );
+                  return <li key={i}>{speaker}</li>;
                 })}
               </ul>
             </EventSpeaker>
+            <EventDescrBox>
+              <EventDescr>Duration of the event: {duration} hours</EventDescr>
+            </EventDescrBox>
             <EventDescrBox>
               <EventDescr>{description}</EventDescr>
             </EventDescrBox>
@@ -165,17 +159,12 @@ EventDetails.propTypes = {
     _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     plan: PropTypes.any,
-    speakers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        company: PropTypes.string,
-        position: PropTypes.string,
-      }),
-    ).isRequired,
+    speakers: PropTypes.any.isRequired,
     moderator: PropTypes.string,
     packages: PropTypes.array.isRequired,
     image: PropTypes.string,

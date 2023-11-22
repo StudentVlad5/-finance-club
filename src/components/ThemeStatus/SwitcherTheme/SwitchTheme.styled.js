@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 const fadeInTopAnimation = keyframes`
   0% {
@@ -12,6 +13,7 @@ const fadeInTopAnimation = keyframes`
 `;
 
 const BtnChangeTheme = styled.button`
+  color: ${props => props.theme.white_text};
   background-color: transparent;
   border: none;
   padding: 0;
@@ -20,6 +22,10 @@ const BtnChangeTheme = styled.button`
   &:hover {
     transform: scale(1.1);
   }
+
+  & svg {
+    fill: currentColor;
+  }
 `;
 
 const SwitcherWrapper = styled.div`
@@ -27,16 +33,14 @@ const SwitcherWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  position: absolute;
-  left: 110px;
-  height: auto;
-
   background-color: transparent;
   animation: ${fadeInTopAnimation} 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   cursor: pointer;
 
-  @media screen and (min-width: 768px) {
-    left: 135px;
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    position: absolute;
+    top: 5px;
+    left: 68px;
   }
 `;
 

@@ -10,6 +10,10 @@ export const List = styled.ul`
 
   padding: 0 15px;
 
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    gap: 35px;
+  }
+
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     gap: 45px;
     padding: 0;

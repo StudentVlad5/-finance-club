@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { theme } from "components/baseStyles/Variables.styled";
+import styled from 'styled-components';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 const Section = styled.section`
   position: relative;
@@ -39,7 +39,7 @@ const Title = styled.h1`
   line-height: 79.992px; /* 121.2% */
   letter-spacing: -1px;
 
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 42px;
@@ -57,7 +57,7 @@ const Headline = styled.h2`
   font-weight: 700;
   line-height: 55.02px; /* 114.625% */
 
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 24px;
@@ -76,7 +76,7 @@ const Subtitle = styled.p`
   line-height: 32.004px; /* 177.8% */
   text-align: center;
 
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 16px;

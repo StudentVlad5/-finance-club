@@ -161,7 +161,7 @@ export const RegisterModal = ({ event }) => {
                     </FormLabel>
                     <FormInput
                       id="phone"
-                      type="tel"
+                      type="phone"
                       name="phone"
                       placeholder="+1234567890"
                       value={values.phone}
@@ -200,8 +200,7 @@ export const RegisterModal = ({ event }) => {
                 </FormList>
                 <SelectedEvent>
                   <SEventImages
-                    // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
-                    src={event.image ? event.image : defaultImg}
+                    src={event.image ? BASE_URL_IMG + event.image : defaultImg}
                     alt={event.title}
                     width="325"
                     height="322"
@@ -239,17 +238,12 @@ RegisterModal.propTypes = {
     _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     plan: PropTypes.any,
-    speakers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        company: PropTypes.string,
-        position: PropTypes.string,
-      }),
-    ).isRequired,
+    speakers: PropTypes.any.isRequired,
     moderator: PropTypes.string,
     packages: PropTypes.array.isRequired,
     image: PropTypes.string,

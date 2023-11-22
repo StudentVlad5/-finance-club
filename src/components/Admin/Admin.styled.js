@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ReactComponent as Logout } from 'images/svg/logout.svg';
 import { theme } from 'components/baseStyles/Variables.styled';
+import { NavLink } from 'react-router-dom';
 
 export const AdminContainer = styled.div`
   position: relative;
@@ -16,8 +16,8 @@ export const Heading = styled.div`
 
 export const Table = styled.table`
   width: 100%;
-  margin-top: 10px;
-  color: ${theme.colors.black};
+  margin: 10px 0;
+  color: ${props => props.theme.black_text};
   border-collapse: collapse;
 `;
 
@@ -29,22 +29,22 @@ export const TableFilter = styled.thead`
   & input {
     width: 100%;
     margin: 0;
-    padding: 5px 35px 5px 10px;
+    padding: 5px 20px 5px 10px;
 
-    font-family: ${theme.fonts[2]};
+    font-family: ${theme.fonts[0]};
     font-size: ${theme.fontSizes.extraSmall};
     font-weight: 400;
     line-height: 1.33;
-    color: #303030;
+    color: ${props => props.theme.black_text};
 
-    border-color: #f7f7f7;
+    border-color: ${props => props.theme.grey};
     border-radius: 40px;
 
     &:hover,
     &:focus,
     &:focus-visible,
     &:focus-within {
-      border: 2px solid ${theme.colors.braun};
+      border: 1px solid ${props => props.theme.black_text};
     }
   }
 `;
@@ -58,7 +58,7 @@ export const TableRow = styled.tr`
   } */
 
   &:nth-child(2n) {
-    background-color: ${theme.colors.opacity};
+    background-color: ${props => props.theme.greyOpacity};
   }
 `;
 
@@ -66,12 +66,12 @@ export const TableHead = styled.th`
   position: relative;
   padding: 0.25rem;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: ${theme.fontSizes.extraSmall};
   font-weight: 700;
   line-height: 1.03;
-
-  border-bottom: 1px solid ${theme.colors.gray};
+  color: ${props => props.theme.white_text};
+  border-bottom: 1px solid ${props => props.theme.grey};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 12px;
@@ -88,11 +88,11 @@ export const TableData = styled.td`
   padding: 0.25rem;
   max-width: 80px;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: ${theme.fontSizes.extraSmall};
   font-weight: 400;
   line-height: 1.1;
-
+  color: ${props => props.theme.white_text};
   overflow-x: hidden;
   white-space: nowrap;
 
@@ -123,11 +123,11 @@ export const BtnWrapper = styled.div`
     &:hover,
     &:focus,
     &:active {
-      color: ${theme.colors.braun};
+      color: ${props => props.theme.black_text};
     }
 
     & > svg {
-      fill: inherit;
+      fill: currentColor;
     }
   }
 `;
@@ -141,7 +141,7 @@ export const IconBtn = styled.button`
   margin: 0;
   padding: 0;
 
-  color: ${theme.colors.gray};
+  color: ${props => props.theme.white_text};
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -151,7 +151,7 @@ export const IconBtn = styled.button`
   &:hover,
   &:focus,
   &:active {
-    color: ${theme.colors.braun};
+    color: ${props => props.theme.black_text};
   }
 
   & > svg {
@@ -164,12 +164,10 @@ export const LearnMoreBtn = styled.button`
   margin-left: auto;
   padding: 6px;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: ${theme.fontSizes.extraSmall};
   font-weight: 500;
-  color: ${theme.colors.gray};
-
-  color: ${theme.colors.gray};
+  color: ${props => props.theme.white_text};
   border-color: #f7f7f7;
   border-radius: 40px;
   background-color: transparent;
@@ -179,72 +177,22 @@ export const LearnMoreBtn = styled.button`
 
   &:hover,
   &:focus {
-    box-shadow: ${theme.colors.gray} 1px 1px 2px inset;
+    box-shadow: ${props => props.theme.grey} 1px 1px 2px inset;
+    color: ${props => props.theme.black_text};
+    background-color: ${props => props.theme.white};
   }
-`;
-
-export const LogoutBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-family: ${theme.fonts[2]};
-  font-size: ${theme.fontSizes.extraSmall};
-  font-style: normal;
-  font-weight: 400;
-  text-align: center;
-  /* text-transform: uppercase; */
-  text-decoration: none;
-  line-height: normal;
-
-  color: ${theme.colors.gray};
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-
-  &:hover,
-  &:focus,
-  &:hover > svg,
-  &:focus > svg {
-    color: ${theme.colors.braun};
-    fill: ${theme.colors.braun};
-    stroke: ${theme.colors.braun};
-    transition: all 150ms linear;
-  }
-`;
-
-export const LogoutIcon = styled(Logout)`
-  width: 16px;
-  height: 16px;
-  stroke: ${theme.colors.gray};
-  transition: all 150ms linear;
-
-  &:hover,
-  :focus {
-    fill: ${theme.colors.white};
-    stroke: ${theme.colors.white};
-  }
-`;
-
-export const LogoutLabel = styled.span`
-  font-family: ${theme.fonts[2]};
-  font-size: ${theme.fontSizes.extraSmall};
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  margin-left: 8px;
-  transition: all 150ms linear;
 `;
 
 export const ClearFiltersBtn = styled.button`
   padding: 5px;
   text-align: start;
 
-  font-family: ${theme.fonts[2]};
+  font-family: ${theme.fonts[0]};
   font-size: 10px;
   font-weight: 400;
   line-height: 1.33;
 
-  color: ${theme.colors.gray};
+  color: ${props => props.theme.white_text};
   border-color: #f7f7f7;
   border-radius: 40px;
   background-color: transparent;
@@ -255,6 +203,85 @@ export const ClearFiltersBtn = styled.button`
 
   &:hover,
   &:focus {
-    box-shadow: ${theme.colors.gray} 1px 1px 2px inset;
+    box-shadow: ${props => props.theme.grey} 1px 1px 2px inset;
+    color: ${props => props.theme.black_text};
+    background-color: ${props => props.theme.white};
+  }
+`;
+
+export const List = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: calc(100vw - 40px);
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    max-width: calc(100vw - 64px);
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    justify-content: space-between;
+    max-width: 1280px;
+  }
+`;
+
+export const Item = styled.li`
+  display: flex;
+  justify-content: space-evenly;
+
+  width: 100%;
+  height: auto;
+  padding: 12px 4px;
+
+  background-color: ${props => props.theme.white_fon};
+  box-shadow: 7px 4px 14px ${props => props.theme.greyOpacity};
+  border-radius: 20px;
+  transition: ${theme.transition};
+
+  @media screen and (min-width: ${theme.breakpoints.mobile}) {
+    max-width: 280px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    max-width: 336px;
+    border-radius: 40px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    max-width: 390px;
+  }
+
+  & svg {
+    margin-left: 8px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: ${props => props.theme.greyOpacity};
+    scale: ${theme.scale};
+  }
+`;
+
+export const SLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  font-family: ${theme.fonts[0]};
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.333;
+  color: ${props => props.theme.black_text};
+  text-decoration: none;
+  cursor: pointer;
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 16px;
+    line-height: 1.357;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 18px;
+    line-height: 1.375;
   }
 `;

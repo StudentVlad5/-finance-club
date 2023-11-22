@@ -1,25 +1,24 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { BASE_URL_IMG } from 'helpers/constants';
 import {
   ArchiveDetailsWrapper,
   ArchiveEvent,
   ArchiveList,
+  ArchiveImage,
   BtnMore,
 } from './ArchiveEventList.styled';
 import {
   DataPlaceWrapper,
   EventDate,
-  EventImages,
   EventTitle,
 } from '../EventsList/EventList.styled';
-// import { BASE_URL_IMG } from 'helpers/constants';
-
 import defaultImg from 'images/events/default.jpg';
 
-export const ArchiveEventsList = ({ archiveEvents }) => {
-  // const today = new Date();
-  // const archiveEvents = events.filter(({ date }) => new Date(date) < today);
+export const ArchiveEventsList = ({ events }) => {
+  const today = new Date();
+  const archiveEvents = events.filter(({ date }) => new Date(date) < today);
 
   const [limit, setLimit] = useState(2);
   const end = count => {
@@ -37,9 +36,8 @@ export const ArchiveEventsList = ({ archiveEvents }) => {
               data-aos-delay="200"
             >
               <NavLink to={`/events/${event._id}`}>
-                <EventImages
-                  // src={event.image ? BASE_URL_IMG + event.image : defaultImg}
-                  src={event.image ? event.image : defaultImg}
+                <ArchiveImage
+                  src={event.image ? BASE_URL_IMG + event.image : defaultImg}
                   alt={event.title}
                   width="325"
                   height="322"
@@ -69,22 +67,17 @@ export const ArchiveEventsList = ({ archiveEvents }) => {
 };
 
 ArchiveEventsList.propTypes = {
-  archiveEvents: PropTypes.arrayOf(
+  events: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
       time: PropTypes.string.isRequired,
+      duration: PropTypes.number,
       location: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       plan: PropTypes.any,
-      speakers: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string,
-          company: PropTypes.string,
-          position: PropTypes.string,
-        }),
-      ).isRequired,
+      speakers: PropTypes.any.isRequired,
       moderator: PropTypes.string,
       packages: PropTypes.array.isRequired,
       image: PropTypes.string,

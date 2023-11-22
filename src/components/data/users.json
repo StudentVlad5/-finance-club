@@ -1,0 +1,76 @@
+[
+  {
+    "_id": "1",
+    "email": "candidate@gmail.com",
+    "password": "123456",
+    "name": "Candidate",
+    "surname": "Data",
+    "phone": "+123456",
+    "avatar": "",
+    "company": "NY",
+    "position": "CFO",
+    "birthday": "1990-12-12",
+    "packages": [],
+    "events": [],
+    "status": "active",
+    "role": "candidate"
+  },
+  {
+    "_id": "2",
+    "email": "member@gmail.com",
+    "password": "987654",
+    "name": "Member",
+    "surname": "Data",
+    "phone": "+987654",
+    "avatar": "",
+    "company": "CE",
+    "position": "CFO",
+    "birthday": "1990-10-10",
+    "packages": [
+      {
+        "name": "basic",
+        "termActive": { "from": "2023-11-14", "to": "2024-11-14" }
+      }
+    ],
+    "events": [],
+    "status": "active",
+    "role": "member"
+  },
+  {
+    "_id": "3",
+    "email": "memberOld@gmail.com",
+    "password": "654321",
+    "name": "Member",
+    "surname": "Old",
+    "phone": "+654321",
+    "avatar": "",
+    "company": "RE",
+    "position": "CFO",
+    "birthday": "1990-07-07",
+    "packages": [
+      {
+        "name": "basic",
+        "termActive": { "from": "2022-11-14", "to": "2023-11-14" }
+      }
+    ],
+    "events": [],
+    "status": "inActive",
+    "role": "member"
+  },
+  {
+    "_id": "4",
+    "email": "guest@gmail.com",
+    "password": "456123",
+    "name": "Guest",
+    "surname": "Data",
+    "phone": "+456123",
+    "avatar": "",
+    "company": "NI",
+    "position": "CEO",
+    "birthday": "2000-09-08",
+    "packages": [{ "name": "", "termActive": { "from": "", "to": "" } }],
+    "events": [{ "_id": "1sfgh" }],
+    "status": "active",
+    "role": "guest"
+  }
+]

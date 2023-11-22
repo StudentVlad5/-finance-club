@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { theme } from 'components/baseStyles/Variables.styled';
-import { DetailsWrapper, Event } from '../EventsList/EventList.styled';
+import {
+  DetailsWrapper,
+  Event,
+  EventImages,
+} from '../EventsList/EventList.styled';
 
 export const ArchiveList = styled.ul`
   display: flex;
@@ -13,6 +17,10 @@ export const ArchiveList = styled.ul`
 
   padding: 0 15px;
   margin-bottom: 20px;
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    gap: 35px;
+  }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     gap: 45px;
@@ -32,6 +40,15 @@ export const ArchiveDetailsWrapper = styled(DetailsWrapper)`
   }
 `;
 
+export const ArchiveImage = styled(EventImages)`
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    width: 466px;
+    height: 100%;
+    min-height: 256px;
+    max-height: 366px;
+  }
+`;
+
 export const BtnMore = styled.button`
   position: relative;
   display: block;
@@ -48,18 +65,11 @@ export const BtnMore = styled.button`
 
   background-color: transparent;
   border: none;
-  /* border-bottom: 1px solid ${props => props.theme.white_text}; */
   transition: ${theme.transition};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;
   }
-  /* 
-  &:hover,
-  &:focus {
-    color: ${props => props.theme.grey};
-    border-bottom: 1px solid ${props => props.theme.grey};
-  } */
 
   &::before,
   &::after,

@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   MeetingEventSection,
   MeetingEventContainer,
-  EventCalendarBtn
+  EventCalendarBtn,
 } from './MeetingEvents.styled';
 import { fetchData } from 'services/APIservice';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
@@ -138,12 +137,11 @@ const eventsData = [
   },
 ];
 
-
 const MeetingEvents = () => {
   const [events, setEvents] = useState(eventsData);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // const { t } = useTranslation();
   // useEffect(() => {
   //   (async function getData() {
@@ -167,7 +165,7 @@ const MeetingEvents = () => {
   return (
     <MeetingEventSection>
       <MeetingEventContainer>
-          {/* <ListItemsUppertitle
+        {/* <ListItemsUppertitle
             data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1500"
@@ -193,13 +191,16 @@ const MeetingEvents = () => {
             </EventContentDesc>
           </ListItems>)}
           </ListItemsContainer> */}
-          {isLoading ? onLoading() : onLoaded()}
-          {error && onFetchError('Whoops, something went wrong')}
-          {events.length > 0 && !error && <ArchiveEventsList archiveEvents={archiveEvents} />}
-            <Link style={{textDecoration:"none"}} to='/events'>
-              <EventCalendarBtn type='button' aria-label='EVENTS CALENDAR'><span>EVENTS CALENDAR</span>
-              </EventCalendarBtn>
-            </Link>
+        {isLoading ? onLoading() : onLoaded()}
+        {error && onFetchError('Whoops, something went wrong')}
+        {events.length > 0 && !error && (
+          <ArchiveEventsList events={archiveEvents} />
+        )}
+        <Link style={{ textDecoration: 'none' }} to="/events">
+          <EventCalendarBtn type="button" aria-label="EVENTS CALENDAR">
+            <span>EVENTS CALENDAR</span>
+          </EventCalendarBtn>
+        </Link>
       </MeetingEventContainer>
     </MeetingEventSection>
   );
