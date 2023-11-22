@@ -1,22 +1,21 @@
-import styled from 'styled-components';
-import { Field, Form } from 'formik';
-import { Link } from 'react-router-dom';
-import { FaCheck, FaTimes } from 'react-icons/fa';
-import { Button } from 'components/helpers/ButtonSplit/ButtonSplit.styled';
+import styled from "styled-components";
+import { Field, Form } from "formik";
+import { Link } from "react-router-dom";
+import { FaCheck, FaTimes } from "react-icons/fa";
 import {
   Container,
   Section,
   Title,
-} from 'components/baseStyles/CommonStyle.styled';
-import { theme } from 'components/baseStyles/Variables.styled';
+} from "components/baseStyles/CommonStyle.styled";
+import { theme } from "components/baseStyles/Variables.styled";
+import { Button } from "helpers/ButtonSplit/ButtonSplit.styled";
 
 const FormSection = styled(Section)`
-  padding-top: 123px;
+  padding: 0;
+  background-color: ${(props) => props.theme.black};
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    padding-top: 129px;
   }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    padding-bottom: 110px;
   }
 `;
 
@@ -24,27 +23,28 @@ const FormContainer = styled(Container)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 40px;
-
+  padding-top: 100px;
+  padding-bottom: 120px;
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    padding-top: 68px;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    padding-top: 141px;
   }
 `;
 
 const FormTitle = styled(Title)`
   margin-bottom: 40px;
   margin-top: 0;
-  text-transform: uppercase;
-
+  color: ${(props) => props.theme.white_text};
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: ${theme.fontSizes.extraXL};
     font-weight: 500;
     margin-bottom: 32px;
-    color: ${theme.colors.brown1};
+  }
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: ${theme.fontSizes.extraXL};
+    font-weight: 500;
+    margin-bottom: 48px;
   }
 `;
 
@@ -71,113 +71,37 @@ const StyledForm = styled(Form)`
 
 const Input = styled(Field)`
   width: calc(100vw - 60px);
-  max-width: 400px;
+  max-width: 365px;
   padding: 11px 0 12px 14px;
-
   font-family: ${theme.fonts[0]};
   font-size: 14px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
-  color: ${theme.colors.brown2};
-  background: ${theme.colors.blue1};
+  border-radius: 14px;
+  color: ${(props) => props.theme.black};
+  background: ${(props) => props.theme.white_fon};
 
   border: none;
   transition: ${theme.transition[0]};
 
   &:focus,
   &:hover {
-    border-color: ${theme.colors.darkGreen};
-    color: ${theme.colors.darkGreen};
+    border-color: ${(props) => props.theme.grey};
+    color: ${(props) => props.theme.grey};
     outline: none;
   }
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    width: 450px;
-    max-width: 450px;
     font-size: ${theme.fontSizes.medium};
     padding: 14px 0 13px 32px;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    width: 600px;
-    max-width: 600px;
+    padding: 22px 25px;
   }
 
   &::placeholder {
-  }
-
-  &:focus ~ .floating-label,
-  &:not([value='']):not(:focus):invalid ~ .floating-label,
-  &:not([value='']):not(:focus):valid ~ .floating-label {
-    top: -15px;
-    left: 20px;
-    font-size: 11px;
-    opacity: 1;
-  }
-`;
-
-const ShowPassword = styled.span`
-  display: inline-block;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  right: 6%;
-  top: 62%;
-  transform: translateY(-80%);
-  color: grey;
-
-  cursor: pointer;
-
-  & svg {
-    width: inherit;
-    height: inherit;
-  }
-`;
-
-const Span = styled.span`
-  position: absolute;
-  left: 20px;
-  top: 13px;
-
-  font-family: ${theme.fonts[0]};
-  font-size: ${theme.fontSizes.small};
-  text-transform: uppercase;
-  pointer-events: none;
-
-  transition: ${theme.transition[0]};
-`;
-
-const IconValid = styled(FaCheck)`
-  display: inline-block;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  right: 6%;
-  top: 62%;
-  transform: translateY(-80%);
-  color: grey;
-  cursor: pointer;
-  svg {
-    width: inherit;
-    height: inherit;
-  }
-`;
-
-const IconInValid = styled(FaTimes)`
-  display: inline-block;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  right: 6%;
-  top: 62%;
-  transform: translateY(-80%);
-  color: grey;
-  cursor: pointer;
-
-  & svg {
-    width: inherit;
-    height: inherit;
   }
 `;
 
@@ -192,11 +116,11 @@ const Btn = styled(Button)`
   font-weight: 300;
   line-height: normal;
   text-transform: uppercase;
-  color: ${theme.colors.brown1};
+  color: ${(props) => props.theme.black};
 
   border: none;
   border-radius: 4px;
-  background: ${theme.colors.green3};
+  background: ${(props) => props.theme.white_fon};
 
   cursor: pointer;
   position: relative;
@@ -206,8 +130,8 @@ const Btn = styled(Button)`
 
   &:hover,
   &:focus {
-    color: ${theme.colors.white};
-    background: ${theme.colors.brown2};
+    color: ${(props) => props.theme.white_text};
+    background: ${(props) => props.theme.black};
   }
 
   &:disabled {
@@ -255,12 +179,12 @@ const BtnContainer = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: ${theme.colors.brown2};
+  color: ${(props) => props.theme.black};
   transition: ${theme.transition[0]};
 
   &:hover,
   &:focus {
-    color: ${theme.colors.brown3};
+    color: ${(props) => props.theme.grey};
   }
 `;
 
@@ -276,22 +200,96 @@ const BoxText = styled.div`
   font-weight: 400;
   font-size: ${theme.fontSizes.small};
   letter-spacing: 0.04em;
-  color: ${theme.brown2};
+  color: ${(props) => props.theme.black};
 `;
 
+const Label = styled.label`
+  color: ${(props) => props.theme.white_text};
+  font-family: ${theme.fonts[0]};
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 80%;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+`;
+
+const Span = styled.span`
+  position: absolute;
+  left: 20px;
+  top: 13px;
+
+  font-family: ${theme.fonts[0]};
+  font-size: ${theme.fontSizes.small};
+  text-transform: uppercase;
+  pointer-events: none;
+
+  transition: ${theme.transition[0]};
+`;
+
+const IconValid = styled(FaCheck)`
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 6%;
+  top: 62%;
+  transform: translateY(-80%);
+  color: grey;
+  cursor: pointer;
+  svg {
+    width: inherit;
+    height: inherit;
+  }
+`;
+
+const IconInValid = styled(FaTimes)`
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 6%;
+  top: 62%;
+  transform: translateY(-80%);
+  color: grey;
+  cursor: pointer;
+
+  & svg {
+    width: inherit;
+    height: inherit;
+  }
+`;
+const ShowPassword = styled.span`
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 6%;
+  top: 62%;
+  transform: translateY(-80%);
+  color: grey;
+
+  cursor: pointer;
+
+  & svg {
+    width: inherit;
+    height: inherit;
+  }
+`;
 export {
   FormSection,
   FormContainer,
   FormTitle,
   StyledForm,
   Input,
-  Span,
-  ShowPassword,
-  IconValid,
-  IconInValid,
+  Label,
   Btn,
   StyledLink,
   BoxText,
   ErrorBox,
   BtnContainer,
+  IconInValid,
+  IconValid,
+  Span,
+  ShowPassword
 };
