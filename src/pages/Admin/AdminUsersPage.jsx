@@ -193,7 +193,7 @@ const AdminUsersPage = () => {
       : (filterS = filterBirthday);
     e.currentTarget.name === 'clearFilterEvents'
       ? setFilterEvents(filterU)
-      : (filterS = filterEvents);
+      : (filterU = filterEvents);
     e.currentTarget.name === 'clearFilterStatus'
       ? setFilterStatus(filterP)
       : (filterP = filterStatus);
@@ -300,6 +300,7 @@ const AdminUsersPage = () => {
             type="button"
             id="filters"
             name="clearFilters"
+            aria-label="Clear all filters"
             onClick={e => {
               clearAllFilters(e);
             }}

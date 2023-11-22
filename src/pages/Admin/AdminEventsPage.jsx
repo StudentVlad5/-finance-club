@@ -34,13 +34,15 @@ import {
   TableRow,
 } from 'components/Admin/Admin.styled';
 
+import eventsData from 'components/data/events.json';
+
 const AdminEventsPage = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(eventsData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const reload = useSelector(reloadValue);
 
-  const [filterEvents, setFilterEvents] = useState([]);
+  const [filterEvents, setFilterEvents] = useState(eventsData);
   const [filterDate, setFilterDate] = useState('');
   const [filterTime, setFilterTime] = useState('');
   const [filterDuration, setFilterDuration] = useState('');
@@ -53,23 +55,23 @@ const AdminEventsPage = () => {
   const [filterPackages, setFilterPackages] = useState('');
   const [filterImage, setFilterImage] = useState('');
 
-  useEffect(() => {
-    (async function getData() {
-      setIsLoading(true);
-      try {
-        const { data } = await fetchData('/admin/events');
-        setEvents(data);
-        setFilterEvents(data);
-        if (!data) {
-          return onFetchError('Whoops, something went wrong');
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [reload]);
+  // useEffect(() => {
+  //   (async function getData() {
+  //     setIsLoading(true);
+  //     try {
+  //       const { data } = await fetchData('/admin/events');
+  //       setEvents(data);
+  //       setFilterEvents(data);
+  //       if (!data) {
+  //         return onFetchError('Whoops, something went wrong');
+  //       }
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   })();
+  // }, [reload]);
 
   async function deleteEvent(id) {
     setIsLoading(true);
@@ -190,7 +192,7 @@ const AdminEventsPage = () => {
       : (filterS = filterPlan);
     e.currentTarget.name === 'clearFilterSpeakers'
       ? setFilterSpeakers(filterU)
-      : (filterS = filterSpeakers);
+      : (filterU = filterSpeakers);
     e.currentTarget.name === 'clearFilterModerator'
       ? setFilterModerator(filterP)
       : (filterP = filterModerator);
@@ -241,7 +243,7 @@ const AdminEventsPage = () => {
 
   const handleSearchOnEnter = e => {
     if (e.key == 'Enter') {
-      setEvents(e);
+      startFilterEvents(e);
     }
   };
 
@@ -292,6 +294,7 @@ const AdminEventsPage = () => {
             type="button"
             id="filters"
             name="clearFilters"
+            aria-label="Clear all filters"
             onClick={e => {
               clearAllFilters(e);
             }}

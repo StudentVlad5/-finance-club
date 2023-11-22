@@ -7,6 +7,8 @@ import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { EventsSection, Heading } from './Events.styled';
 import { Container, Title } from 'components/baseStyles/CommonStyle.styled';
 
+import eventsData from 'components/data/events.json';
+
 export const Events = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState('');
