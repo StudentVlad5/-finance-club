@@ -34,15 +34,13 @@ import {
   TableRow,
 } from 'components/Admin/Admin.styled';
 
-import eventsData from 'components/data/events.json';
-
 const AdminEventsPage = () => {
-  const [events, setEvents] = useState(eventsData);
+  const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const reload = useSelector(reloadValue);
 
-  const [filterEvents, setFilterEvents] = useState(eventsData);
+  const [filterEvents, setFilterEvents] = useState([]);
   const [filterDate, setFilterDate] = useState('');
   const [filterTime, setFilterTime] = useState('');
   const [filterDuration, setFilterDuration] = useState('');
@@ -55,23 +53,23 @@ const AdminEventsPage = () => {
   const [filterPackages, setFilterPackages] = useState('');
   const [filterImage, setFilterImage] = useState('');
 
-  // useEffect(() => {
-  //   (async function getData() {
-  //     setIsLoading(true);
-  //     try {
-  //       const { data } = await fetchData('/admin/events');
-  //       setEvents(data);
-  //       setFilterEvents(data);
-  //       if (!data) {
-  //         return onFetchError('Whoops, something went wrong');
-  //       }
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   })();
-  // }, [reload]);
+  useEffect(() => {
+    (async function getData() {
+      setIsLoading(true);
+      try {
+        const { data } = await fetchData('/admin/events');
+        setEvents(data);
+        setFilterEvents(data);
+        if (!data) {
+          return onFetchError('Whoops, something went wrong');
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [reload]);
 
   async function deleteEvent(id) {
     setIsLoading(true);

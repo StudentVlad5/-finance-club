@@ -47,7 +47,7 @@
     "packages": [
       {
         "name": "basic",
-        "termActive": { "from": "2022-11-14", "to": "2023-11-14" }
+        "termActive": { "from": "2023-11-14", "to": "2023-11-14" }
       }
     ],
     "events": [],
@@ -64,9 +64,36 @@
     "company": "NI",
     "position": "CEO",
     "birthday": "2000-09-08",
-    "packages": [{ "name": "", "termActive": { "from": "", "to": "" } }],
-    "events": [{ "_id": "1sfgh" }],
+    "packages": [
+      {
+        "name": "pro",
+        "termActive": { "from": "2023-06-01", "to": "2024-06-01" }
+      }
+    ],
+    "events": [
+      { "_id": "655e5e39dafd9f2f4b56487d" },
+      { "_id": "655e5e39dafd9f2f4b56487e" },
+      { "_id": "655e5e39dafd9f2f4b564881" }
+    ],
     "status": "active",
     "role": "guest"
+  },
+  {
+    "email": "admin@gmail.com",
+    "password": "qwer1234",
+    "name": "Admin",
+    "surname": "Data",
+    "phone": "+123456",
+    "avatar": "",
+    "company": "BrandMaze",
+    "position": "Developer",
+    "birthday": "2000-09-08",
+    "packages": [{ "name": "expert", "termActive": { "from": "", "to": "" } }],
+    "events": [
+      { "_id": "655e5e39dafd9f2f4b56487d" },
+      { "_id": "655e5e39dafd9f2f4b56487e" }
+    ],
+    "status": "active",
+    "role": "admin"
   }
 ]

@@ -2,7 +2,7 @@
   {
     "date": "2023-11-22",
     "time": "17:30",
-    "duration": "3 h",
+    "duration": "3h",
     "location": "New York, USA",
     "title": "Digital money and financial risks",
     "description": "There is a challenge to ensuring a high level of security of the digital money function, namely the problem of digital currency fraud and CBDCs. CBDC is a new third form of fiat money. The difference between CBDCs and cryptocurrencies, is that the latter are forms of decentralized or private money. Today, the use of cryptocurrency requires full regulation comparable to the risks they already pose or may pose in the future.",
@@ -22,7 +22,7 @@
   {
     "date": "2023-12-02",
     "time": "19:00",
-    "duration": "2 h",
+    "duration": "2h",
     "location": "ZOOM",
     "title": "TOP 10 cybersecurity trends in 2023",
     "description": "Tendencies and trends of the current year • What hackers know about your business • Cloud migration and cyber security risks • Practical recommendations for building cyber defense in the context of military operations",
@@ -35,7 +35,7 @@
   {
     "date": "2023-12-15",
     "time": "13:00",
-    "duration": "3 h",
+    "duration": "3h",
     "location": "Miami, USA",
     "title": "DeFi: challenges of modern financial analytics",
     "description": "The development of computing technologies and the emergence of cryptocurrencies have created the possibility of concluding direct smart contracts between economic agents, effectively redistributing risks between them and thereby creating prerequisites for further growth in economic efficiency in local markets, taking into account the local nature of their risks. To realize the new opportunities that new technologies give us, we need to create a simple and understandable decentralized platform for trading derivative financial instruments (smart derivatives) that can be initiated by each market participant, create analytical methods for the basic assessment of financial contracts, ensure their implementation by introducing certain algorithms into the corresponding smart contracts, using the mechanism of collateral by different parties to the transaction. Another important tool for the implementation of such agreements is the inclusion, by mutual agreement of the parties, in smart derivatives of reliable information flows that provide another participant in the platform – the oracle.",
@@ -48,7 +48,7 @@
   {
     "date": "2023-10-17",
     "time": "14:00",
-    "duration": "3 h",
+    "duration": "3h",
     "location": "ZOOM",
     "title": "Cybersecurity for Business",
     "description": "How to protect your company from hackers, spyware and security forces? Cybersecurity for Business",
@@ -61,7 +61,7 @@
   {
     "date": "2023-09-27",
     "time": "14:30",
-    "duration": "4 h",
+    "duration": "4h",
     "location": "ZOOM",
     "title": "Digital money and financial risks",
     "description": "There is a challenge to ensuring a high level of security of the digital money function, namely the problem of digital currency fraud and CBDCs.CBDC is a new third form of fiat money. The difference between CBDCs and cryptocurrencies, is that the latter are forms of decentralized or private money. Today, the use of cryptocurrency requires full regulation comparable to the risks they already pose or may pose in the future.",
@@ -74,7 +74,7 @@
   {
     "date": "2023-09-07",
     "time": "13:00",
-    "duration": "3 h",
+    "duration": "3h",
     "location": "New York, USA",
     "title": "Challenges of modern financial analytics",
     "description": "The development of computing technologies and the emergence of cryptocurrencies have created the possibility of concluding direct smart contracts between economic agents, effectively redistributing risks between them and thereby creating prerequisites for further growth in economic efficiency in local markets, taking into account the local nature of their risks. To realize the new opportunities that new technologies give us, we need to create a simple and understandable decentralized platform for trading derivative financial instruments (smart derivatives) that can be initiated by each market participant, create analytical methods for the basic assessment of financial contracts, ensure their implementation by introducing certain algorithms into the corresponding smart contracts, using the mechanism of collateral by different parties to the transaction. Another important tool for the implementation of such agreements is the inclusion, by mutual agreement of the parties, in smart derivatives of reliable information flows that provide another participant in the platform – the oracle.",

@@ -38,41 +38,41 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<HomePage />} />
-            {/* {permission === 'admin' ? ( */}
-            <Route
-              path="admin"
-              element={<AdminPage />}
-              // element={
-              //   <PrivateRoute redirectTo="/" component={<AdminPage />} />
-              // }
-            />
-            {/* ) : ( */}
-            <Route
-              path="user"
-              element={
-                <PrivateRoute redirectTo="/login" component={<UserPage />} />
-              }
-            />
-            {/* )} */}
+            {permission === 'admin' ? (
+              <Route
+                path="admin"
+                // element={<AdminPage />}
+                element={
+                  <PrivateRoute redirectTo="/" component={<AdminPage />} />
+                }
+              />
+            ) : (
+              <Route
+                path="user"
+                element={
+                  <PrivateRoute redirectTo="/login" component={<UserPage />} />
+                }
+              />
+            )}
             <Route
               path="admin/users"
-              element={<AdminUsersPage />}
-              // element={
-              //   <PrivateRoute
-              //     redirectTo="/admin"
-              //     component={<AdminUsersPage />}
-              //   />
-              // }
+              // element={<AdminUsersPage />}
+              element={
+                <PrivateRoute
+                  redirectTo="/admin"
+                  component={<AdminUsersPage />}
+                />
+              }
             />
             <Route
               path="admin/events"
-              element={<AdminEventsPage />}
-              // element={
-              //   <PrivateRoute
-              //     redirectTo="/admin"
-              //     component={<AdminEventsPage />}
-              //   />
-              // }
+              // element={<AdminEventsPage />}
+              element={
+                <PrivateRoute
+                  redirectTo="/admin"
+                  component={<AdminEventsPage />}
+                />
+              }
             />
 
             <Route
@@ -84,7 +84,10 @@ export const App = () => {
             <Route
               path="register"
               element={
-                <RestrictedRoute redirectTo={'/'} component={<RegisterPage />} />
+                <RestrictedRoute
+                  redirectTo={'/'}
+                  component={<RegisterPage />}
+                />
               }
             />
 
