@@ -38,7 +38,7 @@ const EventDetailsPage = () => {
     <>
       <SEO title="Event" description="Event details - finance club" />
       {isLoading ? onLoading() : onLoaded()}
-      {error && onFetchError(t('Whoops, something went wrong'))}
+      {error && onFetchError('Whoops, something went wrong')}
       {Object.keys(event).length > 0 && !error && (
         <EventDetails event={event} />
       )}

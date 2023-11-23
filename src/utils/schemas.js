@@ -46,7 +46,7 @@ const registerSchema = Yup.object().shape({
       'Position must includes only Latin alphabet',
     )
     .required('Require field'),
-  packageUser: Yup.string(),
+  packages: Yup.string(),
 });
 
 const schemasLogin = Yup.object().shape({
@@ -130,6 +130,7 @@ const updateSchema = Yup.object().shape({
       'Position must includes only Latin alphabet',
     )
     .required('Require field'),
+  company: Yup.string(),
 });
 
 const updatePasswordSchema = Yup.object().shape({
@@ -146,12 +147,12 @@ const updatePasswordSchema = Yup.object().shape({
 const schemasEvents = Yup.object().shape({
   date: Yup.date().required('Require field'),
   time: Yup.string().required('Require field'),
-  duration: Yup.number(),
+  duration: Yup.string(),
   location: Yup.string().required('Require field'),
   title: Yup.string().required('Require field'),
   description: Yup.string().required('Require field'),
   plan: Yup.mixed(),
-  speakers: Yup.mixed().required('Require field'),
+  speakers: Yup.array().required('Require field'),
   moderator: Yup.string(),
   packages: Yup.array().required('Require field'),
   image: Yup.string(),

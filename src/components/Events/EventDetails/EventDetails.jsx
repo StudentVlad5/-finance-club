@@ -82,7 +82,7 @@ export const EventDetails = ({ event }) => {
             </HeadingItem>
           </EventHeading>
           <EventImage
-            src={event.image ? BASE_URL_IMG + event.image : defaultImg}
+            src={image ? BASE_URL_IMG + image : defaultImg}
             alt={title}
             width="325"
             height="322"
@@ -98,7 +98,7 @@ export const EventDetails = ({ event }) => {
               </ul>
             </EventSpeaker>
             <EventDescrBox>
-              <EventDescr>Duration of the event: {duration} hours</EventDescr>
+              <EventDescr>Duration of the event: {duration}</EventDescr>
             </EventDescrBox>
             <EventDescrBox>
               <EventDescr>{description}</EventDescr>
@@ -159,12 +159,12 @@ EventDetails.propTypes = {
     _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
-    duration: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     plan: PropTypes.any,
-    speakers: PropTypes.any.isRequired,
+    speakers: PropTypes.array.isRequired,
     moderator: PropTypes.string,
     packages: PropTypes.array.isRequired,
     image: PropTypes.string,

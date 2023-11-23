@@ -134,6 +134,7 @@ async function updateEventsData(pathParams, body) {
     },
   });
 }
+
 async function createEventsData(pathParams, body) {
   const formData = new FormData();
   formData.append('date', body.date);

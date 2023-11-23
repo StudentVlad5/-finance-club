@@ -33,15 +33,14 @@ import {
   TableHead,
   TableRow,
 } from 'components/Admin/Admin.styled';
-import usersData from 'components/data/users.json';
 
 const AdminUsersPage = () => {
-  const [users, setUsers] = useState(usersData);
+  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const reload = useSelector(reloadValue);
 
-  const [filterUsers, setFilterUsers] = useState(usersData);
+  const [filterUsers, setFilterUsers] = useState([]);
   const [filterName, setFilterName] = useState('');
   const [filterSurname, setFilterSurname] = useState('');
   const [filterEmail, setFilterEmail] = useState('');
@@ -55,23 +54,23 @@ const AdminUsersPage = () => {
   const [filterAvatar, setFilterAvatar] = useState('');
   const [filterRole, setFilterRole] = useState('');
 
-  // useEffect(() => {
-  //   (async function getData() {
-  //     setIsLoading(true);
-  //     try {
-  //       const { data } = await fetchData('/admin/users');
-  //       setUsers(data);
-  //       setFilterUsers(data);
-  //       if (!data) {
-  //         return onFetchError('Whoops, something went wrong');
-  //       }
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   })();
-  // }, [reload]);
+  useEffect(() => {
+    (async function getData() {
+      setIsLoading(true);
+      try {
+        const { data } = await fetchData('/admin/users');
+        setUsers(data);
+        setFilterUsers(data);
+        if (!data) {
+          return onFetchError('Whoops, something went wrong');
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [reload]);
 
   async function deleteUser(id) {
     setIsLoading(true);
