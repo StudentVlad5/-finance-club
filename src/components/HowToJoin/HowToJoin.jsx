@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import {
   Container,
   Section,
@@ -11,11 +12,33 @@ import {
   JoinListItemNumber,
   JoinListItemText,
   JoinTitle,
+  RegistrationBtn,
+  RegistrationContainer,
+  RegistrationSection,
 } from './HowToJoin.styled';
 import Prices from 'components/Prices/Prices';
+import { openModalWindow } from 'hooks/modalWindow';
+import { RegisterModal } from './RegisterModal/RegisterModal';
+import { addModal } from 'redux/modal/operation';
 
 export const HowToJoin = () => {
+
+  const dispatch = useDispatch();
+  const openModal = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.currentTarget.dataset.modal === 'member_registration') {
+      dispatch(
+        addModal({
+          modal: e.currentTarget.dataset.modal,
+        }),
+      );
+      setTimeout(() => openModalWindow(e, null), 200);
+    }
+  };
+
   return (
+    <>
     <Section>
       <Container>
         <Title>How to join</Title>
@@ -70,8 +93,21 @@ export const HowToJoin = () => {
             </JoinListItem>
           </JoinList>
           <Prices />
+          <RegistrationSection>
+            <RegistrationContainer>
+              <JoinDiscr data-aos="fade-down" data-aos-easing="linear"    data-aos-duration="1500">
+              The decision on admission to the club is made by the Council within two weeks. The cost of the annual membership fee for CFO Club Ukraine: – for the real sector of business 2700$; – for consultants 4500$. Loyalty program for regular customers, for those who are in the club: – more than 10 years – 20% discount; – over 8 years – 15%; – more than 5 years – 10%. If your membership is interrupted for less than 1 year, this discount is reserved for the club member. If participation is interrupted for a longer period, the program is no longer valid.
+              </JoinDiscr>
+              <RegistrationBtn type="button" aria-label="button for form registration"  onClick={e => {
+              openModal(e);
+            }}
+            data-modal="member_registration">BECOME A MEMBER</RegistrationBtn>
+            </RegistrationContainer>
+          </RegistrationSection>
         </JoinBox>
       </Container>
     </Section>
+    <RegisterModal/>
+    </>
   );
 };

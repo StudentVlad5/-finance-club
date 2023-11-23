@@ -25,10 +25,10 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await signUp(credentials);
-      setAuthHeader(data.data.authToken);
+      // setAuthHeader(data.data.authToken);
       return data;
     } catch (error) {
-      alert(`Something wrong`, error.message);
+      alert(`Something wrong `, error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },

@@ -1,5 +1,7 @@
-import { theme } from 'components/baseStyles/Variables.styled';
-import styled from 'styled-components';
+import { BtnLight } from "components/baseStyles/Button.styled";
+import { Container, Section } from "components/baseStyles/CommonStyle.styled";
+import { theme } from "components/baseStyles/Variables.styled";
+import styled from "styled-components";
 
 export const JoinBox = styled.div`
   display: flex;
@@ -12,7 +14,7 @@ export const JoinBox = styled.div`
 `;
 
 export const JoinTitle = styled.h2`
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
   text-align: center;
   font-family: ${theme.fonts[0]};
   font-size: 36px;
@@ -26,7 +28,7 @@ export const JoinTitle = styled.h2`
 `;
 
 export const JoinDiscr = styled.p`
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
   text-align: center;
   font-family: ${theme.fonts[0]};
   font-size: 15px;
@@ -62,7 +64,7 @@ export const JoinListItem = styled.li`
   position: relative;
   padding: 53px 49px 53px 49px;
   border-radius: 40px;
-  background-color: ${props => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_fon};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     padding: 53px 102px 53px 102px;
@@ -101,19 +103,30 @@ export const JoinListItemNumber = styled.p`
 export const JoinListItemText = styled.p`
   width: 227px;
   text-align: left;
-  color: ${props => props.theme.black_text};
+  color: ${(props) => props.theme.black_text};
   font-family: ${theme.fonts[0]};
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
 `;
-
-// export const JoinBox = styled.div``;
-// export const JoinBox = styled.div``;
-// export const JoinBox = styled.div``;
-// export const JoinBox = styled.div``;
-// export const JoinBox = styled.div``;
-// export const JoinBox = styled.div``;
-// export const JoinBox = styled.div``;
-// export const JoinBox = styled.div``;
+export const RegistrationSection = styled(Section)`
+  background-color: ${(props) => props.theme.fon_second};
+  padding-bottom: 0;
+`;
+export const RegistrationContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    flex-direction: row;
+  }
+`;
+export const RegistrationBtn = styled(BtnLight)`
+margin: 20px 0;`
