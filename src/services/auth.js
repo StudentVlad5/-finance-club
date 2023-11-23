@@ -6,6 +6,7 @@ export const signUp = async credentials => {
     const res = await axios.post(`${BASE_URL}/auth/signup`, credentials);
     return res;
   } catch (error) {
+    alert(error.message);
     return error.message;
   }
 };

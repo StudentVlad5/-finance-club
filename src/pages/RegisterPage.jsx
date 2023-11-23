@@ -1,5 +1,4 @@
 
-import RegisterForm from 'components/Auth/RegisterForm/RegisterForm';
 import { useEffect } from 'react';
 import { SEO } from 'utils/SEO';
 
@@ -10,7 +9,6 @@ const RegisterPage = () => {
   return (
     <>
       <SEO title="Register" description="" />
-      <RegisterForm/>
     </>
   );
 };

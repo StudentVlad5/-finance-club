@@ -15,7 +15,6 @@ const HowToJoinPage = lazy(() => import('pages/HowToJoinPage'));
 const ReviewsPage = lazy(() => import('pages/ReviewsPage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
-const RegisterPage = lazy(() => import('pages/RegisterPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const AdminPage = lazy(() => import('pages/Admin/AdminPage'));
 const AdminUsersPage = lazy(() => import('pages/Admin/AdminUsersPage'));
@@ -79,15 +78,6 @@ export const App = () => {
               path="login"
               element={
                 <RestrictedRoute redirectTo={'/'} component={<LoginPage />} />
-              }
-            />
-            <Route
-              path="register"
-              element={
-                <RestrictedRoute
-                  redirectTo={'/'}
-                  component={<RegisterPage />}
-                />
               }
             />
 
