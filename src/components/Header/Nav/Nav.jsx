@@ -44,7 +44,7 @@ export const MobileNav = ({ toggleMenu }) => {
       >
         Contacts
       </NavItem>
-      <div>
+      <div style={{ display: 'flex' }}>
         <Language />
         <SwitchTheme />
       </div>
@@ -75,7 +75,7 @@ export const Nav = () => {
       <NavItem to="/contacts" aria-label="Contacts" data-info="Contacts">
         Contacts
       </NavItem>
-      <div>
+      <div style={{ display: 'flex' }}>
         <Language />
         <SwitchTheme />
       </div>
