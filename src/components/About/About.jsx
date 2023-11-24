@@ -25,6 +25,7 @@ import {
   Btn,
   ListItemsContainerForSwiper,
 } from './About.styled';
+import { useTranslation } from 'react-i18next';
 
 const data = [
   {
@@ -55,6 +56,7 @@ const data = [
 
 const About = () => {
   // const { t } = useTranslation();
+
   return (
     <AboutSection>
       <AboutContainer>
@@ -96,16 +98,16 @@ const About = () => {
               </SubTitle>
               <ListItemsContainer>
                 {data.map(it => (
-                    <ListItems key={it.title}>
-                      <ListItemsImgContainer>
-                        <ListItemsImg src={it.img} alt={it.title} />
-                      </ListItemsImgContainer>
-                      <ListItemsContentWraper>
-                        <ListItemsTitle>{it.title}</ListItemsTitle>
-                        <SubTitleItem>{it.content}</SubTitleItem>
-                      </ListItemsContentWraper>
-                    </ListItems>
-                  ))}
+                  <ListItems key={it.title}>
+                    <ListItemsImgContainer>
+                      <ListItemsImg src={it.img} alt={it.title} />
+                    </ListItemsImgContainer>
+                    <ListItemsContentWraper>
+                      <ListItemsTitle>{it.title}</ListItemsTitle>
+                      <SubTitleItem>{it.content}</SubTitleItem>
+                    </ListItemsContentWraper>
+                  </ListItems>
+                ))}
               </ListItemsContainer>
               <ListItemsContainerForSwiper>
                 <Swiper
