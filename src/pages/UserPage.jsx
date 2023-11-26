@@ -1,3 +1,4 @@
+import { UserComp } from 'components/UserComp/UserComp';
 import { useEffect } from 'react';
 import { SEO } from 'utils/SEO';
 
@@ -7,7 +8,8 @@ const UserPage = () => {
   }, [])
   return (
     <>
-      <SEO title="User profile" description="" />
+      <SEO title="Profile" description="User profile" />
+      <UserComp />
     </>
   );
 };

@@ -158,28 +158,8 @@ const ErrorBox = styled.div`
     left: 32px;
   }
 `;
-
-const BtnContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    width: 450px;
-    font-size: ${theme.fontSizes.medium};
-  }
-
-  @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    width: 600px;
-  }
-`;
-
 const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.black};
+  color: ${(props) => props.theme.white_text};
   transition: ${theme.transition[0]};
 
   &:hover,
@@ -287,7 +267,6 @@ export {
   StyledLink,
   BoxText,
   ErrorBox,
-  BtnContainer,
   IconInValid,
   IconValid,
   Span,

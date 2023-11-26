@@ -6,7 +6,6 @@ import { Formik } from 'formik';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
-import { register } from 'redux/auth/operations';
 import schemas from 'utils/schemas';
 import {
   ContainerRadioButton,
@@ -29,10 +28,14 @@ import {
 } from 'components/baseStyles/Form.styled';
 import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
 import { addReload } from 'redux/reload/slice';
+import { onFetchError } from 'helpers/Messages/NotifyMessages';
+import { onLoaded, onLoading } from 'helpers/Loader/Loader';
+import { createFormRegistration } from 'services/APIservice';
 
 export const RegisterModal = () => {
   const modal = useSelector(modalComponent);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
   const handleChangeClass = e => {
@@ -50,22 +53,24 @@ export const RegisterModal = () => {
     closeModalWindow();
   };
 
-  const createMember = values => {
+  async function createMember(values) {
     setIsLoading(true);
-    const { name, surname, email, phone, company, position, packages } = values;
-    dispatch(
-      register({
-        name,
-        surname,
-        email,
-        phone,
-        company,
-        position,
-        packages,
-      }),
-    );
-    setIsLoading(false);
-  };
+    try {
+      const { code } = await createFormRegistration(`/auth/signup`, values);
+      if (code && code !== 201) {
+        return onFetchError('Whoops, something went wrong. Please, write us through the contacts');
+      }
+      if (code && code === 201) {
+        return onFetchError("Registration is successful. Thank you");
+      }
+    } catch (error) {
+      setError(error);
+      onFetchError(error.message);
+    } finally {
+      setIsLoading(false);
+      dispatch(addReload(true));
+    }
+  }
 
   return createPortal(
     Object.values(modal)[0] === 'member_registration' && (
@@ -82,6 +87,8 @@ export const RegisterModal = () => {
           >
             <MdClose />
           </CloseBtn>
+          {isLoading ? onLoading() : onLoaded()}
+          {error && onFetchError('Whoops, something went wrong')}
           <Formik
             initialValues={{
               name: '',
@@ -237,7 +244,7 @@ export const RegisterModal = () => {
                   <LabelRadioButton>
                     <InputWithStyle
                       style={{ display: 'none' }}
-                      name="packageUser"
+                      name="packages"
                       type="radio"
                       onChange={handleChange}
                       value="Pro"

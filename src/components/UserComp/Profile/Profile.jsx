@@ -1,0 +1,162 @@
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik } from 'formik';
+import PropTypes from 'prop-types';
+import { getUser, selectId } from 'redux/auth/selectors';
+import { update } from 'redux/auth/operations';
+import schemas from 'utils/schemas';
+import { BtnContainer, BtnDarkUser, BtnLightUser } from '../UserData/UserData.styled';
+import {
+  Error,
+  ProfileInput,
+  ProfileLabel,
+  ProfileName,
+  ProfileList,
+} from './Profile.styled';
+
+export const Profile = ({ onClose }) => {
+  let  userIn  = useSelector(getUser);
+  const [updateData, setUpdateData] = useState(userIn ?? []);
+  const id = useSelector(selectId);
+  const dispatch = useDispatch();
+
+  return (
+    <Formik
+      initialValues={{
+        name: updateData?.name ? updateData.name : '',
+        surname: updateData?.surname ? updateData.surname : '',
+        company: updateData?.company ? updateData.company : '',
+        position: updateData?.position ? updateData.position : '',
+        email: updateData?.email ? updateData.email : '',
+        phone: updateData?.phone ? updateData.phone : '',
+        birthday: updateData?.birthday ? updateData.birthday : '',
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        dispatch(update({ ...values, id }));
+        setSubmitting(false);
+        onClose(false);
+      }}
+      enableReinitialize={true}
+      validationSchema={schemas.updateSchema}
+    >
+      {({
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+        values,
+        errors,
+        touched,
+      }) => (
+        <ProfileList
+          autoComplete="off"
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        >
+          <ProfileLabel htmlFor="name">
+            <ProfileName>First name</ProfileName>
+            <ProfileInput
+              type="text"
+              name="name"
+              id="name"
+              value={values.name}
+              required
+            />
+            {errors.name && touched.name ? (
+              <Error>{errors.name}</Error>
+            ) : null}
+          </ProfileLabel>
+          <ProfileLabel htmlFor="surname">
+            <ProfileName>Last name</ProfileName>
+            <ProfileInput
+              type="text"
+              name="surname"
+              id="surname"
+              value={values.surname}
+            />
+            {errors.surname && touched.surname ? (
+              <Error>{errors.surname}</Error>
+            ) : null}
+          </ProfileLabel>
+          <ProfileLabel htmlFor="company">
+            <ProfileName>Company</ProfileName>
+            <ProfileInput
+              type="text"
+              name="company"
+              id="company"
+              value={values.company}
+            />
+            {errors.company && touched.company ? (
+              <Error>{errors.company}</Error>
+            ) : null}
+          </ProfileLabel>
+          <ProfileLabel htmlFor="position">
+            <ProfileName>Position</ProfileName>
+            <ProfileInput
+              type="text"
+              name="position"
+              id="position"
+              value={values.position}
+            />
+            {errors.position && touched.position ? (
+              <Error>{errors.position}</Error>
+            ) : null}
+          </ProfileLabel>
+          <ProfileLabel htmlFor="email">
+            <ProfileName>Email</ProfileName>
+            <ProfileInput
+              type="email"
+              name="email"
+              id="email"
+              value={values.email}
+              required
+            />
+            {errors.email && touched.email ? (
+              <Error>{errors.email}</Error>
+            ) : null}
+          </ProfileLabel>
+          <ProfileLabel htmlFor="phone">
+            <ProfileName>Phone</ProfileName>
+            <ProfileInput
+              type="tel"
+              name="phone"
+              id="phone"
+              value={values.phone}
+              required
+            />
+            {errors.phone && touched.phone ? (
+              <Error>{errors.phone}</Error>
+            ) : null}
+          </ProfileLabel>
+          <ProfileLabel htmlFor="birthday">
+            <ProfileName>Birthday</ProfileName>
+            <ProfileInput
+              type="date"
+              name="birthday"
+              id="birthday"
+              value={values.birthday}
+            />
+            {errors.birthday && touched.birthday ? (
+              <Error>{errors.birthday}</Error>
+            ) : null}
+          </ProfileLabel>
+          <BtnContainer>
+            <BtnLightUser
+              type="button"
+              aria-label="Close"
+              onClick={() => onClose(false)}
+            >
+              CANCEL
+            </BtnLightUser>
+            <BtnDarkUser type="submit" disabled={isSubmitting} aria-label="Submit">
+              SAVE
+            </BtnDarkUser>
+          </BtnContainer>
+        </ProfileList>
+      )}
+    </Formik>
+  );
+};
+
+Profile.propTypes = {
+  onClose: PropTypes.func,
+};

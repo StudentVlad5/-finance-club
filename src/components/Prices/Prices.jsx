@@ -21,7 +21,7 @@ import {
   ListItemsContainerForSwiper,
 } from './Prices.styled';
 
-const data = [
+export const data = [
   {
     title: 'Basic',
     price: '$ 100 USD',

@@ -1,27 +1,26 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { ReactComponent as iconUser } from 'images/svg/icon_user.svg';
-import { theme } from 'components/baseStyles/Variables.styled';
-
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { ReactComponent as iconUser } from "images/svg/icon_user.svg";
+import { theme } from "components/baseStyles/Variables.styled";
 
 const MobileAccountButton = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 46px auto 0 auto;
-  /* padding: 8px 36px; */
-
   height: 35px;
   border-radius: 40px;
   text-decoration: none;
-  color: ${(props) => props.theme.black};
-
-  font-family: ${theme.fonts[0]};
+  color: ${(props) => props.theme.white_text};
+  font-family: ${theme.fonts[1]};
+  font-size: 24px;
   font-style: normal;
-  font-size: ${theme.fontSizes.small};
+  font-weight: 300;
   line-height: normal;
-  /* letter-spacing: -0.04em; */
-
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.25s ease-in;
+  cursor: pointer;
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     display: none;
     margin: 0 auto;
@@ -46,7 +45,7 @@ const IconUser = styled(iconUser)`
   height: 20px;
   margin-right: 12px;
   display: block;
-  fill: ${(props) => props.theme.black};
+  fill: ${(props) => props.theme.white_text};
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     width: 28px;
     height: 28px;
@@ -59,7 +58,7 @@ const AvatarUser = styled.img`
   height: 20px;
   margin-right: 12px;
   display: block;
-  fill: ${(props) => props.theme.black};
+  fill: ${(props) => props.theme.white_text};
   border-radius: 50%;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
