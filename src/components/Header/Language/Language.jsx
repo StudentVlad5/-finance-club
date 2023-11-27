@@ -1,58 +1,35 @@
-// import i18next from 'i18next';
 import React, { useEffect, useState } from 'react';
-import { SelectContainerLanguage, LabelLanguage } from './Language.styled';
+import { SelectContainerLanguage, SelectLanguage } from './Language.styled';
+import { useTranslation } from 'react-i18next';
 
 const Language = () => {
-  const [, setSelectedLanguage] = useState('en');
+  const { i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem('chosenLanguage') || 'en',
+  );
 
   useEffect(() => {
     const saveLanguage = localStorage.getItem('chosenLanguage');
     if (saveLanguage) {
-      // i18next.changeLanguage(saveLanguage);
+      i18n.changeLanguage(saveLanguage);
       setSelectedLanguage(saveLanguage);
-      document.querySelectorAll('.language').forEach(it => {
-        if (it.dataset.leng === saveLanguage) {
-          it.classList.add('active');
-        } else {
-          it.classList.remove('active');
-        }
-      });
     }
-  }, []);
+  }, [i18n]);
 
-  const changeLanguage = e => {
-    e.preventDefault();
-    const languageItemList = document.querySelectorAll('.language');
-    if (languageItemList) {
-      languageItemList.forEach(it => {
-        if (it.dataset.leng === e.target.dataset.leng) {
-          it.classList.add('active');
-        } else {
-          it.classList.remove('active');
-        }
-      });
-    }
-    // i18next.changeLanguage(e.target.dataset.leng);
-    localStorage.setItem('chosenLanguage', e.target.dataset.leng);
-    setSelectedLanguage(e.target.dataset.leng);
+  const changeLanguage = event => {
+    const language = event.target.value;
+    i18n.changeLanguage(language);
+    localStorage.setItem('chosenLanguage', language);
+    setSelectedLanguage(language);
   };
 
   return (
     <SelectContainerLanguage>
-      <LabelLanguage
-        data-leng="en"
-        className="language"
-        onClick={e => changeLanguage(e)}
-      >
-        EN
-      </LabelLanguage>
-      <LabelLanguage
-        data-leng="ua"
-        className="language active"
-        onClick={e => changeLanguage(e)}
-      >
-        UA
-      </LabelLanguage>
+      <SelectLanguage onChange={changeLanguage} value={selectedLanguage}>
+        <option value="en">En</option>
+        <option value="ua">Ua</option>
+        <option value="de">De</option>
+      </SelectLanguage>
     </SelectContainerLanguage>
   );
 };
