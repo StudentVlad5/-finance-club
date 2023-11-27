@@ -41,7 +41,7 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         if (action.payload?.data) {
           state.user = action.payload.data;
-          // state.token = action.payload.data.authToken;
+          state.token = action.payload.data.authToken;
           state.permission = action.payload.data.role;
           state.isLoggedIn = true;
         }

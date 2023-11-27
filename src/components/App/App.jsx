@@ -7,6 +7,9 @@ import { PrivateRoute } from 'routes/PrivateRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { selectIsRefreshing, getPermission } from 'redux/auth/selectors';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
+import { UserData } from 'components/UserComp/UserData/UserData';
+import { Packages } from 'components/UserComp/Packages/Packages';
+import { Events } from 'components/UserComp/Events/Events';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const EventsPage = lazy(() => import('pages/EventsPage'));
@@ -15,6 +18,7 @@ const HowToJoinPage = lazy(() => import('pages/HowToJoinPage'));
 const ReviewsPage = lazy(() => import('pages/ReviewsPage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
+const ForgotPasswordPage = lazy(() => import('pages/ForgotPasswordPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const AdminPage = lazy(() => import('pages/Admin/AdminPage'));
 const AdminUsersPage = lazy(() => import('pages/Admin/AdminUsersPage'));
@@ -42,7 +46,7 @@ export const App = () => {
                 path="admin"
                 // element={<AdminPage />}
                 element={
-                  <PrivateRoute redirectTo="/" component={<AdminPage />} />
+                  <PrivateRoute redirectTo="/login" component={<AdminPage />} />
                 }
               />
             ) : (
@@ -51,7 +55,32 @@ export const App = () => {
                 element={
                   <PrivateRoute redirectTo="/login" component={<UserPage />} />
                 }
+              >
+                              <Route
+                path="profile"
+                element={
+                  <PrivateRoute redirectTo="/signin" component={<UserData />} />
+                }
               />
+              <Route
+                path="events"
+                element={
+                  <PrivateRoute
+                    redirectTo="/signin"
+                    component={<Events />}
+                  />
+                }
+              />
+              <Route
+                path="packages"
+                element={
+                  <PrivateRoute
+                    redirectTo="/signin"
+                    component={<Packages />}
+                  />
+                }
+              />
+              </Route>
             )}
             <Route
               path="admin/users"
@@ -77,11 +106,11 @@ export const App = () => {
             <Route
               path="login"
               element={
-                <RestrictedRoute redirectTo={'/'} component={<LoginPage />} />
+                <RestrictedRoute redirectTo={permission === 'admin' ? '/admin': "/user"} component={<LoginPage />} />
               }
             />
 
-            {/* <Route
+             <Route
               path="forgot_password"
               element={
                 <RestrictedRoute
@@ -89,7 +118,7 @@ export const App = () => {
                   component={<ForgotPasswordPage />}
                 />
               }
-            /> */}
+            /> 
 
             <Route path="events" element={<EventsPage />} />
             <Route path="events/:id" element={<EventDetailsPage />} />

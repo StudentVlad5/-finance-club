@@ -63,7 +63,7 @@ const schemasLogin = Yup.object().shape({
     )
     .required('Require'),
   password: Yup.string()
-    .min(7, 'Password too short (min 7)')
+    .min(4, 'Password too short (min 4)')
     .max(32, 'Password too long (max 32)')
     .matches(/^\s*\S+\s*$/, 'Password must be without spaces')
     .required('Require'),

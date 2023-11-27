@@ -15,6 +15,7 @@ import {
 import defaultImg from 'images/events/default.jpg';
 
 export const EventsList = ({ events }) => {
+  console.log("events", events)
   const today = new Date();
   const activeEvents = events.filter(({ date }) => new Date(date) >= today);
   const widthWindow = window.innerWidth;

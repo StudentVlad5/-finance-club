@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { getUser } from 'redux/auth/selectors';
+import { getPermission, selectUserName } from 'redux/auth/selectors';
 import {
   MobileAccountButton,
   AccountButton,
@@ -11,7 +11,10 @@ import {
 
 
 export const MobileUserNav = ({ toggleMenu }) => {
-  const user = useSelector(getUser);
+  const user = useSelector(selectUserName);
+  const permission = useSelector(getPermission);
+  
+
   // const userAvatar = useSelector(getUserAvatar);
   // let avatar;
   // if (userAvatar !== '' && userAvatar !== undefined) {
@@ -22,7 +25,7 @@ export const MobileUserNav = ({ toggleMenu }) => {
   // }
 
   return (
-    <MobileAccountButton to="/user/profile" onClick={toggleMenu}>
+    <MobileAccountButton to={permission === "admin" ? "/admin" : "/user"} onClick={toggleMenu}>
       {/* {avatar ? <AvatarUser src={avatar} alt="User" /> : <IconUser />} */}
       <IconUser />
       {user}
@@ -31,7 +34,8 @@ export const MobileUserNav = ({ toggleMenu }) => {
 };
 
 export const UserNav = () => {
-  const user = useSelector(getUser);
+  const user = useSelector(selectUserName);
+  const permission = useSelector(getPermission);
   // const userAvatar = useSelector(getUserAvatar);
   // let avatar;
   // if (userAvatar !== '' && userAvatar !== undefined) {
@@ -42,7 +46,7 @@ export const UserNav = () => {
   // }
 
   return (
-    <AccountButton to="/user/profile">
+    <AccountButton to={permission === "admin" ? "/admin" : "/user"}>
       {/* {avatar ? <AvatarUser src={avatar} alt="User" /> : <IconUser />} */}
       <IconUser />
       {user}

@@ -1,17 +1,18 @@
-import axios from 'axios';
-import { BASE_URL } from 'helpers/constants';
+import axios from "axios";
+import { onFetchError } from "helpers/Messages/NotifyMessages";
+import { BASE_URL } from "helpers/constants";
 
-export const signUp = async credentials => {
+export const signUp = async (credentials) => {
   try {
     const res = await axios.post(`${BASE_URL}/auth/signup`, credentials);
     return res;
   } catch (error) {
-    alert(error.message);
+    onFetchError(`Something wrong`);
     return error.message;
   }
 };
 
-export const signIn = async credentials => {
+export const signIn = async (credentials) => {
   try {
     const res = await axios.post(`${BASE_URL}/auth/signin`, credentials);
     return res;
@@ -25,21 +26,21 @@ export const singOut = async () => {
   return res;
 };
 
-export const updateUserData = async updateData => {
+export const updateUserData = async (updateData) => {
   const asArray = Object.entries(updateData);
-  const filtered = asArray.filter(([key]) => key !== '_id');
+  const filtered = asArray.filter(([key]) => key !== "id");
   const justOne = Object.fromEntries(filtered);
   const { data } = await axios.patch(
-    `${BASE_URL}/auth/user/${updateData._id}`,
+    `${BASE_URL}/auth/user/${updateData.id}`,
     justOne,
     {
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-        'Access-Control-Expose-Headers': 'Content-Range',
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+        "Access-Control-Expose-Headers": "Content-Range",
       },
-    },
+    }
   );
   return data;
 };
@@ -49,25 +50,25 @@ export const refreshUserToken = async () => {
   return data;
 };
 
-export const changePassword = async credentials => {
+export const changePassword = async (credentials) => {
   try {
-    const res = await axios.post('/auth/changePassword', credentials);
+    const res = await axios.post("/auth/changePassword", credentials);
     return res;
   } catch (error) {
     return error.message;
   }
 };
 
-export const forgotPassword = async credentials => {
+export const forgotPassword = async (credentials) => {
   try {
-    const res = await axios.post('/auth/forgotPassword', credentials);
+    const res = await axios.post("/auth/forgotPassword", credentials);
     return res;
   } catch (error) {
     return error.message;
   }
 };
 
-export const addToEvents = async id => {
+export const addToEvents = async (id) => {
   try {
     await axios.post(`/events/${id}`);
     return id;
@@ -76,7 +77,7 @@ export const addToEvents = async id => {
   }
 };
 
-export const removeFromEvents = async id => {
+export const removeFromEvents = async (id) => {
   try {
     await axios.delete(`/events/${id}`);
     return id;
