@@ -2,6 +2,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Mousewheel, Keyboard, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { openModalWindow } from 'hooks/modalWindow';
 import {
   PriceSection,
   PriceContainer,
@@ -20,34 +22,52 @@ import {
   ButtonBuy,
   ListItemsContainerForSwiper,
 } from './Prices.styled';
-
-export const data = [
-  {
-    title: 'Basic',
-    price: '$ 100 USD',
-    content:
-      'Lorem ipsum dolor sit amet, ametor consectetur adipiscing elit. Et nibh',
-    features: ['Everything included in Basic', 'Trading up to $1MM per month', 'Windows & macOS App', 'Premium Support'],
-  },
-  {
-    title: 'Pro',
-    price: '$ 200 USD',
-    content:
-      'Lorem ipsum dolor sit amet, ametor consectetur adipiscing elit. Et nibh',
-    features: ['Everything included in Pro', 'Trading up to $1MM per month', 'Windows & macOS App', 'Premium Support'],
-  },
-  {
-    title: 'Expert',
-    price: '$ 300 USD',
-    content:
-      'Lorem ipsum dolor sit amet, ametor consectetur adipiscing elit. Et nibh',
-    features: ['Everything included in Expert', 'Trading up to $1MM per month', 'Windows & macOS App', 'Premium Support'],
-  },
-];
+import { addModal } from 'redux/modal/operation';
+import { RegisterModal } from 'components/HowToJoin/RegisterModal/RegisterModal';
+import { onFetchError } from 'helpers/Messages/NotifyMessages';
+import { onLoaded, onLoading } from 'helpers/Loader/Loader';
+import { fetchData } from 'services/APIservice';
+import { useEffect, useState } from 'react';
 
 const Prices = () => {
   // const { t } = useTranslation();
+
+  const [packages, setPackages] = useState([]);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    (async function getData() {
+      setIsLoading(true);
+      try {
+        const { data } = await fetchData(`/packages`);
+        if (!data) {
+          return onFetchError('Whoops, something went wrong');
+        }
+        setPackages(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
+  const dispatch = useDispatch();
+  const openModal = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.currentTarget.dataset.modal === 'member_registration') {
+      dispatch(
+        addModal({
+          modal: e.currentTarget.dataset.modal,
+        }),
+      );
+      setTimeout(() => openModalWindow(e, null), 200);
+    }
+  };
   return (
+    <>
     <PriceSection id="prices">
       <PriceContainer>
           <ListItemsUppertitle
@@ -65,7 +85,9 @@ const Prices = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat nulla suspendisse tortor aenean dis placerat. Scelerisque
           </SubTitle>
             <ListItemsContainer>
-                  {data.map(it=>
+            {isLoading ? onLoading() : onLoaded()}
+            {error && onFetchError('Whoops, something went wrong')}
+                  {packages.map(it=>
                           <ListItems key={it.title}>
                             <ListItemsContentWraper>
                               <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
@@ -75,7 +97,7 @@ const Prices = () => {
                                 {it?.features.map((item, i)=>
                                 <LiContent key={item + i}>{item}</LiContent>)}
                               </UlContent>
-                              <ButtonBuy type='button' aria-label="buy now">Buy now</ButtonBuy>
+                              <ButtonBuy type='button' aria-label="buy now" onClick={e => {openModal(e);}}            data-modal="member_registration">Buy now</ButtonBuy>
                             </ListItemsContentWraper>
                           </ListItems>)}
             </ListItemsContainer>
@@ -99,7 +121,7 @@ const Prices = () => {
                             effect={'creative'}
                           >
                             {' '}
-                          {data.map(it=><SwiperSlide key={it.title}>
+                          {packages.map(it=><SwiperSlide key={it.title}>
                                 <ListItems>
                                   <ListItemsContentWraper>
                                     <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
@@ -109,7 +131,8 @@ const Prices = () => {
                                       {it?.features.map((item, i)=>
                                       <LiContent key={item + i}>{item}</LiContent>)}
                                     </UlContent>
-                                    <ButtonBuy type='button' aria-label="buy now">Buy now</ButtonBuy>
+                                    <ButtonBuy type='button' aria-label="buy now" onClick={e => {openModal(e);}}
+                                    data-modal="member_registration">Buy now</ButtonBuy>
                                   </ListItemsContentWraper>
                                 </ListItems>
                               </SwiperSlide>
@@ -126,6 +149,8 @@ const Prices = () => {
                   </ContainerNavigation>
       </PriceContainer>
     </PriceSection>
+    <RegisterModal/>
+    </>
   );
 };
 
