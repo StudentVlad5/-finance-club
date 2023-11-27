@@ -17,8 +17,11 @@ import {
   ReviewsListItemName,
 } from './Reviews.styled';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const Reviews = () => {
+  const { t } = useTranslation();
+
   const initialReviews = 4;
   const [reviewsNumber, setReviewsNumber] = useState(initialReviews);
 
@@ -64,11 +67,11 @@ export const Reviews = () => {
   const handleReviewsNumber = () => {
     setReviewsNumber(reviewsNumber + 4);
   };
-  
+
   return (
     <Section>
       <Container>
-        <Title>Reviews</Title>
+        <Title>{t('Reviews')}</Title>
         <ReviewsList>
           {reviews.slice(0, reviewsNumber).map((review, idx) => (
             <ReviewsListItem key={idx}>
@@ -79,11 +82,12 @@ export const Reviews = () => {
           ))}
         </ReviewsList>
         <ReviewsBtnBox>
-        <ReviewsBtn onClick={handleReviewsNumber}>
-          <span> VIEW MORE </span>
-        </ReviewsBtn>
+          {reviewsNumber < reviews.length && (
+            <ReviewsBtn onClick={handleReviewsNumber}>
+              <span> {t('VIEW MORE')} </span>
+            </ReviewsBtn>
+          )}
         </ReviewsBtnBox>
-     
       </Container>
     </Section>
   );

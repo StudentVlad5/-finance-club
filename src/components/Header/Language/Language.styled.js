@@ -31,7 +31,7 @@ export const SelectLanguage = styled.select`
   border-radius: 5px;
   color: ${props => props.theme.white_text};
   border-color: transparent;
-  background: transparent;
+  background: ${props => props.theme.black};
   padding: 3px;
   cursor: pointer;
 

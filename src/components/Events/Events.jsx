@@ -8,8 +8,11 @@ import { EventsSection, Heading } from './Events.styled';
 import { Container, Title } from 'components/baseStyles/CommonStyle.styled';
 
 import eventsData from 'components/data/events.json';
+import { useTranslation } from 'react-i18next';
 
 export const Events = () => {
+  const { t } = useTranslation();
+
   const [events, setEvents] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -34,14 +37,14 @@ export const Events = () => {
   return (
     <EventsSection>
       <Container>
-        <Title>Events calendar</Title>
+        <Title>{t("Events calendar")}</Title>
 
-        <Heading>Upcoming club meetings</Heading>
+        <Heading>{t("Upcoming club meetings")}</Heading>
         {isLoading ? onLoading() : onLoaded()}
         {error && onFetchError('Whoops, something went wrong')}
         {events.length > 0 && !error && <EventsList events={events} />}
 
-        <Heading>Archive of past events</Heading>
+        <Heading>{t("Archive of past events")}</Heading>
         {isLoading ? onLoading() : onLoaded()}
         {error && onFetchError('Whoops, something went wrong')}
         {events.length > 0 && !error && <ArchiveEventsList events={events} />}

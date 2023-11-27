@@ -66,7 +66,7 @@ export const BtnMore = styled.button`
   background-color: transparent;
   border: none;
   transition: ${theme.transition};
-
+  cursor: pointer;
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;
   }

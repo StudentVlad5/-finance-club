@@ -15,8 +15,11 @@ import {
   EventTitle,
 } from '../EventsList/EventList.styled';
 import defaultImg from 'images/events/default.jpg';
+import { useTranslation } from 'react-i18next';
 
 export const ArchiveEventsList = ({ events }) => {
+  const { t } = useTranslation();
+
   const today = new Date();
   const archiveEvents = events.filter(({ date }) => new Date(date) < today);
 
@@ -59,7 +62,7 @@ export const ArchiveEventsList = ({ events }) => {
       </ArchiveList>
       {archiveEvents.length > limit && (
         <BtnMore type="button" aria-label="More events" onClick={() => end(2)}>
-          <span>more events</span>
+          <span>{t("more events")}</span>
         </BtnMore>
       )}
     </>
