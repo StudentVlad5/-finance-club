@@ -30,12 +30,12 @@ const Hero = () => {
           <BtnContainer>
             <Link to="/join" style={{ textDecoration: 'none' }}>
               <BtnHeroJoin aria-label="join now" type="button">
-                JOIN NOW
+                {t("JOIN NOW")}
               </BtnHeroJoin>
             </Link>
             <a href="#prices" style={{ textDecoration: 'none' }}>
               <BtnHeroJoin aria-label="VIEW PRICING" type="button">
-                VIEW PRICING
+                {t("VIEW PRICING")}
               </BtnHeroJoin>
             </a>
           </BtnContainer>

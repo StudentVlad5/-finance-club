@@ -31,8 +31,11 @@ import { addReload } from 'redux/reload/slice';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { createFormRegistration } from 'services/APIservice';
+import { useTranslation } from 'react-i18next';
 
 export const RegisterModal = () => {
+  const { t } = useTranslation();
+
   const modal = useSelector(modalComponent);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -122,11 +125,11 @@ export const RegisterModal = () => {
                 onSubmit={handleSubmit}
                 onChange={handleChange}
               >
-                <FormTitle>Become a member</FormTitle>
+                <FormTitle>{t("Become a member")}</FormTitle>
                 <FormList>
                   <FormField>
                     <FormLabel htmlFor="name">
-                      <span>Name</span>
+                      <span>{t("Name")}</span>
                       {errors.name && touched.name ? (
                         <Error>{errors.name}</Error>
                       ) : null}
@@ -135,13 +138,13 @@ export const RegisterModal = () => {
                       id="name"
                       type="text"
                       name="name"
-                      placeholder="James"
+                      placeholder={t("James")}
                       value={values.name}
                     />
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="surname">
-                      <span>Surname</span>
+                      <span>{t("Surname")}</span>
                       {errors.surname && touched.surname ? (
                         <Error>{errors.surname}</Error>
                       ) : null}
@@ -150,13 +153,13 @@ export const RegisterModal = () => {
                       id="surname"
                       type="text"
                       name="surname"
-                      placeholder="Bond"
+                      placeholder={t("Bond")}
                       value={values.surname}
                     />
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="email">
-                      <span>Email</span>
+                      <span>{t("Email")}</span>
                       {errors.email && touched.email ? (
                         <Error>{errors.email}</Error>
                       ) : null}
@@ -171,7 +174,7 @@ export const RegisterModal = () => {
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="phone">
-                      <span>Phone</span>
+                      <span>{t("Phone")}</span>
                       {errors.phone && touched.phone ? (
                         <Error>{errors.phone}</Error>
                       ) : null}
@@ -186,7 +189,7 @@ export const RegisterModal = () => {
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="company">
-                      <span>Company</span>
+                      <span>{t("Company")}</span>
                       {errors.company && touched.company ? (
                         <Error>{errors.company}</Error>
                       ) : null}
@@ -201,7 +204,7 @@ export const RegisterModal = () => {
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="position">
-                      <span>Position</span>
+                      <span>{t("Position")}</span>
                       {errors.position && touched.position ? (
                         <Error>{errors.position}</Error>
                       ) : null}
@@ -215,7 +218,7 @@ export const RegisterModal = () => {
                     />
                   </FormField>
                   <ContainerRadioButton>
-              <TitlePackage>Package</TitlePackage>
+              <TitlePackage>{t("Package")}</TitlePackage>
               <ListRadioButton>
                 <LabelRadioButtonContainer
                   className="packageContainer active"
@@ -279,7 +282,7 @@ export const RegisterModal = () => {
                   disabled={isSubmitting}
                   aria-label="Submit"
                 >
-                  Send application
+                  {t("Send application")}
                 </SBtnLight>
               </StyledForm>
             )}

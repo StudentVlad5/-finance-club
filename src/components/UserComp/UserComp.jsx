@@ -10,28 +10,31 @@ import {
   LinkFolder,
 } from './UserComp.styled';
 import { Title } from 'components/baseStyles/CommonStyle.styled';
+import { useTranslation } from 'react-i18next';
 
 export const UserComp = () => {
+  const { t } = useTranslation();
+  
   return (
     <UserSection>
       <UserContainer>
         <Title as="h1" hidden>
-          Profile
+          {t("Profile")}
         </Title>
         <UserDataWrapper>
           <FolderWrapper>
             <LinkFolder
               to={`/user/profile`}
             >
-              My account
+              {t("My account")}
             </LinkFolder>
             <LinkFolder to={`/user/events`}>
-              My events
+              {t("My events")}
             </LinkFolder>
             <LinkFolder
               to={`/user/packages`}
             >
-              My packages
+              {t("My packages")}
             </LinkFolder>
             <Logout />
           </FolderWrapper>

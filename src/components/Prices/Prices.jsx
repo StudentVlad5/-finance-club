@@ -28,9 +28,10 @@ import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { fetchData } from 'services/APIservice';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Prices = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const [packages, setPackages] = useState([]);
   const [error, setError] = useState('');
@@ -66,90 +67,114 @@ const Prices = () => {
       setTimeout(() => openModalWindow(e, null), 200);
     }
   };
+
   return (
     <>
-    <PriceSection id="prices">
-      <PriceContainer>
+      <PriceSection id="prices">
+        <PriceContainer>
           <ListItemsUppertitle
             data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1500"
-            >
-            Prices
+          >
+            {t("Prices")}
           </ListItemsUppertitle>
           <SubTitle
             data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1000"
-            >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat nulla suspendisse tortor aenean dis placerat. Scelerisque
+          >
+            {t("We offer a variety of packages, our company carefully approaches the formation of offers to meet the diverse needs of our customers.")}
           </SubTitle>
-            <ListItemsContainer>
+          <ListItemsContainer>
             {isLoading ? onLoading() : onLoaded()}
             {error && onFetchError('Whoops, something went wrong')}
-                  {packages.map(it=>
-                          <ListItems key={it.title}>
-                            <ListItemsContentWraper>
-                              <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
-                              <TitleItem>{it.price}</TitleItem>
-                              <SubTitleItem>{it.content}</SubTitleItem>
-                                 <UlContent>features
-                                {it?.features.map((item, i)=>
-                                <LiContent key={item + i}>{item}</LiContent>)}
-                              </UlContent>
-                              <ButtonBuy type='button' aria-label="buy now" onClick={e => {openModal(e);}}            data-modal="member_registration">Buy now</ButtonBuy>
-                            </ListItemsContentWraper>
-                          </ListItems>)}
-            </ListItemsContainer>
-            <ListItemsContainerForSwiper>
-                    <Swiper
-                            modules={[Navigation, Mousewheel, Keyboard, Autoplay]}
-                            spaceBetween={50}
-                            slidesPerView={1}
-                            grabCursor={true}
-                            navigation={{
-                              prevEl: '.swiper-button-pr',
-                              nextEl: '.swiper-button-nt',
-                            }}
-                            pagination={{ clickable: false }}
-                            mousewheel={true}
-                            keyboard={true}
-                            loop={true}
-                            loopPreventsSliding={true}
-                            // loopedSlides={1}
-                            // autoplay={{ delay: 1000 }}
-                            effect={'creative'}
-                          >
-                            {' '}
-                          {packages.map(it=><SwiperSlide key={it.title}>
-                                <ListItems>
-                                  <ListItemsContentWraper>
-                                    <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
-                                    <TitleItem>{it.price}</TitleItem>
-                                    <SubTitleItem>{it.content}</SubTitleItem>
-                                        <UlContent>features
-                                      {it?.features.map((item, i)=>
-                                      <LiContent key={item + i}>{item}</LiContent>)}
-                                    </UlContent>
-                                    <ButtonBuy type='button' aria-label="buy now" onClick={e => {openModal(e);}}
-                                    data-modal="member_registration">Buy now</ButtonBuy>
-                                  </ListItemsContentWraper>
-                                </ListItems>
-                              </SwiperSlide>
-                            )}
-                    </Swiper>
-            </ListItemsContainerForSwiper>
-                  <ContainerNavigation>
-                    <BtnSlider className="swiper-button-pr">
-                      <MdKeyboardArrowLeft className="buttonSlide" />
-                    </BtnSlider>
-                    <BtnSlider className="swiper-button-nt">
-                      <MdKeyboardArrowRight className="buttonSlide" />
-                    </BtnSlider>
-                  </ContainerNavigation>
-      </PriceContainer>
-    </PriceSection>
-    <RegisterModal/>
+            {packages.map(it => (
+              <ListItems key={it.title}>
+                <ListItemsContentWraper>
+                  <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
+                  <TitleItem>{it.price}</TitleItem>
+                  <SubTitleItem>{it.content}</SubTitleItem>
+                  <UlContent>
+                    {t("features")}
+                    {it?.features.map((item, i) => (
+                      <LiContent key={item + i}>{item}</LiContent>
+                    ))}
+                  </UlContent>
+                  <ButtonBuy
+                    type="button"
+                    aria-label="buy now"
+                    onClick={e => {
+                      openModal(e);
+                    }}
+                    data-modal="member_registration"
+                  >
+                    {t("Buy now")}
+                  </ButtonBuy>
+                </ListItemsContentWraper>
+              </ListItems>
+            ))}
+          </ListItemsContainer>
+          <ListItemsContainerForSwiper>
+            <Swiper
+              modules={[Navigation, Mousewheel, Keyboard, Autoplay]}
+              spaceBetween={50}
+              slidesPerView={1}
+              grabCursor={true}
+              navigation={{
+                prevEl: '.swiper-button-pr',
+                nextEl: '.swiper-button-nt',
+              }}
+              pagination={{ clickable: false }}
+              mousewheel={true}
+              keyboard={true}
+              loop={true}
+              loopPreventsSliding={true}
+              // loopedSlides={1}
+              // autoplay={{ delay: 1000 }}
+              effect={'creative'}
+            >
+              {' '}
+              {packages.map(it => (
+                <SwiperSlide key={it.title}>
+                  <ListItems>
+                    <ListItemsContentWraper>
+                      <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
+                      <TitleItem>{it.price}</TitleItem>
+                      <SubTitleItem>{it.content}</SubTitleItem>
+                      <UlContent>
+                        {t("features")}
+                        {it?.features.map((item, i) => (
+                          <LiContent key={item + i}>{item}</LiContent>
+                        ))}
+                      </UlContent>
+                      <ButtonBuy
+                        type="button"
+                        aria-label="buy now"
+                        onClick={e => {
+                          openModal(e);
+                        }}
+                        data-modal="member_registration"
+                      >
+                        {t("Buy now")}
+                      </ButtonBuy>
+                    </ListItemsContentWraper>
+                  </ListItems>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </ListItemsContainerForSwiper>
+          <ContainerNavigation>
+            <BtnSlider className="swiper-button-pr">
+              <MdKeyboardArrowLeft className="buttonSlide" />
+            </BtnSlider>
+            <BtnSlider className="swiper-button-nt">
+              <MdKeyboardArrowRight className="buttonSlide" />
+            </BtnSlider>
+          </ContainerNavigation>
+        </PriceContainer>
+      </PriceSection>
+      <RegisterModal />
     </>
   );
 };

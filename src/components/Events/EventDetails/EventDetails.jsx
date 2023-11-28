@@ -23,8 +23,11 @@ import {
   HeadingItemData,
   HeadingItemTitle,
 } from './EventDetails.styled';
+import { useTranslation } from 'react-i18next';
 
 export const EventDetails = ({ event }) => {
+  const { t } = useTranslation();
+
   const {
     date,
     time,
@@ -60,24 +63,24 @@ export const EventDetails = ({ event }) => {
           <EventTitle>
             {new Date(date).toLocaleDateString()} | {title}
           </EventTitle>
-          <BackButton to="/events">Back</BackButton>
+          <BackButton to="/events">{t('Back')}</BackButton>
           <EventHeading>
             <HeadingItem>
-              <HeadingItemTitle>Package</HeadingItemTitle>
+              <HeadingItemTitle>{t('Package')}</HeadingItemTitle>
               <HeadingItemData>{packages.join(', ')}</HeadingItemData>
             </HeadingItem>
             <HeadingItem>
-              <HeadingItemTitle>Date</HeadingItemTitle>
+              <HeadingItemTitle>{t('Date')}</HeadingItemTitle>
               <HeadingItemData>
                 {new Date(date).toLocaleDateString()}
               </HeadingItemData>
             </HeadingItem>
             <HeadingItem>
-              <HeadingItemTitle>Start at</HeadingItemTitle>
+              <HeadingItemTitle>{t('Start at')}</HeadingItemTitle>
               <HeadingItemData>{time}</HeadingItemData>
             </HeadingItem>
             <HeadingItem>
-              <HeadingItemTitle>Location</HeadingItemTitle>
+              <HeadingItemTitle>{t('Location')}</HeadingItemTitle>
               <HeadingItemData>{location}</HeadingItemData>
             </HeadingItem>
           </EventHeading>
@@ -90,7 +93,7 @@ export const EventDetails = ({ event }) => {
           />
           <EventTextWrapper>
             <EventSpeaker>
-              <span>Speakers:</span>
+              <span>{t('Speakers')}:</span>
               <ul>
                 {speakers.map((speaker, i) => {
                   return <li key={i}>{speaker}</li>;
@@ -98,14 +101,16 @@ export const EventDetails = ({ event }) => {
               </ul>
             </EventSpeaker>
             <EventDescrBox>
-              <EventDescr>Duration of the event: {duration}</EventDescr>
+              <EventDescr>
+                {t('Duration of the event')}: {duration}
+              </EventDescr>
             </EventDescrBox>
             <EventDescrBox>
               <EventDescr>{description}</EventDescr>
             </EventDescrBox>
             {plan.length !== 0 && (
               <EventDescrBox>
-                <EventDescr>Plan of the event:</EventDescr>
+                <EventDescr>{t('Plan of the event')}:</EventDescr>
                 <EventPlan>
                   {plan.map((item, i) => {
                     return (
@@ -120,20 +125,22 @@ export const EventDetails = ({ event }) => {
             )}
             {moderator && (
               <EventDescrBox>
-                <EventDescr>Moderator: {moderator}</EventDescr>
+                <EventDescr>
+                  {t('Moderator')}: {moderator}
+                </EventDescr>
               </EventDescrBox>
             )}
             <EventDescrBox>
               <EventDescr $small>
-                The meeting is part of the SoFi CLUB club programme.
+                {t('The meeting is part of the SoFi CLUB club programme.')}
                 <br />
-                If you are not a member of the club, you have a “Guest Visit”
-                option. The organizers have the right to refuse to participate,
-                as the number of guest places is limited.
+                {t(
+                  'If you are not a member of the club, you have a “Guest Visit” option. The organizers have the right to refuse to participate, as the number of guest places is limited.',
+                )}
                 <br />
-                We will be happy to answer your questions.
+                {t('We will be happy to answer your questions.')}
                 <br />
-                Call +1234567890, Mark Key
+                {t('Call')} +1234567890, Mark Key
               </EventDescr>
             </EventDescrBox>
           </EventTextWrapper>
@@ -145,7 +152,7 @@ export const EventDetails = ({ event }) => {
             }}
             data-modal="event"
           >
-            Register
+            {t('Register')}
           </BtnLight>
         </Container>
       </EventsSection>

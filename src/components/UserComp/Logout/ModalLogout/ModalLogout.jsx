@@ -10,12 +10,12 @@ import {
   ModalButtonWrapper,
   ModalButton,
 } from './ModalLogout.styled';
-// import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 export const ModalLogout = ({ onClose, onCloseBtn }) => {
   const dispatch = useDispatch();
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleDelete = () => {
     dispatch(logOut());
@@ -33,14 +33,14 @@ export const ModalLogout = ({ onClose, onCloseBtn }) => {
           <CloseIcon />
         </ModalCloseBtn>
       </CloseBtnWrapper>
-      <ModalDescription>{'Are you sure you want to exit?'}</ModalDescription>
+      <ModalDescription>{t('Are you sure you want to exit?')}</ModalDescription>
       <ModalButtonWrapper>
         <ModalButton
           type="button"
           onClick={handleDelete}
           aria-label="submit log out"
         >
-          {'Yes'}
+          {t('Yes')}
         </ModalButton>
         <ModalButton
           type="button"
@@ -50,7 +50,7 @@ export const ModalLogout = ({ onClose, onCloseBtn }) => {
           }}
           aria-label="not log out"
         >
-          {'No'}
+          {t('No')}
         </ModalButton>
       </ModalButtonWrapper>
     </ModalWrapper>
