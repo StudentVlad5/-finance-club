@@ -22,17 +22,19 @@ export const Events = () => {
         let eventsList = [];
         setIsLoading(true);
         try {
-          const { data } = await fetchData(`/events`);
+          const  {data}  = await fetchData(`/events`);
           if (!data) {
             return onFetchError('Whoops, something went wrong');
           }
-          setEvents(data);
+          // setEvents(data);
           data.map(it=>eventsOfUser.map(item=>{if(item === it._id){
             eventsList.push(it)}
+            console.log("eventsList", eventsList)
             setEvents(eventsList);
           }));
         } catch (error) {
           setError(error);
+          alert(error)
         } finally {
           setIsLoading(false);
         }
@@ -43,7 +45,6 @@ export const Events = () => {
       <EventsSection>
       <Container>
         {isLoading ? onLoading() : onLoaded()}
-        {error && onFetchError('Whoops, something went wrong')}
         <HeaderText>Upcoming club meetings</HeaderText>
         {events.length > 0 && !error && <EventsList events={events} />}
         <HeaderText>Archive of past events</HeaderText>
