@@ -28,8 +28,8 @@ const ProfileName = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 177.8%;
-  color: ${(props) => props.theme.white_text};
-
+  color: ${(props) => props.theme.black_text};
+ 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 18px;
   }
@@ -45,12 +45,12 @@ const ProfileInput = styled(Field)`
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.32px;
-  color: ${theme.colors.green};
+  color: ${props=>props.theme.black_text};
 
   border: 1px solid #c6cdd3;
   border-color: transparent;
   border-radius: 10px;
-  background: ${theme.colors.blue3};
+
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 14px;
@@ -63,12 +63,12 @@ const ProfileInput = styled(Field)`
   }
 
   &:focus-visible {
-    border: 0.5px solid ${theme.colors.green};
+    border: 0.5px solid ${props=>props.theme.white_fon};
     outline: none;
   }
 
   &::placeholder {
-    color: ${theme.colors.green};
+    color: ${props=>props.theme.black_text};
     font-family: ${theme.fonts[1]};
     font-size: 12px;
     font-style: normal;

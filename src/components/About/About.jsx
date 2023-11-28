@@ -27,35 +27,39 @@ import {
 } from './About.styled';
 import { useTranslation } from 'react-i18next';
 
-const data = [
-  {
-    title: 'Open Source',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et nibh urna in proin dui purus bibendum cras. Morbi cursus nunc.',
-    img: open_source,
-  },
-  {
-    title: 'Transparente',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et nibh urna in proin dui purus bibendum cras. Morbi cursus nunc.',
-    img: transparent,
-  },
-  {
-    title: 'Worldwide',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et nibh urna in proin dui purus bibendum cras. Morbi cursus nunc.',
-    img: worldwide,
-  },
-  {
-    title: 'Community driven',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et nibh urna in proin dui purus bibendum cras. Morbi cursus nunc.',
-    img: community_driven,
-  },
-];
-
 const About = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
+
+  const data = [
+    {
+      title: 'Open Source',
+      content: t(
+        "In our open finance club, we strive for innovation and collaboration. Here, you'll find solutions that are open to everyone, fostering a dynamic exchange of ideas and improvements.",
+      ),
+      img: open_source,
+    },
+    {
+      title: 'Transparente',
+      content: t(
+        'Our closed financial club prides itself on transparency in all matters. We disclose information in detail to ensure honesty and mutual understanding among participants.',
+      ),
+      img: transparent,
+    },
+    {
+      title: 'Worldwide',
+      content: t(
+        'The club spans all corners of the world, bringing together a community of representatives from different countries. A global perspective helps us understand and leverage diversity to achieve high results.',
+      ),
+      img: worldwide,
+    },
+    {
+      title: 'Community driven',
+      content: t(
+        'Our community adds strength and determination to every aspect. Collaborative problem-solving and public support are at the core of our philosophy of management and development.',
+      ),
+      img: community_driven,
+    },
+  ];
 
   return (
     <AboutSection>
@@ -85,16 +89,20 @@ const About = () => {
                 data-aos-easing="linear"
                 data-aos-duration="1500"
               >
-                About us
+                {t('About us')}
               </ListItemsUppertitle>
               <SubTitle
                 data-aos="fade-down"
                 data-aos-easing="linear"
                 data-aos-duration="1000"
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                {t(
+                  'Innovative financial company that offers exclusive services in a private financial club.',
+                )}
                 <br />
-                Feugiat nulla suspendisse tortor aene.
+                {t(
+                  'We provide convenient and advanced solutions for the success of our clients.',
+                )}
               </SubTitle>
               <ListItemsContainer>
                 {data.map(it => (
@@ -157,22 +165,18 @@ const About = () => {
                 data-aos-easing="linear"
                 data-aos-duration="1500"
               >
-                Our story
+                {t('Our story')}
               </ListItemsUppertitle>
               <SubTitle>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Parturient lorem purus justo, ultricies. Sollicitudin odio
-                elementum urna placerat lacus, vulputate. Non malesuada viverra
-                et ultrices cras. Tincidunt tempor, blandit augue ac feugiat.
-                Praesent arcu tempus ullamcorper quisque in. Magna fermentum,
-                lacus, fermentum arcu.
+                SoFi -{' '}
+                {t(
+                  "is a pioneering company in the realm of closed financial clubs, providing exclusive insights and opportunities. Our closed financial club operates as a hub of knowledge, welcoming only CEOs to ensure high-level interactions. We don't just develop; we curate an environment where CEOs learn to navigate effectively.",
+                )}
               </SubTitle>
               <SubTitle>
-                Vulputate pellentesque proin facilisis dignissim gravida sed
-                faucibus nunc. Nunc eget pharetra, in vitae porta lacus. Elit in
-                nisl, in quis nulla tellus suscipit id. Semper velit odio cras
-                pretium tristique habitant. Elit eu penatibus congue orci
-                turpis.
+                {t(
+                  'Our exclusive gatherings bring CEOs together, fostering a community driven by shared insights and unparalleled expertise. With a transparent and worldwide approach, SoFi stands as a testament to community-driven success in the closed financial sector.',
+                )}
               </SubTitle>
             </ListOfItemNext>
           </SwiperSlide>
@@ -183,22 +187,18 @@ const About = () => {
                 data-aos-easing="linear"
                 data-aos-duration="1500"
               >
-                Our mission
+                {t('Our mission')}
               </ListItemsUppertitle>
               <SubTitle>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Parturient lorem purus justo, ultricies. Sollicitudin odio
-                elementum urna placerat lacus, vulputate. Non malesuada viverra
-                et ultrices cras. Tincidunt tempor, blandit augue ac feugiat.
-                Praesent arcu tempus ullamcorper quisque in. Magna fermentum,
-                lacus, fermentum arcu.
+                SoFi{' '}
+                {t(
+                  'aims to take a leading position in the realm of exclusive financial clubs. Our mission is to create a platform exclusively for CEOs, allowing them to leverage high-level expertise and develop effective managerial skills. Through transparent and global approaches, we foster knowledge exchange and shape a global community of business leaders.',
+                )}
               </SubTitle>
               <SubTitle>
-                ulputate pellentesque proin facilisis dignissim gravida sed
-                faucibus nunc. Nunc eget pharetra, in vitae porta lacus. Elit in
-                nisl, in quis nulla tellus suscipit id. Semper velit odio cras
-                pretium tristique habitant. Elit eu penatibus congue orci
-                turpis. Enim diam id.
+                {t(
+                  'SoFi aspires to excellence in the financial world, creating an innovative environment where leaders come together to unleash their potential. Our mission is to support CEOs in achieving success and leaving a lasting impact in their industries.',
+                )}
               </SubTitle>
             </ListOfItemNext>
           </SwiperSlide>

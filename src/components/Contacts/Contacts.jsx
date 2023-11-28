@@ -17,23 +17,26 @@ import {
 } from './Contacts.styled';
 import { Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useTranslation } from 'react-i18next';
 
 export const Contacts = () => {
+  const { t } = useTranslation();
+
   const position = [40.712776, -74.005974];
 
   return (
     <Section>
       <Container>
-        <Title>Contacts</Title>
+        <Title>{t('Contacts')}</Title>
 
-        <ContactsTitle>Want to reach us directly?</ContactsTitle>
+        <ContactsTitle>{t('Want to reach us directly?')}</ContactsTitle>
 
         <ContactsBox>
           <ContactsList>
             <ContactsListItem>
               <ContactsListIconPin />
               <ContactsListItemText>
-                New York, Street 1A , USA
+                {t("Street 1A, New York, USA")}
               </ContactsListItemText>
             </ContactsListItem>
 

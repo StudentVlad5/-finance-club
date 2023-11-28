@@ -19,9 +19,10 @@ import {
 } from './Footer.styled';
 
 import sprite from 'images/svg/sprite.svg';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <FooterSection>
@@ -30,20 +31,20 @@ export const Footer = () => {
         <FooterStyleWrap>
           <FooterItemContainer>
               <FooterList>
-                <TitleMenu>MENU</TitleMenu>
-                <FooterListItem><LinkItem to='/' aria-label='About'>Home</LinkItem></FooterListItem>
-                <FooterListItem><LinkItem to="/join" aria-label='How to join'>how to join</LinkItem></FooterListItem>
-                <FooterListItem><LinkItem to="/events" aria-label='Events calendar'>EVENTS CALENDAR</LinkItem></FooterListItem>
-                <FooterListItem><LinkItem to="/reviews" aria-label='Reviews'>Reviews</LinkItem></FooterListItem>
-                <FooterListItem><LinkItem to="/contacts" aria-label='Contacts'>contacts</LinkItem></FooterListItem>
+                <TitleMenu>{t("MENU")}</TitleMenu>
+                <FooterListItem><LinkItem to='/' aria-label='About'>{t("Home")}</LinkItem></FooterListItem>
+                <FooterListItem><LinkItem to="/join" aria-label='How to join'>{t("How to join")}</LinkItem></FooterListItem>
+                <FooterListItem><LinkItem to="/events" aria-label='Events calendar'>{t("Events calendar")}</LinkItem></FooterListItem>
+                <FooterListItem><LinkItem to="/reviews" aria-label='Reviews'>{t("Reviews")}</LinkItem></FooterListItem>
+                <FooterListItem><LinkItem to="/contacts" aria-label='Contacts'>{t("Contacts")}</LinkItem></FooterListItem>
               </FooterList>
               <FooterList>
-                <TitleMenu>Location</TitleMenu>
-                <FooterListItem>New york, USA</FooterListItem>
-                <FooterListItem>street 1a</FooterListItem>
+                <TitleMenu>{t("Location")}</TitleMenu>
+                <FooterListItem>{t("New york, USA")}</FooterListItem>
+                <FooterListItem>{t("street 1a")}</FooterListItem>
               </FooterList>
               <FooterList>
-                <TitleMenu>Contacts</TitleMenu>
+                <TitleMenu>{t("Contacts")}</TitleMenu>
                 <FooterListItem><LinkEmail href="mailto:test@gmail.com"><Span>test@gmail.com</Span></LinkEmail></FooterListItem>
                 <FooterListItem><LinkItem to="tel:1234567890" aria-label='phone'>+1234567890</LinkItem></FooterListItem>
                 <FooterSvgContainer>
@@ -67,9 +68,9 @@ export const Footer = () => {
           </FooterItemContainer>
           <FooterBottomContainer>
             <SpanBottom>© 2023 CFO Club Ukraine</SpanBottom>
-            <SpanBottom>Privacy Policy | Terms & Conditions</SpanBottom>
-            <LinkItemLowercase to='https://brand-maze.vercel.app/' target="_blank">
-              <SpanBottom>Designed and Developed by Brand Maze</SpanBottom>
+            <SpanBottom>{t("Privacy Policy")} | {t("Terms & Conditions")}</SpanBottom>
+            <LinkItemLowercase to='https://brand-maze.com/' target="_blank">
+              <SpanBottom>{t("Designed and Developed by")} Brand Maze</SpanBottom>
             </LinkItemLowercase>
           </FooterBottomContainer>
         </FooterStyleWrap>

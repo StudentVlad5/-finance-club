@@ -9,13 +9,38 @@ import { useSelector } from 'react-redux';
 import { getUser } from 'redux/auth/selectors';
 import { fetchData } from 'services/APIservice';
 import { HeaderText } from './Events.styled';
+import { useTranslation } from 'react-i18next';
 
 export const Events = () => {
   const eventsOfUser = useSelector(getUser).events;
   const [events, setEvents] = useState([]);
-  console.log('Events ~ events:', events);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const { t } = useTranslation();
+  // useEffect(() => {
+  //   (async function getData() {
+  //     let eventsList = [];
+  //     setIsLoading(true);
+  //     try {
+  //       const  {data}  = await fetchData(`/events`);
+  //       if (!data) {
+  //         return onFetchError('Whoops, something went wrong');
+  //       }
+  //       // setEvents(data);
+  //       data.map(it=>eventsOfUser.map(item=>{if(item === it._id){
+  //         eventsList.push(it)}
+  //         console.log("eventsList", eventsList)
+  //         setEvents(eventsList);
+  //       }));
+  //     } catch (error) {
+  //       setError(error);
+  //       alert(error)
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   })();
+  // }, []);
 
   useEffect(() => {
     (async function getData() {
@@ -48,9 +73,10 @@ export const Events = () => {
       <Container>
         {isLoading ? onLoading() : onLoaded()}
         {error && onFetchError('Whoops, something went wrong')}
-        <HeaderText>Upcoming club meetings</HeaderText>
+        <HeaderText>{t('Upcoming club meetings')}</HeaderText>
+
         {events.length > 0 && !error && <EventsList events={events} />}
-        <HeaderText>Archive of past events</HeaderText>
+        <HeaderText>{t('Archive of past events')}</HeaderText>
         {events.length > 0 && !error && <ArchiveEventsList events={events} />}
       </Container>
     </EventsSection>

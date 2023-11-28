@@ -29,8 +29,11 @@ import {
   StyledForm,
 } from 'components/baseStyles/Form.styled';
 import { Backdrop, CloseBtn, Modal } from 'components/baseStyles/Modal.styled';
+import { useTranslation } from 'react-i18next';
 
 export const RegisterModal = ({ event }) => {
+  const { t } = useTranslation();
+
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
 
@@ -105,11 +108,11 @@ export const RegisterModal = ({ event }) => {
                 onSubmit={handleSubmit}
                 onChange={handleChange}
               >
-                <FormTitle>Register for the event</FormTitle>
+                <FormTitle>{t("Register for the event")}</FormTitle>
                 <FormList>
                   <FormField>
                     <FormLabel htmlFor="name">
-                      <span>Name</span>
+                      <span>{t("Name")}</span>
                       {errors.name && touched.name ? (
                         <Error>{errors.name}</Error>
                       ) : null}
@@ -118,13 +121,13 @@ export const RegisterModal = ({ event }) => {
                       id="name"
                       type="text"
                       name="name"
-                      placeholder="James"
+                      placeholder={t("James")}
                       value={values.name}
                     />
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="surname">
-                      <span>Surname</span>
+                      <span>{t("Surname")}</span>
                       {errors.surname && touched.surname ? (
                         <Error>{errors.surname}</Error>
                       ) : null}
@@ -133,13 +136,13 @@ export const RegisterModal = ({ event }) => {
                       id="surname"
                       type="text"
                       name="surname"
-                      placeholder="Bond"
+                      placeholder={t("Bond")}
                       value={values.surname}
                     />
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="email">
-                      <span>Email</span>
+                      <span>{t("Email")}</span>
                       {errors.email && touched.email ? (
                         <Error>{errors.email}</Error>
                       ) : null}
@@ -154,7 +157,7 @@ export const RegisterModal = ({ event }) => {
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="phone">
-                      <span>Phone</span>
+                      <span>{t("Phone")}</span>
                       {errors.phone && touched.phone ? (
                         <Error>{errors.phone}</Error>
                       ) : null}
@@ -169,7 +172,7 @@ export const RegisterModal = ({ event }) => {
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="company">
-                      <span>Company</span>
+                      <span>{t("Company")}</span>
                       {errors.company && touched.company ? (
                         <Error>{errors.company}</Error>
                       ) : null}
@@ -184,7 +187,7 @@ export const RegisterModal = ({ event }) => {
                   </FormField>
                   <FormField>
                     <FormLabel htmlFor="position">
-                      <span>Position</span>
+                      <span>{t("Position")}</span>
                       {errors.position && touched.position ? (
                         <Error>{errors.position}</Error>
                       ) : null}
@@ -221,7 +224,7 @@ export const RegisterModal = ({ event }) => {
                   disabled={isSubmitting}
                   aria-label="Submit"
                 >
-                  Send
+                  {t("Send")}
                 </SBtnLight>
               </StyledForm>
             )}

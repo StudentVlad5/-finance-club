@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import Language from '../Language/Language';
 import { MobileNavList, NavList, NavItem } from './Nav.styled';
 import { SwitchTheme } from 'components/ThemeStatus/SwitcherTheme/SwitchTheme';
+import { useTranslation } from 'react-i18next';
 
 export const MobileNav = ({ toggleMenu }) => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
+
   return (
     <MobileNavList>
       <NavItem to="/" aria-label="About" data-info="About" onClick={toggleMenu}>
-        About
+        {t("About")}
       </NavItem>
       <NavItem
         to="/events"
@@ -18,7 +20,7 @@ export const MobileNav = ({ toggleMenu }) => {
         data-info="Events calendar"
         onClick={toggleMenu}
       >
-        Events calendar
+        {t("Events calendar")}
       </NavItem>
       <NavItem
         to="/join"
@@ -26,7 +28,7 @@ export const MobileNav = ({ toggleMenu }) => {
         data-info="How to join"
         onClick={toggleMenu}
       >
-        How to join
+        {t("How to join")}
       </NavItem>
       <NavItem
         to="/reviews"
@@ -34,7 +36,7 @@ export const MobileNav = ({ toggleMenu }) => {
         data-info="Reviews"
         onClick={toggleMenu}
       >
-        Reviews
+        {t("Reviews")}
       </NavItem>
       <NavItem
         to="/contacts"
@@ -42,7 +44,7 @@ export const MobileNav = ({ toggleMenu }) => {
         data-info="Contacts"
         onClick={toggleMenu}
       >
-        Contacts
+        {t("Contacts")}
       </NavItem>
       <div style={{ display: 'flex' }}>
         <Language />
@@ -53,27 +55,28 @@ export const MobileNav = ({ toggleMenu }) => {
 };
 
 export const Nav = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
+
   return (
     <NavList>
       <NavItem to="/" aria-label="About" data-info="About">
-        About
+        {t("About")}
       </NavItem>
       <NavItem
         to="/events"
         aria-label="Events calendar"
         data-info="Events calendar"
       >
-        Events calendar
+        {t("Events calendar")}
       </NavItem>
       <NavItem to="/join" aria-label="How to join" data-info="How to join">
-        How to join
+        {t("How to join")}
       </NavItem>
       <NavItem to="/reviews" aria-label="Reviews" data-info="Reviews">
-        Reviews
+        {t("Reviews")}
       </NavItem>
       <NavItem to="/contacts" aria-label="Contacts" data-info="Contacts">
-        Contacts
+        {t("Contacts")}
       </NavItem>
       <div style={{ display: 'flex' }}>
         <Language />

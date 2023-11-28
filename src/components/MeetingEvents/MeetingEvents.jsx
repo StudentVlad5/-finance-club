@@ -14,6 +14,7 @@ import digitalMoney from 'images/events/DIGITAL MONEY.jpg';
 import cybersecurity from 'images/events/cybersecurity.webp';
 import cybersecurity2 from 'images/events/cybersecurity-2.webp';
 import defi from 'images/events/defi.webp';
+import { useTranslation } from 'react-i18next';
 
 const eventsData = [
   {
@@ -138,6 +139,8 @@ const eventsData = [
 ];
 
 const MeetingEvents = () => {
+  const { t } = useTranslation();
+
   const [events, setEvents] = useState(eventsData);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -198,7 +201,7 @@ const MeetingEvents = () => {
         )}
         <Link style={{ textDecoration: 'none' }} to="/events">
           <EventCalendarBtn type="button" aria-label="EVENTS CALENDAR">
-            <span>EVENTS CALENDAR</span>
+            <span>{t("Events calendar")}</span>
           </EventCalendarBtn>
         </Link>
       </MeetingEventContainer>
