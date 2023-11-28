@@ -45,8 +45,8 @@ export const LogoutBtn = styled.button`
 export const LogoutIconStyled = styled(LogoutIcon)`
   width: 10px;
   height: 10px;
-  fill: ${(props) => props.theme.black};
-  stroke: ${(props) => props.theme.black};
+  fill: ${(props) => props.theme.black_text};
+  stroke: ${(props) => props.theme.black_text};
   transition: ${theme.transition[1]};
 
   &:hover,
@@ -61,10 +61,10 @@ export const LogoutBtnText = styled.span`
   font-family: ${theme.fonts[0]};
   font-size: 10px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-
+  color: ${(props) => props.theme.black_text};
   @media (min-width: ${theme.breakpoints.tablet}) {
     font-size: 12px;
   }

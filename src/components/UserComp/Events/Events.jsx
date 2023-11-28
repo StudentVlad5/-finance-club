@@ -14,6 +14,35 @@ import { useTranslation } from 'react-i18next';
 export const Events = () => {
   const { t } = useTranslation();
 
+  // const eventsOfUser = useSelector(getUser).events;
+  // const [events, setEvents] = useState([]);
+  // const [error, setError] = useState('');
+  // const [isLoading, setIsLoading] = useState(false);
+
+  // useEffect(() => {
+  //   (async function getData() {
+  //     let eventsList = [];
+  //     setIsLoading(true);
+  //     try {
+  //       const  {data}  = await fetchData(`/events`);
+  //       if (!data) {
+  //         return onFetchError('Whoops, something went wrong');
+  //       }
+  //       // setEvents(data);
+  //       data.map(it=>eventsOfUser.map(item=>{if(item === it._id){
+  //         eventsList.push(it)}
+  //         console.log("eventsList", eventsList)
+  //         setEvents(eventsList);
+  //       }));
+  //     } catch (error) {
+  //       setError(error);
+  //       alert(error)
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   })();
+  // }, []);
+
   const eventsOfUser = useSelector(getUser).events;
   const [events, setEvents] = useState([]);
   const [error, setError] = useState('');
@@ -51,6 +80,7 @@ export const Events = () => {
         {isLoading ? onLoading() : onLoaded()}
         {error && onFetchError('Whoops, something went wrong')}
         <HeaderText>{t('Upcoming club meetings')}</HeaderText>
+
         {events.length > 0 && !error && <EventsList events={events} />}
         <HeaderText>{t('Archive of past events')}</HeaderText>
         {events.length > 0 && !error && <ArchiveEventsList events={events} />}
