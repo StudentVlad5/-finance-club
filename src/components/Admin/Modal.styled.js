@@ -37,6 +37,14 @@ export const FormLabel = styled.label`
   line-height: 1.33;
   letter-spacing: 0.04em;
   color: ${props => props.theme.white_text};
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 16px;
+  }
 `;
 
 export const FormLabelBox = styled.div`
@@ -54,6 +62,14 @@ export const FormLabelBox = styled.div`
   letter-spacing: 0.04em;
   color: ${props => props.theme.white_text};
 
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 16px;
+  }
+
   & div {
     width: 70%;
     display: flex;
@@ -64,6 +80,7 @@ export const FormLabelBox = styled.div`
   & label {
     display: flex;
     align-items: center;
+    color: ${props => props.theme.white_text};
   }
 `;
 
@@ -81,6 +98,14 @@ export const FormRatio = styled.div`
   line-height: 1.33;
   letter-spacing: 0.04em;
   color: ${props => props.theme.white_text};
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 14px;
+  }
 `;
 
 export const FormInputBox = styled.div`
@@ -118,6 +143,14 @@ export const FormInput = styled(Field)`
   outline: none;
   transition: ${theme.transition};
 
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 16px;
+  }
+
   &::placeholder {
     color: rgba(27, 27, 27, 0.6);
   }
@@ -151,7 +184,15 @@ export const FormInput = styled(Field)`
       font-weight: 400;
       line-height: 1.33;
       letter-spacing: 0.04em;
-      color: ${props => props.theme.black_text};
+      color: ${props => props.theme.white_text};
+
+      @media screen and (min-width: ${theme.breakpoints.tablet}) {
+        font-size: 14px;
+      }
+
+      @media screen and (min-width: ${theme.breakpoints.desktop}) {
+        font-size: 16px;
+      }
     }
   }
 `;
@@ -225,7 +266,7 @@ export const IncrementBtn = styled.button`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${props => props.theme.white_text};
+  color: ${props => props.theme.black_text};
 
   background-color: ${props => props.theme.white_fon};
   border: 1px solid ${props => props.theme.white_fon};
@@ -234,6 +275,14 @@ export const IncrementBtn = styled.button`
   transition: ${theme.transition};
 
   cursor: pointer;
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 16px;
+  }
 
   &:hover,
   &:focus {
@@ -262,6 +311,14 @@ export const AddDetailsBtn = styled.button`
 
   cursor: pointer;
 
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 16px;
+  }
+
   &:hover,
   &:focus {
     color: ${props => props.theme.white_fon};
@@ -281,4 +338,12 @@ export const Error = styled.span`
   font-size: 8px;
   text-align: right;
   color: ${props => props.theme.black_text};
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 10px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 12px;
+  }
 `;

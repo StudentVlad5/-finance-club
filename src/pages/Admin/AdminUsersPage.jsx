@@ -7,6 +7,7 @@ import {
   MdAddCard,
   MdFilterAlt,
 } from 'react-icons/md';
+import moment from 'moment';
 import { SEO } from 'utils/SEO';
 import { openModalWindow } from 'hooks/modalWindow';
 import { addModal } from 'redux/modal/operation';
@@ -17,7 +18,6 @@ import { getFromStorage } from 'services/localStorService';
 import { PaginationBlock } from 'helpers/Pagination/Pagination';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
-import { BASE_URL_IMG } from 'helpers/constants';
 import { EditUserModal } from 'components/Admin/UsersModal/EditUserModal';
 import { CreateUserModal } from 'components/Admin/UsersModal/CreateUserModal';
 import { BackButton } from 'helpers/BackLink/BackLink';
@@ -140,11 +140,11 @@ const AdminUsersPage = () => {
         item.phone.toString().toLowerCase().includes(filterPhone) &&
         item.company.toString().toLowerCase().includes(filterCompany) &&
         item.position.toString().includes(filterPosition) &&
-        item.birthday.toString().toLowerCase().includes(filterBirthday) &&
+        item.birthday.split('-').join('').includes(filterBirthday) &&
         item.events.join(',').toString().toLowerCase().includes(filterEvents) &&
-        item.status.toString().toLowerCase().includes(filterStatus) &&
         item.packages.join(',').toString().includes(filterPackages) &&
         item.avatar.toString().toLowerCase().includes(filterAvatar) &&
+        item.status.toString().toLowerCase().includes(filterStatus) &&
         item.role.toString().toLowerCase().includes(filterRole)
       ) {
         peremOfFilter.push(item);
@@ -729,7 +729,9 @@ const AdminUsersPage = () => {
                       <>
                         <TableData>{user.company}</TableData>
                         <TableData>{user.position}</TableData>
-                        <TableData>{user.birthday}</TableData>
+                        <TableData>
+                          {moment(user.birthday).format('DD.MM.YYYY')}
+                        </TableData>
                         <TableData>{user.events.join(', ')}</TableData>
                         <TableData>{user.packages.join(', ')}</TableData>
                         <TableData>

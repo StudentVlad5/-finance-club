@@ -22,23 +22,28 @@ export const Table = styled.table`
 `;
 
 export const TableFilter = styled.thead`
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-
   & input {
     width: 100%;
+    min-width: 40px;
     margin: 0;
     padding: 5px 20px 5px 10px;
 
     font-family: ${theme.fonts[0]};
-    font-size: ${theme.fontSizes.extraSmall};
+    font-size: 10px;
     font-weight: 400;
     line-height: 1.33;
     color: ${props => props.theme.black_text};
 
     border-color: ${props => props.theme.grey};
     border-radius: 40px;
+
+    @media screen and (min-width: ${theme.breakpoints.tablet}) {
+      font-size: 12px;
+    }
+
+    @media screen and (min-width: ${theme.breakpoints.desktop}) {
+      font-size: 14px;
+    }
 
     &:hover,
     &:focus,
@@ -50,13 +55,6 @@ export const TableFilter = styled.thead`
 `;
 
 export const TableRow = styled.tr`
-  /* &:first-child {
-    position: absolute;
-    top: 40px;
-    left: 0;
-    right: 0;
-  } */
-
   &:nth-child(2n) {
     background-color: ${props => props.theme.greyOpacity};
   }
@@ -64,23 +62,23 @@ export const TableRow = styled.tr`
 
 export const TableHead = styled.th`
   position: relative;
-  padding: 0.25rem;
+  padding: 0.25rem 0;
 
   font-family: ${theme.fonts[0]};
-  font-size: ${theme.fontSizes.extraSmall};
+  font-size: 12px;
   font-weight: 700;
   line-height: 1.03;
   color: ${props => props.theme.white_text};
   border-bottom: 1px solid ${props => props.theme.grey};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.3;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     max-width: 200px;
-    font-size: 14px;
+    font-size: 16px;
   }
 `;
 
@@ -89,7 +87,7 @@ export const TableData = styled.td`
   max-width: 80px;
 
   font-family: ${theme.fonts[0]};
-  font-size: ${theme.fontSizes.extraSmall};
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.1;
   color: ${props => props.theme.white_text};
@@ -98,23 +96,24 @@ export const TableData = styled.td`
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     max-width: 100px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.3;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     max-width: 200px;
-    font-size: 14px;
+    font-size: 16px;
   }
 `;
 
 export const BtnWrapper = styled.div`
   position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 8px;
+  top: 60%;
+  transform: translateY(-60%);
 
   & button {
+    display: none;
     padding: 1px;
     background-color: transparent;
     border: none;
@@ -128,6 +127,10 @@ export const BtnWrapper = styled.div`
 
     & > svg {
       fill: currentColor;
+    }
+
+    &.active {
+      display: inline-block;
     }
   }
 `;
@@ -165,7 +168,7 @@ export const LearnMoreBtn = styled.button`
   padding: 6px;
 
   font-family: ${theme.fonts[0]};
-  font-size: ${theme.fontSizes.extraSmall};
+  font-size: 12px;
   font-weight: 500;
   color: ${props => props.theme.white_text};
   border-color: #f7f7f7;
@@ -174,6 +177,14 @@ export const LearnMoreBtn = styled.button`
 
   transition: ${theme.transition};
   cursor: pointer;
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 16px;
+  }
 
   &:hover,
   &:focus {
@@ -188,7 +199,7 @@ export const ClearFiltersBtn = styled.button`
   text-align: start;
 
   font-family: ${theme.fonts[0]};
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.33;
 
@@ -198,8 +209,15 @@ export const ClearFiltersBtn = styled.button`
   background-color: transparent;
 
   transition: ${theme.transition};
-
   cursor: pointer;
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 16px;
+  }
 
   &:hover,
   &:focus {
@@ -215,15 +233,17 @@ export const List = styled.ul`
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
+
   max-width: calc(100vw - 40px);
+  margin-top: 20px;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     max-width: calc(100vw - 64px);
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    justify-content: space-between;
-    max-width: 1280px;
+    justify-content: space-evenly;
+    max-width: ${theme.breakpoints.desktop};
   }
 `;
 

@@ -238,7 +238,7 @@ RegisterModal.propTypes = {
     _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
-    duration: PropTypes.number.isRequired,
+    duration: PropTypes.string,
     location: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,

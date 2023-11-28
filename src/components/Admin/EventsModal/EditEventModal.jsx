@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdClose, MdDone } from 'react-icons/md';
+import moment from 'moment';
 import { FieldArray, Formik } from 'formik';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
@@ -169,8 +170,8 @@ export const EditEventModal = () => {
                       type="date"
                       id="date"
                       name="date"
-                      placeholder="YYYY/MM/DD"
-                      value={values.date}
+                      placeholder="DD.MM.YYYY"
+                      value={moment(values.date).format('DD.MM.YYYY')}
                     />
                   </FormField>
                   <FormField>
@@ -196,7 +197,7 @@ export const EditEventModal = () => {
                       ) : null}
                     </FormLabel>
                     <FormInput
-                      type="number"
+                      type="text"
                       id="duration"
                       name="duration"
                       placeholder="Duration of the event"
