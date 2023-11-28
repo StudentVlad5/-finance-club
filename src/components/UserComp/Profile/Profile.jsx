@@ -133,7 +133,7 @@ export const Profile = ({ onClose }) => {
               type="date"
               name="birthday"
               id="birthday"
-              value={values.birthday}
+              value={values.birthday.split('T')[0]}
             />
             {errors.birthday && touched.birthday ? (
               <Error>{errors.birthday}</Error>
