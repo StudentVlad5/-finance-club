@@ -13,8 +13,11 @@ import {
   ProfileName,
   ProfileList,
 } from './Profile.styled';
+import { useTranslation } from 'react-i18next';
 
 export const Profile = ({ onClose }) => {
+  const { t } = useTranslation();
+
   let  userIn  = useSelector(getUser);
   const [updateData, setUpdateData] = useState(userIn ?? []);
   const id = useSelector(selectId);
@@ -53,7 +56,7 @@ export const Profile = ({ onClose }) => {
           onChange={handleChange}
         >
           <ProfileLabel htmlFor="name">
-            <ProfileName>First name</ProfileName>
+            <ProfileName>{t("First name")}</ProfileName>
             <ProfileInput
               type="text"
               name="name"
@@ -66,7 +69,7 @@ export const Profile = ({ onClose }) => {
             ) : null}
           </ProfileLabel>
           <ProfileLabel htmlFor="surname">
-            <ProfileName>Last name</ProfileName>
+            <ProfileName>{t("Last name")}</ProfileName>
             <ProfileInput
               type="text"
               name="surname"
@@ -78,7 +81,7 @@ export const Profile = ({ onClose }) => {
             ) : null}
           </ProfileLabel>
           <ProfileLabel htmlFor="company">
-            <ProfileName>Company</ProfileName>
+            <ProfileName>{t("Company")}</ProfileName>
             <ProfileInput
               type="text"
               name="company"
@@ -90,7 +93,7 @@ export const Profile = ({ onClose }) => {
             ) : null}
           </ProfileLabel>
           <ProfileLabel htmlFor="position">
-            <ProfileName>Position</ProfileName>
+            <ProfileName>{t("Position")}</ProfileName>
             <ProfileInput
               type="text"
               name="position"
@@ -102,7 +105,7 @@ export const Profile = ({ onClose }) => {
             ) : null}
           </ProfileLabel>
           <ProfileLabel htmlFor="email">
-            <ProfileName>Email</ProfileName>
+            <ProfileName>{t("Email")}</ProfileName>
             <ProfileInput
               type="email"
               name="email"
@@ -115,7 +118,7 @@ export const Profile = ({ onClose }) => {
             ) : null}
           </ProfileLabel>
           <ProfileLabel htmlFor="phone">
-            <ProfileName>Phone</ProfileName>
+            <ProfileName>{t({Phone})}</ProfileName>
             <ProfileInput
               type="tel"
               name="phone"
@@ -128,7 +131,7 @@ export const Profile = ({ onClose }) => {
             ) : null}
           </ProfileLabel>
           <ProfileLabel htmlFor="birthday">
-            <ProfileName>Birthday</ProfileName>
+            <ProfileName>{t("Birthday")}</ProfileName>
             <ProfileInput
               type="date"
               name="birthday"
@@ -145,10 +148,10 @@ export const Profile = ({ onClose }) => {
               aria-label="Close"
               onClick={() => onClose(false)}
             >
-              CANCEL
+              {t("CANCEL")}
             </BtnLightUser>
             <BtnDarkUser type="submit" disabled={isSubmitting} aria-label="Submit">
-              SAVE
+              {t("SAVE")}
             </BtnDarkUser>
           </BtnContainer>
         </ProfileList>

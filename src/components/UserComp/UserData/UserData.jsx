@@ -26,9 +26,12 @@ import { BASE_URL_IMG } from 'helpers/constants';
 
 import { Profile } from '../Profile/Profile';
 import { ChangePassword } from '../ChangePassword/ChangePassword';
+import { useTranslation } from 'react-i18next';
 
 
 export const UserData = () => {
+  const { t } = useTranslation();
+
   const [editProfileSettings, setEditProfileSettings] = useState(false);
   const dispatch = useDispatch();
 
@@ -94,7 +97,7 @@ export const UserData = () => {
         {editProfileSettings && <Profile onClose={setEditProfileSettings} />}
       </UserDataContainer>
       <UserDataContainer>
-        <TitleArticle>Change Password</TitleArticle>
+        <TitleArticle>{t("Change Password")}</TitleArticle>
         <ChangePassword />
       </UserDataContainer>
     </UserDataSection>

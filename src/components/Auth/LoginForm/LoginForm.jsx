@@ -4,22 +4,29 @@ import { useDispatch } from 'react-redux';
 import { useFormik, Formik } from 'formik';
 import { ImEye, ImEyeBlocked } from 'react-icons/im';
 import schemas from 'utils/schemas';
-import {theme} from 'components/baseStyles/Variables.styled';
-import { TitleLogin, ErrorBox, FormInputLogin, ShowPassword, Btn, StyledLink, BoxText, FormContainer, FormStyled} from './LoginForm.styled';
-import { logIn } from 'redux/auth/operations';
+import { theme } from 'components/baseStyles/Variables.styled';
 import {
-  Error,
-  FormField,
-  FormLabel,
-} from 'components/baseStyles/Form.styled';
+  TitleLogin,
+  ErrorBox,
+  FormInputLogin,
+  ShowPassword,
+  Btn,
+  StyledLink,
+  BoxText,
+  FormContainer,
+  FormStyled,
+} from './LoginForm.styled';
+import { logIn } from 'redux/auth/operations';
+import { Error, FormField, FormLabel } from 'components/baseStyles/Form.styled';
 import { Section, Container } from 'components/baseStyles/CommonStyle.styled';
-
+import { useTranslation } from 'react-i18next';
 
 export const LoginForm = () => {
+  const { t } = useTranslation();
+
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-
 
   const onSubmit = values => {
     setIsLoading(true);
@@ -39,7 +46,6 @@ export const LoginForm = () => {
     },
     validationSchema: schemas.schemasLogin,
     onSubmit,
-    
   });
 
   const isValid =
@@ -63,75 +69,71 @@ export const LoginForm = () => {
   return (
     <Section>
       <Container>
-          <Formik validationSchema={schemas.schemasLogin}>
-            <FormStyled onSubmit={formik.handleSubmit} autoComplete="off">
-              <TitleLogin>{'Log In'}</TitleLogin>
-                <FormField>
-                  <FormLabel htmlFor="email">
-                        <span>Email</span>
-                        {formik.errors.name && formik.touched.name ? (
-                          <Error>{formik.errors.name}</Error>
-                        ) : null}
-                      </FormLabel>
-                  <FormInputLogin
-                    style={{
-                      borderColor: showAccentValidateInput(
-                        formik.values.email,
-                        formik.errors.email,
-                      ),
-                    }}
-                    name="email"
-                    type="email"
-                    validate={schemas.schemasLogin.email}
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                    onBlur={formik.handleBlur}
-                  />
-                </FormField>
-                <FormField>
-                  <FormLabel htmlFor="password">
-                          <span>Password</span>
-                          {formik.errors.name && formik.touched.name ? (
-                            <Error>{formik.errors.name}</Error>
-                          ) : null}
-                  </FormLabel>
-                  <FormInputLogin
-                    style={{
-                      borderColor: showAccentValidateInput(
-                        formik.values.password,
-                        formik.errors.password,
-                      ),
-                    }}
-                    name="password"
-                    type={showPass ? 'text' : 'password'}
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                    onBlur={formik.handleBlur}
-                  />
-                  <ShowPassword onClick={showPassword}>
-                    {!showPass ? <ImEyeBlocked /> : <ImEye />}
-                  </ShowPassword>
-                  {formik.errors.password && formik.touched.password ? (
-                    <ErrorBox>{formik.errors.password}</ErrorBox>
-                  ) : null}
-                </FormField>
-                <FormContainer>
-                <BoxText>
-                  <StyledLink to="/forgot_password">
-                    {'Forgot password?'}
-                  </StyledLink>
-                </BoxText>
-                  <Btn
-                    type="submit"
-                    disabled={isValid}
-                    aria-label="submit log in"
-                  >
-                    {isLoading ? 'Loading' : 'Log In'}
-                  </Btn>
-                  </FormContainer>
-            </FormStyled>
-          </Formik>
-        </Container>
+        <Formik validationSchema={schemas.schemasLogin}>
+          <FormStyled onSubmit={formik.handleSubmit} autoComplete="off">
+            <TitleLogin>{t('Log In')}</TitleLogin>
+            <FormField>
+              <FormLabel htmlFor="email">
+                <span>{t('Email')}</span>
+                {formik.errors.name && formik.touched.name ? (
+                  <Error>{formik.errors.name}</Error>
+                ) : null}
+              </FormLabel>
+              <FormInputLogin
+                style={{
+                  borderColor: showAccentValidateInput(
+                    formik.values.email,
+                    formik.errors.email,
+                  ),
+                }}
+                name="email"
+                type="email"
+                validate={schemas.schemasLogin.email}
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                onBlur={formik.handleBlur}
+              />
+            </FormField>
+            <FormField>
+              <FormLabel htmlFor="password">
+                <span>{t('Password')}</span>
+                {formik.errors.name && formik.touched.name ? (
+                  <Error>{formik.errors.name}</Error>
+                ) : null}
+              </FormLabel>
+              <FormInputLogin
+                style={{
+                  borderColor: showAccentValidateInput(
+                    formik.values.password,
+                    formik.errors.password,
+                  ),
+                }}
+                name="password"
+                type={showPass ? 'text' : 'password'}
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                onBlur={formik.handleBlur}
+              />
+              <ShowPassword onClick={showPassword}>
+                {!showPass ? <ImEyeBlocked /> : <ImEye />}
+              </ShowPassword>
+              {formik.errors.password && formik.touched.password ? (
+                <ErrorBox>{formik.errors.password}</ErrorBox>
+              ) : null}
+            </FormField>
+            <FormContainer>
+              <BoxText>
+                <StyledLink to="/forgot_password">
+                  {t('Forgot password?')}
+                </StyledLink>
+              </BoxText>
+              <Btn type="submit" disabled={isValid} aria-label="submit log in">
+                {isLoading ? 'Loading' : t('Log In')}
+              </Btn>
+            </FormContainer>
+          </FormStyled>
+        </Formik>
+      </Container>
     </Section>
   );
 };
