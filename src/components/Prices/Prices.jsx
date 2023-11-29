@@ -27,8 +27,9 @@ import { RegisterModal } from 'components/HowToJoin/RegisterModal/RegisterModal'
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { fetchData } from 'services/APIservice';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { StatusContext } from 'components/ContextStatus/ContextStatus';
 
 const Prices = () => {
   const { t } = useTranslation();
@@ -36,10 +37,7 @@ const Prices = () => {
   const [packages, setPackages] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem('chosenLanguage') || 'en',
-  );
-
+  const { selectedLanguage } = useContext(StatusContext);
   useEffect(() => {
     (async function getData() {
       setIsLoading(true);
@@ -93,11 +91,11 @@ const Prices = () => {
             {isLoading ? onLoading() : onLoaded()}
             {error && onFetchError('Whoops, something went wrong')}
             {packages.map(it => (
-              <ListItems key={it[selectedLanguage].title}>
+              <ListItems key={it[selectedLanguage]?.title}>
                 <ListItemsContentWraper>
-                  <ListItemsOfPacked>{it[selectedLanguage].title}</ListItemsOfPacked>
-                  <TitleItem>{it[selectedLanguage].price}</TitleItem>
-                  <SubTitleItem>{it[selectedLanguage].content}</SubTitleItem>
+                  <ListItemsOfPacked>{it[selectedLanguage]?.title}</ListItemsOfPacked>
+                  <TitleItem>{it[selectedLanguage]?.price}</TitleItem>
+                  <SubTitleItem>{it[selectedLanguage]?.content}</SubTitleItem>
                   <UlContent>
                     {t("features")}
                     {it[selectedLanguage]?.features.map((item, i) => (
