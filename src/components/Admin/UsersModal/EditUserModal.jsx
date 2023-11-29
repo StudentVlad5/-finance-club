@@ -298,6 +298,42 @@ export const EditUserModal = () => {
                       </label>
                     </div>
                   </FormLabelBox>
+                  <FieldArray
+                    name="events"
+                    render={arrayHelpers => (
+                      <FormInputArray>
+                        <FormLabel>Events</FormLabel>
+                        <FormInputBoxColumn>
+                          {values.events && values.events.length > 0 ? (
+                            values.events.map((item, index) => (
+                              <div key={index}>
+                                <FormInput name={`events.${index}`} />
+                                <IncrementBtn
+                                  type="button"
+                                  onClick={() => arrayHelpers.remove(index)} // remove a detail from the list
+                                >
+                                  -
+                                </IncrementBtn>
+                                <IncrementBtn
+                                  type="button"
+                                  onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at an event
+                                >
+                                  +
+                                </IncrementBtn>
+                              </div>
+                            ))
+                          ) : (
+                            <AddDetailsBtn
+                              type="button"
+                              onClick={() => arrayHelpers.push('')}
+                            >
+                              Add an event
+                            </AddDetailsBtn>
+                          )}
+                        </FormInputBoxColumn>
+                      </FormInputArray>
+                    )}
+                  />
                   <FormField>
                     <FormLabel htmlFor="avatar">
                       <span>Avatar</span>

@@ -7,6 +7,7 @@ import {
   MdAddCard,
   MdFilterAlt,
 } from 'react-icons/md';
+import moment from 'moment';
 import { SEO } from 'utils/SEO';
 import { openModalWindow } from 'hooks/modalWindow';
 import { addModal } from 'redux/modal/operation';
@@ -17,7 +18,6 @@ import { getFromStorage } from 'services/localStorService';
 import { PaginationBlock } from 'helpers/Pagination/Pagination';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
-import { BASE_URL_IMG } from 'helpers/constants';
 import { EditEventModal } from 'components/Admin/EventsModal/EditEventModal';
 import { CreateEventModal } from 'components/Admin/EventsModal/CreateEventModal';
 import { BackButton } from 'helpers/BackLink/BackLink';
@@ -34,6 +34,19 @@ import {
   TableRow,
 } from 'components/Admin/Admin.styled';
 
+const initialState = {
+  filterDate: '',
+  filterTime: '',
+  filterDuration: '',
+  filterLocation: '',
+  filterDescription: '',
+  filterPlan: '',
+  filterSpeakers: '',
+  filterModerator: '',
+  filterPackages: '',
+  filterImage: '',
+};
+
 const AdminEventsPage = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,17 +54,11 @@ const AdminEventsPage = () => {
   const reload = useSelector(reloadValue);
 
   const [filterEvents, setFilterEvents] = useState([]);
-  const [filterDate, setFilterDate] = useState('');
-  const [filterTime, setFilterTime] = useState('');
-  const [filterDuration, setFilterDuration] = useState('');
-  const [filterLocation, setFilterLocation] = useState('');
-  const [filterTitle, setFilterTitle] = useState('');
-  const [filterDescription, setFilterDescription] = useState('');
-  const [filterPlan, setFilterPlan] = useState('');
-  const [filterSpeakers, setFilterSpeakers] = useState('');
-  const [filterModerator, setFilterModerator] = useState('');
-  const [filterPackages, setFilterPackages] = useState('');
-  const [filterImage, setFilterImage] = useState('');
+  const [filters, setFilters] = useState(initialState);
+
+  const [lang, setLang] = useState(
+    localStorage.getItem('chosenLanguage') || 'en',
+  );
 
   useEffect(() => {
     (async function getData() {
@@ -69,7 +76,7 @@ const AdminEventsPage = () => {
         setIsLoading(false);
       }
     })();
-  }, [reload]);
+  }, [reload, lang]);
 
   async function deleteEvent(id) {
     setIsLoading(true);
@@ -86,157 +93,116 @@ const AdminEventsPage = () => {
 
   const handleChangeFilter = e => {
     e.preventDefault();
-    switch (e.currentTarget.name) {
-      case 'filterDate':
-        setFilterDate(e.currentTarget.value);
-        break;
-      case 'filterTime':
-        setFilterTime(e.currentTarget.value);
-        break;
-      case 'filterDuration':
-        setFilterDuration(e.currentTarget.value);
-        break;
-      case 'filterLocation':
-        setFilterLocation(e.currentTarget.value);
-        break;
-      case 'filterTitle':
-        setFilterTitle(e.currentTarget.value);
-        break;
-      case 'filterDescription':
-        setFilterDescription(e.currentTarget.value);
-        break;
-      case 'filterPlan':
-        setFilterPlan(e.currentTarget.value);
-        break;
-      case 'filterSpeakers':
-        setFilterSpeakers(e.currentTarget.value);
-        break;
-      case 'filterModerator':
-        setFilterModerator(e.currentTarget.value);
-        break;
-      case 'filterPackages':
-        setFilterPackages(e.currentTarget.value);
-        break;
-      case 'filterImage':
-        setFilterImage(e.currentTarget.value);
-        break;
-      default:
-        break;
-    }
+    const { name, value } = e.currentTarget;
+    const selectedFilters = {
+      ...filters,
+      [name]: value,
+    };
+    setFilters(selectedFilters);
+    document
+      .querySelector(`button[id='${name}'][name='startFilterEvents']`)
+      .classList.remove('active');
+    document
+      .querySelector(`button[id='${name}'][name='cleanFilterEvents']`)
+      .classList.add('active');
   };
 
   const startFilterEvents = e => {
     e.preventDefault();
     const peremOfFilter = [];
     events.map(item => {
+      // let isImage = item[lang].image && item[lang].image !== '' ? 'yes' : 'no';
       if (
-        item.date.toString().toLowerCase().includes(filterDate) &&
-        item.time.toString().toLowerCase().includes(filterTime) &&
-        item.duration.toString().toLowerCase().includes(filterDuration) &&
-        item.location.toString().toLowerCase().includes(filterLocation) &&
-        item.title.toString().toLowerCase().includes(filterTitle) &&
-        item.description.toString().includes(filterDescription) &&
-        item.plan.join(',').toString().toLowerCase().includes(filterPlan) &&
-        item.speakers
-          .join(',')
-          .toString()
-          .toLowerCase()
-          .includes(filterSpeakers) &&
-        item.moderator.toString().toLowerCase().includes(filterModerator) &&
-        item.packages.join(',').toString().includes(filterPackages) &&
-        item.image.toString().toLowerCase().includes(filterImage)
+        moment(item[lang].date)
+          .format('DD.MM.YYYY')
+          .includes(filters['filterDate'])
+        // &&
+        // item[lang].time.split(':').join('').includes(filters['filterTime'])
+        // &&
+        // item[lang].duration
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterDuration'])
+        // &&
+        // item[lang].location
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterLocation'])
+        // &&
+        // item[lang].title
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterTitle'])
+        // &&
+        // item[lang].description
+        //   ?.toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterDescription'])
+        // &&
+        // item[lang].plan
+        //   .join('; ')
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterPlan'])
+        // &&
+        // item[lang].speakers
+        //   .join('; ')
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterSpeakers'])
+        // &&
+        // item[lang].moderator
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterModerator'])
+        // &&
+        // item[lang].packages
+        //   .join(', ')
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterPackages'])
+        // &&
+        // isImage.includes(filters['filterImage'])
       ) {
-        peremOfFilter.push(item);
+        peremOfFilter.push(item[lang]);
       }
     });
-
+    setCurrent(1);
     setFilterEvents(peremOfFilter);
   };
 
   const cleanFilterEvents = e => {
     e.preventDefault();
-    let filterPr = '';
-    let filterCa = '';
-    let filterDu = '';
-    let filterLn = '';
-    let filterA = '';
-    let filterD = '';
-    let filterS = '';
-    let filterU = '';
-    let filterP = '';
-    let filterC = '';
-    let filterI = '';
+    const { id } = e.currentTarget;
+    const deletedFilters = {
+      ...filters,
+      [id]: '',
+    };
 
-    e.currentTarget.name === 'clearFilterDate'
-      ? setFilterDate(filterPr)
-      : (filterPr = filterDate);
-    e.currentTarget.name === 'clearFilterTime'
-      ? setFilterTime(filterCa)
-      : (filterCa = filterTime);
-    e.currentTarget.name === 'clearFilterDuration'
-      ? setFilterDuration(filterDu)
-      : (filterDu = filterDuration);
-    e.currentTarget.name === 'clearFilterLocation'
-      ? setFilterLocation(filterLn)
-      : (filterLn = filterLocation);
-    e.currentTarget.name === 'clearFilterTitle'
-      ? setFilterTitle(filterA)
-      : (filterA = filterTitle);
-    e.currentTarget.name === 'clearFilterDescription'
-      ? setFilterDescription(filterD)
-      : (filterD = filterDescription);
-    e.currentTarget.name === 'clearFilterPlan'
-      ? setFilterPlan(filterS)
-      : (filterS = filterPlan);
-    e.currentTarget.name === 'clearFilterSpeakers'
-      ? setFilterSpeakers(filterU)
-      : (filterU = filterSpeakers);
-    e.currentTarget.name === 'clearFilterModerator'
-      ? setFilterModerator(filterP)
-      : (filterP = filterModerator);
-    e.currentTarget.name === 'clearFilterPackages'
-      ? setFilterPackages(filterC)
-      : (filterC = filterPackages);
-    e.currentTarget.name === 'clearFilterImage'
-      ? setFilterImage(filterI)
-      : (filterI = filterImage);
+    setFilters(deletedFilters);
+    document
+      .querySelector(`button[id='${id}'][name='startFilterEvents']`)
+      .classList.add('active');
+    document
+      .querySelector(`button[id='${id}'][name='cleanFilterEvents']`)
+      .classList.remove('active');
 
-    const peremOfFilter = [];
-    events.map(item => {
-      if (
-        item.date?.toString().toLowerCase().includes(filterPr) &&
-        item.time?.toString().toLowerCase().includes(filterCa) &&
-        item.duration?.toString().toLowerCase().includes(filterDu) &&
-        item.location?.toString().toLowerCase().includes(filterLn) &&
-        item.title?.toString().toLowerCase().includes(filterA) &&
-        item.description?.toString().toLowerCase().includes(filterD) &&
-        item.plan?.toString().toLowerCase().includes(filterS) &&
-        item.speakers?.toString().toLowerCase().includes(filterU) &&
-        item.moderator?.toString().toLowerCase().includes(filterP) &&
-        item.packages?.toString().toLowerCase().includes(filterC) &&
-        item.image?.toString().toLowerCase().includes(filterI)
-      ) {
-        peremOfFilter.push(item);
-      }
-      return peremOfFilter;
-    });
-
-    setFilterEvents(peremOfFilter);
+    startFilterEvents(e);
   };
 
   const clearAllFilters = () => {
+    setFilters(initialState);
+    const listOfStartFilterEvents = document.querySelectorAll(
+      `button[name='startFilterEvents']`,
+    );
+    listOfStartFilterEvents.forEach(item => item.classList.add('active'));
+
+    const listOfCleanFilterEvents = document.querySelectorAll(
+      `button[name='cleanFilterEvents']`,
+    );
+    listOfCleanFilterEvents.forEach(item => item.classList.remove('active'));
+
     reload === true ? dispatch(addReload(false)) : dispatch(addReload(true));
-    setFilterDate('');
-    setFilterTime('');
-    setFilterDuration('');
-    setFilterLocation('');
-    setFilterTitle('');
-    setFilterDescription('');
-    setFilterPlan('');
-    setFilterSpeakers('');
-    setFilterModerator('');
-    setFilterPackages('');
-    setFilterImage('');
   };
 
   const handleSearchOnEnter = e => {
@@ -313,14 +279,16 @@ const AdminEventsPage = () => {
                   type="text"
                   name="filterDate"
                   placeholder="Date"
-                  value={filterDate}
+                  value={filters['filterDate']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
                 <BtnWrapper>
                   <button
+                    className="active"
                     type="button"
                     id="filterDate"
+                    name="startFilterEvents"
                     onClick={e => startFilterEvents(e)}
                   >
                     <MdFilterAlt />
@@ -328,10 +296,9 @@ const AdminEventsPage = () => {
                   <button
                     type="button"
                     id="filterDate"
-                    name="clearFilterDate"
+                    name="cleanFilterEvents"
                     onClick={e => {
                       cleanFilterEvents(e);
-                      setFilterDate('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -343,14 +310,16 @@ const AdminEventsPage = () => {
                   type="text"
                   name="filterTime"
                   placeholder="Time"
-                  value={filterTime}
+                  value={filters['filterTime']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
                 <BtnWrapper>
                   <button
+                    className="active"
                     type="button"
                     id="filterTime"
+                    name="startFilterEvents"
                     onClick={e => startFilterEvents(e)}
                   >
                     <MdFilterAlt />
@@ -358,10 +327,9 @@ const AdminEventsPage = () => {
                   <button
                     type="button"
                     id="filterTime"
-                    name="clearFilterTime"
+                    name="cleanFilterEvents"
                     onClick={e => {
                       cleanFilterEvents(e);
-                      setFilterTime('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -373,14 +341,16 @@ const AdminEventsPage = () => {
                   type="number"
                   name="filterDuration"
                   placeholder="Duration"
-                  value={filterDuration}
+                  value={filters['filterDuration']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
                 <BtnWrapper>
                   <button
+                    className="active"
                     type="button"
                     id="filterDuration"
+                    name="startFilterEvents"
                     onClick={e => startFilterEvents(e)}
                   >
                     <MdFilterAlt />
@@ -388,10 +358,9 @@ const AdminEventsPage = () => {
                   <button
                     type="button"
                     id="filterDuration"
-                    name="clearFilterDuration"
+                    name="cleanFilterEvents"
                     onClick={e => {
                       cleanFilterEvents(e);
-                      setFilterDuration('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -403,14 +372,16 @@ const AdminEventsPage = () => {
                   type="text"
                   name="filterLocation"
                   placeholder="Location"
-                  value={filterLocation}
+                  value={filters['filterLocation']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
                 <BtnWrapper>
                   <button
+                    className="active"
                     type="button"
                     id="filterLocation"
+                    name="startFilterEvents"
                     onClick={e => startFilterEvents(e)}
                   >
                     <MdFilterAlt />
@@ -418,10 +389,9 @@ const AdminEventsPage = () => {
                   <button
                     type="button"
                     id="filterLocation"
-                    name="clearFilterLocation"
+                    name="cleanFilterEvents"
                     onClick={e => {
                       cleanFilterEvents(e);
-                      setFilterLocation('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -433,14 +403,16 @@ const AdminEventsPage = () => {
                   type="text"
                   name="filterTitle"
                   placeholder="Title"
-                  value={filterTitle}
+                  value={filters['filterTitle']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
                 <BtnWrapper>
                   <button
+                    className="active"
                     type="button"
                     id="filterTitle"
+                    name="startFilterEvents"
                     onClick={e => startFilterEvents(e)}
                   >
                     <MdFilterAlt />
@@ -448,10 +420,9 @@ const AdminEventsPage = () => {
                   <button
                     type="button"
                     id="filterTitle"
-                    name="clearFilterTitle"
+                    name="cleanFilterEvents"
                     onClick={e => {
                       cleanFilterEvents(e);
-                      setFilterTitle('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -465,14 +436,16 @@ const AdminEventsPage = () => {
                       type="text"
                       name="filterDescription"
                       placeholder="Description"
-                      value={filterDescription}
+                      value={filters['filterDescription']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
                     <BtnWrapper>
                       <button
+                        className="active"
                         type="button"
                         id="filterDescription"
+                        name="startFilterEvents"
                         onClick={e => startFilterEvents(e)}
                       >
                         <MdFilterAlt />
@@ -480,10 +453,9 @@ const AdminEventsPage = () => {
                       <button
                         type="button"
                         id="filterDescription"
-                        name="clearFilterDescription"
+                        name="cleanFilterEvents"
                         onClick={e => {
                           cleanFilterEvents(e);
-                          setFilterDescription('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -495,14 +467,16 @@ const AdminEventsPage = () => {
                       type="text"
                       name="filterPlan"
                       placeholder="Plan"
-                      value={filterPlan}
+                      value={filters['filterPlan']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
                     <BtnWrapper>
                       <button
+                        className="active"
                         type="button"
                         id="filterPlan"
+                        name="startFilterEvents"
                         onClick={e => startFilterEvents(e)}
                       >
                         <MdFilterAlt />
@@ -510,10 +484,9 @@ const AdminEventsPage = () => {
                       <button
                         type="button"
                         id="filterPlan"
-                        name="clearFilterPlan"
+                        name="cleanFilterEvents"
                         onClick={e => {
                           cleanFilterEvents(e);
-                          setFilterPlan('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -525,14 +498,16 @@ const AdminEventsPage = () => {
                       type="text"
                       name="filterSpeakers"
                       placeholder="Speakers"
-                      value={filterSpeakers}
+                      value={filters['filterSpeakers']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
                     <BtnWrapper>
                       <button
+                        className="active"
                         type="button"
                         id="filterSpeakers"
+                        name="startFilterEvents"
                         onClick={e => startFilterEvents(e)}
                       >
                         <MdFilterAlt />
@@ -540,10 +515,9 @@ const AdminEventsPage = () => {
                       <button
                         type="button"
                         id="filterSpeakers"
-                        name="clearFilterSpeakers"
+                        name="cleanFilterEvents"
                         onClick={e => {
                           cleanFilterEvents(e);
-                          setFilterSpeakers('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -555,14 +529,16 @@ const AdminEventsPage = () => {
                       type="text"
                       name="filterModerator"
                       placeholder="Moderator"
-                      value={filterModerator}
+                      value={filters['filterModerator']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
                     <BtnWrapper>
                       <button
+                        className="active"
                         type="button"
                         id="filterModerator"
+                        name="startFilterEvents"
                         onClick={e => startFilterEvents(e)}
                       >
                         <MdFilterAlt />
@@ -570,10 +546,9 @@ const AdminEventsPage = () => {
                       <button
                         type="button"
                         id="filterModerator"
-                        name="clearFilterModerator"
+                        name="cleanFilterEvents"
                         onClick={e => {
                           cleanFilterEvents(e);
-                          setFilterModerator('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -585,14 +560,16 @@ const AdminEventsPage = () => {
                       type="text"
                       name="filterPackages"
                       placeholder="Packages"
-                      value={filterPackages}
+                      value={filters['filterPackages']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
                     <BtnWrapper>
                       <button
+                        className="active"
                         type="button"
                         id="filterPackages"
+                        name="startFilterEvents"
                         onClick={e => startFilterEvents(e)}
                       >
                         <MdFilterAlt />
@@ -600,10 +577,9 @@ const AdminEventsPage = () => {
                       <button
                         type="button"
                         id="filterPackages"
-                        name="clearFilterPackages"
+                        name="cleanFilterEvents"
                         onClick={e => {
                           cleanFilterEvents(e);
-                          setFilterPackages('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -615,14 +591,16 @@ const AdminEventsPage = () => {
                       type="text"
                       name="filterImage"
                       placeholder="Image"
-                      value={filterImage}
+                      value={filters['filterImage']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
                     <BtnWrapper>
                       <button
+                        className="active"
                         type="button"
                         id="filterImage"
+                        name="startFilterEvents"
                         onClick={e => startFilterEvents(e)}
                       >
                         <MdFilterAlt />
@@ -630,10 +608,9 @@ const AdminEventsPage = () => {
                       <button
                         type="button"
                         id="filterImage"
-                        name="clearFilterImage"
+                        name="cleanFilterEvents"
                         onClick={e => {
                           cleanFilterEvents(e);
-                          setFilterImage('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -681,22 +658,26 @@ const AdminEventsPage = () => {
                 .slice((current - 1) * size, current * size)
                 .map(event => (
                   <TableRow key={event._id}>
-                    <TableData>{event.date}</TableData>
-                    <TableData>{event.time}</TableData>
-                    <TableData>{event.duration} h</TableData>
-                    <TableData>{event.location}</TableData>
-                    <TableData>{event.title}</TableData>
+                    <TableData>
+                      {moment(event[lang].date).format('DD.MM.YYYY')}
+                    </TableData>
+                    <TableData>{event[lang].time}</TableData>
+                    <TableData>{event[lang].duration}</TableData>
+                    <TableData>{event[lang].location}</TableData>
+                    <TableData>{event[lang].title}</TableData>
                     {!isLearnMore && (
                       <>
-                        <TableData>{event.description}</TableData>
+                        <TableData>{event[lang].description}</TableData>
                         <TableData>
-                          {event.plan ? event.plan.join('; ') : ''}
+                          {event[lang].plan ? event[lang].plan.join('; ') : ''}
                         </TableData>
-                        <TableData>{event.speakers.join('; ')}</TableData>
-                        <TableData>{event.moderator}</TableData>
-                        <TableData>{event.packages.join(', ')}</TableData>
+                        <TableData>{event[lang].speakers.join('; ')}</TableData>
+                        <TableData>{event[lang].moderator}</TableData>
+                        <TableData>{event[lang].packages.join(', ')}</TableData>
                         <TableData>
-                          {event.image && event.image !== 'none' ? 'yes' : 'no'}
+                          {event[lang].image && event[lang].image !== 'none'
+                            ? 'yes'
+                            : 'no'}
                         </TableData>
                       </>
                     )}

@@ -26,8 +26,6 @@ import {
 import { useTranslation } from 'react-i18next';
 
 export const EventDetails = ({ event }) => {
-  const { t } = useTranslation();
-
   const {
     date,
     time,
@@ -41,6 +39,8 @@ export const EventDetails = ({ event }) => {
     moderator,
     image,
   } = event;
+
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const openModal = e => {

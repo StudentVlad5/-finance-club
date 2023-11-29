@@ -160,7 +160,7 @@ export const CreateEventModal = () => {
                       ) : null}
                     </FormLabel>
                     <FormInput
-                      type="number"
+                      type="text"
                       id="duration"
                       name="duration"
                       placeholder="Duration of the event"

@@ -18,7 +18,6 @@ import { useTranslation } from 'react-i18next';
 export const EventsList = ({ events }) => {
   const { t } = useTranslation();
 
-  console.log("events", events)
   const today = new Date();
   const activeEvents = events.filter(({ date }) => new Date(date) >= today);
   const widthWindow = window.innerWidth;
@@ -53,7 +52,7 @@ export const EventsList = ({ events }) => {
                 </EventDesc>
               )}
               <BtnLink to={`/events/${event._id}`}>
-                <span>{t("More")}</span>
+                <span>{t('More')}</span>
               </BtnLink>
             </DetailsWrapper>
           </Event>
