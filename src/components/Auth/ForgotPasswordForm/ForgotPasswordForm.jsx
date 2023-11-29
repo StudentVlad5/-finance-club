@@ -4,28 +4,20 @@ import { useDispatch } from 'react-redux';
 import { useFormik, Formik } from 'formik';
 import schemas from 'utils/schemas';
 import { forgotPasswordAuth } from 'redux/auth/operations';
-import theme from 'components/baseStyles/Variables.styled';
-import { FormRegister, TitleRegister } from './ForgotPasswordForm.styled.js';
-import { onSuccess } from 'components/helpers/Messages/NotifyMessages.jsx';
+import { Section, Container } from 'components/baseStyles/CommonStyle.styled';
 import { useNavigate } from 'react-router-dom';
-import {
-  BoxText,
-  Btn,
-  BtnContainer,
-  ErrorBox,
-  FormContainer,
-  FormSection,
-  IconInValid,
-  IconValid,
-  Input,
-  Span,
-  StyledLink,
-} from '../AuthForm.styled.js';
+import { theme } from 'components/baseStyles/Variables.styled.js';
+import { onSuccess } from 'helpers/Messages/NotifyMessages.jsx';
+import { FormInputLogin, FormStyled, TitleLogin, Btn, BoxText, StyledLink, ErrorBox } from '../LoginForm/LoginForm.styled.js';
+import { FormLabel,  Error, FormField } from 'components/baseStyles/Form.styled.js';
+import { useTranslation } from 'react-i18next';
+
 
 const ForgotPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onSubmit = ({ values }) => {
     setIsLoading(true);
@@ -64,13 +56,19 @@ const ForgotPasswordForm = () => {
   };
 
   return (
-    <FormSection>
-      <FormContainer>
+    <Section>
+      <Container>
         <Formik validationSchema={schemas.changePasswordSchema}>
-          <FormRegister onSubmit={formik.handleSubmit} autoComplete="off">
-            <TitleRegister>{'Forgot Password'}</TitleRegister>
-            <div>
-              <Input
+          <FormStyled onSubmit={formik.handleSubmit} autoComplete="off">
+            <TitleLogin>{'Forgot Password'}</TitleLogin>
+            <FormField>
+            <FormLabel htmlFor="email">
+                <span>{t('Email')}</span>
+                {formik.errors.name && formik.touched.name ? (
+                  <Error>{formik.errors.name}</Error>
+                ) : null}
+              </FormLabel>
+              <FormInputLogin
                 style={{
                   borderColor: showAccentValidateInput(
                     formik.values.email,
@@ -84,34 +82,27 @@ const ForgotPasswordForm = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-
-              {!formik.values.email ? null : !formik.errors.email ? (
-                <IconValid color={theme.colors.green1} />
-              ) : (
-                <IconInValid color={theme.colors.red} />
-              )}
               {formik.errors.email && formik.touched.email ? (
-                <ErrorBox>{formik.errors.email}</ErrorBox>
+                <ErrorBox style={{bottom:"22px"}}>{formik.errors.email}</ErrorBox>
               ) : null}
-              <Span className="floating-label">Email</Span>
-            </div>
-            <BtnContainer>
-              <Btn
+            </FormField>
+
+              <Btn style={{height:"auto"}}
                 type="submit"
                 disabled={isValid}
                 aria-label="submit to change password"
               >
-                {isLoading ? 'Loading' : 'Change Password'}{' '}
+                {isLoading ? 'Loading' : 'Change'}{' '}
               </Btn>
               <BoxText>
                 <span>{'Already have an account?'}</span>{' '}
-                <StyledLink to="/signin">{'Sign In'}</StyledLink>
+                <StyledLink to="/login">{'Log In'}</StyledLink>
               </BoxText>
-            </BtnContainer>
-          </FormRegister>
+
+          </FormStyled>
         </Formik>
-      </FormContainer>
-    </FormSection>
+      </Container>
+    </Section>
   );
 };
 

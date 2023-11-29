@@ -13,7 +13,7 @@ const Language = () => {
     if (saveLanguage) {
       i18n.changeLanguage(saveLanguage);
       setSelectedLanguage(saveLanguage);
-    }
+    } else {localStorage.setItem('chosenLanguage', 'en');}
   }, [i18n]);
 
   const changeLanguage = event => {
