@@ -14,10 +14,7 @@ export const Events = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const [lang, setLang] = useState(
-    // getFromStorage('chosenLanguage') || 'en'
-    localStorage.getItem('chosenLanguage') || 'en',
-  );
+  const [lang, setLang] = useState(getFromStorage('chosenLanguage') || 'en');
   const { t } = useTranslation();
 
   useEffect(() => {

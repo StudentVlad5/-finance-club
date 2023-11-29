@@ -13,10 +13,7 @@ const EventDetailsPage = () => {
   const [error, setError] = useState(null);
   const routeParams = useParams();
 
-  const [lang, setLang] = useState(
-    // getFromStorage('chosenLanguage') || 'en'
-    localStorage.getItem('chosenLanguage') || 'en',
-  );
+  const [lang, setLang] = useState(getFromStorage('chosenLanguage') || 'en');
 
   useEffect(() => {
     async function getData() {
