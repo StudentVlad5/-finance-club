@@ -56,6 +56,10 @@ const AdminEventsPage = () => {
   const [filterEvents, setFilterEvents] = useState([]);
   const [filters, setFilters] = useState(initialState);
 
+  const [lang, setLang] = useState(
+    localStorage.getItem('chosenLanguage') || 'en',
+  );
+
   useEffect(() => {
     (async function getData() {
       setIsLoading(true);
@@ -72,7 +76,7 @@ const AdminEventsPage = () => {
         setIsLoading(false);
       }
     })();
-  }, [reload]);
+  }, [reload, lang]);
 
   async function deleteEvent(id) {
     setIsLoading(true);
@@ -107,47 +111,60 @@ const AdminEventsPage = () => {
     e.preventDefault();
     const peremOfFilter = [];
     events.map(item => {
-      let isImage = item.image ? 'yes' : 'no';
+      // let isImage = item[lang].image && item[lang].image !== '' ? 'yes' : 'no';
       if (
-        moment(item.date)
+        moment(item[lang].date)
           .format('DD.MM.YYYY')
-          .includes(filters['filterDate']) &&
-        item.time.split(':').join('').includes(filters['filterTime']) &&
-        item.duration
-          .toString()
-          .toLowerCase()
-          .includes(filters['filterDuration']) &&
-        item.location
-          .toString()
-          .toLowerCase()
-          .includes(filters['filterLocation']) &&
-        item.title.toString().toLowerCase().includes(filters['filterTitle']) &&
-        item.description
-          ?.toString()
-          .toLowerCase()
-          .includes(filters['filterDescription']) &&
-        item.plan
-          .join('; ')
-          .toString()
-          .toLowerCase()
-          .includes(filters['filterPlan']) &&
-        item.speakers
-          .join(', ')
-          .toString()
-          .toLowerCase()
-          .includes(filters['filterSpeakers']) &&
-        item.moderator
-          .toString()
-          .toLowerCase()
-          .includes(filters['filterModerator']) &&
-        item.packages
-          .join(', ')
-          .toString()
-          .toLowerCase()
-          .includes(filters['filterPackages']) &&
-        isImage.includes(filters['filterImage'])
+          .includes(filters['filterDate'])
+        // &&
+        // item[lang].time.split(':').join('').includes(filters['filterTime'])
+        // &&
+        // item[lang].duration
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterDuration'])
+        // &&
+        // item[lang].location
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterLocation'])
+        // &&
+        // item[lang].title
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterTitle'])
+        // &&
+        // item[lang].description
+        //   ?.toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterDescription'])
+        // &&
+        // item[lang].plan
+        //   .join('; ')
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterPlan'])
+        // &&
+        // item[lang].speakers
+        //   .join('; ')
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterSpeakers'])
+        // &&
+        // item[lang].moderator
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterModerator'])
+        // &&
+        // item[lang].packages
+        //   .join(', ')
+        //   .toString()
+        //   .toLowerCase()
+        //   .includes(filters['filterPackages'])
+        // &&
+        // isImage.includes(filters['filterImage'])
       ) {
-        peremOfFilter.push(item);
+        peremOfFilter.push(item[lang]);
       }
     });
     setCurrent(1);
@@ -169,18 +186,23 @@ const AdminEventsPage = () => {
     document
       .querySelector(`button[id='${id}'][name='cleanFilterEvents']`)
       .classList.remove('active');
-    reload === true ? dispatch(addReload(false)) : dispatch(addReload(true));
+
+    startFilterEvents(e);
   };
 
   const clearAllFilters = () => {
-    reload === true ? dispatch(addReload(false)) : dispatch(addReload(true));
     setFilters(initialState);
-    document
-      .querySelectorAll(`button[name='startFilterEvents']`)
-      .classList.add('active');
-    document
-      .querySelectorAll(`button[name='cleanFilterEvents']`)
-      .classList.remove('active');
+    const listOfStartFilterEvents = document.querySelectorAll(
+      `button[name='startFilterEvents']`,
+    );
+    listOfStartFilterEvents.forEach(item => item.classList.add('active'));
+
+    const listOfCleanFilterEvents = document.querySelectorAll(
+      `button[name='cleanFilterEvents']`,
+    );
+    listOfCleanFilterEvents.forEach(item => item.classList.remove('active'));
+
+    reload === true ? dispatch(addReload(false)) : dispatch(addReload(true));
   };
 
   const handleSearchOnEnter = e => {
@@ -637,23 +659,25 @@ const AdminEventsPage = () => {
                 .map(event => (
                   <TableRow key={event._id}>
                     <TableData>
-                      {moment(event.date).format('DD.MM.YYYY')}
+                      {moment(event[lang].date).format('DD.MM.YYYY')}
                     </TableData>
-                    <TableData>{event.time}</TableData>
-                    <TableData>{event.duration}</TableData>
-                    <TableData>{event.location}</TableData>
-                    <TableData>{event.title}</TableData>
+                    <TableData>{event[lang].time}</TableData>
+                    <TableData>{event[lang].duration}</TableData>
+                    <TableData>{event[lang].location}</TableData>
+                    <TableData>{event[lang].title}</TableData>
                     {!isLearnMore && (
                       <>
-                        <TableData>{event.description}</TableData>
+                        <TableData>{event[lang].description}</TableData>
                         <TableData>
-                          {event.plan ? event.plan.join('; ') : ''}
+                          {event[lang].plan ? event[lang].plan.join('; ') : ''}
                         </TableData>
-                        <TableData>{event.speakers.join('; ')}</TableData>
-                        <TableData>{event.moderator}</TableData>
-                        <TableData>{event.packages.join(', ')}</TableData>
+                        <TableData>{event[lang].speakers.join('; ')}</TableData>
+                        <TableData>{event[lang].moderator}</TableData>
+                        <TableData>{event[lang].packages.join(', ')}</TableData>
                         <TableData>
-                          {event.image && event.image !== 'none' ? 'yes' : 'no'}
+                          {event[lang].image && event[lang].image !== 'none'
+                            ? 'yes'
+                            : 'no'}
                         </TableData>
                       </>
                     )}
