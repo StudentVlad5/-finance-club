@@ -56,9 +56,7 @@ const AdminEventsPage = () => {
   const [filterEvents, setFilterEvents] = useState([]);
   const [filters, setFilters] = useState(initialState);
 
-  const [lang, setLang] = useState(
-    localStorage.getItem('chosenLanguage') || 'en',
-  );
+  const [lang, setLang] = useState(getFromStorage('chosenLanguage') || 'en');
 
   useEffect(() => {
     (async function getData() {
@@ -115,56 +113,47 @@ const AdminEventsPage = () => {
       if (
         moment(item[lang].date)
           .format('DD.MM.YYYY')
-          .includes(filters['filterDate'])
-        // &&
-        // item[lang].time.split(':').join('').includes(filters['filterTime'])
-        // &&
-        // item[lang].duration
-        //   .toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterDuration'])
-        // &&
-        // item[lang].location
-        //   .toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterLocation'])
-        // &&
-        // item[lang].title
-        //   .toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterTitle'])
-        // &&
-        // item[lang].description
-        //   ?.toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterDescription'])
-        // &&
-        // item[lang].plan
-        //   .join('; ')
-        //   .toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterPlan'])
-        // &&
-        // item[lang].speakers
-        //   .join('; ')
-        //   .toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterSpeakers'])
-        // &&
-        // item[lang].moderator
-        //   .toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterModerator'])
-        // &&
-        // item[lang].packages
-        //   .join(', ')
-        //   .toString()
-        //   .toLowerCase()
-        //   .includes(filters['filterPackages'])
+          .includes(filters['filterDate']) &&
+        item[lang].time.split(':').join('').includes(filters['filterTime']) &&
+        item[lang].duration
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterDuration']) &&
+        item[lang].location
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterLocation']) &&
+        item[lang].title
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterTitle']) &&
+        item[lang].description
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterDescription']) &&
+        item[lang].plan
+          .join('; ')
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterPlan']) &&
+        item[lang].speakers
+          .join('; ')
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterSpeakers']) &&
+        item[lang].moderator
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterModerator']) &&
+        item[lang].packages
+          .join(', ')
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterPackages'])
         // &&
         // isImage.includes(filters['filterImage'])
       ) {
-        peremOfFilter.push(item[lang]);
+        peremOfFilter.push(item);
       }
     });
     setCurrent(1);
