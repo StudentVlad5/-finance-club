@@ -22,7 +22,7 @@ const ContainerNavigation = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 25px;
-  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
     display: none;
   }
 `;
@@ -53,6 +53,7 @@ const ListItemsContainer = styled.ul`
   align-items: stretch;
   gap: 26px;
   width: 100%;
+  height: 100%;
   padding: 0 50px;
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     display: flex;
@@ -160,19 +161,19 @@ const TitleItem = styled(SubTitle)`
   text-transform: uppercase;
   padding: 0;
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    font-size:38px;
-    }
+    font-size: 38px;
+  }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 42px;
-    }
+  }
 `;
 const UlContent = styled.ul`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: start;
+  height: 100%;
   gap: 8px;
-  color: ${(props) => props.theme.black};
   font-family: ${theme.fonts[0]};
   font-size: 14px;
   font-style: normal;
@@ -185,6 +186,7 @@ const UlContent = styled.ul`
   list-style-position: outside;
   margin-bottom: 40px;
   margin-left: 20px;
+  color: ${(props) => props.theme.black};
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     gap: 16px;
     font-size: 18px;

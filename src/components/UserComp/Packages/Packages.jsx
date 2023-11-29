@@ -23,6 +23,9 @@ export const Packages = () => {
   const [packagesList, setPackagesList] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem('chosenLanguage') || 'en',
+  );
 
   useEffect(() => {
     (async function getData() {
@@ -47,15 +50,15 @@ export const Packages = () => {
       {error && onFetchError('Whoops, something went wrong')}
       {packagesList.map(it =>
         packages.map(item => {
-          if (it.title === item) {
+          if (it[selectedLanguage].title === item.name) {
             return (
               <ListItems key={item}>
                 <ListItemsContentWraper>
-                  <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
-                  <SubTitleItem>{it.content}</SubTitleItem>
+                  <ListItemsOfPacked>{it[selectedLanguage].title}</ListItemsOfPacked>
+                  <SubTitleItem>{it[selectedLanguage].content}</SubTitleItem>
                   <UlContent>
                     features
-                    {it?.features.map((item, i) => (
+                    {it[selectedLanguage]?.features.map((item, i) => (
                       <LiContent key={item + i}>{item}</LiContent>
                     ))}
                   </UlContent>

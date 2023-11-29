@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { theme } from "components/baseStyles/Variables.styled";
 import { IconBtn } from "../UserData/UserData.styled";
-import { ShowPassword } from "components/Auth/AuthForm.styled";
+import { ShowPassword } from "components/baseStyles/Form.styled";
+
 
 const Label = styled.label`
   position: relative;

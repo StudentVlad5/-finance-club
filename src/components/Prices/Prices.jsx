@@ -36,6 +36,9 @@ const Prices = () => {
   const [packages, setPackages] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem('chosenLanguage') || 'en',
+  );
 
   useEffect(() => {
     (async function getData() {
@@ -90,14 +93,14 @@ const Prices = () => {
             {isLoading ? onLoading() : onLoaded()}
             {error && onFetchError('Whoops, something went wrong')}
             {packages.map(it => (
-              <ListItems key={it.title}>
+              <ListItems key={it[selectedLanguage].title}>
                 <ListItemsContentWraper>
-                  <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
-                  <TitleItem>{it.price}</TitleItem>
-                  <SubTitleItem>{it.content}</SubTitleItem>
+                  <ListItemsOfPacked>{it[selectedLanguage].title}</ListItemsOfPacked>
+                  <TitleItem>{it[selectedLanguage].price}</TitleItem>
+                  <SubTitleItem>{it[selectedLanguage].content}</SubTitleItem>
                   <UlContent>
                     {t("features")}
-                    {it?.features.map((item, i) => (
+                    {it[selectedLanguage]?.features.map((item, i) => (
                       <LiContent key={item + i}>{item}</LiContent>
                     ))}
                   </UlContent>
@@ -129,22 +132,21 @@ const Prices = () => {
               mousewheel={true}
               keyboard={true}
               loop={true}
-              loopPreventsSliding={true}
-              // loopedSlides={1}
-              // autoplay={{ delay: 1000 }}
+              // loopPreventsSliding={true}
+              autoplay={{ delay: 2000 }}
               effect={'creative'}
             >
               {' '}
               {packages.map(it => (
-                <SwiperSlide key={it.title}>
+                <SwiperSlide key={it[selectedLanguage].title}>
                   <ListItems>
                     <ListItemsContentWraper>
-                      <ListItemsOfPacked>{it.title}</ListItemsOfPacked>
-                      <TitleItem>{it.price}</TitleItem>
-                      <SubTitleItem>{it.content}</SubTitleItem>
+                      <ListItemsOfPacked>{it[selectedLanguage].title}</ListItemsOfPacked>
+                      <TitleItem>{it[selectedLanguage].price}</TitleItem>
+                      <SubTitleItem>{it[selectedLanguage].content}</SubTitleItem>
                       <UlContent>
                         {t("features")}
-                        {it?.features.map((item, i) => (
+                        {it[selectedLanguage]?.features.map((item, i) => (
                           <LiContent key={item + i}>{item}</LiContent>
                         ))}
                       </UlContent>

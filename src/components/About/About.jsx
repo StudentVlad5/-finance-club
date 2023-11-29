@@ -77,8 +77,7 @@ const About = () => {
           mousewheel={true}
           keyboard={true}
           loop={true}
-          loopPreventsSliding={true}
-          // loopedSlides={1}
+          // loopPreventsSliding={true}
           autoplay={{ delay: 5000 }}
           effect={'creative'}
         >
@@ -131,9 +130,8 @@ const About = () => {
                   mousewheel={true}
                   keyboard={true}
                   loop={true}
-                  loopPreventsSliding={true}
-                  // loopedSlides={1}
-                  autoplay={{ delay: 1000 }}
+                  // loopPreventsSliding={true}
+                  autoplay={{ delay: 2000 }}
                   effect={'creative'}
                 >
                   {' '}

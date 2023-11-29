@@ -1,4 +1,4 @@
-import LoginForm from 'components/Auth/LoginForm/LoginForm';
+import ForgotPasswordForm from 'components/Auth/ForgotPasswordForm/ForgotPasswordForm';
 import { useEffect } from 'react';
 import { SEO } from 'utils/SEO';
 
@@ -9,7 +9,7 @@ const ForgotPasswordPage = () => {
   return (
     <>
       <SEO title="Forgot Password" description="" />
-      <LoginForm/>
+      <ForgotPasswordForm/>
     </>
   );
 };
