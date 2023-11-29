@@ -56,30 +56,30 @@ export const App = () => {
                   <PrivateRoute redirectTo="/login" component={<UserPage />} />
                 }
               >
-                              <Route
-                path="profile"
-                element={
-                  <PrivateRoute redirectTo="/signin" component={<UserData />} />
-                }
-              />
-              <Route
-                path="events"
-                element={
-                  <PrivateRoute
-                    redirectTo="/signin"
-                    component={<Events />}
-                  />
-                }
-              />
-              <Route
-                path="packages"
-                element={
-                  <PrivateRoute
-                    redirectTo="/signin"
-                    component={<Packages />}
-                  />
-                }
-              />
+                <Route
+                  path="profile"
+                  element={
+                    <PrivateRoute
+                      redirectTo="/signin"
+                      component={<UserData />}
+                    />
+                  }
+                />
+                <Route
+                  path="events"
+                  element={
+                    <PrivateRoute redirectTo="/signin" component={<Events />} />
+                  }
+                />
+                <Route
+                  path="packages"
+                  element={
+                    <PrivateRoute
+                      redirectTo="/signin"
+                      component={<Packages />}
+                    />
+                  }
+                />
               </Route>
             )}
             <Route
@@ -106,11 +106,14 @@ export const App = () => {
             <Route
               path="login"
               element={
-                <RestrictedRoute redirectTo={permission === 'admin' ? '/admin': "/user"} component={<LoginPage />} />
+                <RestrictedRoute
+                  redirectTo={permission === 'admin' ? '/admin' : '/user'}
+                  component={<LoginPage />}
+                />
               }
             />
 
-             <Route
+            <Route
               path="forgot_password"
               element={
                 <RestrictedRoute
@@ -118,7 +121,7 @@ export const App = () => {
                   component={<ForgotPasswordPage />}
                 />
               }
-            /> 
+            />
 
             <Route path="events" element={<EventsPage />} />
             <Route path="events/:id" element={<EventDetailsPage />} />

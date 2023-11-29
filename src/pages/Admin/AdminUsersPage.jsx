@@ -7,6 +7,7 @@ import {
   MdAddCard,
   MdFilterAlt,
 } from 'react-icons/md';
+import moment from 'moment';
 import { SEO } from 'utils/SEO';
 import { openModalWindow } from 'hooks/modalWindow';
 import { addModal } from 'redux/modal/operation';
@@ -17,7 +18,6 @@ import { getFromStorage } from 'services/localStorService';
 import { PaginationBlock } from 'helpers/Pagination/Pagination';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
-import { BASE_URL_IMG } from 'helpers/constants';
 import { EditUserModal } from 'components/Admin/UsersModal/EditUserModal';
 import { CreateUserModal } from 'components/Admin/UsersModal/CreateUserModal';
 import { BackButton } from 'helpers/BackLink/BackLink';
@@ -34,6 +34,21 @@ import {
   TableRow,
 } from 'components/Admin/Admin.styled';
 
+const initialState = {
+  filterName: '',
+  filterSurname: '',
+  filterEmail: '',
+  filterPhone: '',
+  filterCompany: '',
+  filterPosition: '',
+  filterBirthday: '',
+  filterEvents: '',
+  filterPackages: '',
+  filterAvatar: '',
+  filterStatus: '',
+  filterRole: '',
+};
+
 const AdminUsersPage = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,18 +56,7 @@ const AdminUsersPage = () => {
   const reload = useSelector(reloadValue);
 
   const [filterUsers, setFilterUsers] = useState([]);
-  const [filterName, setFilterName] = useState('');
-  const [filterSurname, setFilterSurname] = useState('');
-  const [filterEmail, setFilterEmail] = useState('');
-  const [filterPhone, setFilterPhone] = useState('');
-  const [filterCompany, setFilterCompany] = useState('');
-  const [filterPosition, setFilterPosition] = useState('');
-  const [filterBirthday, setFilterBirthday] = useState('');
-  const [filterEvents, setFilterEvents] = useState('');
-  const [filterStatus, setFilterStatus] = useState('');
-  const [filterPackages, setFilterPackages] = useState('');
-  const [filterAvatar, setFilterAvatar] = useState('');
-  const [filterRole, setFilterRole] = useState('');
+  const [filters, setFilters] = useState(initialState);
 
   useEffect(() => {
     (async function getData() {
@@ -87,168 +91,103 @@ const AdminUsersPage = () => {
 
   const handleChangeFilter = e => {
     e.preventDefault();
-    switch (e.currentTarget.name) {
-      case 'filterName':
-        setFilterName(e.currentTarget.value);
-        break;
-      case 'filterSurname':
-        setFilterSurname(e.currentTarget.value);
-        break;
-      case 'filterEmail':
-        setFilterEmail(e.currentTarget.value);
-        break;
-      case 'filterPhone':
-        setFilterPhone(e.currentTarget.value);
-        break;
-      case 'filterCompany':
-        setFilterCompany(e.currentTarget.value);
-        break;
-      case 'filterPosition':
-        setFilterPosition(e.currentTarget.value);
-        break;
-      case 'filterBirthday':
-        setFilterBirthday(e.currentTarget.value);
-        break;
-      case 'filterEvents':
-        setFilterEvents(e.currentTarget.value);
-        break;
-      case 'filterStatus':
-        setFilterStatus(e.currentTarget.value);
-        break;
-      case 'filterPackages':
-        setFilterPackages(e.currentTarget.value);
-        break;
-      case 'filterAvatar':
-        setFilterAvatar(e.currentTarget.value);
-        break;
-      case 'filterRole':
-        setFilterRole(e.currentTarget.value);
-        break;
-      default:
-        break;
-    }
+    const { name, value } = e.currentTarget;
+    const selectedFilters = {
+      ...filters,
+      [name]: value,
+    };
+    setFilters(selectedFilters);
+
+    document
+      .querySelector(`button[id='${name}'][name='startFilterUsers']`)
+      .classList.remove('active');
+    document
+      .querySelector(`button[id='${name}'][name='cleanFilterUsers']`)
+      .classList.add('active');
   };
 
   const startFilterUsers = e => {
     e.preventDefault();
     const peremOfFilter = [];
     users.map(item => {
+      let isAvatar = item.avatar && item.avatar !== '' ? 'yes' : 'no';
       if (
-        item.name.toString().toLowerCase().includes(filterName) &&
-        item.surname.toString().toLowerCase().includes(filterSurname) &&
-        item.email.toString().toLowerCase().includes(filterEmail) &&
-        item.phone.toString().toLowerCase().includes(filterPhone) &&
-        item.company.toString().toLowerCase().includes(filterCompany) &&
-        item.position.toString().includes(filterPosition) &&
-        item.birthday.toString().toLowerCase().includes(filterBirthday) &&
-        item.events.join(',').toString().toLowerCase().includes(filterEvents) &&
-        item.status.toString().toLowerCase().includes(filterStatus) &&
-        item.packages.join(',').toString().includes(filterPackages) &&
-        item.avatar.toString().toLowerCase().includes(filterAvatar) &&
-        item.role.toString().toLowerCase().includes(filterRole)
+        item.name.toString().toLowerCase().includes(filters['filterName']) &&
+        item.surname
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterSurname']) &&
+        item.email.toString().toLowerCase().includes(filters['filterEmail']) &&
+        item.phone.toString().toLowerCase().includes(filters['filterPhone']) &&
+        item.company
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterCompany']) &&
+        item.position.toString().includes(filters['filterPosition']) &&
+        moment(item.birthday)
+          .format('DD.MM.YYYY')
+          .includes(filters['filterBirthday']) &&
+        item.events
+          .join(', ')
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterEvents']) &&
+        item.packages
+          .flatMap(pack => pack.name)
+          // .join(', ')
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterPackages']) &&
+        isAvatar.toString().toLowerCase().includes(filters['filterAvatar']) &&
+        item.status
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterStatus']) &&
+        item.role.toString().toLowerCase().includes(filters['filterRole'])
       ) {
         peremOfFilter.push(item);
       }
     });
-
+    setCurrent(1);
     setFilterUsers(peremOfFilter);
   };
 
   const cleanFilterUsers = e => {
     e.preventDefault();
-    let filterPr = '';
-    let filterCa = '';
-    let filterDu = '';
-    let filterLn = '';
-    let filterA = '';
-    let filterD = '';
-    let filterS = '';
-    let filterU = '';
-    let filterP = '';
-    let filterC = '';
-    let filterI = '';
-    let filterR = '';
+    const { id } = e.currentTarget;
+    const deletedFilters = {
+      ...filters,
+      [id]: '',
+    };
+    setFilters(deletedFilters);
 
-    e.currentTarget.name === 'clearFilterName'
-      ? setFilterName(filterPr)
-      : (filterPr = filterName);
-    e.currentTarget.name === 'clearFilterSurname'
-      ? setFilterSurname(filterCa)
-      : (filterCa = filterSurname);
-    e.currentTarget.name === 'clearFilterEmail'
-      ? setFilterEmail(filterDu)
-      : (filterDu = filterEmail);
-    e.currentTarget.name === 'clearFilterPhone'
-      ? setFilterPhone(filterLn)
-      : (filterLn = filterPhone);
-    e.currentTarget.name === 'clearFilterCompany'
-      ? setFilterCompany(filterA)
-      : (filterA = filterCompany);
-    e.currentTarget.name === 'clearFilterPosition'
-      ? setFilterPosition(filterD)
-      : (filterD = filterPosition);
-    e.currentTarget.name === 'clearFilterBirthday'
-      ? setFilterBirthday(filterS)
-      : (filterS = filterBirthday);
-    e.currentTarget.name === 'clearFilterEvents'
-      ? setFilterEvents(filterU)
-      : (filterU = filterEvents);
-    e.currentTarget.name === 'clearFilterStatus'
-      ? setFilterStatus(filterP)
-      : (filterP = filterStatus);
-    e.currentTarget.name === 'clearFilterPackages'
-      ? setFilterPackages(filterC)
-      : (filterC = filterPackages);
-    e.currentTarget.name === 'clearFilterAvatar'
-      ? setFilterAvatar(filterI)
-      : (filterI = filterAvatar);
-    e.currentTarget.name === 'clearFilterRole'
-      ? setFilterRole(filterR)
-      : (filterR = filterRole);
+    document
+      .querySelector(`button[id='${id}'][name='startFilterUsers']`)
+      .classList.add('active');
+    document
+      .querySelector(`button[id='${id}'][name='cleanFilterUsers']`)
+      .classList.remove('active');
 
-    const peremOfFilter = [];
-    users.map(item => {
-      if (
-        item.name?.toString().toLowerCase().includes(filterPr) &&
-        item.surname?.toString().toLowerCase().includes(filterCa) &&
-        item.email?.toString().toLowerCase().includes(filterDu) &&
-        item.phone?.toString().toLowerCase().includes(filterLn) &&
-        item.company?.toString().toLowerCase().includes(filterA) &&
-        item.position?.toString().toLowerCase().includes(filterD) &&
-        item.birthday?.toString().toLowerCase().includes(filterS) &&
-        item.events?.toString().toLowerCase().includes(filterU) &&
-        item.status?.toString().toLowerCase().includes(filterP) &&
-        item.packages?.toString().toLowerCase().includes(filterC) &&
-        item.avatar?.toString().toLowerCase().includes(filterI) &&
-        item.role?.toString().toLowerCase().includes(filterR)
-      ) {
-        peremOfFilter.push(item);
-      }
-      return peremOfFilter;
-    });
-
-    setFilterUsers(peremOfFilter);
+    startFilterUsers(e);
   };
 
   const clearAllFilters = () => {
     reload === true ? dispatch(addReload(false)) : dispatch(addReload(true));
-    setFilterName('');
-    setFilterSurname('');
-    setFilterEmail('');
-    setFilterPhone('');
-    setFilterCompany('');
-    setFilterPosition('');
-    setFilterBirthday('');
-    setFilterEvents('');
-    setFilterStatus('');
-    setFilterPackages('');
-    setFilterAvatar('');
-    setFilterRole('');
+    setFilters(initialState);
+    const listOfStartFilterUsers = document.querySelectorAll(
+      `button[name='startFilterUsers']`,
+    );
+    listOfStartFilterUsers.forEach(item => item.classList.add('active'));
+
+    const listOfCleanFilterUsers = document.querySelectorAll(
+      `button[name='cleanFilterUsers']`,
+    );
+    listOfCleanFilterUsers.forEach(item => item.classList.remove('active'));
   };
 
   const handleSearchOnEnter = e => {
     if (e.key == 'Enter') {
-      setUsers(e);
+      startFilterUsers(e);
     }
   };
 
@@ -320,7 +259,7 @@ const AdminUsersPage = () => {
                   type="text"
                   name="filterName"
                   placeholder="Name"
-                  value={filterName}
+                  value={filters['filterName']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
@@ -328,6 +267,8 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterName"
+                    name="startFilterUsers"
+                    className="active"
                     onClick={e => startFilterUsers(e)}
                   >
                     <MdFilterAlt />
@@ -335,10 +276,9 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterName"
-                    name="clearFilterName"
+                    name="cleanFilterUsers"
                     onClick={e => {
                       cleanFilterUsers(e);
-                      setFilterName('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -350,7 +290,7 @@ const AdminUsersPage = () => {
                   type="text"
                   name="filterSurname"
                   placeholder="Surname"
-                  value={filterSurname}
+                  value={filters['filterSurname']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
@@ -358,6 +298,8 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterSurname"
+                    name="startFilterUsers"
+                    className="active"
                     onClick={e => startFilterUsers(e)}
                   >
                     <MdFilterAlt />
@@ -365,10 +307,9 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterSurname"
-                    name="clearFilterSurname"
+                    name="cleanFilterUsers"
                     onClick={e => {
                       cleanFilterUsers(e);
-                      setFilterSurname('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -380,7 +321,7 @@ const AdminUsersPage = () => {
                   type="email"
                   name="filterEmail"
                   placeholder="Email"
-                  value={filterEmail}
+                  value={filters['filterEmail']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
@@ -388,6 +329,8 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterEmail"
+                    name="startFilterUsers"
+                    className="active"
                     onClick={e => startFilterUsers(e)}
                   >
                     <MdFilterAlt />
@@ -395,10 +338,9 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterEmail"
-                    name="clearFilterEmail"
+                    name="cleanFilterUsers"
                     onClick={e => {
                       cleanFilterUsers(e);
-                      setFilterEmail('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -410,7 +352,7 @@ const AdminUsersPage = () => {
                   type="phone"
                   name="filterPhone"
                   placeholder="Phone"
-                  value={filterPhone}
+                  value={filters['filterPhone']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
@@ -418,6 +360,8 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterPhone"
+                    name="startFilterUsers"
+                    className="active"
                     onClick={e => startFilterUsers(e)}
                   >
                     <MdFilterAlt />
@@ -425,10 +369,9 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterPhone"
-                    name="clearFilterPhone"
+                    name="cleanFilterUsers"
                     onClick={e => {
                       cleanFilterUsers(e);
-                      setFilterPhone('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -440,7 +383,7 @@ const AdminUsersPage = () => {
                   type="text"
                   name="filterStatus"
                   placeholder="Status"
-                  value={filterStatus}
+                  value={filters['filterStatus']}
                   onKeyDown={e => handleSearchOnEnter(e)}
                   onChange={e => handleChangeFilter(e)}
                 />
@@ -448,6 +391,8 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterStatus"
+                    name="startFilterUsers"
+                    className="active"
                     onClick={e => startFilterUsers(e)}
                   >
                     <MdFilterAlt />
@@ -455,10 +400,9 @@ const AdminUsersPage = () => {
                   <button
                     type="button"
                     id="filterStatus"
-                    name="clearFilterStatus"
+                    name="cleanFilterUsers"
                     onClick={e => {
                       cleanFilterUsers(e);
-                      setFilterStatus('');
                     }}
                   >
                     <MdFilterAltOff />
@@ -472,7 +416,7 @@ const AdminUsersPage = () => {
                       type="text"
                       name="filterCompany"
                       placeholder="Company"
-                      value={filterCompany}
+                      value={filters['filterCompany']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
@@ -480,6 +424,8 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterCompany"
+                        name="startFilterUsers"
+                        className="active"
                         onClick={e => startFilterUsers(e)}
                       >
                         <MdFilterAlt />
@@ -487,10 +433,9 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterCompany"
-                        name="clearFilterCompany"
+                        name="cleanFilterUsers"
                         onClick={e => {
                           cleanFilterUsers(e);
-                          setFilterCompany('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -502,7 +447,7 @@ const AdminUsersPage = () => {
                       type="text"
                       name="filterPosition"
                       placeholder="Position"
-                      value={filterPosition}
+                      value={filters['filterPosition']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
@@ -510,6 +455,8 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterPosition"
+                        name="startFilterUsers"
+                        className="active"
                         onClick={e => startFilterUsers(e)}
                       >
                         <MdFilterAlt />
@@ -517,10 +464,9 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterPosition"
-                        name="clearFilterPosition"
+                        name="cleanFilterUsers"
                         onClick={e => {
                           cleanFilterUsers(e);
-                          setFilterPosition('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -532,7 +478,7 @@ const AdminUsersPage = () => {
                       type="text"
                       name="filterBirthday"
                       placeholder="Birthday"
-                      value={filterBirthday}
+                      value={filters['filterBirthday']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
@@ -540,6 +486,8 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterBirthday"
+                        name="startFilterUsers"
+                        className="active"
                         onClick={e => startFilterUsers(e)}
                       >
                         <MdFilterAlt />
@@ -547,10 +495,9 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterBirthday"
-                        name="clearFilterBirthday"
+                        name="cleanFilterUsers"
                         onClick={e => {
                           cleanFilterUsers(e);
-                          setFilterBirthday('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -562,7 +509,7 @@ const AdminUsersPage = () => {
                       type="text"
                       name="filterEvents"
                       placeholder="Events"
-                      value={filterEvents}
+                      value={filters['filterEvents']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
@@ -570,6 +517,8 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterEvents"
+                        name="startFilterUsers"
+                        className="active"
                         onClick={e => startFilterUsers(e)}
                       >
                         <MdFilterAlt />
@@ -577,10 +526,9 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterEvents"
-                        name="clearFilterEvents"
+                        name="cleanFilterUsers"
                         onClick={e => {
                           cleanFilterUsers(e);
-                          setFilterEvents('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -592,7 +540,7 @@ const AdminUsersPage = () => {
                       type="text"
                       name="filterPackages"
                       placeholder="Packages"
-                      value={filterPackages}
+                      value={filters['filterPackages']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
@@ -600,6 +548,8 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterPackages"
+                        name="startFilterUsers"
+                        className="active"
                         onClick={e => startFilterUsers(e)}
                       >
                         <MdFilterAlt />
@@ -607,10 +557,9 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterPackages"
-                        name="clearFilterPackages"
+                        name="cleanFilterUsers"
                         onClick={e => {
                           cleanFilterUsers(e);
-                          setFilterPackages('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -622,7 +571,7 @@ const AdminUsersPage = () => {
                       type="text"
                       name="filterAvatar"
                       placeholder="Avatar"
-                      value={filterAvatar}
+                      value={filters['filterAvatar']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
@@ -630,6 +579,8 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterAvatar"
+                        name="startFilterUsers"
+                        className="active"
                         onClick={e => startFilterUsers(e)}
                       >
                         <MdFilterAlt />
@@ -637,10 +588,9 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterAvatar"
-                        name="clearFilterAvatar"
+                        name="cleanFilterUsers"
                         onClick={e => {
                           cleanFilterUsers(e);
-                          setFilterAvatar('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -652,7 +602,7 @@ const AdminUsersPage = () => {
                       type="text"
                       name="filterRole"
                       placeholder="Role"
-                      value={filterRole}
+                      value={filters['filterRole']}
                       onKeyDown={e => handleSearchOnEnter(e)}
                       onChange={e => handleChangeFilter(e)}
                     />
@@ -660,6 +610,8 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterRole"
+                        name="startFilterUsers"
+                        className="active"
                         onClick={e => startFilterUsers(e)}
                       >
                         <MdFilterAlt />
@@ -667,10 +619,9 @@ const AdminUsersPage = () => {
                       <button
                         type="button"
                         id="filterRole"
-                        name="clearFilterRole"
+                        name="cleanFilterUsers"
                         onClick={e => {
                           cleanFilterUsers(e);
-                          setFilterRole('');
                         }}
                       >
                         <MdFilterAltOff />
@@ -729,11 +680,15 @@ const AdminUsersPage = () => {
                       <>
                         <TableData>{user.company}</TableData>
                         <TableData>{user.position}</TableData>
-                        <TableData>{user.birthday}</TableData>
-                        <TableData>{user.events.join(', ')}</TableData>
-                        <TableData>{user.packages.join(', ')}</TableData>
                         <TableData>
-                          {user.avatar && user.avatar !== 'none' ? 'yes' : 'no'}
+                          {moment(user.birthday).format('DD.MM.YYYY')}
+                        </TableData>
+                        <TableData>{user.events.join(', ')}</TableData>
+                        <TableData>
+                          {user.packages.flatMap(pack => pack.name)}
+                        </TableData>
+                        <TableData>
+                          {user.avatar && user.avatar !== '' ? 'yes' : 'no'}
                         </TableData>
                         <TableData>{user.role}</TableData>
                       </>

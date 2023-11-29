@@ -12,13 +12,12 @@ import { HeaderText } from './Events.styled';
 import { useTranslation } from 'react-i18next';
 
 export const Events = () => {
+  const eventsOfUser = useSelector(getUser).events;
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const { t } = useTranslation();
-
-  // const eventsOfUser = useSelector(getUser).events;
-  // const [events, setEvents] = useState([]);
-  // const [error, setError] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
-
   // useEffect(() => {
   //   (async function getData() {
   //     let eventsList = [];
@@ -42,11 +41,6 @@ export const Events = () => {
   //     }
   //   })();
   // }, []);
-
-  const eventsOfUser = useSelector(getUser).events;
-  const [events, setEvents] = useState([]);
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async function getData() {

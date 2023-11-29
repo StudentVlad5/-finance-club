@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchData } from 'services/APIservice';
+import { getFromStorage } from 'services/localStorService';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { EventDetails } from 'components/Events/EventDetails/EventDetails';
@@ -12,6 +13,11 @@ const EventDetailsPage = () => {
   const [error, setError] = useState(null);
   const routeParams = useParams();
 
+  const [lang, setLang] = useState(
+    // getFromStorage('chosenLanguage') || 'en'
+    localStorage.getItem('chosenLanguage') || 'en',
+  );
+
   useEffect(() => {
     async function getData() {
       setIsLoading(true);
@@ -20,7 +26,8 @@ const EventDetailsPage = () => {
         if (!data) {
           return onFetchError('Whoops, something went wrong');
         }
-        setEvent(data);
+        const langData = [{ _id: data._id, ...data[lang] }];
+        setEvent(langData[0]);
       } catch (error) {
         setError(error);
       } finally {

@@ -71,9 +71,9 @@
       }
     ],
     "events": [
-      { "_id": "655e5e39dafd9f2f4b56487d" },
-      { "_id": "655e5e39dafd9f2f4b56487e" },
-      { "_id": "655e5e39dafd9f2f4b564881" }
+      "655e5e39dafd9f2f4b56487d",
+      "655e5e39dafd9f2f4b56487e",
+      "655e5e39dafd9f2f4b564881"
     ],
     "status": "active",
     "role": "guest"
@@ -89,10 +89,7 @@
     "position": "Developer",
     "birthday": "2000-09-08",
     "packages": [{ "name": "expert", "termActive": { "from": "", "to": "" } }],
-    "events": [
-      { "_id": "655e5e39dafd9f2f4b56487d" },
-      { "_id": "655e5e39dafd9f2f4b56487e" }
-    ],
+    "events": ["655e5e39dafd9f2f4b56487d", "655e5e39dafd9f2f4b56487e"],
     "status": "active",
     "role": "admin"
   }
