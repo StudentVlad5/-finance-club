@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SelectContainerLanguage, SelectLanguage } from './Language.styled';
 import { useTranslation } from 'react-i18next';
+import { StatusContext } from 'components/ContextStatus/ContextStatus';
 
 const Language = () => {
   const { i18n } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem('chosenLanguage') || 'en',
-  );
+  const { selectedLanguage, setSelectedLanguage } = useContext(StatusContext);
 
   useEffect(() => {
     const saveLanguage = localStorage.getItem('chosenLanguage');

@@ -10,11 +10,12 @@ import {
 } from 'components/Prices/Prices.styled';
 import { useSelector } from 'react-redux';
 import { getUser } from 'redux/auth/selectors';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { fetchData } from 'services/APIservice';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { useTranslation } from 'react-i18next';
+import { StatusContext } from 'components/ContextStatus/ContextStatus';
 
 export const Packages = () => {
   const { t } = useTranslation();
@@ -23,9 +24,7 @@ export const Packages = () => {
   const [packagesList, setPackagesList] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem('chosenLanguage') || 'en',
-  );
+  const { selectedLanguage } = useContext(StatusContext);
 
   useEffect(() => {
     (async function getData() {
