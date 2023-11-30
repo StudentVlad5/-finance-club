@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { EventsList } from './EventsList/EventList';
 import { ArchiveEventsList } from './ArchiveEventsList/ArchiveEventList';
 import { fetchData } from 'services/APIservice';
-import { getFromStorage } from 'services/localStorService';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { EventsSection, Heading } from './Events.styled';
 import { Container, Title } from 'components/baseStyles/CommonStyle.styled';
+import { StatusContext } from 'components/ContextStatus/ContextStatus';
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const [lang, setLang] = useState(getFromStorage('chosenLanguage') || 'en');
+  const { selectedLanguage } = useContext(StatusContext);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -28,13 +28,13 @@ export const Events = () => {
 
         // const langData = [
         //   ...new Set(
-        //     data.map(item => item[lang]).filter(item => item !== undefined),
+        //     data.map(item => item[selectedLanguage]).filter(item => item !== undefined),
         //   ),
         // ];
 
         let langData = [];
         data.map(it => {
-          let item = [{ _id: it._id, ...it[lang] }];
+          let item = [{ _id: it._id, ...it[selectedLanguage] }];
           langData.push(item[0]);
         });
         setEvents(langData);
@@ -44,7 +44,7 @@ export const Events = () => {
         setIsLoading(false);
       }
     })();
-  }, [lang]);
+  }, [selectedLanguage]);
 
   return (
     <EventsSection>

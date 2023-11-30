@@ -75,6 +75,7 @@ export const FormLabelBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    gap: 10px;
   }
 
   & label {
@@ -93,18 +94,18 @@ export const FormRatio = styled.div`
   width: 70%;
 
   font-family: ${theme.fonts[0]};
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
   color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
-    font-size: 14px;
+    font-size: 15px;
   }
 `;
 
@@ -195,6 +196,11 @@ export const FormInput = styled(Field)`
       }
     }
   }
+`;
+
+export const FormInputSelect = styled.select`
+  padding: 5px;
+  border-radius: 4px;
 `;
 
 export const FormInputFile = styled(Field)`

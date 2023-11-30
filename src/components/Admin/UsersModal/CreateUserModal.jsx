@@ -28,6 +28,7 @@ import {
   FormList,
   IncrementBtn,
   ModalForm,
+  FormRatio,
 } from '../Modal.styled';
 
 export const CreateUserModal = () => {
@@ -45,7 +46,11 @@ export const CreateUserModal = () => {
 
     setIsLoading(true);
     try {
-      const { code } = await createUserData(`/users/create`, values, file);
+      const { code } = await createUserData(
+        `/admin/users/create`,
+        values,
+        file,
+      );
       if (code && code !== 201) {
         return onFetchError('Whoops, something went wrong');
       }
@@ -92,11 +97,12 @@ export const CreateUserModal = () => {
               phone: '',
               company: '',
               position: '',
+              birthday: '',
               events: [],
-              packages: [],
+              packages: [{ name: '', termActive: { from: '', to: '' } }],
               status: 'active',
               avatar: '',
-              role: '',
+              role: 'candidate',
             }}
             onSubmit={(values, { setSubmitting }) => {
               createUsers(values);
@@ -214,6 +220,21 @@ export const CreateUserModal = () => {
                     />
                   </FormField>
                   <FormField>
+                    <FormLabel htmlFor="position">
+                      <span>Position</span>
+                      {errors.position && touched.position ? (
+                        <Error>{errors.position}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormInput
+                      type="text"
+                      id="position"
+                      name="position"
+                      placeholder="User position"
+                      value={values.position}
+                    />
+                  </FormField>
+                  <FormField>
                     <FormLabel htmlFor="birthday">
                       <span>Birthday</span>
                       {errors.birthday && touched.birthday ? (
@@ -289,7 +310,7 @@ export const CreateUserModal = () => {
                               type="button"
                               onClick={() => arrayHelpers.push('')}
                             >
-                              Add an event
+                              Add an event id
                             </AddDetailsBtn>
                           )}
                         </FormInputBoxColumn>
@@ -338,21 +359,26 @@ export const CreateUserModal = () => {
                       />
                     )}
                   </FormField>
-                  <FormLabelBox>
-                    <span>Role</span>
-                    <div>
-                      <label htmlFor="candidate">
+                  <FormField>
+                    <FormLabel htmlFor="role">
+                      <span>Role</span>
+                      {errors.role && touched.role ? (
+                        <Error>{errors.role}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormRatio>
+                      <label htmlFor="candidate" style={{ marginRight: '5px' }}>
                         <FormInput
-                          type="checkbox"
+                          type="radio"
                           id="candidate"
                           name="role"
                           value="candidate"
                         />
                         <span>candidate</span>
                       </label>
-                      <label htmlFor="member">
+                      <label htmlFor="member" style={{ marginRight: '5px' }}>
                         <FormInput
-                          type="checkbox"
+                          type="radio"
                           id="member"
                           name="role"
                           value="member"
@@ -361,15 +387,46 @@ export const CreateUserModal = () => {
                       </label>
                       <label htmlFor="guest">
                         <FormInput
-                          type="checkbox"
+                          type="radio"
                           id="guest"
                           name="role"
                           value="guest"
                         />
                         <span>guest</span>
                       </label>
-                    </div>
-                  </FormLabelBox>
+                    </FormRatio>
+                  </FormField>
+                  <FormField>
+                    <FormLabel htmlFor="status">
+                      <span>Status</span>
+                      {errors.status && touched.status ? (
+                        <Error>{errors.status}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormRatio>
+                      <label
+                        style={{ marginRight: '5px' }}
+                        htmlFor="status_active"
+                      >
+                        <FormInput
+                          type="radio"
+                          id="status_active"
+                          name="status"
+                          value="active"
+                        />
+                        <span>active</span>
+                      </label>
+                      <label htmlFor="status_inActive">
+                        <FormInput
+                          type="radio"
+                          id="status_inActive"
+                          name="status"
+                          value="inActive"
+                        />
+                        <span>inActive</span>
+                      </label>
+                    </FormRatio>
+                  </FormField>
                 </FormList>
 
                 <DoneBtn

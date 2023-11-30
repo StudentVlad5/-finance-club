@@ -37,6 +37,8 @@ export const CreateEventModal = () => {
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
 
+  const [lang, setLang] = useState('en');
+
   async function createEvents(values) {
     const file = img;
 

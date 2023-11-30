@@ -40,6 +40,8 @@ export const EditEventModal = () => {
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
 
+  const [lang, setLang] = useState('en');
+
   const itemForFetch = `/events/${modal.id}`;
 
   useEffect(() => {
