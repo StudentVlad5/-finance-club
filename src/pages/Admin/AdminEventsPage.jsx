@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   MdClose,
@@ -18,6 +18,7 @@ import { getFromStorage } from 'services/localStorService';
 import { PaginationBlock } from 'helpers/Pagination/Pagination';
 import { onLoading, onLoaded } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
+import { StatusContext } from 'components/ContextStatus/ContextStatus';
 import { EditEventModal } from 'components/Admin/EventsModal/EditEventModal';
 import { CreateEventModal } from 'components/Admin/EventsModal/CreateEventModal';
 import { BackButton } from 'helpers/BackLink/BackLink';
@@ -56,7 +57,7 @@ const AdminEventsPage = () => {
   const [filterEvents, setFilterEvents] = useState([]);
   const [filters, setFilters] = useState(initialState);
 
-  const [lang, setLang] = useState(getFromStorage('chosenLanguage') || 'en');
+  const { selectedLanguage } = useContext(StatusContext);
 
   useEffect(() => {
     (async function getData() {
@@ -74,7 +75,7 @@ const AdminEventsPage = () => {
         setIsLoading(false);
       }
     })();
-  }, [reload, lang]);
+  }, [reload, selectedLanguage]);
 
   async function deleteEvent(id) {
     setIsLoading(true);
@@ -109,49 +110,54 @@ const AdminEventsPage = () => {
     e.preventDefault();
     const peremOfFilter = [];
     events.map(item => {
-      // let isImage = item[lang].image && item[lang].image !== '' ? 'yes' : 'no';
+      let isImage =
+        item[selectedLanguage].image && item[selectedLanguage].image !== ''
+          ? 'yes'
+          : 'no';
       if (
-        moment(item[lang].date)
+        moment(item[selectedLanguage].date)
           .format('DD.MM.YYYY')
           .includes(filters['filterDate']) &&
-        item[lang].time.split(':').join('').includes(filters['filterTime']) &&
-        item[lang].duration
+        item[selectedLanguage].time
+          .split(':')
+          .join('')
+          .includes(filters['filterTime']) &&
+        item[selectedLanguage].duration
           .toString()
           .toLowerCase()
           .includes(filters['filterDuration']) &&
-        item[lang].location
+        item[selectedLanguage].location
           .toString()
           .toLowerCase()
           .includes(filters['filterLocation']) &&
-        item[lang].title
+        item[selectedLanguage].title
           .toString()
           .toLowerCase()
           .includes(filters['filterTitle']) &&
-        item[lang].description
+        item[selectedLanguage].description
           .toString()
           .toLowerCase()
           .includes(filters['filterDescription']) &&
-        item[lang].plan
+        item[selectedLanguage].plan
           .join('; ')
           .toString()
           .toLowerCase()
           .includes(filters['filterPlan']) &&
-        item[lang].speakers
+        item[selectedLanguage].speakers
           .join('; ')
           .toString()
           .toLowerCase()
           .includes(filters['filterSpeakers']) &&
-        item[lang].moderator
+        item[selectedLanguage].moderator
           .toString()
           .toLowerCase()
           .includes(filters['filterModerator']) &&
-        item[lang].packages
+        item[selectedLanguage].packages
           .join(', ')
           .toString()
           .toLowerCase()
-          .includes(filters['filterPackages'])
-        // &&
-        // isImage.includes(filters['filterImage'])
+          .includes(filters['filterPackages']) &&
+        isImage.includes(filters['filterImage'])
       ) {
         peremOfFilter.push(item);
       }
@@ -648,23 +654,36 @@ const AdminEventsPage = () => {
                 .map(event => (
                   <TableRow key={event._id}>
                     <TableData>
-                      {moment(event[lang].date).format('DD.MM.YYYY')}
+                      {moment(event[selectedLanguage].date).format(
+                        'DD.MM.YYYY',
+                      )}
                     </TableData>
-                    <TableData>{event[lang].time}</TableData>
-                    <TableData>{event[lang].duration}</TableData>
-                    <TableData>{event[lang].location}</TableData>
-                    <TableData>{event[lang].title}</TableData>
+                    <TableData>{event[selectedLanguage].time}</TableData>
+                    <TableData>{event[selectedLanguage].duration}</TableData>
+                    <TableData>{event[selectedLanguage].location}</TableData>
+                    <TableData>{event[selectedLanguage].title}</TableData>
                     {!isLearnMore && (
                       <>
-                        <TableData>{event[lang].description}</TableData>
                         <TableData>
-                          {event[lang].plan ? event[lang].plan.join('; ') : ''}
+                          {event[selectedLanguage].description}
                         </TableData>
-                        <TableData>{event[lang].speakers.join('; ')}</TableData>
-                        <TableData>{event[lang].moderator}</TableData>
-                        <TableData>{event[lang].packages.join(', ')}</TableData>
                         <TableData>
-                          {event[lang].image && event[lang].image !== 'none'
+                          {event[selectedLanguage].plan
+                            ? event[selectedLanguage].plan.join('; ')
+                            : ''}
+                        </TableData>
+                        <TableData>
+                          {event[selectedLanguage].speakers.join('; ')}
+                        </TableData>
+                        <TableData>
+                          {event[selectedLanguage].moderator}
+                        </TableData>
+                        <TableData>
+                          {event[selectedLanguage].packages.join(', ')}
+                        </TableData>
+                        <TableData>
+                          {event[selectedLanguage].image &&
+                          event[selectedLanguage].image !== 'none'
                             ? 'yes'
                             : 'no'}
                         </TableData>

@@ -123,7 +123,10 @@ const AdminUsersPage = () => {
           .toString()
           .toLowerCase()
           .includes(filters['filterCompany']) &&
-        item.position.toString().includes(filters['filterPosition']) &&
+        item.position
+          .toString()
+          .toLowerCase()
+          .includes(filters['filterPosition']) &&
         moment(item.birthday)
           .format('DD.MM.YYYY')
           .includes(filters['filterBirthday']) &&

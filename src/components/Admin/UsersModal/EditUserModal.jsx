@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdClose, MdDone } from 'react-icons/md';
 import { FieldArray, Formik } from 'formik';
+import moment from 'moment';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
@@ -29,6 +30,8 @@ import {
   FormList,
   IncrementBtn,
   ModalForm,
+  FormRatio,
+  FormInputSelect,
 } from '../Modal.styled';
 
 export const EditUserModal = () => {
@@ -39,7 +42,7 @@ export const EditUserModal = () => {
   const modal = useSelector(modalComponent);
   const dispatch = useDispatch();
 
-  const itemForFetch = `/users/${modal.id}`;
+  const itemForFetch = `/admin/users/${modal.id}`;
 
   useEffect(() => {
     async function getData() {
@@ -121,11 +124,14 @@ export const EditUserModal = () => {
               phone: dataUpdate?.phone ? dataUpdate.phone : '',
               company: dataUpdate?.company ? dataUpdate.company : '',
               position: dataUpdate?.position ? dataUpdate.position : '',
+              birthday: dataUpdate?.birthday ? dataUpdate.birthday : '',
               events: dataUpdate?.events ? dataUpdate.events : [],
-              packages: dataUpdate?.packages ? dataUpdate.packages : [],
-              status: dataUpdate?.status ? dataUpdate.status : '',
+              packages: dataUpdate?.packages
+                ? dataUpdate.packages
+                : [{ name: '', termActive: { from: '', to: '' } }],
               avatar: '',
-              role: '',
+              status: dataUpdate?.status ? dataUpdate.status : '',
+              role: dataUpdate?.role ? dataUpdate.role : '',
             }}
             onSubmit={(values, { setSubmitting }) => {
               editUser(values);
@@ -228,6 +234,21 @@ export const EditUserModal = () => {
                     />
                   </FormField>
                   <FormField>
+                    <FormLabel htmlFor="position">
+                      <span>Position</span>
+                      {errors.position && touched.position ? (
+                        <Error>{errors.position}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormInput
+                      type="text"
+                      id="position"
+                      name="position"
+                      placeholder="User position"
+                      value={values.position}
+                    />
+                  </FormField>
+                  <FormField>
                     <FormLabel htmlFor="birthday">
                       <span>Birthday</span>
                       {errors.birthday && touched.birthday ? (
@@ -239,23 +260,24 @@ export const EditUserModal = () => {
                       id="birthday"
                       name="birthday"
                       placeholder="User birthday"
-                      value={values.birthday}
+                      value={moment(values.birthday).format('YYYY-MM-DD')}
                     />
                   </FormField>
                   <FormLabelBox>
                     <span>Packages</span>
-                    <div>
+                    {/* <div>
                       <label htmlFor="basic">
                         <FormInput
                           type="checkbox"
                           id="basic"
                           name="packages"
                           value="basic"
-                          checked={values.packages.includes('basic')}
+                          // checked={values.packages.name.includes('basic')}
+                          checked={values.packages.name === 'expert'}
                           onChange={e => {
                             handleChange(e);
                             setFieldValue(
-                              'packages',
+                              'packages.name',
                               e.target.attributes.value.value,
                             );
                           }}
@@ -268,11 +290,12 @@ export const EditUserModal = () => {
                           id="pro"
                           name="packages"
                           value="pro"
-                          checked={values.packages.includes('pro')}
+                          // checked={values.packages.name.includes('pro')}
+                          checked={values.packages.name === 'pro'}
                           onChange={e => {
                             handleChange(e);
                             setFieldValue(
-                              'packages',
+                              'packages.name',
                               e.target.attributes.value.value,
                             );
                           }}
@@ -285,18 +308,71 @@ export const EditUserModal = () => {
                           id="expert"
                           name="packages"
                           value="expert"
-                          checked={values.packages.includes('expert')}
+                          // checked={values.packages.name.includes('expert')}
+                          checked={values.packages.name === 'expert'}
                           onChange={e => {
                             handleChange(e);
                             setFieldValue(
-                              'packages',
+                              'packages.name',
                               e.target.attributes.value.value,
                             );
                           }}
                         />
                         <span>expert</span>
                       </label>
-                    </div>
+                    </div> */}
+                    {values.packages.map((pack, i) => (
+                      <div key={i}>
+                        <label htmlFor="packages">
+                          <FormInputSelect
+                            id="packages"
+                            name="name"
+                            value={pack.name}
+                            onChange={handleChange}
+                            style={{ display: 'block' }}
+                          >
+                            <option value="" label="">
+                              Name
+                            </option>
+                            <option value="basic" label="basic">
+                              basic
+                            </option>
+                            <option value="pro" label="pro">
+                              pro
+                            </option>
+                            <option value="expert" label="expert">
+                              expert
+                            </option>
+                          </FormInputSelect>
+                        </label>
+
+                        <span>Term</span>
+                        <label>
+                          <span>from</span>
+                          <FormInput
+                            type="date"
+                            id="from"
+                            name="from"
+                            placeholder="from"
+                            value={moment(pack.termActive.from).format(
+                              'YYYY-MM-DD',
+                            )}
+                          />
+                        </label>
+                        <label>
+                          <span>to</span>
+                          <FormInput
+                            type="date"
+                            id="to"
+                            name="to"
+                            placeholder="to"
+                            value={moment(pack.termActive.to).format(
+                              'YYYY-MM-DD',
+                            )}
+                          />
+                        </label>
+                      </div>
+                    ))}
                   </FormLabelBox>
                   <FieldArray
                     name="events"
@@ -327,7 +403,7 @@ export const EditUserModal = () => {
                               type="button"
                               onClick={() => arrayHelpers.push('')}
                             >
-                              Add an event
+                              Add an event id
                             </AddDetailsBtn>
                           )}
                         </FormInputBoxColumn>
@@ -378,62 +454,79 @@ export const EditUserModal = () => {
                       />
                     )}
                   </FormField>
-                  <FormLabelBox>
-                    <span>Role</span>
-                    <div>
-                      <label htmlFor="candidate">
+                  <FormField>
+                    <FormLabel htmlFor="role">
+                      <span>Role</span>
+                      {errors.role && touched.role ? (
+                        <Error>{errors.role}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormRatio>
+                      <label style={{ marginRight: '5px' }} htmlFor="candidate">
                         <FormInput
-                          type="checkbox"
+                          type="radio"
                           id="candidate"
                           name="role"
                           value="candidate"
-                          checked={values.role.includes('candidate')}
-                          onChange={e => {
-                            handleChange(e);
-                            setFieldValue(
-                              'role',
-                              e.target.attributes.value.value,
-                            );
-                          }}
+                          checked={values.role === 'candidate'}
                         />
                         <span>candidate</span>
                       </label>
-                      <label htmlFor="member">
+                      <label style={{ marginRight: '5px' }} htmlFor="member">
                         <FormInput
-                          type="checkbox"
+                          type="radio"
                           id="member"
                           name="role"
                           value="member"
-                          checked={values.role.includes('member')}
-                          onChange={e => {
-                            handleChange(e);
-                            setFieldValue(
-                              'role',
-                              e.target.attributes.value.value,
-                            );
-                          }}
+                          checked={values.role === 'member'}
                         />
                         <span>member</span>
                       </label>
                       <label htmlFor="guest">
                         <FormInput
-                          type="checkbox"
+                          type="radio"
                           id="guest"
                           name="role"
                           value="guest"
-                          checked={values.role.includes('guest')}
-                          onChange={e => {
-                            handleChange(e);
-                            setFieldValue(
-                              'role',
-                              e.target.attributes.value.value,
-                            );
-                          }}
+                          checked={values.role === 'guest'}
                         />
                         <span>guest</span>
                       </label>
-                    </div>
-                  </FormLabelBox>
+                    </FormRatio>
+                  </FormField>
+                  <FormField>
+                    <FormLabel htmlFor="status">
+                      <span>Status</span>
+                      {errors.status && touched.status ? (
+                        <Error>{errors.status}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormRatio>
+                      <label
+                        style={{ marginRight: '5px' }}
+                        htmlFor="status_active"
+                      >
+                        <FormInput
+                          type="radio"
+                          id="status_active"
+                          name="status"
+                          value="active"
+                          checked={values.status === 'active'}
+                        />
+                        <span>active</span>
+                      </label>
+                      <label htmlFor="status_inActive">
+                        <FormInput
+                          type="radio"
+                          id="status_inActive"
+                          name="status"
+                          value="inActive"
+                          checked={values.status === 'inActive'}
+                        />
+                        <span>inActive</span>
+                      </label>
+                    </FormRatio>
+                  </FormField>
                 </FormList>
 
                 <DoneBtn
