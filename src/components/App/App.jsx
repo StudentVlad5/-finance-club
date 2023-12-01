@@ -10,6 +10,7 @@ import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import { UserData } from 'components/UserComp/UserData/UserData';
 import { Packages } from 'components/UserComp/Packages/Packages';
 import { Events } from 'components/UserComp/Events/Events';
+import AdminPackagesPage from 'pages/Admin/AdminPackagesPage';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const EventsPage = lazy(() => import('pages/EventsPage'));
@@ -99,6 +100,16 @@ export const App = () => {
                 <PrivateRoute
                   redirectTo="/admin"
                   component={<AdminEventsPage />}
+                />
+              }
+            />
+            <Route
+              path="admin/packages"
+              // element={<AdminEventsPage />}
+              element={
+                <PrivateRoute
+                  redirectTo="/admin"
+                  component={<AdminPackagesPage />}
                 />
               }
             />

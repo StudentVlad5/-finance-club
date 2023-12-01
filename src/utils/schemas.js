@@ -158,6 +158,13 @@ const schemasEvents = Yup.object().shape({
   image: Yup.string(),
 });
 
+const schemasPackage = Yup.object().shape({
+  title: Yup.string().required('Require field'),
+  price: Yup.string().required('Require field'),
+  content: Yup.string().required('Require field'),
+  features: Yup.array().required('Require field'),
+});
+
 const schemas = {
   registerSchema,
   schemasLogin,
@@ -165,6 +172,7 @@ const schemas = {
   updateSchema,
   updatePasswordSchema,
   schemasEvents,
+  schemasPackage,
 };
 
 export default schemas;
