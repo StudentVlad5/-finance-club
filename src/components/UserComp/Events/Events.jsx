@@ -4,12 +4,13 @@ import { EventsList } from 'components/Events/EventsList/EventList';
 import { Container } from 'components/baseStyles/CommonStyle.styled';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getUser } from 'redux/auth/selectors';
 import { fetchData } from 'services/APIservice';
 import { HeaderText } from './Events.styled';
 import { useTranslation } from 'react-i18next';
+import { StatusContext } from 'components/ContextStatus/ContextStatus';
 
 export const Events = () => {
   const eventsOfUser = useSelector(getUser).events;
@@ -18,29 +19,7 @@ export const Events = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
-  // useEffect(() => {
-  //   (async function getData() {
-  //     let eventsList = [];
-  //     setIsLoading(true);
-  //     try {
-  //       const  {data}  = await fetchData(`/events`);
-  //       if (!data) {
-  //         return onFetchError('Whoops, something went wrong');
-  //       }
-  //       // setEvents(data);
-  //       data.map(it=>eventsOfUser.map(item=>{if(item === it._id){
-  //         eventsList.push(it)}
-  //         console.log("eventsList", eventsList)
-  //         setEvents(eventsList);
-  //       }));
-  //     } catch (error) {
-  //       setError(error);
-  //       alert(error)
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   })();
-  // }, []);
+  const { selectedLanguage } = useContext(StatusContext);
 
   useEffect(() => {
     (async function getData() {
@@ -51,11 +30,10 @@ export const Events = () => {
         if (!data) {
           return onFetchError('Whoops, something went wrong');
         }
-        setEvents(data);
         data.map(it =>
           eventsOfUser.map(item => {
             if (item === it._id) {
-              eventsList.push(it);
+              eventsList.push({_id: it._id,...it[selectedLanguage]});
             }
             setEvents(eventsList);
           }),
@@ -66,7 +44,7 @@ export const Events = () => {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [selectedLanguage]);
 
   return (
     <EventsSection>

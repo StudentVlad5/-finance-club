@@ -187,6 +187,43 @@ async function deleteData(pathParams) {
   });
 }
 
+async function createPackagesData(pathParams, body) {
+  const formData = new FormData();
+  formData.append("title", body.title);
+  formData.append("price", body.price);
+  formData.append("content", body.content);
+  body?.features.forEach((value) => {
+    formData.append("features[]", value);
+  });
+
+  return await axios.post(`${BASE_URL}${pathParams}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
+    },
+  });
+}
+
+async function updatePackageData(pathParams, body) {
+  const formData = new FormData();
+  formData.append("title", body.title);
+  formData.append("price", body.price);
+  formData.append("content", body.content);
+  body?.features.forEach((value) => {
+    formData.append("features[]", value);
+  });
+  return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
+    headers: {
+      "Content-Type": "amultipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
+    },
+  });
+}
+
 fetchData.propTypes = {
   pathParams: PropTypes.string.isRequired,
 };
@@ -218,7 +255,17 @@ updateEventsData.propTypes = {
   formData: PropTypes.string.isRequired,
 };
 
+updatePackageData.propTypes = {
+  pathParams: PropTypes.string.isRequired,
+  formData: PropTypes.string.isRequired,
+};
+
 createEventsData.propTypes = {
+  pathParams: PropTypes.string.isRequired,
+  formData: PropTypes.string.isRequired,
+};
+
+createPackagesData.propTypes = {
   pathParams: PropTypes.string.isRequired,
   formData: PropTypes.string.isRequired,
 };
@@ -238,4 +285,6 @@ export {
   updateEventsData,
   deleteData,
   changePassword,
+  createPackagesData,
+  updatePackageData,
 };
