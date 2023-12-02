@@ -21,6 +21,7 @@ import {
   LiContent,
   ButtonBuy,
   ListItemsContainerForSwiper,
+  ContainerNavigationForDesctop
 } from './Prices.styled';
 import { addModal } from 'redux/modal/operation';
 import { RegisterModal } from 'components/HowToJoin/RegisterModal/RegisterModal';
@@ -88,7 +89,8 @@ const Prices = () => {
           </SubTitle>
           <ListItemsContainer>
             {isLoading ? onLoading() : onLoaded()}
-            {packages.map(it => (
+            {packages.length < 4 ? 
+            packages.map(it => (
               <ListItems key={it[selectedLanguage]?.title}>
                 <ListItemsContentWraper>
                   <ListItemsOfPacked>{it[selectedLanguage]?.title}</ListItemsOfPacked>
@@ -112,7 +114,63 @@ const Prices = () => {
                   </ButtonBuy>
                 </ListItemsContentWraper>
               </ListItems>
+            )) : 
+            <div style={{display:'flex',flexDirection:"column", width:'100%'}}>
+            <Swiper
+            modules={[Navigation, Mousewheel, Keyboard, Autoplay]}
+            spaceBetween={50}
+            slidesPerView={2}
+            grabCursor={true}
+            navigation={{
+              prevEl: '.swiper-button-pr',
+              nextEl: '.swiper-button-nt',
+            }}
+            pagination={{ clickable: false }}
+            mousewheel={true}
+            keyboard={true}
+            loop={true}
+            // loopPreventsSliding={true}
+            // autoplay={{ delay: 2000 }}
+            effect={'creative'}
+          >
+            {' '}
+            {packages.map(it => (
+              <SwiperSlide key={it[selectedLanguage].title}>
+                <ListItems>
+                  <ListItemsContentWraper>
+                    <ListItemsOfPacked>{it[selectedLanguage].title}</ListItemsOfPacked>
+                    <TitleItem>{it[selectedLanguage].price}</TitleItem>
+                    <SubTitleItem>{it[selectedLanguage].content}</SubTitleItem>
+                    <UlContent>
+                      {t("features")}
+                      {it[selectedLanguage]?.features.map((item, i) => (
+                        <LiContent key={item + i}>{item}</LiContent>
+                      ))}
+                    </UlContent>
+                    <ButtonBuy
+                      type="button"
+                      aria-label="buy now"
+                      onClick={e => {
+                        openModal(e);
+                      }}
+                      data-modal="member_registration"
+                    >
+                      {t("Buy now")}
+                    </ButtonBuy>
+                  </ListItemsContentWraper>
+                </ListItems>
+              </SwiperSlide>
             ))}
+          </Swiper>
+            <ContainerNavigationForDesctop>
+            <BtnSlider className="swiper-button-pr">
+              <MdKeyboardArrowLeft className="buttonSlide" />
+            </BtnSlider>
+            <BtnSlider className="swiper-button-nt">
+              <MdKeyboardArrowRight className="buttonSlide" />
+            </BtnSlider>
+          </ContainerNavigationForDesctop>        
+          </div>}
           </ListItemsContainer>
           <ListItemsContainerForSwiper>
             <Swiper
