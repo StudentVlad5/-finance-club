@@ -189,16 +189,22 @@ async function deleteData(pathParams) {
 
 async function createPackagesData(pathParams, body) {
   const formData = new FormData();
-  formData.append("title", body.title);
-  formData.append("price", body.price);
-  formData.append("content", body.content);
-  body?.features.forEach((value) => {
-    formData.append("features[]", value);
-  });
+  formData.append("titleEn", body.titleEn);
+  formData.append("priceEn", body.priceEn);
+  formData.append("contentEn", body.contentEn);
+  formData.append("featuresEn", body.featuresEn);
+  formData.append("titleUa", body.titleUa);
+  formData.append("priceUa", body.priceUa);
+  formData.append("contentUa", body.contentUa);
+  formData.append("featuresUa", body.featuresUa);
+  formData.append("titleDe", body.titleDe);
+  formData.append("priceDe", body.priceDe);
+  formData.append("contentDe", body.contentDe);
+  formData.append("featuresDe", body.featuresDe);
 
   return await axios.post(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
       "Access-Control-Expose-Headers": "Content-Range",
@@ -207,16 +213,24 @@ async function createPackagesData(pathParams, body) {
 }
 
 async function updatePackageData(pathParams, body) {
+  console.log(body);
   const formData = new FormData();
-  formData.append("title", body.title);
-  formData.append("price", body.price);
-  formData.append("content", body.content);
-  body?.features.forEach((value) => {
-    formData.append("features[]", value);
-  });
+  formData.append("titleEn", body.titleEn);
+  formData.append("priceEn", body.priceEn);
+  formData.append("contentEn", body.contentEn);
+  formData.append("featuresEn", body.featuresEn);
+  formData.append("titleUa", body.titleUa);
+  formData.append("priceUa", body.priceUa);
+  formData.append("contentUa", body.contentUa);
+  formData.append("featuresUa", body.featuresUa);
+  formData.append("titleDe", body.titleDe);
+  formData.append("priceDe", body.priceDe);
+  formData.append("contentDe", body.contentDe);
+  formData.append("featuresDe", body.featuresDe);
+
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      "Content-Type": "amultipart/form-data",
+      "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
       "Access-Control-Expose-Headers": "Content-Range",

@@ -68,7 +68,6 @@ const Prices = () => {
       setTimeout(() => openModalWindow(e, null), 200);
     }
   };
-
   return (
     <>
       <PriceSection id="prices">
@@ -89,7 +88,6 @@ const Prices = () => {
           </SubTitle>
           <ListItemsContainer>
             {isLoading ? onLoading() : onLoaded()}
-            {error && onFetchError('Whoops, something went wrong')}
             {packages.map(it => (
               <ListItems key={it[selectedLanguage]?.title}>
                 <ListItemsContentWraper>

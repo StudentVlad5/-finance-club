@@ -73,7 +73,7 @@ const AdminPackagesPage = () => {
   async function deletePackage(id) {
     setIsLoading(true);
     try {
-      const { date } = await deleteData(`admin/events/${id}`);
+      const { date } = await deleteData(`/admin/packages/${id}`);
       return date;
     } catch (error) {
       setError(error);

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { Field, Form } from 'formik';
-import { theme } from 'components/baseStyles/Variables.styled';
-import { CloseBtn } from 'components/baseStyles/Modal.styled';
+import styled from "styled-components";
+import { Field, Form } from "formik";
+import { theme } from "components/baseStyles/Variables.styled";
+import { CloseBtn } from "components/baseStyles/Modal.styled";
 
 export const ModalForm = styled(Form)`
   display: flex;
@@ -36,7 +36,7 @@ export const FormLabel = styled.label`
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 14px;
@@ -60,7 +60,7 @@ export const FormLabelBox = styled.div`
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 14px;
@@ -81,7 +81,7 @@ export const FormLabelBox = styled.div`
   & label {
     display: flex;
     align-items: center;
-    color: ${props => props.theme.white_text};
+    color: ${(props) => props.theme.white_text};
   }
 `;
 
@@ -98,7 +98,7 @@ export const FormRatio = styled.div`
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 13px;
@@ -136,10 +136,10 @@ export const FormInput = styled(Field)`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${props => props.theme.black_text};
+  color: ${(props) => props.theme.black_text};
 
-  background-color: ${props => props.theme.white_fon};
-  border: 1px solid ${props => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_fon};
+  border: 1px solid ${(props) => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
   transition: ${theme.transition};
@@ -158,7 +158,7 @@ export const FormInput = styled(Field)`
 
   &:hover,
   &:focus {
-    outline: 2px solid ${props => props.theme.black_text};
+    outline: 2px solid ${(props) => props.theme.black_text};
   }
 
   &::-webkit-outer-spin-button,
@@ -167,11 +167,11 @@ export const FormInput = styled(Field)`
   }
 
   &:disabled {
-    background-color: ${props => props.theme.greyOpacity};
-    color: ${props => props.theme.grey};
+    background-color: ${(props) => props.theme.greyOpacity};
+    color: ${(props) => props.theme.grey};
   }
 
-  &[type='checkbox'] {
+  &[type="checkbox"] {
     width: 30px;
 
     &:hover,
@@ -185,7 +185,7 @@ export const FormInput = styled(Field)`
       font-weight: 400;
       line-height: 1.33;
       letter-spacing: 0.04em;
-      color: ${props => props.theme.white_text};
+      color: ${(props) => props.theme.white_text};
 
       @media screen and (min-width: ${theme.breakpoints.tablet}) {
         font-size: 14px;
@@ -208,9 +208,9 @@ export const FormInputFile = styled(Field)`
   height: 50px;
   width: 50px;
 
-  background-color: ${props => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_fon};
   border-radius: 4px;
-  border: 1px solid ${props => props.theme.white_fon};
+  border: 1px solid ${(props) => props.theme.white_fon};
   outline: none;
 
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzEiIGhlaWdodD0iNzEiIHZpZXdCb3g9IjAgMCA3MSA3MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM1LjQ5OTkgNTkuMTY2M1YzNS40OTk3TTM1LjQ5OTkgMzUuNDk5N1YxMS44MzNNMzUuNDk5OSAzNS40OTk3SDU5LjE2NjZNMzUuNDk5OSAzNS40OTk3SDExLjgzMzMiIHN0cm9rZT0iIzExMTExMSIgc3Ryb2tlLW9wYWNpdHk9IjAuNiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+);
@@ -222,7 +222,7 @@ export const FormInputFile = styled(Field)`
 
   color: transparent;
   &:hover {
-    outline: 3px solid ${props => props.theme.black_text};
+    outline: 3px solid ${(props) => props.theme.black_text};
   }
   &:focus {
     outline: none;
@@ -272,10 +272,10 @@ export const IncrementBtn = styled.button`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${props => props.theme.black_text};
+  color: ${(props) => props.theme.black_text};
 
-  background-color: ${props => props.theme.white_fon};
-  border: 1px solid ${props => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_fon};
+  border: 1px solid ${(props) => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
   transition: ${theme.transition};
@@ -292,8 +292,8 @@ export const IncrementBtn = styled.button`
 
   &:hover,
   &:focus {
-    color: ${props => props.theme.white_fon};
-    background-color: ${props => props.theme.white_fon};
+    color: ${(props) => props.theme.white_fon};
+    background-color: ${(props) => props.theme.white_fon};
   }
 `;
 
@@ -306,10 +306,10 @@ export const AddDetailsBtn = styled.button`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${props => props.theme.black_text};
+  color: ${(props) => props.theme.black_text};
 
-  background-color: ${props => props.theme.white_fon};
-  border: 1px solid ${props => props.theme.white_fon};
+  background-color: ${(props) => props.theme.white_fon};
+  border: 1px solid ${(props) => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
 
@@ -327,8 +327,8 @@ export const AddDetailsBtn = styled.button`
 
   &:hover,
   &:focus {
-    color: ${props => props.theme.white_fon};
-    background-color: ${props => props.theme.white_fon};
+    color: ${(props) => props.theme.white_fon};
+    background-color: ${(props) => props.theme.white_fon};
   }
 `;
 
@@ -343,7 +343,7 @@ export const Error = styled.span`
   font-weight: 400;
   font-size: 8px;
   text-align: right;
-  color: ${props => props.theme.black_text};
+  color: ${(props) => props.theme.black_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 10px;
@@ -353,3 +353,29 @@ export const Error = styled.span`
     font-size: 12px;
   }
 `;
+// changes for modal >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+export const ChooseLanguage = styled.ul`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
+`;
+export const TextLanguage = styled.li`
+  font-family: ${theme.fonts[0]};
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  color: ${(props) => props.theme.white_text};
+  text-transform: uppercase;
+  cursor: pointer;
+  &.active {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgb(0, 162, 199);
+  }
+`;
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
