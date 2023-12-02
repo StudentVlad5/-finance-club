@@ -112,7 +112,7 @@ export const CreateUserModal = () => {
               dispatch(cleanModal());
             }}
             enableReinitialize={true}
-            validationSchema={schemas.schemasUsers}
+            validationSchema={schemas.createUserSchema}
           >
             {({
               handleChange,
