@@ -79,7 +79,7 @@ const AdminUsersPage = () => {
   async function deleteUser(id) {
     setIsLoading(true);
     try {
-      const { date } = await deleteData(`/users/${id}`);
+      const { date } = await deleteData(`/admin/users/${id}`);
       return date;
     } catch (error) {
       setError(error);

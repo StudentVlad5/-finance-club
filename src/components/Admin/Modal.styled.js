@@ -94,6 +94,14 @@ export const FormInputArrayBox = styled.div`
   gap: 10px;
   width: 100%;
 
+  & div {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0px;
+
+    width: 100%;
+  }
+
   & button {
     width: 18px;
     height: 20px;
@@ -394,7 +402,7 @@ export const Error = styled.span`
   font-weight: 400;
   font-size: 8px;
   text-align: right;
-  color: ${props => props.theme.black_text};
+  color: ${props => props.theme.white_text_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 10px;

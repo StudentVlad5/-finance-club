@@ -43,9 +43,6 @@ async function createUserData(pathParams, body, file) {
   body.packages.forEach(value => {
     formData.append('packages[]', value);
   });
-  formData.append('packages.name', body.packages.name);
-  formData.append('packages.termActive.from', body.packages.termActive.from);
-  formData.append('packages.termActive.to', body.packages.termActive.to);
   formData.append('status', body.status);
   formData.append('role', body.role);
 
@@ -60,6 +57,7 @@ async function createUserData(pathParams, body, file) {
 }
 
 async function editUserData(pathParams, body, file) {
+  console.log('editUserData ~ formData:', body, file);
   const formData = new FormData();
   file && formData.set('avatar', file);
   formData.append('name', body.name);
@@ -75,12 +73,8 @@ async function editUserData(pathParams, body, file) {
   body.packages.forEach(value => {
     formData.append('packages[]', value);
   });
-  // formData.append('packages.name', body.packages.name);
-  // formData.append('packages.termActive.from', body.packages.termActive.from);
-  // formData.append('packages.termActive.to', body.packages.termActive.to);
   formData.append('status', body.status);
   formData.append('role', body.role);
-  console.log('editUserData ~ formData:', body, file);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
@@ -226,7 +220,7 @@ async function createPackagesData(pathParams, body) {
 }
 
 async function updatePackageData(pathParams, body) {
-  console.log(body);
+  // console.log(body);
   const formData = new FormData();
   formData.append('titleEn', body.titleEn);
   formData.append('priceEn', body.priceEn);

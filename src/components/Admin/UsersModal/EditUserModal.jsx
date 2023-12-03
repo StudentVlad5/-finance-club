@@ -32,6 +32,9 @@ import {
   ModalForm,
   FormRatio,
   FormInputSelect,
+  FormInputArrayBox,
+  FormInputDate,
+  AddIncrementBtn,
 } from '../Modal.styled';
 
 export const EditUserModal = () => {
@@ -68,7 +71,7 @@ export const EditUserModal = () => {
   async function editUser(values) {
     let file = false;
     if (typeof img === 'string' && img !== '' && img !== 'none') {
-      values.images = img;
+      values.avatar = img;
     } else {
       file = img;
     }
@@ -78,7 +81,11 @@ export const EditUserModal = () => {
 
     setIsLoading(true);
     try {
-      const { code } = await editUserData(`/users/${modal.id}`, values, file);
+      const { code } = await editUserData(
+        `/admin/users/${modal.id}`,
+        values,
+        file,
+      );
       if (code && code !== 201) {
         return onFetchError('Whoops, something went wrong');
       }
@@ -134,6 +141,7 @@ export const EditUserModal = () => {
               role: dataUpdate?.role ? dataUpdate.role : '',
             }}
             onSubmit={(values, { setSubmitting }) => {
+              console.log('EditUserModal ~ values:', values);
               editUser(values);
               dispatch(addReload(false));
               setSubmitting(false);
@@ -141,7 +149,7 @@ export const EditUserModal = () => {
               closeModalWindow();
             }}
             enableReinitialize={true}
-            validationSchema={schemas.schemasUsers}
+            validationSchema={schemas.updateUserSchema}
           >
             {({
               handleChange,
@@ -263,117 +271,117 @@ export const EditUserModal = () => {
                       value={moment(values.birthday).format('YYYY-MM-DD')}
                     />
                   </FormField>
-                  <FormLabelBox>
-                    <span>Packages</span>
-                    {/* <div>
-                      <label htmlFor="basic">
-                        <FormInput
-                          type="checkbox"
-                          id="basic"
-                          name="packages"
-                          value="basic"
-                          // checked={values.packages.name.includes('basic')}
-                          checked={values.packages.name === 'expert'}
-                          onChange={e => {
-                            handleChange(e);
-                            setFieldValue(
-                              'packages.name',
-                              e.target.attributes.value.value,
-                            );
-                          }}
-                        />
-                        <span>basic</span>
-                      </label>
-                      <label htmlFor="pro">
-                        <FormInput
-                          type="checkbox"
-                          id="pro"
-                          name="packages"
-                          value="pro"
-                          // checked={values.packages.name.includes('pro')}
-                          checked={values.packages.name === 'pro'}
-                          onChange={e => {
-                            handleChange(e);
-                            setFieldValue(
-                              'packages.name',
-                              e.target.attributes.value.value,
-                            );
-                          }}
-                        />
-                        <span>pro</span>
-                      </label>
-                      <label htmlFor="expert">
-                        <FormInput
-                          type="checkbox"
-                          id="expert"
-                          name="packages"
-                          value="expert"
-                          // checked={values.packages.name.includes('expert')}
-                          checked={values.packages.name === 'expert'}
-                          onChange={e => {
-                            handleChange(e);
-                            setFieldValue(
-                              'packages.name',
-                              e.target.attributes.value.value,
-                            );
-                          }}
-                        />
-                        <span>expert</span>
-                      </label>
-                    </div> */}
-                    {values.packages.map((pack, i) => (
-                      <div key={i}>
-                        <label htmlFor="packages">
-                          <FormInputSelect
-                            id="packages"
-                            name="name"
-                            value={pack.name}
-                            onChange={handleChange}
-                            style={{ display: 'block' }}
-                          >
-                            <option value="" label="">
-                              Name
-                            </option>
-                            <option value="basic" label="basic">
-                              basic
-                            </option>
-                            <option value="pro" label="pro">
-                              pro
-                            </option>
-                            <option value="expert" label="expert">
-                              expert
-                            </option>
-                          </FormInputSelect>
-                        </label>
+                  <FieldArray
+                    name="packages"
+                    render={arrayHelpers => (
+                      <FormInputArray>
+                        <FormLabel>Packages</FormLabel>
+                        <FormLabelBox
+                          style={{ flexDirection: 'column', gap: '5px' }}
+                        >
+                          {values.packages.map((pack, index) => (
+                            <FormInputArrayBox
+                              key={index}
+                              style={{ width: '100%' }}
+                            >
+                              <div name={`packages.${index}`}>
+                                <label htmlFor="packages">
+                                  <FormInputSelect
+                                    id="packages"
+                                    name={`packages.[${index}].name`}
+                                    value={pack.name}
+                                    onChange={e => {
+                                      handleChange(e);
+                                      setFieldValue(
+                                        `packages[${index}].name`,
+                                        e.target.value,
+                                      );
+                                    }}
+                                    style={{ display: 'block' }}
+                                  >
+                                    <option value="" label="">
+                                      Name
+                                    </option>
+                                    <option value="basic" label="basic">
+                                      basic
+                                    </option>
+                                    <option value="pro" label="pro">
+                                      pro
+                                    </option>
+                                    <option value="expert" label="expert">
+                                      expert
+                                    </option>
+                                  </FormInputSelect>
+                                </label>
+                                <label>
+                                  <span>from</span>
+                                  <FormInputDate
+                                    type="date"
+                                    id="from"
+                                    name={`packages.[${index}].termActive.from`}
+                                    placeholder="from"
+                                    value={moment(pack.termActive?.from).format(
+                                      'YYYY-MM-DD',
+                                    )}
+                                    onChange={e => {
+                                      handleChange(e);
+                                      setFieldValue(
+                                        `packages[${index}].termActive.from`,
+                                        e.target.value,
+                                      );
+                                    }}
+                                  />
+                                </label>
+                                <label>
+                                  <span>to</span>
+                                  <FormInputDate
+                                    type="date"
+                                    id="to"
+                                    name={`packages.[${index}].termActive.to`}
+                                    placeholder="to"
+                                    value={moment(pack.termActive?.to).format(
+                                      'YYYY-MM-DD',
+                                    )}
+                                    onChange={e => {
+                                      handleChange(e);
+                                      setFieldValue(
+                                        `packages[${index}].termActive.to`,
+                                        e.target.value,
+                                      );
+                                    }}
+                                  />
+                                </label>
 
-                        <span>Term</span>
-                        <label>
-                          <span>from</span>
-                          <FormInput
-                            type="date"
-                            id="from"
-                            name="from"
-                            placeholder="from"
-                            value={moment(pack.termActive.from).format(
-                              'YYYY-MM-DD',
-                            )}
-                          />
-                        </label>
-                        <label>
-                          <span>to</span>
-                          <FormInput
-                            type="date"
-                            id="to"
-                            name="to"
-                            placeholder="to"
-                            value={moment(pack.termActive.to).format(
-                              'YYYY-MM-DD',
-                            )}
-                          />
-                        </label>
-                      </div>
-                    ))}
-                  </FormLabelBox>
+                                <IncrementBtn
+                                  type="button"
+                                  onClick={() => arrayHelpers.remove(index)} // remove a package from the list
+                                >
+                                  -
+                                </IncrementBtn>
+                                <IncrementBtn
+                                  type="button"
+                                  onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a package
+                                >
+                                  +
+                                </IncrementBtn>
+                              </div>
+                            </FormInputArrayBox>
+                          ))}
+                          <AddIncrementBtn
+                            type="button"
+                            onClick={() =>
+                              arrayHelpers.push({
+                                name: '',
+                                termActive: { from: '', to: '' },
+                              })
+                            }
+                          >
+                            +
+                          </AddIncrementBtn>
+                        </FormLabelBox>
+                      </FormInputArray>
+                    )}
+                  />
                   <FieldArray
                     name="events"
                     render={arrayHelpers => (
@@ -421,7 +429,7 @@ export const EditUserModal = () => {
                       <FormInputFile
                         style={{
                           backgroundImage: `url(${
-                            BASE_URL_IMG + dataUpdate.images
+                            BASE_URL_IMG + dataUpdate.avatar
                           })`,
                           backgroundUser: 'center',
                           backgroundRepeat: 'no-repeat',

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdClose, MdDone } from 'react-icons/md';
 import { FieldArray, Formik } from 'formik';
+import moment from 'moment';
 import { closeModalWindow } from 'hooks/modalWindow';
 import { cleanModal } from 'redux/modal/operation';
 import { modalComponent } from 'redux/modal/selectors';
@@ -29,6 +30,10 @@ import {
   IncrementBtn,
   ModalForm,
   FormRatio,
+  AddIncrementBtn,
+  FormInputDate,
+  FormInputSelect,
+  FormInputArrayBox,
 } from '../Modal.styled';
 
 export const CreateUserModal = () => {
@@ -105,6 +110,7 @@ export const CreateUserModal = () => {
               role: 'candidate',
             }}
             onSubmit={(values, { setSubmitting }) => {
+              console.log('CreateUserModal ~ values:', values);
               createUsers(values);
               dispatch(addReload(false));
               setSubmitting(false);
@@ -249,38 +255,114 @@ export const CreateUserModal = () => {
                       value={values.birthday}
                     />
                   </FormField>
-                  <FormLabelBox>
-                    <span>Packages</span>
-                    <div>
-                      <label htmlFor="basic">
-                        <FormInput
-                          type="checkbox"
-                          id="basic"
-                          name="packages"
-                          value="basic"
-                        />
-                        <span>basic</span>
-                      </label>
-                      <label htmlFor="pro">
-                        <FormInput
-                          type="checkbox"
-                          id="pro"
-                          name="packages"
-                          value="pro"
-                        />
-                        <span>pro</span>
-                      </label>
-                      <label htmlFor="expert">
-                        <FormInput
-                          type="checkbox"
-                          id="expert"
-                          name="packages"
-                          value="expert"
-                        />
-                        <span>expert</span>
-                      </label>
-                    </div>
-                  </FormLabelBox>
+                  <FieldArray
+                    name="packages"
+                    render={arrayHelpers => (
+                      <FormInputArray>
+                        <FormLabel>Packages</FormLabel>
+                        <FormLabelBox
+                          style={{ flexDirection: 'column', gap: '5px' }}
+                        >
+                          {values.packages.map((pack, index) => (
+                            <FormInputArrayBox
+                              key={index}
+                              style={{ width: '100%' }}
+                            >
+                              <div
+                                name={`packages.${index}`}
+                                style={{
+                                  width: '100%',
+                                  justifyContent: 'flex-end',
+                                  gap: '0',
+                                }}
+                              >
+                                <label htmlFor="packages">
+                                  <FormInputSelect
+                                    id="packages"
+                                    name="packages.name"
+                                    value={pack.name}
+                                    onChange={e => {
+                                      handleChange(e);
+                                      setFieldValue(
+                                        `packages[${index}].name`,
+                                        e.target.value,
+                                      );
+                                    }}
+                                    style={{ display: 'block' }}
+                                  >
+                                    <option value="" label="">
+                                      Name
+                                    </option>
+                                    <option value="basic" label="basic">
+                                      basic
+                                    </option>
+                                    <option value="pro" label="pro">
+                                      pro
+                                    </option>
+                                    <option value="expert" label="expert">
+                                      expert
+                                    </option>
+                                  </FormInputSelect>
+                                </label>
+                                <label>
+                                  <span>from</span>
+                                  <FormInputDate
+                                    type="date"
+                                    id="from"
+                                    name="packages.termActive.from"
+                                    placeholder="from"
+                                    value={pack.termActive?.from}
+                                    onChange={e => {
+                                      handleChange(e);
+                                      setFieldValue(
+                                        `packages[${index}].termActive.from`,
+                                        e.target.value,
+                                      );
+                                    }}
+                                  />
+                                </label>
+                                <label>
+                                  <span>to</span>
+                                  <FormInputDate
+                                    type="date"
+                                    id="to"
+                                    name="packages.termActive.to"
+                                    placeholder="to"
+                                    value={pack.termActive?.to}
+                                    onChange={e => {
+                                      handleChange(e);
+                                      setFieldValue(
+                                        `packages[${index}].termActive.to`,
+                                        e.target.value,
+                                      );
+                                    }}
+                                  />
+                                </label>
+
+                                <IncrementBtn
+                                  type="button"
+                                  onClick={() => arrayHelpers.remove(index)} // remove a package from the list
+                                >
+                                  -
+                                </IncrementBtn>
+                              </div>
+                            </FormInputArrayBox>
+                          ))}
+                          <AddIncrementBtn
+                            type="button"
+                            onClick={() =>
+                              arrayHelpers.push({
+                                name: '',
+                                termActive: { from: '', to: '' },
+                              })
+                            }
+                          >
+                            +
+                          </AddIncrementBtn>
+                        </FormLabelBox>
+                      </FormInputArray>
+                    )}
+                  />
                   <FieldArray
                     name="events"
                     render={arrayHelpers => (
@@ -288,9 +370,12 @@ export const CreateUserModal = () => {
                         <FormLabel>Events</FormLabel>
                         <FormInputBoxColumn>
                           {values.events && values.events.length > 0 ? (
-                            values.events.map((item, index) => (
+                            values.events.map((event, index) => (
                               <div key={index}>
-                                <FormInput name={`events.${index}`} />
+                                <FormInput
+                                  name={`events.${index}`}
+                                  value={event}
+                                />
                                 <IncrementBtn
                                   type="button"
                                   onClick={() => arrayHelpers.remove(index)} // remove a detail from the list
