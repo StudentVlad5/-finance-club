@@ -26,6 +26,12 @@ const ContainerNavigation = styled.div`
     display: none;
   }
 `;
+const ContainerNavigationForDesctop = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+`;
 
 const BtnSlider = styled.div`
   display: flex;
@@ -100,7 +106,7 @@ const ListItems = styled.li`
   justify-content: center;
   align-items: stretch;
   flex-direction: row;
-  /* height: 645px; */
+  height: 100%;
   padding: 48px 30px;
   border-radius: 40px;
   gap: 24px;
@@ -239,4 +245,5 @@ export {
   UlContent,
   LiContent,
   ButtonBuy,
+  ContainerNavigationForDesctop
 };
