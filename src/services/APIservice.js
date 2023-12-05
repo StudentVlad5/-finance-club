@@ -41,7 +41,7 @@ async function createUserData(pathParams, body, file) {
     formData.append('events[]', value);
   });
   body.packages.forEach(value => {
-    formData.append('packages[]', value);
+    formData.append('packages[]', JSON.stringify(value));
   });
   formData.append('status', body.status);
   formData.append('role', body.role);
@@ -57,7 +57,6 @@ async function createUserData(pathParams, body, file) {
 }
 
 async function editUserData(pathParams, body, file) {
-  console.log('editUserData ~ formData:', body, file);
   const formData = new FormData();
   file && formData.set('avatar', file);
   formData.append('name', body.name);
@@ -70,8 +69,14 @@ async function editUserData(pathParams, body, file) {
   body.events.forEach(value => {
     formData.append('events[]', value);
   });
-  body.packages.forEach(value => {
-    formData.append('packages[]', value);
+  body.packages.forEach((value, i) => {
+    formData.append('packages[]', JSON.stringify(value));
+    // formData.append(`packages[${i}].name`, value.name);
+    // formData.append(`packages[${i}].termActive.from`, value.termActive.from);
+    // formData.append(`packages[${i}].termActive.to`, value.termActive.to);
+    // // Object.entries(value).forEach(([key, value]) => {
+    // //   formData.append(`packages[${i}].${key}`, value);
+    // // });
   });
   formData.append('status', body.status);
   formData.append('role', body.role);

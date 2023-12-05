@@ -141,7 +141,6 @@ export const EditUserModal = () => {
               role: dataUpdate?.role ? dataUpdate.role : '',
             }}
             onSubmit={(values, { setSubmitting }) => {
-              console.log('EditUserModal ~ values:', values);
               editUser(values);
               dispatch(addReload(false));
               setSubmitting(false);
@@ -357,12 +356,6 @@ export const EditUserModal = () => {
                                   onClick={() => arrayHelpers.remove(index)} // remove a package from the list
                                 >
                                   -
-                                </IncrementBtn>
-                                <IncrementBtn
-                                  type="button"
-                                  onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a package
-                                >
-                                  +
                                 </IncrementBtn>
                               </div>
                             </FormInputArrayBox>

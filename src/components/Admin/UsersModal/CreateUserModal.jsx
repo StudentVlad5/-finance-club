@@ -110,7 +110,6 @@ export const CreateUserModal = () => {
               role: 'candidate',
             }}
             onSubmit={(values, { setSubmitting }) => {
-              console.log('CreateUserModal ~ values:', values);
               createUsers(values);
               dispatch(addReload(false));
               setSubmitting(false);
@@ -268,18 +267,11 @@ export const CreateUserModal = () => {
                               key={index}
                               style={{ width: '100%' }}
                             >
-                              <div
-                                name={`packages.${index}`}
-                                style={{
-                                  width: '100%',
-                                  justifyContent: 'flex-end',
-                                  gap: '0',
-                                }}
-                              >
+                              <div name={`packages.${index}`}>
                                 <label htmlFor="packages">
                                   <FormInputSelect
                                     id="packages"
-                                    name="packages.name"
+                                    name={`packages.[${index}].name`}
                                     value={pack.name}
                                     onChange={e => {
                                       handleChange(e);
@@ -309,7 +301,7 @@ export const CreateUserModal = () => {
                                   <FormInputDate
                                     type="date"
                                     id="from"
-                                    name="packages.termActive.from"
+                                    name={`packages.[${index}].termActive.from`}
                                     placeholder="from"
                                     value={pack.termActive?.from}
                                     onChange={e => {
@@ -326,7 +318,7 @@ export const CreateUserModal = () => {
                                   <FormInputDate
                                     type="date"
                                     id="to"
-                                    name="packages.termActive.to"
+                                    name={`packages.[${index}].termActive.to`}
                                     placeholder="to"
                                     value={pack.termActive?.to}
                                     onChange={e => {
