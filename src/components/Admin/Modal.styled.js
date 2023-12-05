@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Field, Form } from "formik";
-import { theme } from "components/baseStyles/Variables.styled";
-import { CloseBtn } from "components/baseStyles/Modal.styled";
+import styled from 'styled-components';
+import { Field, Form } from 'formik';
+import { theme } from 'components/baseStyles/Variables.styled';
+import { CloseBtn } from 'components/baseStyles/Modal.styled';
 
 export const ModalForm = styled(Form)`
   display: flex;
@@ -36,7 +36,7 @@ export const FormLabel = styled.label`
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 14px;
@@ -60,7 +60,7 @@ export const FormLabelBox = styled.div`
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 14px;
@@ -71,7 +71,7 @@ export const FormLabelBox = styled.div`
   }
 
   & div {
-    width: 70%;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -81,7 +81,30 @@ export const FormLabelBox = styled.div`
   & label {
     display: flex;
     align-items: center;
-    color: ${(props) => props.theme.white_text};
+    color: ${props => props.theme.white_text};
+    gap: 3px;
+  }
+`;
+
+export const FormInputArrayBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+
+  & div {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0px;
+
+    width: 100%;
+  }
+
+  & button {
+    width: 18px;
+    height: 20px;
   }
 `;
 
@@ -91,14 +114,14 @@ export const FormRatio = styled.div`
   justify-content: flex-start;
   gap: 5px;
 
-  width: 70%;
+  width: 80%;
 
   font-family: ${theme.fonts[0]};
   font-size: 11px;
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 13px;
@@ -107,19 +130,25 @@ export const FormRatio = styled.div`
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 15px;
   }
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
 `;
 
 export const FormInputBox = styled.div`
   display: flex;
   gap: 8px;
-  width: 70%;
+  width: 80%;
 `;
 
 export const FormInputBoxColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  width: 70%;
+  width: 80%;
 
   & input {
     width: calc(100% - 42px);
@@ -127,7 +156,7 @@ export const FormInputBoxColumn = styled.div`
 `;
 
 export const FormInput = styled(Field)`
-  width: 70%;
+  width: 80%;
   padding: 5px;
   box-sizing: border-box;
 
@@ -136,10 +165,10 @@ export const FormInput = styled(Field)`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.black_text};
+  color: ${props => props.theme.black_text};
 
-  background-color: ${(props) => props.theme.white_fon};
-  border: 1px solid ${(props) => props.theme.white_fon};
+  background-color: ${props => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
   transition: ${theme.transition};
@@ -158,7 +187,8 @@ export const FormInput = styled(Field)`
 
   &:hover,
   &:focus {
-    outline: 2px solid ${(props) => props.theme.black_text};
+    outline: 2px solid ${props => props.theme.black_text};
+    box-shadow: ${props => props.theme.grey} 1px 1px 2px inset;
   }
 
   &::-webkit-outer-spin-button,
@@ -167,11 +197,19 @@ export const FormInput = styled(Field)`
   }
 
   &:disabled {
-    background-color: ${(props) => props.theme.greyOpacity};
-    color: ${(props) => props.theme.grey};
+    background-color: ${props => props.theme.greyOpacity};
+    color: ${props => props.theme.grey};
   }
 
-  &[type="checkbox"] {
+  &[type='ratio'] {
+    &:hover,
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  &[type='checkbox'] {
     width: 30px;
 
     &:hover,
@@ -185,7 +223,7 @@ export const FormInput = styled(Field)`
       font-weight: 400;
       line-height: 1.33;
       letter-spacing: 0.04em;
-      color: ${(props) => props.theme.white_text};
+      color: ${props => props.theme.white_text};
 
       @media screen and (min-width: ${theme.breakpoints.tablet}) {
         font-size: 14px;
@@ -198,8 +236,17 @@ export const FormInput = styled(Field)`
   }
 `;
 
+export const FormInputDate = styled(FormInput)`
+  width: 70%;
+  padding: 2px;
+  font-size: 10px;
+  line-height: 1.33;
+  letter-spacing: 0;
+`;
+
 export const FormInputSelect = styled.select`
-  padding: 5px;
+  padding: 2px;
+  margin-right: 7px;
   border-radius: 4px;
 `;
 
@@ -208,9 +255,9 @@ export const FormInputFile = styled(Field)`
   height: 50px;
   width: 50px;
 
-  background-color: ${(props) => props.theme.white_fon};
+  background-color: ${props => props.theme.white_fon};
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   outline: none;
 
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzEiIGhlaWdodD0iNzEiIHZpZXdCb3g9IjAgMCA3MSA3MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM1LjQ5OTkgNTkuMTY2M1YzNS40OTk3TTM1LjQ5OTkgMzUuNDk5N1YxMS44MzNNMzUuNDk5OSAzNS40OTk3SDU5LjE2NjZNMzUuNDk5OSAzNS40OTk3SDExLjgzMzMiIHN0cm9rZT0iIzExMTExMSIgc3Ryb2tlLW9wYWNpdHk9IjAuNiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+);
@@ -222,7 +269,7 @@ export const FormInputFile = styled(Field)`
 
   color: transparent;
   &:hover {
-    outline: 3px solid ${(props) => props.theme.black_text};
+    outline: 3px solid ${props => props.theme.black_text};
   }
   &:focus {
     outline: none;
@@ -246,6 +293,14 @@ export const FormInputArray = styled.div`
 `;
 
 export const SCloseBtn = styled(CloseBtn)`
+  padding: 2px;
+
+  &:hover,
+  &:focus {
+    border: 0.5px solid ${props => props.theme.white_fon};
+    border-radius: 4px;
+  }
+
   & > svg {
     width: 20px;
     height: 20px;
@@ -272,10 +327,10 @@ export const IncrementBtn = styled.button`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.black_text};
+  color: ${props => props.theme.black_text};
 
-  background-color: ${(props) => props.theme.white_fon};
-  border: 1px solid ${(props) => props.theme.white_fon};
+  background-color: ${props => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
   transition: ${theme.transition};
@@ -292,9 +347,14 @@ export const IncrementBtn = styled.button`
 
   &:hover,
   &:focus {
-    color: ${(props) => props.theme.white_fon};
-    background-color: ${(props) => props.theme.white_fon};
+    box-shadow: ${props => props.theme.grey} 1px 1px 2px inset;
   }
+`;
+
+export const AddIncrementBtn = styled(IncrementBtn)`
+  width: 18px;
+  height: 20px;
+  margin-left: auto;
 `;
 
 export const AddDetailsBtn = styled.button`
@@ -306,10 +366,10 @@ export const AddDetailsBtn = styled.button`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.black_text};
+  color: ${props => props.theme.black_text};
 
-  background-color: ${(props) => props.theme.white_fon};
-  border: 1px solid ${(props) => props.theme.white_fon};
+  background-color: ${props => props.theme.white_fon};
+  border: 1px solid ${props => props.theme.white_fon};
   border-radius: 4px;
   outline: none;
 
@@ -327,8 +387,7 @@ export const AddDetailsBtn = styled.button`
 
   &:hover,
   &:focus {
-    color: ${(props) => props.theme.white_fon};
-    background-color: ${(props) => props.theme.white_fon};
+    box-shadow: ${props => props.theme.grey} 1px 1px 2px inset;
   }
 `;
 
@@ -343,7 +402,7 @@ export const Error = styled.span`
   font-weight: 400;
   font-size: 8px;
   text-align: right;
-  color: ${(props) => props.theme.black_text};
+  color: ${props => props.theme.white_text_text};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 10px;
@@ -368,7 +427,7 @@ export const TextLanguage = styled.li`
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
   text-transform: uppercase;
   cursor: pointer;
   &.active {
