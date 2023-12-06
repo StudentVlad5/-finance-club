@@ -15,6 +15,18 @@ async function fetchData(pathParams) {
   return await axiosInstance.get();
 }
 
+async function deleteData(pathParams) {
+  const formData = new FormData();
+  return axios.delete(`${BASE_URL}${pathParams}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+      'Access-Control-Expose-Headers': 'Content-Range',
+    },
+  });
+}
+
 async function createFormRegistration(pathParams, body) {
   return await axios.post(`${BASE_URL}${pathParams}`, body, {
     headers: {
@@ -25,6 +37,8 @@ async function createFormRegistration(pathParams, body) {
     },
   });
 }
+
+// ==== USERS ==== //
 
 async function createUserData(pathParams, body, file) {
   const formData = new FormData();
@@ -125,27 +139,69 @@ async function changePassword(pathParams, body) {
   });
 }
 
-async function updateEventsData(pathParams, body) {
+// ==== EVENTS ==== //
+
+async function updateEventsData(pathParams, body, file) {
   const formData = new FormData();
-  formData.append('date', body.date);
-  formData.append('time', body.time);
-  formData.append('duration', body.duration);
-  formData.append('location', body.location);
-  formData.append('title', body.title);
-  formData.append('description', body.description);
-  body.plan.forEach(value => {
-    formData.append('plan[]', value);
+  formData.append('dateEn', body.dateEn);
+  formData.append('timeEn', body.timeEn);
+  formData.append('durationEn', body.durationEn);
+  formData.append('locationEn', body.locationEn);
+  formData.append('titleEn', body.titleEn);
+  formData.append('descriptionEn', body.descriptionEn);
+  body.planEn.forEach(value => {
+    formData.append('planEn[]', value);
   });
-  body.speakers.forEach(value => {
-    formData.append('speakers[]', value);
+  body.speakersEn.forEach(value => {
+    formData.append('speakersEn[]', value);
   });
-  formData.append('moderator', body.moderator);
-  body.packages.forEach(value => {
-    formData.append('packages[]', value);
+  formData.append('moderatorEn', body.moderatorEn);
+  body.packagesEn.forEach(value => {
+    formData.append('packagesEn[]', value);
   });
-  file && file !== 'none'
-    ? formData.set('images', file, file.name.replaceAll(' ', '_'))
-    : formData.append('image', body.image);
+  file && file !== '' && formData.set('imageEn', body.imageEn);
+  // ? formData.set('imageEn', file, file.name.replaceAll(' ', '_'))
+  // : formData.append('imageEn', body.imageEn);
+
+  formData.append('dateUa', body.dateUa);
+  formData.append('timeUa', body.timeUa);
+  formData.append('durationUa', body.durationUa);
+  formData.append('locationUa', body.locationUa);
+  formData.append('titleUa', body.titleUa);
+  formData.append('descriptionUa', body.descriptionUa);
+  body.planUa.forEach(value => {
+    formData.append('planUa[]', value);
+  });
+  body.speakersUa.forEach(value => {
+    formData.append('speakersUa[]', value);
+  });
+  formData.append('moderatorUa', body.moderatorUa);
+  body.packagesUa.forEach(value => {
+    formData.append('packagesUa[]', value);
+  });
+  file && file !== '' && formData.set('imageUa', body.imageUa);
+  // ? formData.set('imageUa', file, file.name.replaceAll(' ', '_'))
+  // : formData.append('imageUa', body.imageUa);
+
+  formData.append('dateDe', body.dateDe);
+  formData.append('timeDe', body.timeDe);
+  formData.append('durationDe', body.durationDe);
+  formData.append('locationDe', body.locationDe);
+  formData.append('titleDe', body.titleDe);
+  formData.append('descriptionDe', body.descriptionDe);
+  body.planDe.forEach(value => {
+    formData.append('planDe[]', value);
+  });
+  body.speakersDe.forEach(value => {
+    formData.append('speakersDe[]', value);
+  });
+  formData.append('moderatorDe', body.moderatorDe);
+  body.packagesDe.forEach(value => {
+    formData.append('packagesDe[]', value);
+  });
+  file && file !== '' && formData.set('imageDe', body.imageDe);
+  // ? formData.set('imageDe', file, file.name.replaceAll(' ', '_'))
+  // : formData.append('imageDe', body.imageDe);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
@@ -157,25 +213,67 @@ async function updateEventsData(pathParams, body) {
   });
 }
 
-async function createEventsData(pathParams, body) {
+async function createEventsData(pathParams, body, file) {
   const formData = new FormData();
-  formData.append('date', body.date);
-  formData.append('time', body.time);
-  formData.append('duration', body.duration);
-  formData.append('location', body.location);
-  formData.append('title', body.title);
-  formData.append('description', body.description);
-  body.plan.forEach(value => {
-    formData.append('plan[]', value);
+  formData.append('dateEn', body.dateEn);
+  formData.append('timeEn', body.timeEn);
+  formData.append('durationEn', body.durationEn);
+  formData.append('locationEn', body.locationEn);
+  formData.append('titleEn', body.titleEn);
+  formData.append('descriptionEn', body.descriptionEn);
+  body.planEn.forEach(value => {
+    formData.append('planEn[]', value);
   });
-  body.speakers.forEach(value => {
-    formData.append('speakers[]', value);
+  body.speakersEn.forEach(value => {
+    formData.append('speakersEn[]', value);
   });
-  formData.append('moderator', body.moderator);
-  body.packages.forEach(value => {
-    formData.append('packages[]', value);
+  formData.append('moderatorEn', body.moderatorEn);
+  body.packagesEn.forEach(value => {
+    formData.append('packagesEn[]', value);
   });
-  file && formData.set('images', file, file.name.replaceAll(' ', '_'));
+  file && formData.set('imageEn', body.imageEn);
+  // formData.set('images', file, file.name.replaceAll(' ', '_')) &&
+  // formData.append('imageEn', body.imageEn);
+
+  formData.append('dateUa', body.dateUa);
+  formData.append('timeUa', body.timeUa);
+  formData.append('durationUa', body.durationUa);
+  formData.append('locationUa', body.locationUa);
+  formData.append('titleUa', body.titleUa);
+  formData.append('descriptionUa', body.descriptionUa);
+  body.planUa.forEach(value => {
+    formData.append('planUa[]', value);
+  });
+  body.speakersUa.forEach(value => {
+    formData.append('speakersUa[]', value);
+  });
+  formData.append('moderatorUa', body.moderatorUa);
+  body.packagesUa.forEach(value => {
+    formData.append('packagesUa[]', value);
+  });
+  file && formData.set('imageUa', body.imageUa);
+  // formData.set('images', file, file.name.replaceAll(' ', '_')) &&
+  // formData.append('imageUa', body.imageUa);
+
+  formData.append('dateDe', body.dateDe);
+  formData.append('timeDe', body.timeDe);
+  formData.append('durationDe', body.durationDe);
+  formData.append('locationDe', body.locationDe);
+  formData.append('titleDe', body.titleDe);
+  formData.append('descriptionDe', body.descriptionDe);
+  body.planDe.forEach(value => {
+    formData.append('planDe[]', value);
+  });
+  body.speakersDe.forEach(value => {
+    formData.append('speakersDe[]', value);
+  });
+  formData.append('moderatorDe', body.moderatorDe);
+  body.packagesDe.forEach(value => {
+    formData.append('packagesDe[]', value);
+  });
+  file && formData.set('imageDe', body.imageDe);
+  // formData.set('images', file, file.name.replaceAll(' ', '_')) &&
+  // formData.append('imageDe', body.imageDe);
 
   return await axios.post(`${BASE_URL}${pathParams}`, formData, {
     headers: {
@@ -187,17 +285,7 @@ async function createEventsData(pathParams, body) {
   });
 }
 
-async function deleteData(pathParams) {
-  const formData = new FormData();
-  return axios.delete(`${BASE_URL}${pathParams}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
-    },
-  });
-}
+// ==== PACKAGES ==== //
 
 async function createPackagesData(pathParams, body) {
   const formData = new FormData();

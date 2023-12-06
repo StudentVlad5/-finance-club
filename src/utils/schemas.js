@@ -225,27 +225,41 @@ const updatePasswordSchema = Yup.object().shape({
 
 // ----- EVENTS -----//
 const schemasEvents = Yup.object().shape({
-  date: Yup.date().required('Require field'),
-  time: Yup.string().required('Require field'),
-  duration: Yup.string(),
-  location: Yup.string().required('Require field'),
-  title: Yup.string().required('Require field'),
-  description: Yup.string().required('Require field'),
-  plan: Yup.mixed(),
-  speakers: Yup.array().required('Require field'),
-  moderator: Yup.string(),
-  packages: Yup.array()
-    .of(
-      Yup.object().shape({
-        name: Yup.string(),
-        termActive: Yup.object().shape({
-          from: Yup.date(),
-          to: Yup.date(),
-        }),
-      }),
-    )
-    .required('Require field'),
-  image: Yup.string(),
+  dateEn: Yup.date().required('Require field'),
+  timeEn: Yup.string().required('Require field'),
+  durationEn: Yup.string(),
+  locationEn: Yup.string().required('Require field'),
+  titleEn: Yup.string().required('Require field'),
+  descriptionEn: Yup.string().required('Require field'),
+  planEn: Yup.array(),
+  speakersEn: Yup.array().required('Require field'),
+  moderatorEn: Yup.string(),
+  packagesEn: Yup.array().required('Require field'),
+  imageEn: Yup.string(),
+
+  dateUa: Yup.date().required('Require field'),
+  timeUa: Yup.string().required('Require field'),
+  durationUa: Yup.string(),
+  locationUa: Yup.string().required('Require field'),
+  titleUa: Yup.string().required('Require field'),
+  descriptionUa: Yup.string().required('Require field'),
+  planUa: Yup.array(),
+  speakersUa: Yup.array().required('Require field'),
+  moderatorUa: Yup.string(),
+  packagesUa: Yup.array().required('Require field'),
+  imageUa: Yup.string(),
+
+  dateDe: Yup.date().required('Require field'),
+  timeDe: Yup.string().required('Require field'),
+  durationDe: Yup.string(),
+  locationDe: Yup.string().required('Require field'),
+  titleDe: Yup.string().required('Require field'),
+  descriptionDe: Yup.string().required('Require field'),
+  planDe: Yup.array(),
+  speakersDe: Yup.array().required('Require field'),
+  moderatorDe: Yup.string(),
+  packagesDe: Yup.array().required('Require field'),
+  imageDe: Yup.string(),
 });
 
 // ----- PACKAGES -----//

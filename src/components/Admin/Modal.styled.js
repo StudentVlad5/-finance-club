@@ -412,29 +412,43 @@ export const Error = styled.span`
     font-size: 12px;
   }
 `;
-// changes for modal >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 export const ChooseLanguage = styled.ul`
   display: flex;
   flex-direction: row;
-  gap: 10px;
   justify-content: start;
   align-items: center;
+  gap: 10px;
 `;
+
 export const TextLanguage = styled.li`
+  padding: 5px 7px;
+
   font-family: ${theme.fonts[0]};
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.33;
   letter-spacing: 0.04em;
   color: ${props => props.theme.white_text};
+
   text-transform: uppercase;
   cursor: pointer;
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 18px;
+  }
+
   &.active {
-    font-size: 22px;
     font-weight: 700;
     color: rgb(0, 162, 199);
+    border-left: 1px solid ${props => props.theme.white_text};
+    border-top: 1px solid ${props => props.theme.white_text};
+    border-right: 1px solid ${props => props.theme.white_text};
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
 `;
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

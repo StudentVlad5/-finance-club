@@ -418,7 +418,7 @@ export const EditUserModal = () => {
                         <Error>{errors.avatar}</Error>
                       ) : null}
                     </FormLabel>
-                    {dataUpdate.avatar && dataUpdate.avatar !== 'none' ? (
+                    {dataUpdate.avatar && dataUpdate.avatar !== '' ? (
                       <FormInputFile
                         style={{
                           backgroundImage: `url(${
