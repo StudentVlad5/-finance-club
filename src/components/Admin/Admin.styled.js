@@ -154,7 +154,7 @@ export const IconBtn = styled.button`
   &:hover,
   &:focus,
   &:active {
-    color: ${props => props.theme.black_text};
+    color: rgb(0, 162, 199);
   }
 
   & > svg {

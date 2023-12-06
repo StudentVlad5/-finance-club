@@ -404,7 +404,11 @@ export const CreateUserModal = () => {
                     {values.avatar ? (
                       <FormInputFile
                         style={{
-                          backgroundImage: `url(${values.avatar})`,
+                          backgroundImage: `url(${
+                            values.avatar.split('/')[
+                              values.avatar.split('/').length - 1
+                            ]
+                          })`,
                           backgroundUser: 'center',
                           backgroundRepeat: 'no-repeat',
                           backgroundSize: 'cover',

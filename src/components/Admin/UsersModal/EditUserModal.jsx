@@ -418,11 +418,15 @@ export const EditUserModal = () => {
                         <Error>{errors.avatar}</Error>
                       ) : null}
                     </FormLabel>
-                    {dataUpdate.avatar && dataUpdate.avatar !== 'none' ? (
+                    {dataUpdate.avatar && dataUpdate.avatar !== '' ? (
                       <FormInputFile
                         style={{
                           backgroundImage: `url(${
-                            BASE_URL_IMG + dataUpdate.avatar
+                            BASE_URL_IMG +
+                            'avatars/' +
+                            dataUpdate.avatar.split('/')[
+                              dataUpdate.avatar.split('/').length - 1
+                            ]
                           })`,
                           backgroundUser: 'center',
                           backgroundRepeat: 'no-repeat',
@@ -435,7 +439,12 @@ export const EditUserModal = () => {
                         accept=".jpg,.jpeg,.webp,.png,.gif"
                         onChange={e => {
                           handleChange(e);
-                          setFieldValue('avatar', dataUpdate.avatar);
+                          setFieldValue(
+                            'avatar',
+                            dataUpdate.avatar.split('/')[
+                              dataUpdate.avatar.split('/').length - 1
+                            ],
+                          );
                           setImg(e.target.files[0]);
                           setImage(e);
                         }}
