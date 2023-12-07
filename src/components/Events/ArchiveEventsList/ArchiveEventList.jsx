@@ -39,7 +39,14 @@ export const ArchiveEventsList = ({ events }) => {
             >
               <NavLink to={`/events/${event._id}`}>
                 <ArchiveImage
-                  src={event.image ? BASE_URL_IMG + event.image : defaultImg}
+                  src={
+                    event.image
+                      ? BASE_URL_IMG +
+                        event.image.split('/')[
+                          event.image.split('/').length - 1
+                        ]
+                      : defaultImg
+                  }
                   alt={event.title}
                   width="325"
                   height="322"
@@ -61,7 +68,7 @@ export const ArchiveEventsList = ({ events }) => {
       </ArchiveList>
       {archiveEvents.length > limit && (
         <BtnMore type="button" aria-label="More events" onClick={() => end(2)}>
-          <span>{t("more events")}</span>
+          <span>{t('more events')}</span>
         </BtnMore>
       )}
     </>
