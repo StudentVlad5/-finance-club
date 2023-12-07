@@ -20,7 +20,8 @@ const BtnChangeTheme = styled.button`
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
+    color: ${props => props.theme.grey};
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
   }
 
   & svg {

@@ -27,7 +27,7 @@ export const ChangePassword = () => {
   const [isShown, setIsShown] = useState(false);
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
-  let  userIn  = useSelector(getUser);
+  let userIn = useSelector(getUser);
   const dispatch = useDispatch();
 
   const showPassword = () => {
@@ -85,7 +85,7 @@ export const ChangePassword = () => {
               onChange={handleChange}
             >
               <ProfileLabel htmlFor="password">
-                <ProfileName>{t("New password")}</ProfileName>
+                <ProfileName>{t('New password')}</ProfileName>
                 <ProfileInput
                   type={showPass ? 'text' : 'password'}
                   name="password"
@@ -101,7 +101,7 @@ export const ChangePassword = () => {
                 ) : null}
               </ProfileLabel>
               <ProfileLabel htmlFor="confirmPassword">
-                <ProfileName>{t("Repeat new password")}</ProfileName>
+                <ProfileName>{t('Repeat new password')}</ProfileName>
                 <ProfileInput
                   type={showConfirmPass ? 'text' : 'password'}
                   name="confirmPassword"
@@ -122,14 +122,14 @@ export const ChangePassword = () => {
                   aria-label="Close"
                   onClick={() => setIsShown(false)}
                 >
-                  {t("CANCEL")}
+                  {t('CANCEL')}
                 </BtnDarkUser>
                 <BtnLightUser
                   type="submit"
                   disabled={isSubmitting}
                   aria-label="Submit"
                 >
-                  {t("SAVE")}
+                  {t('SAVE')}
                 </BtnLightUser>
               </BtnContainer>
             </ProfileList>

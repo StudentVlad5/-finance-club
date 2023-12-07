@@ -8,6 +8,7 @@ import {
 import { Item, List, SLink } from 'components/Admin/Admin.styled';
 import { FaRegUser } from 'react-icons/fa';
 import { MdEventNote, MdLayers } from 'react-icons/md';
+import { UserComp } from 'components/UserComp/UserComp';
 
 const AdminPage = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const AdminPage = () => {
   return (
     <>
       <SEO title="Administration" description="Page Administration" />
+      <UserComp />
       <Section>
         <Container>
           <Title>Administration of:</Title>

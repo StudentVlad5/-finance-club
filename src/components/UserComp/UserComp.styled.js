@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { Container, Section } from "components/baseStyles/CommonStyle.styled";
-import { theme } from "components/baseStyles/Variables.styled";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { Container, Section } from 'components/baseStyles/CommonStyle.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 export const UserSection = styled(Section)``;
 
@@ -70,11 +70,18 @@ export const LinkFolder = styled(NavLink)`
   line-height: 66.667%;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
   text-decoration: none;
   padding-bottom: 4px;
+
+  &:hover,
+  &:focus {
+    color: ${props => props.theme.grey};
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
+  }
   &.active {
-    border-bottom: 2px solid ${(props) => props.theme.white_text};
+    color: ${props => props.theme.grey};
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
   }
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 20px;
