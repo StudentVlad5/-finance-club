@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { theme } from "components/baseStyles/Variables.styled";
-import { IconBtn } from "../UserData/UserData.styled";
-import { ShowPassword } from "components/baseStyles/Form.styled";
-
+import styled from 'styled-components';
+import { theme } from 'components/baseStyles/Variables.styled';
+import { IconBtn } from '../UserData/UserData.styled';
+import { ShowPassword } from 'components/baseStyles/Form.styled';
 
 const Label = styled.label`
   position: relative;
@@ -36,11 +35,11 @@ const Input = styled.input`
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.32px;
-  color: ${theme.colors.brown1};
+  color: ${props => props.theme.black_text};
   border: 1px solid #c6cdd3;
   border-color: transparent;
   border-radius: 10px;
-  background: ${theme.colors.blue3};
+  background: ${props => props.theme.white_fon};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 12px;

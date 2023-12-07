@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { theme } from "components/baseStyles/Variables.styled";
-import { ReactComponent as LogoutIcon } from "images/svg/logout.svg";
+import styled from 'styled-components';
+import { theme } from 'components/baseStyles/Variables.styled';
+import { ReactComponent as LogoutIcon } from 'images/svg/logout.svg';
 
 export const LogoutBtn = styled.button`
   display: flex;
@@ -8,36 +8,37 @@ export const LogoutBtn = styled.button`
   align-items: center;
   gap: 8px;
 
-  width: 110px;
-  padding: 12px 0;
+  /* width: 110px; */
+  padding: 12px 24px;
 
+  color: ${props => props.theme.black};
+  background-color: ${props => props.theme.white_fon};
   border-radius: 5px;
-  border: 1px solid ${(props) => props.theme.grey};
-  color: ${(props) => props.theme.black};
-  background-color: ${(props) => props.theme.white_fon};
-
+  border: none;
   cursor: pointer;
   transition: ${theme.transition[1]};
 
   @media (min-width: ${theme.breakpoints.desktop}) {
-    width: 150px;
+    /* width: 150px; */
+    padding: 12px 36px;
   }
 
   @media (min-width: ${theme.breakpoints.desktop}) {
-    width: 285px;
-    /* padding: 32px 0; */
+    /* width: 285px; */
+    padding: 12px 48px;
   }
 
   &:hover,
   &:focus,
+  &:hover > span,
+  &:focus > span,
   &:hover > svg,
   &:focus > svg {
-    border: 1px solid ${(props) => props.theme.black};
-    color: ${(props) => props.theme.white_text};
-    background-color: ${(props) => props.theme.grey};
+    color: ${props => props.theme.white_text};
+    background-color: ${props => props.theme.grey};
 
-    fill: ${(props) => props.theme.white_text};
-    stroke: ${(props) => props.theme.white_text};
+    fill: ${props => props.theme.white_text};
+    stroke: ${props => props.theme.white_text};
     transition: ${theme.transition[1]};
   }
 `;
@@ -45,14 +46,14 @@ export const LogoutBtn = styled.button`
 export const LogoutIconStyled = styled(LogoutIcon)`
   width: 10px;
   height: 10px;
-  fill: ${(props) => props.theme.black_text};
-  stroke: ${(props) => props.theme.black_text};
+  fill: ${props => props.theme.black_text};
+  stroke: ${props => props.theme.black_text};
   transition: ${theme.transition[1]};
 
   &:hover,
   :focus {
-    fill: ${(props) => props.theme.white_text};
-    stroke: ${(props) => props.theme.white_text};
+    fill: ${props => props.theme.white_text};
+    stroke: ${props => props.theme.white_text};
   }
 `;
 
@@ -64,7 +65,8 @@ export const LogoutBtnText = styled.span`
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-  color: ${(props) => props.theme.black_text};
+  color: ${props => props.theme.black_text};
+
   @media (min-width: ${theme.breakpoints.tablet}) {
     font-size: 12px;
   }

@@ -54,6 +54,8 @@ export const SelectLanguage = styled.select`
   &:focus,
   &:hover,
   &:focus-visible {
-    transform: scale(1.1);
+    color: ${props => props.theme.grey};
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
+    /* transform: scale(1.1); */
   }
 `;

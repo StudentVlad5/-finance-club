@@ -53,12 +53,12 @@ const NavItem = styled(NavLink)`
   &:focus,
   &:hover {
     color: ${props => props.theme.grey};
-    transform: ${theme.scale};
+    /* transform: ${theme.scale}; */
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
   }
   &.active {
     color: ${props => props.theme.grey};
-    transform: ${theme.scale};
+    /* transform: ${theme.scale}; */
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
     font-weight: 700;
   }

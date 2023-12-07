@@ -1,4 +1,3 @@
-
 import { theme } from 'components/baseStyles/Variables.styled';
 import styled from 'styled-components';
 
@@ -16,8 +15,10 @@ const MobileContainer = styled.nav`
   }
   :hover,
   :focus {
-    transform: ${theme.scale[0]};
-    transition: ${theme.transition[0]};
+    /* transform: ${theme.scale[0]};
+    transition: ${theme.transition[0]}; */
+    color: ${props => props.theme.grey};
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
   }
 `;
 const Container = styled(MobileContainer)`
@@ -30,9 +31,10 @@ const Container = styled(MobileContainer)`
   }
   :hover,
   :focus {
-    transform: ${theme.scale[0]};
-    transition: ${theme.transition[0]};
-    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.4);
+    /* transform: ${theme.scale[0]};
+    transition: ${theme.transition[0]}; */
+    color: ${props => props.theme.grey};
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
   }
 `;
 

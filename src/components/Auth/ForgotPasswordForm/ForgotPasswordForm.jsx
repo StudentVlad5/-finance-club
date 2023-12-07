@@ -8,10 +8,21 @@ import { Section, Container } from 'components/baseStyles/CommonStyle.styled';
 import { useNavigate } from 'react-router-dom';
 import { theme } from 'components/baseStyles/Variables.styled.js';
 import { onSuccess } from 'helpers/Messages/NotifyMessages.jsx';
-import { FormInputLogin, FormStyled, TitleLogin, Btn, BoxText, StyledLink, ErrorBox } from '../LoginForm/LoginForm.styled.js';
-import { FormLabel,  Error, FormField } from 'components/baseStyles/Form.styled.js';
+import {
+  FormInputLogin,
+  FormStyled,
+  TitleLogin,
+  Btn,
+  BoxText,
+  StyledLink,
+  ErrorBox,
+} from '../LoginForm/LoginForm.styled.js';
+import {
+  FormLabel,
+  Error,
+  FormField,
+} from 'components/baseStyles/Form.styled.js';
 import { useTranslation } from 'react-i18next';
-
 
 const ForgotPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +73,7 @@ const ForgotPasswordForm = () => {
           <FormStyled onSubmit={formik.handleSubmit} autoComplete="off">
             <TitleLogin>{'Forgot Password'}</TitleLogin>
             <FormField>
-            <FormLabel htmlFor="email">
+              <FormLabel htmlFor="email">
                 <span>{t('Email')}</span>
                 {formik.errors.name && formik.touched.name ? (
                   <Error>{formik.errors.name}</Error>
@@ -83,22 +94,24 @@ const ForgotPasswordForm = () => {
                 onBlur={formik.handleBlur}
               />
               {formik.errors.email && formik.touched.email ? (
-                <ErrorBox style={{bottom:"22px"}}>{formik.errors.email}</ErrorBox>
+                <ErrorBox style={{ bottom: '22px' }}>
+                  {formik.errors.email}
+                </ErrorBox>
               ) : null}
             </FormField>
 
-              <Btn style={{height:"auto"}}
-                type="submit"
-                disabled={isValid}
-                aria-label="submit to change password"
-              >
-                {isLoading ? 'Loading' : 'Change'}{' '}
-              </Btn>
-              <BoxText>
-                <span>{'Already have an account?'}</span>{' '}
-                <StyledLink to="/login">{'Log In'}</StyledLink>
-              </BoxText>
-
+            <Btn
+              style={{ height: 'auto' }}
+              type="submit"
+              disabled={isValid}
+              aria-label="submit to change password"
+            >
+              {isLoading ? 'Loading' : 'Change'}{' '}
+            </Btn>
+            <BoxText>
+              <span>{'Already have an account?'}</span>{' '}
+              <StyledLink to="/login">{'Log In'}</StyledLink>
+            </BoxText>
           </FormStyled>
         </Formik>
       </Container>

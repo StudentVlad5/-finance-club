@@ -2,12 +2,12 @@ import {
   FormTitle,
   FormInput,
   StyledForm,
-} from "components/baseStyles/Form.styled";
-import { theme } from "components/baseStyles/Variables.styled";
-import styled from "styled-components";
-import { BtnLight } from "components/baseStyles/Button.styled";
-import { Link } from "react-router-dom";
-import { Container } from "components/baseStyles/CommonStyle.styled";
+} from 'components/baseStyles/Form.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
+import styled from 'styled-components';
+import { BtnLight } from 'components/baseStyles/Button.styled';
+import { Link } from 'react-router-dom';
+import { Container } from 'components/baseStyles/CommonStyle.styled';
 
 export const TitleLogin = styled(FormTitle)`
   width: 100%;
@@ -63,21 +63,27 @@ export const ShowPassword = styled.span`
   }
 `;
 export const Btn = styled(BtnLight)`
-  font-size: 20px;
+  font-size: 14px;
   width: 180px;
   height: 50px;
+
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 16px;
     width: 217px;
     height: 70px;
   }
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 18px;
+  }
 `;
 export const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
   transition: ${theme.transition[0]};
   text-decoration: none;
   &:hover,
   &:focus {
-    color: ${(props) => props.theme.grey};
+    color: ${props => props.theme.grey};
   }
 `;
 export const BoxText = styled.div`
@@ -85,14 +91,25 @@ export const BoxText = styled.div`
   justify-content: center;
   align-items: end;
   flex-direction: column;
-  margin-bottom: 8px;
+  gap: 5px;
+  margin-bottom: 16px;
+
   font-family: ${theme.fonts[0]};
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: 0.04em;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 18px;
+  }
 `;
+
 export const FormStyled = styled(StyledForm)`
   gap: 15px;
   &:last-child {

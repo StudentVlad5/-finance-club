@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { ReactComponent as Pencil } from "images/svg/edit_light.svg";
-import { theme } from "components/baseStyles/Variables.styled";
+import styled from 'styled-components';
+import { ReactComponent as Pencil } from 'images/svg/edit_light.svg';
+import { theme } from 'components/baseStyles/Variables.styled';
 
 const UserDataSection = styled.div`
   display: flex;
@@ -140,26 +140,38 @@ const BtnLightUser = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
+
   width: 188px;
   height: 55px;
-  flex-shrink: 0;
-  border-radius: 80px;
+
   font-family: ${theme.fonts[0]};
-  font-size: 20px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 80%;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: ${(props) => props.theme.black};
-  background-color: ${(props) => props.theme.white_text};
-  border: 1px solid ${(props) => props.theme.black};
+  color: ${props => props.theme.black};
+
+  background-color: ${props => props.theme.white_text};
+  border: 1px solid ${props => props.theme.black};
+  border-radius: 80px;
   cursor: pointer;
+
+  @media (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 16px;
+  }
+
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 18px;
+  }
+
   &:hover,
   &:focus {
-    color: ${(props) => props.theme.white_text};
-    background-color: ${(props) => props.theme.black};
-    border: 1px solid ${(props) => props.theme.white_text};
+    color: ${props => props.theme.white_text};
+    background-color: ${props => props.theme.black};
+    border: 1px solid ${props => props.theme.white_text};
   }
   & :disabled {
     opacity: 0.5;
@@ -169,14 +181,14 @@ const BtnLightUser = styled.button`
   }
 `;
 const BtnDarkUser = styled(BtnLightUser)`
-  color: ${(props) => props.theme.white_text};
-  background-color: ${(props) => props.theme.black};
-  border: 1px solid ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
+  background-color: ${props => props.theme.black};
+  border: 1px solid ${props => props.theme.white_text};
   &:hover,
   &:focus {
-    color: ${(props) => props.theme.black};
-    background-color: ${(props) => props.theme.white_text};
-    border: 1px solid ${(props) => props.theme.black};
+    color: ${props => props.theme.black};
+    background-color: ${props => props.theme.white_text};
+    border: 1px solid ${props => props.theme.black};
   }
 `;
 
@@ -191,7 +203,7 @@ const ProfileContainer = styled.div`
   width: 100%;
   padding: 20px;
   border-radius: 14px;
-  background-color: ${(props) => props.theme.white_text};
+  background-color: ${props => props.theme.white_fon};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     gap: 10px;
@@ -214,7 +226,7 @@ const ProfileSpanName = styled.span`
   font-weight: 400;
   line-height: 80%;
   letter-spacing: 1.6px;
-  color: ${(props) => props.theme.fon};
+  color: ${props => props.theme.black_text};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;
@@ -228,7 +240,7 @@ const ProfileSpanValues = styled.span`
   font-weight: 400;
   line-height: 80%;
   letter-spacing: 1.6px;
-  color: ${(props) => props.theme.fon};
+  color: ${props => props.theme.black_text};
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 20px;
@@ -257,12 +269,12 @@ const IconBtn = styled.button`
   &:hover,
   &:focus {
     border-radius: 50%;
-    background-color: ${(props) => props.theme.fon};
+    background-color: ${props => props.theme.fon};
   }
 
   &:disabled {
     svg {
-      fill: ${(props) => props.theme.grey};
+      fill: ${props => props.theme.grey};
     }
   }
 
@@ -276,14 +288,14 @@ const IconBtnWhite = styled(IconBtn)`
   &:hover,
   &:focus {
     border-radius: 50%;
-    background-color: ${(props) => props.theme.white_text};
+    background-color: ${props => props.theme.white_text};
   }
 `;
 
 const PensilStyle = styled(Pencil)`
   width: 14px;
   height: 14px;
-  fill: ${(props) => props.theme.white_text};
+  fill: ${props => props.theme.white_text};
   transform: ${theme.transition[1]};
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
@@ -305,7 +317,7 @@ const TitleArticle = styled.h2`
   line-height: 66.667%;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 24px;
   }
