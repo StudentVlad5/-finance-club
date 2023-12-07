@@ -2,25 +2,25 @@ import {
   Container,
   Headline,
   Section,
-} from "components/baseStyles/CommonStyle.styled";
-import { theme } from "components/baseStyles/Variables.styled";
-import styled from "styled-components";
-import BackgroundImageD1x from "images/hero/screen_desctop_desctop_1x.webp";
-import BackgroundImageD2x from "images/hero/screen_desctop_desctop_2x.webp";
-import BackgroundImageD3x from "images/hero/screen_desctop_desctop_3x.webp";
-import BackgroundImageM1x from "images/hero/screen_desctop_modal_1x.webp";
-import BackgroundImageM2x from "images/hero/screen_desctop_modal_2x.webp";
-import BackgroundImageM3x from "images/hero/screen_desctop_modal_3x.webp";
+} from 'components/baseStyles/CommonStyle.styled';
+import { theme } from 'components/baseStyles/Variables.styled';
+import styled from 'styled-components';
+import BackgroundImageD1x from 'images/hero/screen_desctop_desctop_1x.webp';
+import BackgroundImageD2x from 'images/hero/screen_desctop_desctop_2x.webp';
+import BackgroundImageD3x from 'images/hero/screen_desctop_desctop_3x.webp';
+import BackgroundImageM1x from 'images/hero/screen_desctop_modal_1x.webp';
+import BackgroundImageM2x from 'images/hero/screen_desctop_modal_2x.webp';
+import BackgroundImageM3x from 'images/hero/screen_desctop_modal_3x.webp';
 
-import { ReactComponent as DesctopScreen } from "images/hero/dark_screen.svg";
-import { ReactComponent as DesctopBottom } from "images/hero/bottom_desctop.svg";
-import { BtnLight } from "components/baseStyles/Button.styled";
+import { ReactComponent as DesctopScreen } from 'images/hero/dark_screen.svg';
+import { ReactComponent as DesctopBottom } from 'images/hero/bottom_desctop.svg';
+import { BtnLight } from 'components/baseStyles/Button.styled';
 
 const HeroSection = styled(Section)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.black};
+  background-color: ${props => props.theme.black};
   padding-bottom: 38px;
   padding-top: 119px;
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
@@ -33,7 +33,7 @@ const HeroContainer = styled(Container)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.black};
+  background-color: ${props => props.theme.black};
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     flex-direction: row;
     align-items: start;
@@ -48,14 +48,14 @@ const HeroControl = styled.div`
 `;
 const HeroHeadline = styled(Headline)`
   max-width: 50%;
-  color: ${(props) => props.theme.white_text};
+  color: ${props => props.theme.white_text};
   font-family: ${theme.fonts[2]};
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   text-align: center;
-  word-break: break-all;
+  /* word-break: break-all; */
   overflow-wrap: break-word;
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     max-width: 100%;

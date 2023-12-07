@@ -85,7 +85,11 @@ export const EventDetails = ({ event }) => {
             </HeadingItem>
           </EventHeading>
           <EventImage
-            src={image ? BASE_URL_IMG + image : defaultImg}
+            src={
+              image
+                ? BASE_URL_IMG + image.split('/')[image.split('/').length - 1]
+                : defaultImg
+            }
             alt={title}
             width="325"
             height="322"

@@ -29,7 +29,12 @@ export const EventsList = ({ events }) => {
           <Event key={event._id} data-aos="zoom-in-up" data-aos-delay="200">
             <EventNavLink to={`/events/${event._id}`}>
               <EventImages
-                src={event.image ? BASE_URL_IMG + event.image : defaultImg}
+                src={
+                  event.image
+                    ? BASE_URL_IMG +
+                      event.image.split('/')[event.image.split('/').length - 1]
+                    : defaultImg
+                }
                 alt={event.title}
                 width="325"
                 height="322"
