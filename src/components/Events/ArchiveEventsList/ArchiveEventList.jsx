@@ -27,7 +27,6 @@ export const ArchiveEventsList = ({ events }) => {
   const end = count => {
     setLimit(prevState => prevState + count);
   };
-
   return (
     <>
       <ArchiveList>
