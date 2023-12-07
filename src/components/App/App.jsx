@@ -58,21 +58,6 @@ export const App = () => {
                     />
                   }
                 />
-                <Route
-                  path="events"
-                  element={
-                    <PrivateRoute redirectTo="/signin" component={<Events />} />
-                  }
-                />
-                <Route
-                  path="packages"
-                  element={
-                    <PrivateRoute
-                      redirectTo="/signin"
-                      component={<Packages />}
-                    />
-                  }
-                />
               </Route>
             ) : (
               <Route

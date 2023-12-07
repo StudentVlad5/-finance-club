@@ -28,8 +28,6 @@ export const UserComp = () => {
           <UserDataWrapper>
             <FolderWrapper>
               <LinkFolder to={`/admin/profile`}>{t('My account')}</LinkFolder>
-              <LinkFolder to={`/admin/events`}>{t('My events')}</LinkFolder>
-              <LinkFolder to={`/admin/packages`}>{t('My packages')}</LinkFolder>
               <Logout />
             </FolderWrapper>
             <UserAboutWrapper>
