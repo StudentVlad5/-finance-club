@@ -1,15 +1,15 @@
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import { BASE_URL } from 'helpers/constants';
+import axios from "axios";
+import PropTypes from "prop-types";
+import { BASE_URL } from "helpers/constants";
 
 async function fetchData(pathParams) {
   const axiosInstance = axios.create({
     baseURL: `${BASE_URL}${pathParams}`,
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
   return await axiosInstance.get();
@@ -19,10 +19,10 @@ async function deleteData(pathParams) {
   const formData = new FormData();
   return axios.delete(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
@@ -30,10 +30,10 @@ async function deleteData(pathParams) {
 async function createFormRegistration(pathParams, body) {
   return await axios.post(`${BASE_URL}${pathParams}`, body, {
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
@@ -42,49 +42,49 @@ async function createFormRegistration(pathParams, body) {
 
 async function createUserData(pathParams, body, file) {
   const formData = new FormData();
-  file && formData.set('avatar', file);
-  formData.append('name', body.name);
-  formData.append('surname', body.surname);
-  formData.append('email', body.email);
-  formData.append('password', body.password);
-  formData.append('phone', body.phone);
-  formData.append('birthday', body.birthday);
-  formData.append('company', body.company);
-  formData.append('position', body.position);
-  body.events.forEach(value => {
-    formData.append('events[]', value);
+  file && formData.set("avatar", file);
+  formData.append("name", body.name);
+  formData.append("surname", body.surname);
+  formData.append("email", body.email);
+  formData.append("password", body.password);
+  formData.append("phone", body.phone);
+  formData.append("birthday", body.birthday);
+  formData.append("company", body.company);
+  formData.append("position", body.position);
+  body.events.forEach((value) => {
+    formData.append("events[]", value);
   });
-  body.packages.forEach(value => {
-    formData.append('packages[]', JSON.stringify(value));
+  body.packages.forEach((value) => {
+    formData.append("packages[]", JSON.stringify(value));
   });
-  formData.append('status', body.status);
-  formData.append('role', body.role);
+  formData.append("status", body.status);
+  formData.append("role", body.role);
 
   return await axios.post(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
 
 async function editUserData(pathParams, body, file) {
   const formData = new FormData();
-  file && formData.set('avatar', file);
-  formData.append('name', body.name);
-  formData.append('surname', body.surname);
-  formData.append('email', body.email);
-  formData.append('phone', body.phone);
-  formData.append('birthday', body.birthday);
-  formData.append('company', body.company);
-  formData.append('position', body.position);
-  body.events.forEach(value => {
-    formData.append('events[]', value);
+  file && formData.set("avatar", file);
+  formData.append("name", body.name);
+  formData.append("surname", body.surname);
+  formData.append("email", body.email);
+  formData.append("phone", body.phone);
+  formData.append("birthday", body.birthday);
+  formData.append("company", body.company);
+  formData.append("position", body.position);
+  body.events.forEach((value) => {
+    formData.append("events[]", value);
   });
   body.packages.forEach((value, i) => {
-    formData.append('packages[]', JSON.stringify(value));
+    formData.append("packages[]", JSON.stringify(value));
     // formData.append(`packages[${i}].name`, value.name);
     // formData.append(`packages[${i}].termActive.from`, value.termActive.from);
     // formData.append(`packages[${i}].termActive.to`, value.termActive.to);
@@ -92,49 +92,49 @@ async function editUserData(pathParams, body, file) {
     // //   formData.append(`packages[${i}].${key}`, value);
     // // });
   });
-  formData.append('status', body.status);
-  formData.append('role', body.role);
+  formData.append("status", body.status);
+  formData.append("role", body.role);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
 
 async function updateUserData(pathParams, body, file) {
   const formData = new FormData();
-  file && formData.set('avatar', file);
-  formData.append('name', body.name);
-  formData.append('surname', body.surname);
-  formData.append('email', body.email);
-  formData.append('phone', body.phone);
-  formData.append('birthday', body.birthday);
-  formData.append('company', body.company);
-  formData.append('position', body.position);
+  file && formData.set("avatar", file);
+  formData.append("name", body.name);
+  formData.append("surname", body.surname);
+  formData.append("email", body.email);
+  formData.append("phone", body.phone);
+  formData.append("birthday", body.birthday);
+  formData.append("company", body.company);
+  formData.append("position", body.position);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
 
 async function changePassword(pathParams, body) {
   const formData = new FormData();
-  formData.append('password', body);
+  formData.append("password", body);
   return axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
@@ -143,144 +143,118 @@ async function changePassword(pathParams, body) {
 
 async function updateEventsData(pathParams, body, file) {
   const formData = new FormData();
-  formData.append('dateEn', body.dateEn);
-  formData.append('timeEn', body.timeEn);
-  formData.append('durationEn', body.durationEn);
-  formData.append('locationEn', body.locationEn);
-  formData.append('titleEn', body.titleEn);
-  formData.append('descriptionEn', body.descriptionEn);
-  body.planEn.forEach(value => {
-    formData.append('planEn[]', value);
-  });
-  body.speakersEn.forEach(value => {
-    formData.append('speakersEn[]', value);
-  });
-  formData.append('moderatorEn', body.moderatorEn);
-  body.packagesEn.forEach(value => {
-    formData.append('packagesEn[]', value);
-  });
-  file && file !== '' && formData.set('imageEn', body.imageEn);
-  // ? formData.set('imageEn', file, file.name.replaceAll(' ', '_'))
-  // : formData.append('imageEn', body.imageEn);
+  file && formData.set("image", file);
+  formData.append("date", body.date);
+  formData.append("time", body.time);
 
-  formData.append('dateUa', body.dateUa);
-  formData.append('timeUa', body.timeUa);
-  formData.append('durationUa', body.durationUa);
-  formData.append('locationUa', body.locationUa);
-  formData.append('titleUa', body.titleUa);
-  formData.append('descriptionUa', body.descriptionUa);
-  body.planUa.forEach(value => {
-    formData.append('planUa[]', value);
+  formData.append("durationEn", body.durationEn);
+  formData.append("locationEn", body.locationEn);
+  formData.append("titleEn", body.titleEn);
+  formData.append("descriptionEn", body.descriptionEn);
+  body.planEn.forEach((value) => {
+    formData.append("planEn[]", value);
   });
-  body.speakersUa.forEach(value => {
-    formData.append('speakersUa[]', value);
+  body.speakersEn.forEach((value) => {
+    formData.append("speakersEn[]", value);
   });
-  formData.append('moderatorUa', body.moderatorUa);
-  body.packagesUa.forEach(value => {
-    formData.append('packagesUa[]', value);
+  formData.append("moderatorEn", body.moderatorEn);
+  body.packagesEn.forEach((value) => {
+    formData.append("packagesEn[]", value);
   });
-  file && file !== '' && formData.set('imageUa', body.imageUa);
-  // ? formData.set('imageUa', file, file.name.replaceAll(' ', '_'))
-  // : formData.append('imageUa', body.imageUa);
 
-  formData.append('dateDe', body.dateDe);
-  formData.append('timeDe', body.timeDe);
-  formData.append('durationDe', body.durationDe);
-  formData.append('locationDe', body.locationDe);
-  formData.append('titleDe', body.titleDe);
-  formData.append('descriptionDe', body.descriptionDe);
-  body.planDe.forEach(value => {
-    formData.append('planDe[]', value);
+  formData.append("durationUa", body.durationUa);
+  formData.append("locationUa", body.locationUa);
+  formData.append("titleUa", body.titleUa);
+  formData.append("descriptionUa", body.descriptionUa);
+  body.planUa.forEach((value) => {
+    formData.append("planUa[]", value);
   });
-  body.speakersDe.forEach(value => {
-    formData.append('speakersDe[]', value);
+  body.speakersUa.forEach((value) => {
+    formData.append("speakersUa[]", value);
   });
-  formData.append('moderatorDe', body.moderatorDe);
-  body.packagesDe.forEach(value => {
-    formData.append('packagesDe[]', value);
+  formData.append("moderatorUa", body.moderatorUa);
+  body.packagesUa.forEach((value) => {
+    formData.append("packagesUa[]", value);
   });
-  file && file !== '' && formData.set('imageDe', body.imageDe);
-  // ? formData.set('imageDe', file, file.name.replaceAll(' ', '_'))
-  // : formData.append('imageDe', body.imageDe);
+  formData.append("durationDe", body.durationDe);
+  formData.append("locationDe", body.locationDe);
+  formData.append("titleDe", body.titleDe);
+  formData.append("descriptionDe", body.descriptionDe);
+  body.planDe.forEach((value) => {
+    formData.append("planDe[]", value);
+  });
+  body.speakersDe.forEach((value) => {
+    formData.append("speakersDe[]", value);
+  });
+  formData.append("moderatorDe", body.moderatorDe);
+  body.packagesDe.forEach((value) => {
+    formData.append("packagesDe[]", value);
+  });
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
 
 async function createEventsData(pathParams, body, file) {
   const formData = new FormData();
-  formData.append('dateEn', body.dateEn);
-  formData.append('timeEn', body.timeEn);
-  formData.append('durationEn', body.durationEn);
-  formData.append('locationEn', body.locationEn);
-  formData.append('titleEn', body.titleEn);
-  formData.append('descriptionEn', body.descriptionEn);
-  body.planEn.forEach(value => {
-    formData.append('planEn[]', value);
+  file && formData.set("image", file);
+  formData.append("date", body.date);
+  formData.append("time", body.time);
+  formData.append("durationEn", body.durationEn);
+  formData.append("locationEn", body.locationEn);
+  formData.append("titleEn", body.titleEn);
+  formData.append("descriptionEn", body.descriptionEn);
+  body.planEn.forEach((value) => {
+    formData.append("planEn[]", value);
   });
-  body.speakersEn.forEach(value => {
-    formData.append('speakersEn[]', value);
+  body.speakersEn.forEach((value) => {
+    formData.append("speakersEn[]", value);
   });
-  formData.append('moderatorEn', body.moderatorEn);
-  body.packagesEn.forEach(value => {
-    formData.append('packagesEn[]', value);
+  formData.append("moderatorEn", body.moderatorEn);
+  body.packagesEn.forEach((value) => {
+    formData.append("packagesEn[]", value);
   });
-  file && formData.set('imageEn', body.imageEn);
-  // formData.set('images', file, file.name.replaceAll(' ', '_')) &&
-  // formData.append('imageEn', body.imageEn);
-
-  formData.append('dateUa', body.dateUa);
-  formData.append('timeUa', body.timeUa);
-  formData.append('durationUa', body.durationUa);
-  formData.append('locationUa', body.locationUa);
-  formData.append('titleUa', body.titleUa);
-  formData.append('descriptionUa', body.descriptionUa);
-  body.planUa.forEach(value => {
-    formData.append('planUa[]', value);
+  formData.append("durationUa", body.durationUa);
+  formData.append("locationUa", body.locationUa);
+  formData.append("titleUa", body.titleUa);
+  formData.append("descriptionUa", body.descriptionUa);
+  body.planUa.forEach((value) => {
+    formData.append("planUa[]", value);
   });
-  body.speakersUa.forEach(value => {
-    formData.append('speakersUa[]', value);
+  body.speakersUa.forEach((value) => {
+    formData.append("speakersUa[]", value);
   });
-  formData.append('moderatorUa', body.moderatorUa);
-  body.packagesUa.forEach(value => {
-    formData.append('packagesUa[]', value);
+  formData.append("moderatorUa", body.moderatorUa);
+  body.packagesUa.forEach((value) => {
+    formData.append("packagesUa[]", value);
   });
-  file && formData.set('imageUa', body.imageUa);
-  // formData.set('images', file, file.name.replaceAll(' ', '_')) &&
-  // formData.append('imageUa', body.imageUa);
-
-  formData.append('dateDe', body.dateDe);
-  formData.append('timeDe', body.timeDe);
-  formData.append('durationDe', body.durationDe);
-  formData.append('locationDe', body.locationDe);
-  formData.append('titleDe', body.titleDe);
-  formData.append('descriptionDe', body.descriptionDe);
-  body.planDe.forEach(value => {
-    formData.append('planDe[]', value);
+  formData.append("durationDe", body.durationDe);
+  formData.append("locationDe", body.locationDe);
+  formData.append("titleDe", body.titleDe);
+  formData.append("descriptionDe", body.descriptionDe);
+  body.planDe.forEach((value) => {
+    formData.append("planDe[]", value);
   });
-  body.speakersDe.forEach(value => {
-    formData.append('speakersDe[]', value);
+  body.speakersDe.forEach((value) => {
+    formData.append("speakersDe[]", value);
   });
-  formData.append('moderatorDe', body.moderatorDe);
-  body.packagesDe.forEach(value => {
-    formData.append('packagesDe[]', value);
+  formData.append("moderatorDe", body.moderatorDe);
+  body.packagesDe.forEach((value) => {
+    formData.append("packagesDe[]", value);
   });
-  file && formData.set('imageDe', body.imageDe);
-  // formData.set('images', file, file.name.replaceAll(' ', '_')) &&
-  // formData.append('imageDe', body.imageDe);
 
   return await axios.post(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
@@ -289,25 +263,25 @@ async function createEventsData(pathParams, body, file) {
 
 async function createPackagesData(pathParams, body) {
   const formData = new FormData();
-  formData.append('titleEn', body.titleEn);
-  formData.append('priceEn', body.priceEn);
-  formData.append('contentEn', body.contentEn);
-  formData.append('featuresEn', body.featuresEn);
-  formData.append('titleUa', body.titleUa);
-  formData.append('priceUa', body.priceUa);
-  formData.append('contentUa', body.contentUa);
-  formData.append('featuresUa', body.featuresUa);
-  formData.append('titleDe', body.titleDe);
-  formData.append('priceDe', body.priceDe);
-  formData.append('contentDe', body.contentDe);
-  formData.append('featuresDe', body.featuresDe);
+  formData.append("titleEn", body.titleEn);
+  formData.append("priceEn", body.priceEn);
+  formData.append("contentEn", body.contentEn);
+  formData.append("featuresEn", body.featuresEn);
+  formData.append("titleUa", body.titleUa);
+  formData.append("priceUa", body.priceUa);
+  formData.append("contentUa", body.contentUa);
+  formData.append("featuresUa", body.featuresUa);
+  formData.append("titleDe", body.titleDe);
+  formData.append("priceDe", body.priceDe);
+  formData.append("contentDe", body.contentDe);
+  formData.append("featuresDe", body.featuresDe);
 
   return await axios.post(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }
@@ -315,25 +289,25 @@ async function createPackagesData(pathParams, body) {
 async function updatePackageData(pathParams, body) {
   // console.log(body);
   const formData = new FormData();
-  formData.append('titleEn', body.titleEn);
-  formData.append('priceEn', body.priceEn);
-  formData.append('contentEn', body.contentEn);
-  formData.append('featuresEn', body.featuresEn);
-  formData.append('titleUa', body.titleUa);
-  formData.append('priceUa', body.priceUa);
-  formData.append('contentUa', body.contentUa);
-  formData.append('featuresUa', body.featuresUa);
-  formData.append('titleDe', body.titleDe);
-  formData.append('priceDe', body.priceDe);
-  formData.append('contentDe', body.contentDe);
-  formData.append('featuresDe', body.featuresDe);
+  formData.append("titleEn", body.titleEn);
+  formData.append("priceEn", body.priceEn);
+  formData.append("contentEn", body.contentEn);
+  formData.append("featuresEn", body.featuresEn);
+  formData.append("titleUa", body.titleUa);
+  formData.append("priceUa", body.priceUa);
+  formData.append("contentUa", body.contentUa);
+  formData.append("featuresUa", body.featuresUa);
+  formData.append("titleDe", body.titleDe);
+  formData.append("priceDe", body.priceDe);
+  formData.append("contentDe", body.contentDe);
+  formData.append("featuresDe", body.featuresDe);
 
   return await axios.patch(`${BASE_URL}${pathParams}`, formData, {
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Expose-Headers": "Content-Range",
     },
   });
 }

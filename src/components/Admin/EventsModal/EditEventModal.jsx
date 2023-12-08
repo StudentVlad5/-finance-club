@@ -38,6 +38,7 @@ import {
 export const EditEventModal = () => {
   const [dataUpdate, setDataUpdate] = useState([]);
   const [img, setImg] = useState('');
+  const [newImg, setNewImg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const modal = useSelector(modalComponent);
@@ -51,6 +52,7 @@ export const EditEventModal = () => {
       try {
         const { data } = await fetchData(itemForFetch);
         setDataUpdate(data);
+        console.log(data)
         setImg(data.en.image);
         if (!data) {
           return onFetchError('Whoops, something went wrong');
@@ -67,15 +69,8 @@ export const EditEventModal = () => {
   }, [itemForFetch, modal.id]);
 
   async function editEvent(values) {
-    let file = false;
-    if (typeof img === 'string' && img !== '' && img !== 'none') {
-      values.imageEn = img;
-      values.imageUa = img;
-      values.imageDe = img;
-    } else {
-      file = img;
-    }
-
+    let file='';
+    newImg !=='' ?  file = newImg :  file = img;
     console.log('editEvent ~ file:', file);
     console.log('editEvent ~ values:', values);
 
@@ -134,8 +129,8 @@ export const EditEventModal = () => {
           {error && onFetchError('Whoops, something went wrong')}
           <Formik
             initialValues={{
-              dateEn: dataUpdate?.en?.date ? dataUpdate.en.date : '',
-              timeEn: dataUpdate?.en?.time ? dataUpdate.en.time : '',
+              date: dataUpdate?.en?.date ? dataUpdate.en.date : '',
+              time: dataUpdate?.en?.time ? dataUpdate.en.time : '',
               durationEn: dataUpdate?.en?.duration
                 ? dataUpdate.en.duration
                 : '',
@@ -156,10 +151,7 @@ export const EditEventModal = () => {
               packagesEn: dataUpdate?.en?.packages
                 ? dataUpdate.en.packages
                 : [],
-              imageEn: '',
 
-              dateUa: dataUpdate?.ua?.date ? dataUpdate.ua.date : '',
-              timeUa: dataUpdate?.ua?.time ? dataUpdate.ua.time : '',
               durationUa: dataUpdate?.ua?.duration
                 ? dataUpdate.ua.duration
                 : '',
@@ -180,10 +172,7 @@ export const EditEventModal = () => {
               packagesUa: dataUpdate?.ua?.packages
                 ? dataUpdate.ua.packages
                 : [],
-              imageUa: '',
 
-              dateDe: dataUpdate?.de?.date ? dataUpdate.de.date : '',
-              timeDe: dataUpdate?.de?.time ? dataUpdate.de.time : '',
               durationDe: dataUpdate?.de?.duration
                 ? dataUpdate.de.duration
                 : '',
@@ -204,7 +193,7 @@ export const EditEventModal = () => {
               packagesDe: dataUpdate?.de?.packages
                 ? dataUpdate.de.packages
                 : [],
-              imageDe: '',
+              image: ''
             }}
             onSubmit={(values, { setSubmitting }) => {
               editEvent(values);
@@ -250,36 +239,6 @@ export const EditEventModal = () => {
                   {/* ==== EN ==== */}
                   {chooseLanguage === 'en' && (
                     <>
-                      <FormField>
-                        <FormLabel htmlFor="dateEn">
-                          <span>Date</span>
-                          {errors.dateEn && touched.dateEn ? (
-                            <Error>{errors.dateEn}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="date"
-                          id="dateEn"
-                          name="dateEn"
-                          placeholder="DD.MM.YYYY"
-                          value={moment(values.dateEn).format('YYYY-MM-DD')}
-                        />
-                      </FormField>
-                      <FormField>
-                        <FormLabel htmlFor="timeEn">
-                          <span>Time</span>
-                          {errors.timeEn && touched.timeEn ? (
-                            <Error>{errors.timeEn}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="time"
-                          id="timeEn"
-                          name="timeEn"
-                          placeholder="HH:MM"
-                          value={values.timeEn}
-                        />
-                      </FormField>
                       <FormField>
                         <FormLabel htmlFor="durationEn">
                           <span>Duration</span>
@@ -488,94 +447,11 @@ export const EditEventModal = () => {
                           </label>
                         </div>
                       </FormLabelBox>
-                      <FormField>
-                        <FormLabel htmlFor="imageEn">
-                          <span>Image</span>
-                          {errors.imageEn && touched.imageEn ? (
-                            <Error>{errors.imageEn}</Error>
-                          ) : null}
-                        </FormLabel>
-                        {dataUpdate?.en?.image &&
-                        dataUpdate?.en?.image !== '' ? (
-                          <FormInputFile
-                            style={{
-                              backgroundImage: `url(${
-                                BASE_URL_IMG +
-                                dataUpdate.en.image.split('/')[
-                                  dataUpdate.en.image.split('/').length - 1
-                                ]
-                              })`,
-                              backgroundEvent: 'center',
-                              backgroundRepeat: 'no-repeat',
-                              backgroundSize: 'cover',
-                            }}
-                            type="file"
-                            id="imageEn"
-                            name="imageEn"
-                            placeholder="image"
-                            accept=".jpg,.jpeg,.webp,.png,.gif"
-                            onChange={e => {
-                              handleChange(e);
-                              setFieldValue(
-                                'imageEn',
-                                dataUpdate.en.image.split('/')[
-                                  dataUpdate.en.image.split('/').length - 1
-                                ],
-                              );
-                              setImg(e.target.files[0]);
-                              setImage(e);
-                            }}
-                          />
-                        ) : (
-                          <FormInputFile
-                            type="file"
-                            id="imageEn"
-                            name="imageEn"
-                            accept=".jpg,.jpeg,.webp,.png,.gif"
-                            onChange={e => {
-                              handleChange(e);
-                              setFieldValue('imageEn', e.target.files[0]);
-                              setImg(e.target.files[0]);
-                              setImage(e);
-                            }}
-                          />
-                        )}
-                      </FormField>
                     </>
                   )}
                   {/* ==== UA ==== */}
                   {chooseLanguage === 'ua' && (
                     <>
-                      <FormField>
-                        <FormLabel htmlFor="dateUa">
-                          <span>Date</span>
-                          {errors.dateUa && touched.dateUa ? (
-                            <Error>{errors.dateUa}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="date"
-                          id="dateUa"
-                          name="dateUa"
-                          placeholder="DD.MM.YYYY"
-                          value={moment(values.dateUa).format('YYYY-MM-DD')}
-                        />
-                      </FormField>
-                      <FormField>
-                        <FormLabel htmlFor="timeUa">
-                          <span>Time</span>
-                          {errors.timeUa && touched.timeUa ? (
-                            <Error>{errors.timeUa}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="time"
-                          id="timeUa"
-                          name="timeUa"
-                          placeholder="HH:MM"
-                          value={values.timeUa}
-                        />
-                      </FormField>
                       <FormField>
                         <FormLabel htmlFor="durationUa">
                           <span>Duration</span>
@@ -786,90 +662,11 @@ export const EditEventModal = () => {
                           </label>
                         </div>
                       </FormLabelBox>
-                      <FormField>
-                        <FormLabel htmlFor="imageUa">
-                          <span>Image</span>
-                          {errors.imageUa && touched.imageUa ? (
-                            <Error>{errors.imageUa}</Error>
-                          ) : null}
-                        </FormLabel>
-                        {dataUpdate.ua.image && dataUpdate.ua.image !== '' ? (
-                          <FormInputFile
-                            style={{
-                              backgroundImage: `url(${
-                                BASE_URL_IMG + dataUpdate.ua.image
-                              })`,
-                              backgroundEvent: 'center',
-                              backgroundRepeat: 'no-repeat',
-                              backgroundSize: 'cover',
-                            }}
-                            type="file"
-                            id="imageUa"
-                            name="imageUa"
-                            placeholder="imageUa"
-                            accept=".jpg,.jpeg,.webp,.png,.gif"
-                            onChange={e => {
-                              handleChange(e);
-                              setFieldValue(
-                                'imageUa',
-                                dataUpdate.ua.image.split('/')[
-                                  dataUpdate.ua.image.split('/').length - 1
-                                ],
-                              );
-                              setImg(e.target.files[0]);
-                              setImage(e);
-                            }}
-                          />
-                        ) : (
-                          <FormInputFile
-                            type="file"
-                            id="imageUa"
-                            name="imageUa"
-                            accept=".jpg,.jpeg,.webp,.png,.gif"
-                            onChange={e => {
-                              handleChange(e);
-                              setFieldValue('imageUa', e.target.files[0]);
-                              setImg(e.target.files[0]);
-                              setImage(e);
-                            }}
-                          />
-                        )}
-                      </FormField>
                     </>
                   )}
                   {/* ==== DE ==== */}
                   {chooseLanguage === 'de' && (
                     <>
-                      <FormField>
-                        <FormLabel htmlFor="dateDe">
-                          <span>Date</span>
-                          {errors.dateDe && touched.dateDe ? (
-                            <Error>{errors.dateDe}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="date"
-                          id="dateDe"
-                          name="dateDe"
-                          placeholder="DD.MM.YYYY"
-                          value={moment(values.dateDe).format('YYYY-MM-DD')}
-                        />
-                      </FormField>
-                      <FormField>
-                        <FormLabel htmlFor="timeDe">
-                          <span>Time</span>
-                          {errors.timeDe && touched.timeDe ? (
-                            <Error>{errors.timeDe}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="time"
-                          id="timeDe"
-                          name="timeDe"
-                          placeholder="HH:MM"
-                          value={values.timeDe}
-                        />
-                      </FormField>
                       <FormField>
                         <FormLabel htmlFor="durationDe">
                           <span>Duration</span>
@@ -1078,58 +875,89 @@ export const EditEventModal = () => {
                           </label>
                         </div>
                       </FormLabelBox>
-                      <FormField>
-                        <FormLabel htmlFor="imageDe">
-                          <span>Image</span>
-                          {errors.imageDe && touched.imageDe ? (
-                            <Error>{errors.imageDe}</Error>
+                    </>
+                  )}
+                <FormField>
+                        <FormLabel htmlFor="date">
+                          <span>Date</span>
+                          {errors.date && touched.date ? (
+                            <Error>{errors.date}</Error>
                           ) : null}
                         </FormLabel>
-                        {dataUpdate.de.image && dataUpdate.de.image !== '' ? (
+                        <FormInput
+                          type="date"
+                          id="date"
+                          name="date"
+                          placeholder="DD.MM.YYYY"
+                          value={moment(values.date).format('YYYY-MM-DD')}
+                        />
+                      </FormField>
+                      <FormField>
+                        <FormLabel htmlFor="time">
+                          <span>Time</span>
+                          {errors.time && touched.time ? (
+                            <Error>{errors.time}</Error>
+                          ) : null}
+                        </FormLabel>
+                        <FormInput
+                          type="time"
+                          id="time"
+                          name="time"
+                          placeholder="HH:MM"
+                          value={values.time}
+                        />
+                      </FormField>
+                      <FormField>
+                        <FormLabel htmlFor="image">
+                          <span>Image</span>
+                          {errors.image && touched.image ? (
+                            <Error>{errors.image}</Error>
+                          ) : null}
+                        </FormLabel>
+                        {dataUpdate.en?.image && dataUpdate.en?.image !== '' ? (
                           <FormInputFile
                             style={{
                               backgroundImage: `url(${
-                                BASE_URL_IMG + dataUpdate.de.image
+                                img !== '' ? BASE_URL_IMG +
+                                'events/' + img.split('/')[
+                                  img.split('/').length - 1
+                                ] : values.image.split('/')[
+                                  values.image.split('/').length - 1
+                                ]
                               })`,
                               backgroundEvent: 'center',
                               backgroundRepeat: 'no-repeat',
                               backgroundSize: 'cover',
                             }}
                             type="file"
-                            id="imageDe"
-                            name="imageDe"
+                            id="image"
+                            name="image"
                             placeholder="image"
                             accept=".jpg,.jpeg,.webp,.png,.gif"
                             onChange={e => {
                               handleChange(e);
                               setFieldValue(
-                                'imageDe',
-                                dataUpdate.de.image.split('/')[
-                                  dataUpdate.de.image.split('/').length - 1
-                                ],
-                              );
-                              setImg(e.target.files[0]);
+                              'image', e.target.files[0]);
+                              setNewImg(e.target.files[0]);
                               setImage(e);
                             }}
                           />
                         ) : (
                           <FormInputFile
                             type="file"
-                            id="imageDe"
-                            name="imageDe"
+                            id="image"
+                            name="image"
                             accept=".jpg,.jpeg,.webp,.png,.gif"
                             onChange={e => {
                               handleChange(e);
-                              setFieldValue('imageDe', e.target.files[0]);
-                              setImg(e.target.files[0]);
+                              setFieldValue('image', e.target.files[0]);
+                              setNewImg(e.target.files[0]);
                               setImage(e);
                             }}
                           />
                         )}
                       </FormField>
-                    </>
-                  )}
-                </FormList>
+                  </FormList>
                 <DoneBtn
                   type="submit"
                   disabled={isSubmitting}

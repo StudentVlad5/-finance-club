@@ -80,7 +80,7 @@ const AdminEventsPage = () => {
   async function deleteEvent(id) {
     setIsLoading(true);
     try {
-      const { date } = await deleteData(`/events/${id}`);
+      const { date } = await deleteData(`/admin/events/${id}`);
       return date;
     } catch (error) {
       setError(error);

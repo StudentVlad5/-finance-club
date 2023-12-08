@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { update } from 'redux/auth/operations';
@@ -18,8 +18,7 @@ import {
   PensilStyle,
   TitleArticle,
   IconBtn,
-  IconBtnWhite,
-} from './UserData.styled';
+  } from './UserData.styled';
 
 import NotFoundImg from 'images/No-image-available.webp';
 import { BASE_URL_IMG } from 'helpers/constants';
@@ -66,9 +65,9 @@ export const UserData = () => {
               <UserDataImg alt="User" src={avatar} />
               <EditCameraForm>
                 <EditPhotoLabel htmlFor="user_photo">
-                <IconBtnWhite>
+                <div>
                   <PensilStyle />
-                </IconBtnWhite>
+                </div>
                 </EditPhotoLabel>
                 <EditPhotoInput
                   type="file"
