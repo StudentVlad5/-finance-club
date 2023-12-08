@@ -52,7 +52,7 @@ export const EditEventModal = () => {
       try {
         const { data } = await fetchData(itemForFetch);
         setDataUpdate(data);
-        console.log(data)
+        console.log(data);
         setImg(data.en.image);
         if (!data) {
           return onFetchError('Whoops, something went wrong');
@@ -69,10 +69,10 @@ export const EditEventModal = () => {
   }, [itemForFetch, modal.id]);
 
   async function editEvent(values) {
-    let file='';
-    newImg !=='' ?  file = newImg :  file = img;
-    console.log('editEvent ~ file:', file);
-    console.log('editEvent ~ values:', values);
+    let file = '';
+    newImg !== '' ? (file = newImg) : (file = img);
+    // console.log('editEvent ~ file:', file);
+    // console.log('editEvent ~ values:', values);
 
     setIsLoading(true);
     try {
@@ -193,7 +193,7 @@ export const EditEventModal = () => {
               packagesDe: dataUpdate?.de?.packages
                 ? dataUpdate.de.packages
                 : [],
-              image: ''
+              image: '',
             }}
             onSubmit={(values, { setSubmitting }) => {
               editEvent(values);
@@ -877,87 +877,87 @@ export const EditEventModal = () => {
                       </FormLabelBox>
                     </>
                   )}
-                <FormField>
-                        <FormLabel htmlFor="date">
-                          <span>Date</span>
-                          {errors.date && touched.date ? (
-                            <Error>{errors.date}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="date"
-                          id="date"
-                          name="date"
-                          placeholder="DD.MM.YYYY"
-                          value={moment(values.date).format('YYYY-MM-DD')}
-                        />
-                      </FormField>
-                      <FormField>
-                        <FormLabel htmlFor="time">
-                          <span>Time</span>
-                          {errors.time && touched.time ? (
-                            <Error>{errors.time}</Error>
-                          ) : null}
-                        </FormLabel>
-                        <FormInput
-                          type="time"
-                          id="time"
-                          name="time"
-                          placeholder="HH:MM"
-                          value={values.time}
-                        />
-                      </FormField>
-                      <FormField>
-                        <FormLabel htmlFor="image">
-                          <span>Image</span>
-                          {errors.image && touched.image ? (
-                            <Error>{errors.image}</Error>
-                          ) : null}
-                        </FormLabel>
-                        {dataUpdate.en?.image && dataUpdate.en?.image !== '' ? (
-                          <FormInputFile
-                            style={{
-                              backgroundImage: `url(${
-                                img !== '' ? BASE_URL_IMG +
-                                'events/' + img.split('/')[
-                                  img.split('/').length - 1
-                                ] : values.image.split('/')[
+                  <FormField>
+                    <FormLabel htmlFor="date">
+                      <span>Date</span>
+                      {errors.date && touched.date ? (
+                        <Error>{errors.date}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormInput
+                      type="date"
+                      id="date"
+                      name="date"
+                      placeholder="DD.MM.YYYY"
+                      value={moment(values.date).format('YYYY-MM-DD')}
+                    />
+                  </FormField>
+                  <FormField>
+                    <FormLabel htmlFor="time">
+                      <span>Time</span>
+                      {errors.time && touched.time ? (
+                        <Error>{errors.time}</Error>
+                      ) : null}
+                    </FormLabel>
+                    <FormInput
+                      type="time"
+                      id="time"
+                      name="time"
+                      placeholder="HH:MM"
+                      value={values.time}
+                    />
+                  </FormField>
+                  <FormField>
+                    <FormLabel htmlFor="image">
+                      <span>Image</span>
+                      {errors.image && touched.image ? (
+                        <Error>{errors.image}</Error>
+                      ) : null}
+                    </FormLabel>
+                    {dataUpdate.en?.image && dataUpdate.en?.image !== '' ? (
+                      <FormInputFile
+                        style={{
+                          backgroundImage: `url(${
+                            img !== ''
+                              ? BASE_URL_IMG +
+                                'events/' +
+                                img.split('/')[img.split('/').length - 1]
+                              : values.image.split('/')[
                                   values.image.split('/').length - 1
                                 ]
-                              })`,
-                              backgroundEvent: 'center',
-                              backgroundRepeat: 'no-repeat',
-                              backgroundSize: 'cover',
-                            }}
-                            type="file"
-                            id="image"
-                            name="image"
-                            placeholder="image"
-                            accept=".jpg,.jpeg,.webp,.png,.gif"
-                            onChange={e => {
-                              handleChange(e);
-                              setFieldValue(
-                              'image', e.target.files[0]);
-                              setNewImg(e.target.files[0]);
-                              setImage(e);
-                            }}
-                          />
-                        ) : (
-                          <FormInputFile
-                            type="file"
-                            id="image"
-                            name="image"
-                            accept=".jpg,.jpeg,.webp,.png,.gif"
-                            onChange={e => {
-                              handleChange(e);
-                              setFieldValue('image', e.target.files[0]);
-                              setNewImg(e.target.files[0]);
-                              setImage(e);
-                            }}
-                          />
-                        )}
-                      </FormField>
-                  </FormList>
+                          })`,
+                          backgroundEvent: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundSize: 'cover',
+                        }}
+                        type="file"
+                        id="image"
+                        name="image"
+                        placeholder="image"
+                        accept=".jpg,.jpeg,.webp,.png,.gif"
+                        onChange={e => {
+                          handleChange(e);
+                          setFieldValue('image', e.target.files[0]);
+                          setNewImg(e.target.files[0]);
+                          setImage(e);
+                        }}
+                      />
+                    ) : (
+                      <FormInputFile
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept=".jpg,.jpeg,.webp,.png,.gif"
+                        onChange={e => {
+                          handleChange(e);
+                          setFieldValue('image', e.target.files[0]);
+                          setNewImg(e.target.files[0]);
+                          setImage(e);
+                        }}
+                      />
+                    )}
+                  </FormField>
+                </FormList>
                 <DoneBtn
                   type="submit"
                   disabled={isSubmitting}
