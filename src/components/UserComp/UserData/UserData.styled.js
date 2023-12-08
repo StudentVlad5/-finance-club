@@ -283,14 +283,6 @@ const IconBtn = styled.button`
     height: 30px;
   }
 `;
-const IconBtnWhite = styled(IconBtn)`
-  top: -20px;
-  &:hover,
-  &:focus {
-    border-radius: 50%;
-    background-color: ${props => props.theme.white_text};
-  }
-`;
 
 const PensilStyle = styled(Pencil)`
   width: 14px;
@@ -341,6 +333,5 @@ export {
   PensilStyle,
   TitleArticle,
   BtnContainer,
-  IconBtnWhite,
   BtnDarkUser,
 };

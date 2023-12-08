@@ -225,8 +225,10 @@ const updatePasswordSchema = Yup.object().shape({
 
 // ----- EVENTS -----//
 const schemasEvents = Yup.object().shape({
-  dateEn: Yup.date().required('Require field'),
-  timeEn: Yup.string().required('Require field'),
+  date: Yup.date().required('Require field'),
+  time: Yup.string().required('Require field'),
+  image: Yup.string(),
+ 
   durationEn: Yup.string(),
   locationEn: Yup.string().required('Require field'),
   titleEn: Yup.string().required('Require field'),
@@ -235,10 +237,7 @@ const schemasEvents = Yup.object().shape({
   speakersEn: Yup.array().required('Require field'),
   moderatorEn: Yup.string(),
   packagesEn: Yup.array().required('Require field'),
-  imageEn: Yup.string(),
-
-  dateUa: Yup.date().required('Require field'),
-  timeUa: Yup.string().required('Require field'),
+ 
   durationUa: Yup.string(),
   locationUa: Yup.string().required('Require field'),
   titleUa: Yup.string().required('Require field'),
@@ -247,10 +246,7 @@ const schemasEvents = Yup.object().shape({
   speakersUa: Yup.array().required('Require field'),
   moderatorUa: Yup.string(),
   packagesUa: Yup.array().required('Require field'),
-  imageUa: Yup.string(),
 
-  dateDe: Yup.date().required('Require field'),
-  timeDe: Yup.string().required('Require field'),
   durationDe: Yup.string(),
   locationDe: Yup.string().required('Require field'),
   titleDe: Yup.string().required('Require field'),
@@ -259,7 +255,6 @@ const schemasEvents = Yup.object().shape({
   speakersDe: Yup.array().required('Require field'),
   moderatorDe: Yup.string(),
   packagesDe: Yup.array().required('Require field'),
-  imageDe: Yup.string(),
 });
 
 // ----- PACKAGES -----//
