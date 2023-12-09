@@ -40,6 +40,7 @@ const initialState = {
   filterTime: '',
   filterDuration: '',
   filterLocation: '',
+  filterTitle:'',
   filterDescription: '',
   filterPlan: '',
   filterSpeakers: '',
@@ -107,7 +108,7 @@ const AdminEventsPage = () => {
   };
 
   const startFilterEvents = e => {
-    e.preventDefault();
+    // e.preventDefault();
     const peremOfFilter = [];
     events.map(item => {
       let isImage =
@@ -160,6 +161,7 @@ const AdminEventsPage = () => {
         isImage.includes(filters['filterImage'])
       ) {
         peremOfFilter.push(item);
+        console.log("peremOfFilter", peremOfFilter)
       }
     });
     setCurrent(1);
