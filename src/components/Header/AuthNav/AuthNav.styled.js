@@ -17,8 +17,8 @@ const MobileContainer = styled.nav`
   :focus {
     /* transform: ${theme.scale[0]};
     transition: ${theme.transition[0]}; */
-    color: ${props => props.theme.grey};
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
+    /* color: ${props => props.theme.grey}; */
+    /* text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2); */
   }
 `;
 const Container = styled(MobileContainer)`
@@ -33,8 +33,8 @@ const Container = styled(MobileContainer)`
   :focus {
     /* transform: ${theme.scale[0]};
     transition: ${theme.transition[0]}; */
-    color: ${props => props.theme.grey};
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
+    /* color: ${props => props.theme.grey}; */
+    /* text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2); */
   }
 `;
 

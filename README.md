@@ -5,7 +5,7 @@ and banking community, the expert environment, regulators and society
 
 ## Developers
 
-### [Brand maze](https://brand-maze-production.vercel.app/)
+### [Brand maze](https://brand-maze.com/)
 
 - [Julia Golban](https://github.com/JuliaGolban)
 - [Vladislav Popov](https://github.com/StudentVlad5)

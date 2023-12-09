@@ -79,7 +79,17 @@ const BtnContainer = styled.div`
     flex-direction: column;
   }
 `;
-const BtnHeroJoin = styled(BtnLight)``;
+
+const BtnHeroJoin = styled(BtnLight)`
+  background-color: ${props => props.theme.white_text};
+  color: ${props => props.theme.black};
+`;
+
+const BtnHeroPricing = styled(BtnLight)`
+  background-color: transparent;
+  color: ${props => props.theme.white_text};
+  border-color: ${props => props.theme.white_text};
+`;
 
 const DesctopImgContainer = styled.div`
   position: relative;
@@ -174,4 +184,5 @@ export {
   DesctopImgContainer,
   DesctopDarkScreen,
   DesctopDarkBottom,
+  BtnHeroPricing,
 };
