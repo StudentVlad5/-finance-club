@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/finance-club/static/css/main.7cda0caf.css",
-    "main.js": "/finance-club/static/js/main.ba9ff45b.js",
+    "main.js": "/finance-club/static/js/main.5f469d78.js",
     "static/css/360.ab2b3bb1.chunk.css": "/finance-club/static/css/360.ab2b3bb1.chunk.css",
-    "static/js/360.da77d267.chunk.js": "/finance-club/static/js/360.da77d267.chunk.js",
+    "static/js/360.273b956d.chunk.js": "/finance-club/static/js/360.273b956d.chunk.js",
     "static/js/388.83f993ff.chunk.js": "/finance-club/static/js/388.83f993ff.chunk.js",
     "static/js/858.57846c46.chunk.js": "/finance-club/static/js/858.57846c46.chunk.js",
     "static/css/255.ab2b3bb1.chunk.css": "/finance-club/static/css/255.ab2b3bb1.chunk.css",
@@ -40,11 +40,11 @@
     "static/media/man2.webp": "/finance-club/static/media/man2.de1e4af6cca8a917e9d0.webp",
     "static/media/No-image-available.webp": "/finance-club/static/media/No-image-available.12543cbbce5122e5ed0d.webp",
     "static/media/open_source.svg": "/finance-club/static/media/open_source.95d32215bcc72f0bcbf66ee8872cb016.svg",
+    "static/media/send_receive.svg": "/finance-club/static/media/send_receive.1ce91a0e68ee491c15b516b24231ef68.svg",
     "static/media/w2.webp": "/finance-club/static/media/w2.b00e5bd79f4ea67e8f2c.webp",
     "static/media/bottom_desctop.svg": "/finance-club/static/media/bottom_desctop.5895579e18d42422450fb411ec2a48e5.svg",
-    "static/media/send_receive.svg": "/finance-club/static/media/send_receive.79fa3f61b55a15e521c09184aeb1a6b4.svg",
     "static/media/worldwide.svg": "/finance-club/static/media/worldwide.25f48a06a1d21010e0911c03268e968d.svg",
-    "static/media/trading_charts.svg": "/finance-club/static/media/trading_charts.b95bcf042d4f4e8c49e6e3a4fc181ca0.svg",
+    "static/media/trading_charts.svg": "/finance-club/static/media/trading_charts.0c78f91414ba69e70afb3b2b7f399686.svg",
     "static/media/edit_light.svg": "/finance-club/static/media/edit_light.b833ba37984d7a7bfdb333a648fbc1ee.svg",
     "index.html": "/finance-club/index.html",
     "static/media/logout.svg": "/finance-club/static/media/logout.679e7d3c509259498f69b6b64831187f.svg",
@@ -62,9 +62,9 @@
     "static/media/icon_close.svg": "/finance-club/static/media/icon_close.260c96aba626d6a8d203d583f1cf31cb.svg",
     "static/media/dark_screen.svg": "/finance-club/static/media/dark_screen.c389bf839694fda217166e1b64114f65.svg",
     "main.7cda0caf.css.map": "/finance-club/static/css/main.7cda0caf.css.map",
-    "main.ba9ff45b.js.map": "/finance-club/static/js/main.ba9ff45b.js.map",
+    "main.5f469d78.js.map": "/finance-club/static/js/main.5f469d78.js.map",
     "360.ab2b3bb1.chunk.css.map": "/finance-club/static/css/360.ab2b3bb1.chunk.css.map",
-    "360.da77d267.chunk.js.map": "/finance-club/static/js/360.da77d267.chunk.js.map",
+    "360.273b956d.chunk.js.map": "/finance-club/static/js/360.273b956d.chunk.js.map",
     "388.83f993ff.chunk.js.map": "/finance-club/static/js/388.83f993ff.chunk.js.map",
     "858.57846c46.chunk.js.map": "/finance-club/static/js/858.57846c46.chunk.js.map",
     "255.ab2b3bb1.chunk.css.map": "/finance-club/static/css/255.ab2b3bb1.chunk.css.map",
@@ -88,6 +88,6 @@
   },
   "entrypoints": [
     "static/css/main.7cda0caf.css",
-    "static/js/main.ba9ff45b.js"
+    "static/js/main.5f469d78.js"
   ]
 }
