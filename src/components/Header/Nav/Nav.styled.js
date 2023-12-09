@@ -50,17 +50,32 @@ const NavItem = styled(NavLink)`
   white-space: nowrap;
   color: ${props => props.theme.white_text};
   transition: ${theme.transition};
-  &:focus,
-  &:hover {
-    color: ${props => props.theme.grey};
-    /* transform: ${theme.scale}; */
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
+
+  position: relative;
+  display: block;
+  padding: 4px 0;
+
+  &::after {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: ${props => props.theme.white_text};
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
   }
-  &.active {
-    color: ${props => props.theme.grey};
-    /* transform: ${theme.scale}; */
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
-    font-weight: 700;
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  &.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 `;
 export { MobileNavList, NavList, NavItem };

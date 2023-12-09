@@ -12,20 +12,39 @@ const AuthLink = styled(NavLink)`
   line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
-  color: ${(props) => props.theme.white_text};
+  color: ${(props) => props.theme.black};
   transition: ${theme.transition[0]};
+  background-color: ${(props) => props.theme.white_text};
+  padding: 11px 52px;
+  border-radius: 8px;
+
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: ${(props) => props.theme.grey};
+    border-radius: 8px;
+    transition: width 0.3s ease-in-out;
+  }
+  &:hover:before {
+    width: 100%;
+    left: 0;
+
+  }
+
   &:focus,
   &:hover {
-    color:${(props) => props.theme.grey};
-    transform: ${theme.scale[0]};
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
+    color: #fff;
   }
   &.active {
-    color: ${(props) => props.theme.grey};;
-    transform: ${theme.scale[0]};
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
-    font-weight: 700;
+    background-color: ${(props) => props.theme.grey};;
   }
+
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
   }

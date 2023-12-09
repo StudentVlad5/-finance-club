@@ -31,7 +31,7 @@ export const SelectLanguage = styled.select`
   border-radius: 5px;
   color: ${props => props.theme.white_text};
   border-color: transparent;
-  background: ${props => props.theme.black};
+  background: transparent;
   padding: 3px;
   cursor: pointer;
 
@@ -55,7 +55,6 @@ export const SelectLanguage = styled.select`
   &:hover,
   &:focus-visible {
     color: ${props => props.theme.grey};
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
     /* transform: scale(1.1); */
   }
 `;

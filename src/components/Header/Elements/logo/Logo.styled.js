@@ -7,7 +7,7 @@ const LogoContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
   max-width: 230px;
 
 
