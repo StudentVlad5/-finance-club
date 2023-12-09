@@ -10,6 +10,7 @@ import {
   HeroSection,
   DesctopDarkScreen,
   DesctopDarkBottom,
+  BtnHeroPricing,
 } from './Hero.styled';
 import { useTranslation } from 'react-i18next';
 
@@ -34,9 +35,9 @@ const Hero = () => {
               </BtnHeroJoin>
             </Link>
             <a href="#prices" style={{ textDecoration: 'none' }}>
-              <BtnHeroJoin aria-label="VIEW PRICING" type="button">
+              <BtnHeroPricing aria-label="VIEW PRICING" type="button">
                 {t("VIEW PRICING")}
-              </BtnHeroJoin>
+              </BtnHeroPricing>
             </a>
           </BtnContainer>
         </HeroControl>
