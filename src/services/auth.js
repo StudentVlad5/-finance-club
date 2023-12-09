@@ -38,7 +38,7 @@ export const updateUserData = async (updateData) => {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-        "Access-Control-Expose-Headers": "*",
+        "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
       },
     }
   );

@@ -9,7 +9,7 @@ async function fetchData(pathParams) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
   return await axiosInstance.get();
@@ -22,7 +22,7 @@ async function deleteData(pathParams) {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -33,7 +33,7 @@ async function createFormRegistration(pathParams, body) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -65,7 +65,7 @@ async function createUserData(pathParams, body, file) {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -85,12 +85,6 @@ async function editUserData(pathParams, body, file) {
   });
   body.packages.forEach((value, i) => {
     formData.append("packages[]", JSON.stringify(value));
-    // formData.append(`packages[${i}].name`, value.name);
-    // formData.append(`packages[${i}].termActive.from`, value.termActive.from);
-    // formData.append(`packages[${i}].termActive.to`, value.termActive.to);
-    // // Object.entries(value).forEach(([key, value]) => {
-    // //   formData.append(`packages[${i}].${key}`, value);
-    // // });
   });
   formData.append("status", body.status);
   formData.append("role", body.role);
@@ -100,7 +94,7 @@ async function editUserData(pathParams, body, file) {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -121,7 +115,7 @@ async function updateUserData(pathParams, body, file) {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -134,7 +128,7 @@ async function changePassword(pathParams, body) {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -196,7 +190,7 @@ async function updateEventsData(pathParams, body, file) {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "Content-Range",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -254,7 +248,7 @@ async function createEventsData(pathParams, body, file) {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -281,7 +275,7 @@ async function createPackagesData(pathParams, body) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
@@ -306,7 +300,7 @@ async function updatePackageData(pathParams, body) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "Access-Control-Expose-Headers": "*",
+      "Access-Control-Expose-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
     },
   });
 }
