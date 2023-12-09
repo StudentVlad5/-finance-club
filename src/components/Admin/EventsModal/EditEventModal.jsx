@@ -52,7 +52,6 @@ export const EditEventModal = () => {
       try {
         const { data } = await fetchData(itemForFetch);
         setDataUpdate(data);
-        console.log(data);
         setImg(data.en.image);
         if (!data) {
           return onFetchError('Whoops, something went wrong');
@@ -71,9 +70,6 @@ export const EditEventModal = () => {
   async function editEvent(values) {
     let file = '';
     newImg !== '' ? (file = newImg) : (file = img);
-    // console.log('editEvent ~ file:', file);
-    // console.log('editEvent ~ values:', values);
-
     setIsLoading(true);
     try {
       const { code } = await updateEventsData(itemForFetch, values, file);

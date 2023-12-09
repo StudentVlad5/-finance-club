@@ -75,10 +75,6 @@ export const EditUserModal = () => {
     } else {
       file = img;
     }
-
-    // console.log('editUser ~ file:', file);
-    // console.log('editUser ~ values:', values);
-
     setIsLoading(true);
     try {
       const { code } = await editUserData(

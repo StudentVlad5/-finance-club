@@ -161,7 +161,6 @@ const AdminEventsPage = () => {
         isImage.includes(filters['filterImage'])
       ) {
         peremOfFilter.push(item);
-        console.log("peremOfFilter", peremOfFilter)
       }
     });
     setCurrent(1);

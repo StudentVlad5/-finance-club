@@ -45,10 +45,6 @@ export const CreateUserModal = () => {
 
   async function createUsers(values) {
     const file = img;
-
-    // console.log('createUser ~ file:', file);
-    // console.log('createUser ~ values:', values);
-
     setIsLoading(true);
     try {
       const { code } = await createUserData(

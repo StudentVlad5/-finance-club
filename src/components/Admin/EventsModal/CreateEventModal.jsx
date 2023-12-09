@@ -45,10 +45,6 @@ export const CreateEventModal = () => {
 
   async function createEvents(values) {
     const file = img;
-
-    // console.log('createEvents ~ file:', file);
-    // console.log('createEvents ~ values:', values);
-
     setIsLoading(true);
     try {
       const { code } = await createEventsData(itemForFetch, values, file);

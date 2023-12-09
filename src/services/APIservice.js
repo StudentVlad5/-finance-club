@@ -287,7 +287,6 @@ async function createPackagesData(pathParams, body) {
 }
 
 async function updatePackageData(pathParams, body) {
-  // console.log(body);
   const formData = new FormData();
   formData.append("titleEn", body.titleEn);
   formData.append("priceEn", body.priceEn);
