@@ -1,6 +1,17 @@
 import { theme } from 'components/baseStyles/Variables.styled';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeInTopAnimation = keyframes`
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 const MobileNavList = styled.nav`
   display: flex;
@@ -54,6 +65,26 @@ const NavItem = styled(NavLink)`
   position: relative;
   display: block;
   padding: 4px 0;
+
+  &:nth-child(1) {
+    animation: ${fadeInTopAnimation} 0.6s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+  }
+  &:nth-child(2) {
+    animation: ${fadeInTopAnimation} 0.8s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+  }
+  &:nth-child(3) {
+    animation: ${fadeInTopAnimation} 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+  &:nth-child(4) {
+    animation: ${fadeInTopAnimation} 1.2s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+  }
+  &:nth-child(5) {
+    animation: ${fadeInTopAnimation} 1.4s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+  }
 
   &::after {
     position: absolute;

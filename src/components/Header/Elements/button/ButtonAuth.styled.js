@@ -1,10 +1,20 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { theme } from 'components/baseStyles/Variables.styled';
 
+const fadeInRightAnimation = keyframes`
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
 
 const AuthLink = styled(NavLink)`
- cursor: pointer;
+  cursor: pointer;
   font-family: ${theme.fonts[1]};
   font-size: 24px;
   font-style: normal;
@@ -12,14 +22,15 @@ const AuthLink = styled(NavLink)`
   line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
-  color: ${(props) => props.theme.black};
+  color: ${props => props.theme.white_text};
   transition: ${theme.transition[0]};
-  background-color: ${(props) => props.theme.white_text};
-  padding: 11px 52px;
+  padding: 11px 32px;
   border-radius: 8px;
 
   position: relative;
   overflow: hidden;
+  animation: ${fadeInRightAnimation} 0.6s ease-in both;
+
   &:before {
     content: '';
     position: absolute;
@@ -27,24 +38,24 @@ const AuthLink = styled(NavLink)`
     left: 0;
     width: 0;
     height: 100%;
-    background-color: ${(props) => props.theme.grey};
+    background-color: ${props => props.theme.white_text};
     border-radius: 8px;
     transition: width 0.3s ease-in-out;
+    z-index: -1;
   }
   &:hover:before {
     width: 100%;
-    left: 0;
-
   }
 
   &:focus,
   &:hover {
-    color: #fff;
-  }
-  &.active {
-    background-color: ${(props) => props.theme.grey};;
+    color: ${props => props.theme.black};
   }
 
+  &.active {
+    background-color: ${props => props.theme.white_text};
+    color: ${props => props.theme.black};
+  }
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
   }
