@@ -1,6 +1,6 @@
-import { theme } from 'components/baseStyles/Variables.styled';
-import { NavLink } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import { theme } from "components/baseStyles/Variables.styled";
+import { NavLink } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
 
 const fadeInTopAnimation = keyframes`
   0% {
@@ -18,17 +18,16 @@ const MobileNavList = styled.nav`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-
-  margin-top: 60px;
-
+  gap: 20px;
+  margin-top: 30px;
   font-family: ${theme.fonts[1]};
   font-size: 24px;
   text-decoration: none;
   white-space: nowrap;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
-    /* gap: 60px; */
+    gap: 40px;
+    margin-top: 60px;
   }
 
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
@@ -59,7 +58,7 @@ const NavItem = styled(NavLink)`
   line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
-  color: ${props => props.theme.white_text};
+  color: ${(props) => props.theme.white_text};
   transition: ${theme.transition};
 
   position: relative;
@@ -88,12 +87,12 @@ const NavItem = styled(NavLink)`
 
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     top: 100%;
     left: 0;
     width: 100%;
     height: 3px;
-    background: ${props => props.theme.white_text};
+    background: ${(props) => props.theme.white_text};
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.5s;
