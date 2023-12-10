@@ -9,8 +9,8 @@ async function fetchData(pathParams) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-      'Access-Control-Expose-Headers': 'Content-Range',
-      'Access-Control-Allow-Header': 'Origin, Content-Type, X-Auth-Token',
+      // 'Access-Control-Expose-Headers': 'Content-Range',
+      // 'Access-Control-Allow-Header': 'Origin, Content-Type, X-Auth-Token',
     },
   });
   return await axiosInstance.get();

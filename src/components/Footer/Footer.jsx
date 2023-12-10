@@ -32,66 +32,72 @@ export const Footer = () => {
           <FooterItemContainer>
             <FooterList>
               <TitleMenu>{t('MENU')}</TitleMenu>
-              <FooterListItem>
-                <LinkItem to="/" aria-label="About">
-                  {t('Home')}
-                </LinkItem>
-              </FooterListItem>
-              <FooterListItem>
-                <LinkItem to="/join" aria-label="How to join">
-                  {t('How to join')}
-                </LinkItem>
-              </FooterListItem>
-              <FooterListItem>
-                <LinkItem to="/events" aria-label="Events calendar">
-                  {t('Events calendar')}
-                </LinkItem>
-              </FooterListItem>
-              <FooterListItem>
-                <LinkItem to="/reviews" aria-label="Reviews">
-                  {t('Reviews')}
-                </LinkItem>
-              </FooterListItem>
-              <FooterListItem>
-                <LinkItem to="/contacts" aria-label="Contacts">
-                  {t('Contacts')}
-                </LinkItem>
-              </FooterListItem>
+              <ul>
+                <FooterListItem>
+                  <LinkItem to="/" aria-label="About">
+                    {t('Home')}
+                  </LinkItem>
+                </FooterListItem>
+                <FooterListItem>
+                  <LinkItem to="/join" aria-label="How to join">
+                    {t('How to join')}
+                  </LinkItem>
+                </FooterListItem>
+                <FooterListItem>
+                  <LinkItem to="/events" aria-label="Events calendar">
+                    {t('Events calendar')}
+                  </LinkItem>
+                </FooterListItem>
+                <FooterListItem>
+                  <LinkItem to="/reviews" aria-label="Reviews">
+                    {t('Reviews')}
+                  </LinkItem>
+                </FooterListItem>
+                <FooterListItem>
+                  <LinkItem to="/contacts" aria-label="Contacts">
+                    {t('Contacts')}
+                  </LinkItem>
+                </FooterListItem>
+              </ul>
             </FooterList>
             <FooterList>
               <TitleMenu>{t('Location')}</TitleMenu>
-              <FooterListItem>{t('New york, USA')}</FooterListItem>
-              <FooterListItem>{t('street 1a')}</FooterListItem>
+              <ul>
+                <FooterListItem>{t('New york, USA')}</FooterListItem>
+                <FooterListItem>{t('street 1a')}</FooterListItem>
+              </ul>
             </FooterList>
             <FooterList>
               <TitleMenu>{t('Contacts')}</TitleMenu>
-              <FooterListItem>
-                <LinkEmail href="mailto:test@gmail.com">
-                  <Span>test@gmail.com</Span>
-                </LinkEmail>
-              </FooterListItem>
-              <FooterListItem>
-                <LinkItem to="tel:1234567890" aria-label="phone">
-                  +1234567890
-                </LinkItem>
-              </FooterListItem>
-              <FooterSvgContainer>
-                <FooterSvgLi>
-                  <FooterSvg width="15" height="15">
-                    <use href={sprite + '#facebook'}></use>
-                  </FooterSvg>
-                </FooterSvgLi>
-                <FooterSvgLi>
-                  <FooterSvg width="15" height="15">
-                    <use href={sprite + '#instagram'}></use>
-                  </FooterSvg>
-                </FooterSvgLi>
-                <FooterSvgLi>
-                  <FooterSvg width="15" height="15">
-                    <use href={sprite + '#twitter'}></use>
-                  </FooterSvg>
-                </FooterSvgLi>
-              </FooterSvgContainer>
+              <ul>
+                <FooterListItem>
+                  <LinkEmail href="mailto:test@gmail.com">
+                    <Span>test@gmail.com</Span>
+                  </LinkEmail>
+                </FooterListItem>
+                <FooterListItem>
+                  <LinkItem to="tel:1234567890" aria-label="number of the phone">
+                    +1234567890
+                  </LinkItem>
+                </FooterListItem>
+                <FooterSvgContainer>
+                  <FooterSvgLi>
+                    <FooterSvg width="15" height="15">
+                      <use href={sprite + '#facebook'}></use>
+                    </FooterSvg>
+                  </FooterSvgLi>
+                  <FooterSvgLi>
+                    <FooterSvg width="15" height="15">
+                      <use href={sprite + '#instagram'}></use>
+                    </FooterSvg>
+                  </FooterSvgLi>
+                  <FooterSvgLi>
+                    <FooterSvg width="15" height="15">
+                      <use href={sprite + '#twitter'}></use>
+                    </FooterSvg>
+                  </FooterSvgLi>
+                </FooterSvgContainer>
+              </ul>
             </FooterList>
           </FooterItemContainer>
           <FooterBottomContainer>

@@ -9,7 +9,7 @@ export const SwitchTheme = () => {
     <ThemeContext.Consumer>
       {({ theme, setMode }) => (
         <SwitcherWrapper>
-          <BtnChangeTheme
+          <BtnChangeTheme type="button" aria-label='change theme'
             onClick={() =>
               theme === 'light' ? setMode('dark') : setMode('light')
             }

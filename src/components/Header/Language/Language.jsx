@@ -26,9 +26,9 @@ const Language = () => {
   return (
     <SelectContainerLanguage>
       <SelectLanguage onChange={changeLanguage} value={selectedLanguage}>
-        <option value="en">En</option>
-        <option value="ua">Ua</option>
-        <option value="de">De</option>
+        <label><option value="en">En</option></label>
+        <label><option value="ua">Ua</option></label>
+        <label><option value="de">De</option></label>
       </SelectLanguage>
     </SelectContainerLanguage>
   );

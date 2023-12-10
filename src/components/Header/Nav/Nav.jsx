@@ -11,41 +11,51 @@ export const MobileNav = ({ toggleMenu }) => {
 
   return (
     <MobileNavList>
-      <NavItem to="/" aria-label="About" data-info="About" onClick={toggleMenu}>
-        {t("About")}
-      </NavItem>
-      <NavItem
-        to="/events"
-        aria-label="Events calendar"
-        data-info="Events calendar"
-        onClick={toggleMenu}
-      >
-        {t("Events calendar")}
-      </NavItem>
-      <NavItem
-        to="/join"
-        aria-label="How to join"
-        data-info="How to join"
-        onClick={toggleMenu}
-      >
-        {t("How to join")}
-      </NavItem>
-      <NavItem
-        to="/reviews"
-        aria-label="Reviews"
-        data-info="Reviews"
-        onClick={toggleMenu}
-      >
-        {t("Reviews")}
-      </NavItem>
-      <NavItem
-        to="/contacts"
-        aria-label="Contacts"
-        data-info="Contacts"
-        onClick={toggleMenu}
-      >
-        {t("Contacts")}
-      </NavItem>
+      <ul>
+        <li>
+            <NavItem to="/" aria-label="More information about us" data-info="About" onClick={toggleMenu}>
+           {t("About")}
+            </NavItem>
+        </li>
+        <li>
+            <NavItem
+              to="/events"
+              aria-label="Events calendar"
+              data-info="Events calendar"
+              onClick={toggleMenu}
+            >
+              {t("Events calendar")}
+            </NavItem>
+        </li>
+        <li>
+            <NavItem
+              to="/join"
+              aria-label="How to join"
+              data-info="How to join"
+              onClick={toggleMenu}
+            >
+              {t("How to join")}
+            </NavItem>
+        </li><li>
+            <NavItem
+              to="/reviews"
+              aria-label="Reviews"
+              data-info="Reviews"
+              onClick={toggleMenu}
+            >
+              {t("Reviews")}
+            </NavItem>
+        </li><li>
+            <NavItem
+              to="/contacts"
+              aria-label="Contacts"
+              data-info="Contacts"
+              onClick={toggleMenu}
+            >
+              {t("Contacts")}
+            </NavItem>
+        </li>
+      </ul>
       <div style={{ display: 'flex' }}>
         <Language />
         <SwitchTheme />
@@ -59,25 +69,33 @@ export const Nav = () => {
 
   return (
     <NavList>
-      <NavItem to="/" aria-label="About" data-info="About">
-        {t("About")}
-      </NavItem>
-      <NavItem
-        to="/events"
-        aria-label="Events calendar"
-        data-info="Events calendar"
-      >
-        {t("Events calendar")}
-      </NavItem>
-      <NavItem to="/join" aria-label="How to join" data-info="How to join">
-        {t("How to join")}
-      </NavItem>
-      <NavItem to="/reviews" aria-label="Reviews" data-info="Reviews">
-        {t("Reviews")}
-      </NavItem>
-      <NavItem to="/contacts" aria-label="Contacts" data-info="Contacts">
-        {t("Contacts")}
-      </NavItem>
+      <ul>
+        <li>
+          <NavItem to="/" aria-label="More information about us" data-info="About">
+            {t("About")}
+          </NavItem>
+        </li><li> 
+          <NavItem
+            to="/events"
+            aria-label="Events calendar"
+            data-info="Events calendar"
+          >
+            {t("Events calendar")}
+          </NavItem>
+        </li><li> 
+          <NavItem to="/join" aria-label="How to join" data-info="How to join">
+            {t("How to join")}
+          </NavItem>
+        </li><li> 
+          <NavItem to="/reviews" aria-label="Reviews" data-info="Reviews">
+            {t("Reviews")}
+          </NavItem>
+        </li><li>
+          <NavItem to="/contacts" aria-label="Contacts" data-info="Contacts">
+            {t("Contacts")}
+          </NavItem>
+        </li> 
+      </ul>
       <div style={{ display: 'flex' }}>
         <Language />
         <SwitchTheme />

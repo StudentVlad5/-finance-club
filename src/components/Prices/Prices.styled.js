@@ -52,7 +52,7 @@ const BtnSlider = styled.div`
     fill: ${(props) => props.theme.white_text};
   }
 `;
-const ListItemsContainer = styled.ul`
+const ListItemsContainer = styled.div`
   display: none;
   flex-direction: row;
   justify-content: center;
@@ -101,7 +101,7 @@ const ListItemsContentWraper = styled.div`
   width: 100%;
   height: 100%;
 `;
-const ListItems = styled.li`
+const ListItems = styled.div`
   display: flex;
   justify-content: center;
   align-items: stretch;

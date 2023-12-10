@@ -22,7 +22,7 @@ const FooterStyleWrap = styled.div`
   @media screen and (min-width: ${theme.breakpoints.desktop}){
   }
 `;
-const FooterList = styled.ul`
+const FooterList = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.white_text};
@@ -77,7 +77,7 @@ const FooterBottomContainer = styled.div`
     margin-top: 25px;
   }
 `;
-const TitleMenu = styled.h3`
+const TitleMenu = styled.p`
   font-family: ${theme.fonts[0]};
   font-size: 20px;
   font-style: normal;

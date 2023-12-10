@@ -35,10 +35,10 @@ export const updateUserData = async (updateData) => {
     justOne,
     {
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-        'Access-Control-Expose-Headers': 'Content-Range',
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+        // 'Access-Control-Expose-Headers': 'Content-Range',
       },
     }
   );
