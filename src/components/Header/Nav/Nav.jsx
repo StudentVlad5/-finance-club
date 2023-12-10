@@ -11,7 +11,6 @@ export const MobileNav = ({ toggleMenu }) => {
 
   return (
     <MobileNavList>
-      <ul>
         <li>
             <NavItem to="/" aria-label="More information about us" data-info="About" onClick={toggleMenu}>
            {t("About")}
@@ -55,11 +54,10 @@ export const MobileNav = ({ toggleMenu }) => {
               {t("Contacts")}
             </NavItem>
         </li>
-      </ul>
-      <div style={{ display: 'flex' }}>
+      <li style={{ display: 'flex' }}>
         <Language />
         <SwitchTheme />
-      </div>
+      </li>
     </MobileNavList>
   );
 };
@@ -69,7 +67,6 @@ export const Nav = () => {
 
   return (
     <NavList>
-      <ul>
         <li>
           <NavItem to="/" aria-label="More information about us" data-info="About">
             {t("About")}
@@ -95,11 +92,11 @@ export const Nav = () => {
             {t("Contacts")}
           </NavItem>
         </li> 
-      </ul>
-      <div style={{ display: 'flex' }}>
+
+      <li style={{ display: 'flex' }}>
         <Language />
         <SwitchTheme />
-      </div>
+      </li>
     </NavList>
   );
 };

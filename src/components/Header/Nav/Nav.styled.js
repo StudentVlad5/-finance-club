@@ -18,6 +18,7 @@ const MobileNavList = styled.nav`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  list-style: none;
   gap: 20px;
   margin-top: 30px;
   font-family: ${theme.fonts[1]};
