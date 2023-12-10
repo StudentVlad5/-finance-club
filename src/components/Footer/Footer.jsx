@@ -34,7 +34,7 @@ export const Footer = () => {
               <TitleMenu>{t('MENU')}</TitleMenu>
               <ul>
                 <FooterListItem>
-                  <LinkItem to="/" aria-label="About">
+                  <LinkItem to="/" aria-label="More information about us">
                     {t('Home')}
                   </LinkItem>
                 </FooterListItem>
@@ -76,10 +76,11 @@ export const Footer = () => {
                   </LinkEmail>
                 </FooterListItem>
                 <FooterListItem>
-                  <LinkItem to="tel:1234567890" aria-label="number of the phone">
-                    +1234567890
+                  <LinkItem to="tel:1234567890" aria-label="to call us">
+                  <Span>+1234567890</Span>
                   </LinkItem>
                 </FooterListItem>
+                </ul>
                 <FooterSvgContainer>
                   <FooterSvgLi>
                     <FooterSvg width="15" height="15">
@@ -97,7 +98,6 @@ export const Footer = () => {
                     </FooterSvg>
                   </FooterSvgLi>
                 </FooterSvgContainer>
-              </ul>
             </FooterList>
           </FooterItemContainer>
           <FooterBottomContainer>
