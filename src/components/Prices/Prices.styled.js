@@ -106,7 +106,7 @@ const ListItems = styled.div`
   justify-content: center;
   align-items: stretch;
   flex-direction: row;
-  height: 100%;
+  /* height: 100%; */
   padding: 48px 30px;
   border-radius: 40px;
   gap: 24px;
@@ -245,5 +245,5 @@ export {
   UlContent,
   LiContent,
   ButtonBuy,
-  ContainerNavigationForDesctop
+  ContainerNavigationForDesctop,
 };
